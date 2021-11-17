@@ -15,8 +15,6 @@ public class Subject {
 				private YearOfStudy yearOfStudy;
 				private String profesor;
 				private int points;
-				private String polozeni;
-				private String nepolozeni;
 				private ArrayList<Student> passed = new ArrayList<Student>();
 				private ArrayList<Student> failed = new ArrayList<Student>();
 				public String getId() {
@@ -66,9 +64,9 @@ public class Subject {
 				public String toString() {
 					return "Subject [id=" + id + ", name_of_sub=" + name_of_sub + ", semester=" + semester
 							+ ", yearOfStudy=" + yearOfStudy + ", profesor=" + profesor + ", points=" + points
-							+ ", polozeni=" + polozeni + ", nepolozeni=" + nepolozeni + ", passed=" + passed
-							+ ", failed=" + failed + "]";
+							+ ", passed=" + passed + ", failed=" + failed + "]";
 				}
+				
 				
 				
 	
