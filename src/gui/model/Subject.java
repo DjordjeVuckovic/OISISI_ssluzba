@@ -49,18 +49,7 @@ public class Subject {
 				public void setPoints(int points) {
 					this.points = points;
 				}
-				public String getPolozeni() {
-					return polozeni;
-				}
-				public void setPolozeni(String polozeni) {
-					this.polozeni = polozeni;
-				}
-				public String getNepolozeni() {
-					return nepolozeni;
-				}
-				public void setNepolozeni(String nepolozeni) {
-					this.nepolozeni = nepolozeni;
-				}
+				
 				public ArrayList<Student> getPassed() {
 					return passed;
 				}

@@ -3,6 +3,7 @@ package gui.view;
 
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -18,7 +19,7 @@ public class MainWindow extends JFrame {
 	
 	public MainWindow() {
 		super();
-		setTitle("Studentska  Slu\u017Eba FTN");
+		setTitle("Studentska  Slu\u017Eba ");
 		Toolkit kit= Toolkit.getDefaultToolkit();//klasa nije staticka ali metoda jeste
 		Dimension dim = kit.getScreenSize();
 		int width = dim.width;
@@ -34,12 +35,14 @@ public class MainWindow extends JFrame {
 		
 		
 		MenuBar menu_bar= new MenuBar();
-		menu_bar.setOpaque(true);
 		menu_bar.setBackground(new Color(51, 153, 255));
 		this.add(menu_bar);
 		this.setJMenuBar(menu_bar);
 		
 		this.add(new Toolbar(),BorderLayout.NORTH);
+		
+	
+		getContentPane().add(new StatusBar(),BorderLayout.SOUTH);
 	}
 
 }

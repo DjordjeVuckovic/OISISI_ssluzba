@@ -65,7 +65,7 @@ public ImageIcon scaleImg(ImageIcon ic) {
 		add(Box.createHorizontalStrut(screenSize.width/2));
 		
 		
-		JTextField searchable = new JTextField(" ");
+		JTextField searchable = new JTextField("");
 		searchable.setMaximumSize(new Dimension(screenSize.width,27));
 		LineBorder lineBorder1 = new LineBorder(Color.BLACK);
 	    searchable.setBorder(lineBorder1);

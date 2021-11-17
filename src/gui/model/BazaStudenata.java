@@ -4,16 +4,10 @@ import java.util.ArrayList;
 
 
 public class BazaStudenata {
-	private static BazaStudenata unique_instance = null;
+
 	private ArrayList<Student> studenti;
 	private ArrayList<String> kolone;
 	
-	public static BazaStudenata getInstance(){
-			if(unique_instance == null) {
-				unique_instance = new BazaStudenata();
-	}
-			return unique_instance;
-		}
 	
 	public BazaStudenata() {
 		this.studenti = new ArrayList<Student>();
