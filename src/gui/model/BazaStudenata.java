@@ -7,7 +7,7 @@ public class BazaStudenata {
 	private static BazaStudenata unique_instance = null;
 	private ArrayList<Student> studenti;
 	private ArrayList<String> kolone;
-	private ArrayList<Student> pretraga;
+	
 	public static BazaStudenata getInstance(){
 			if(unique_instance == null) {
 				unique_instance = new BazaStudenata();

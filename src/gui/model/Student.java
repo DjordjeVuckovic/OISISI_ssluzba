@@ -8,9 +8,9 @@ public class Student {
 		private String ime;
 		private String prezime;
 		private Date datum_rodjenja;
-		private String adresa;
+		private Adress adresa;
 		private String kontakt_telefon;
-		private String email;
+		private String e_mail;
 		private String index;
 		
 		private int godina_upisa;
@@ -18,11 +18,11 @@ public class Student {
 		
 		private double pr_ocena;
 		
-		private Nacin_Finansiranja n_finansiranja;
+		private Nacin_Finansiranja status;
 		// 
 	//KONSTRUKTORI
 		public Student() {}
-		public Student(String ime,String prezime,Date datum_rodjenja,String adresa,String kontakt_telefon,
+		public Student(String ime,String prezime,Date datum_rodjenja,Adress adresa,String kontakt_telefon,
 				String email,String index,int godina_upisa,int tren_god_studiranja,double pr_ocena,Nacin_Finansiranja n_finansiranja) {
 			super();
 			this.ime=ime;
@@ -30,12 +30,12 @@ public class Student {
 			this.datum_rodjenja= datum_rodjenja;
 			this.adresa= adresa;
 			this.kontakt_telefon=kontakt_telefon;
-			this.email=email;
+			this.e_mail=email;
 			this.index=index;
 			this.godina_upisa=godina_upisa;
 			this.tren_god_studiranja=tren_god_studiranja;
 			this.pr_ocena=pr_ocena;
-			this.n_finansiranja=n_finansiranja;
+			this.status=n_finansiranja;
 		}
 		//GET i SET metode
 		public String getIme() {
@@ -59,10 +59,10 @@ public class Student {
 
 			this.datum_rodjenja = datum_rodjenja;
 		}
-		public String getAdresa() {
+		public Adress getAdresa() {
 			return adresa;
 		}
-		public void setAdresa(String adresa) {
+		public void setAdresa(Adress adresa) {
 			this.adresa = adresa;
 		}
 		public String getKontaktTelefon() {
@@ -72,10 +72,10 @@ public class Student {
 			this.kontakt_telefon = kontakt_telefon;
 		}
 		public String getEmail() {
-			return email;
+			return e_mail;
 		}
 		public void setEmail(String email) {
-			this.email = email;
+			this.e_mail = email;
 		}
 		public String getIndex() {
 			return index;
@@ -102,18 +102,18 @@ public class Student {
 			this.pr_ocena = pr_ocena;
 		}
 		public Nacin_Finansiranja getNacinFinansiranja() {
-			return n_finansiranja;
+			return status;
 		}
 		public void setFinansiranje(Nacin_Finansiranja n_finansiranja) {
-			this.n_finansiranja = n_finansiranja;
+			this.status = n_finansiranja;
 		}
 		//STRING
 		@Override
 		public String toString() {
 			return "Student [ime=" + ime + ", prezime=" + prezime + ", datum_rodjenja=" + datum_rodjenja + ", adresa="
-					+ adresa + ", kontakt_telefon=" + kontakt_telefon + ", email=" + email + ", index=" + index
+					+ adresa + ", kontakt_telefon=" + kontakt_telefon + ", email=" + e_mail + ", index=" + index
 					+ ", godina_upisa=" + godina_upisa + ", tren_god_studiranja=" + tren_god_studiranja + ", pr_ocena="
-					+ pr_ocena + ", n_finansiranja=" + n_finansiranja + "]";
+					+ pr_ocena + ", n_finansiranja=" + status + "]";
 		}
 		
 		
