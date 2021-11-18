@@ -15,9 +15,9 @@ public class Professor {
 	private Adress adress;
 	private String contact;
 	private String mail;
-	private String idNumber;
+	private String id_num;
 	private String title;
-	private int yearsOfTail;
+	private int years_of_tail;
 	private ArrayList<Subject> subjects = new ArrayList<Subject>();
 	
 	
@@ -32,9 +32,9 @@ public class Professor {
 		this.adress = adress;
 		this.contact = contact;
 		this.mail = mail;
-		this.idNumber = idNumber;
+		this.id_num = idNumber;
 		this.title = title;
-		this.yearsOfTail = yearsOfTail;
+		this.years_of_tail = yearsOfTail;
 		this.subjects = subjects;
 	}
 	public String getSurname() {
@@ -74,10 +74,10 @@ public class Professor {
 		this.mail = mail;
 	}
 	public String getIdNumber() {
-		return idNumber;
+		return id_num;
 	}
 	public void setIdNumber(String idNumber) {
-		this.idNumber = idNumber;
+		this.id_num = idNumber;
 	}
 	public String getTitle() {
 		return title;
@@ -94,8 +94,8 @@ public class Professor {
 	@Override
 	public String toString() {
 		return "Professor [surname=" + surname + ", name=" + name + ", birthday=" + birthday + ", adress=" + adress
-				+ ", contact=" + contact + ", mail=" + mail + ", idNumber=" + idNumber + ", title=" + title
-				+ ", yearsOfTail=" + yearsOfTail + ", subjects=" + subjects + "]";
+				+ ", contact=" + contact + ", mail=" + mail + ", idNumber=" + id_num + ", title=" + title
+				+ ", yearsOfTail=" + years_of_tail + ", subjects=" + subjects + "]";
 	}
 
 			

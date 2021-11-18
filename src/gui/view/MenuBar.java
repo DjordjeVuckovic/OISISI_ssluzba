@@ -26,20 +26,20 @@ public class MenuBar extends JMenuBar {
 			menu_file.setMnemonic(KeyEvent.VK_F);
 			
 			
-			JMenuItem mNew = new JMenuItem("New", scaleImg(new ImageIcon("img/21.png")));
-			mNew.setMnemonic(KeyEvent.VK_N);
-			mNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
-			menu_file.add(mNew);
+			JMenuItem new_ = new JMenuItem("New", scaleImg(new ImageIcon("img/21.png")));
+			new_.setMnemonic(KeyEvent.VK_N);
+			new_.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
+			menu_file.add(new_);
 			
-			JMenuItem mSave = new JMenuItem("Save", scaleImg(new ImageIcon("img/save.png")));
-			mSave.setMnemonic(KeyEvent.VK_S);
-			mSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
-			menu_file.add(mSave);
+			JMenuItem save_ = new JMenuItem("Save", scaleImg(new ImageIcon("img/save.png")));
+			save_.setMnemonic(KeyEvent.VK_S);
+			save_.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
+			menu_file.add(save_);
 			
-			JMenuItem mOpen = new JMenuItem("Open",scaleImg(new ImageIcon("img/open.png")));
-			mOpen.setMnemonic(KeyEvent.VK_O);
-			mOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,ActionEvent.CTRL_MASK));
-			menu_file.add(mOpen);
+			JMenuItem open_ = new JMenuItem("Open",scaleImg(new ImageIcon("img/open.png")));
+			open_.setMnemonic(KeyEvent.VK_O);
+			open_.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,ActionEvent.CTRL_MASK));
+			menu_file.add(open_);
 			
 			JMenuItem close_ = new JMenuItem("Close", scaleImg(new ImageIcon("img/close.jpg")));
 			close_.setMnemonic(KeyEvent.VK_C);
@@ -49,28 +49,28 @@ public class MenuBar extends JMenuBar {
 			JMenu menu_edit = new JMenu("Edit");
 			menu_edit.setMnemonic(KeyEvent.VK_E);
 			
-			JMenuItem mEdit = new JMenuItem("Edit",scaleImg(new ImageIcon("img/edit1.png")));
-			mEdit.setMnemonic(KeyEvent.VK_E);
-			mEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
-			menu_edit.add(mEdit);
+			JMenuItem edit_ = new JMenuItem("Edit",scaleImg(new ImageIcon("img/edit1.png")));
+			edit_.setMnemonic(KeyEvent.VK_E);
+			edit_.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
+			menu_edit.add(edit_);
 			
-			JMenuItem mDelete = new JMenuItem("Delete",scaleImg(new ImageIcon("img/delete.jpg")));
-			mDelete.setMnemonic(KeyEvent.VK_D);
-			mDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));
-			menu_edit.add(mDelete);
+			JMenuItem delete_ = new JMenuItem("Delete",scaleImg(new ImageIcon("img/delete.jpg")));
+			delete_.setMnemonic(KeyEvent.VK_D);
+			delete_.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));
+			menu_edit.add(delete_);
 			
 			JMenu menu_help = new JMenu("Help");
 			menu_help.setMnemonic(KeyEvent.VK_H);
 			
-			JMenuItem mHelp = new JMenuItem("Help",scaleImg(new ImageIcon("img/help.png")));
-			mHelp.setMnemonic(KeyEvent.VK_H);
-			mHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
-			menu_help.add(mHelp);
+			JMenuItem help_ = new JMenuItem("Help",scaleImg(new ImageIcon("img/help.png")));
+			help_.setMnemonic(KeyEvent.VK_H);
+			help_.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
+			menu_help.add(help_);
 			
-			JMenuItem mAbout = new JMenuItem("About", scaleImg(new ImageIcon("img/about.png")));
-			mAbout.setMnemonic(KeyEvent.VK_A);
-			mAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.CTRL_MASK));
-			menu_help.add(mAbout);
+			JMenuItem about_ = new JMenuItem("About", scaleImg(new ImageIcon("img/about.png")));
+			about_.setMnemonic(KeyEvent.VK_A);
+			about_.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.CTRL_MASK));
+			menu_help.add(about_);
 		
 		this.add(menu_file);
 		this.add(menu_edit);

@@ -5,18 +5,18 @@ import java.util.Date;
 
 public class Student {
 	// POLJA
-		private String ime;
+		private String name;
 		private String prezime;
-		private Date datum_rodjenja;
-		private Adress adresa;
-		private String kontakt_telefon;
+		private Date birthday;
+		private Adress adress;
+		private String contact_ph;
 		private String e_mail;
 		private String index;
 		
-		private int godina_upisa;
-		private int tren_god_studiranja;
+		private int enroll_year;
+		private int current_year;
 		
-		private double pr_ocena;
+		private double avg;
 		
 		private Nacin_Finansiranja status;
 		// 
@@ -25,25 +25,25 @@ public class Student {
 		public Student(String ime,String prezime,Date datum_rodjenja,Adress adresa,String kontakt_telefon,
 				String email,String index,int godina_upisa,int tren_god_studiranja,double pr_ocena,Nacin_Finansiranja n_finansiranja) {
 			super();
-			this.ime=ime;
+			this.name=ime;
 			this.prezime=prezime;
-			this.datum_rodjenja= datum_rodjenja;
-			this.adresa= adresa;
-			this.kontakt_telefon=kontakt_telefon;
+			this.birthday= datum_rodjenja;
+			this.adress= adresa;
+			this.contact_ph=kontakt_telefon;
 			this.e_mail=email;
 			this.index=index;
-			this.godina_upisa=godina_upisa;
-			this.tren_god_studiranja=tren_god_studiranja;
-			this.pr_ocena=pr_ocena;
+			this.enroll_year=godina_upisa;
+			this.current_year=tren_god_studiranja;
+			this.avg=pr_ocena;
 			this.status=n_finansiranja;
 		}
 		//GET i SET metode
 		public String getIme() {
-			return ime;
+			return name;
 		}
 
 		public void setIme(String ime) {
-			this.ime = ime;
+			this.name = ime;
 		}
 
 		public String getPrezime() {
@@ -53,23 +53,23 @@ public class Student {
 			this.prezime = prezime;
 		}
 		public Date getDatumRodjenja() {
-			return datum_rodjenja;
+			return birthday;
 		}
 		public void setDatumRodjenja(Date datum_rodjenja) {
 
-			this.datum_rodjenja = datum_rodjenja;
+			this.birthday = datum_rodjenja;
 		}
 		public Adress getAdresa() {
-			return adresa;
+			return adress;
 		}
 		public void setAdresa(Adress adresa) {
-			this.adresa = adresa;
+			this.adress = adresa;
 		}
 		public String getKontaktTelefon() {
-			return kontakt_telefon;
+			return contact_ph;
 		}
 		public void setKontaktTelefon(String kontakt_telefon) {
-			this.kontakt_telefon = kontakt_telefon;
+			this.contact_ph = kontakt_telefon;
 		}
 		public String getEmail() {
 			return e_mail;
@@ -84,22 +84,22 @@ public class Student {
 			this.index = indeks;
 		}
 		public int getGodinaUpisa() {
-			return godina_upisa;
+			return enroll_year;
 		}
 		public void setGodinaUpisa(int godina_upisa) {
-			this.godina_upisa = godina_upisa;
+			this.enroll_year = godina_upisa;
 		}
 		public int getTrenGodStudija() {
-			return tren_god_studiranja;
+			return current_year;
 		}
 		public void setTrenGodStudija(int trenGodStudija) {
-			this.tren_god_studiranja = trenGodStudija;
+			this.current_year = trenGodStudija;
 		}
 		public double getProsecnaOcena() {
-			return pr_ocena;
+			return avg;
 		}
 		public void setProsecnaOcena(double pr_ocena) {
-			this.pr_ocena = pr_ocena;
+			this.avg = pr_ocena;
 		}
 		public Nacin_Finansiranja getNacinFinansiranja() {
 			return status;
@@ -110,10 +110,10 @@ public class Student {
 		//STRING
 		@Override
 		public String toString() {
-			return "Student [ime=" + ime + ", prezime=" + prezime + ", datum_rodjenja=" + datum_rodjenja + ", adresa="
-					+ adresa + ", kontakt_telefon=" + kontakt_telefon + ", email=" + e_mail + ", index=" + index
-					+ ", godina_upisa=" + godina_upisa + ", tren_god_studiranja=" + tren_god_studiranja + ", pr_ocena="
-					+ pr_ocena + ", n_finansiranja=" + status + "]";
+			return "Student [ime=" + name + ", prezime=" + prezime + ", datum_rodjenja=" + birthday + ", adresa="
+					+ adress + ", kontakt_telefon=" + contact_ph + ", email=" + e_mail + ", index=" + index
+					+ ", godina_upisa=" + enroll_year + ", tren_god_studiranja=" + current_year + ", pr_ocena="
+					+ avg + ", n_finansiranja=" + status + "]";
 		}
 		
 		

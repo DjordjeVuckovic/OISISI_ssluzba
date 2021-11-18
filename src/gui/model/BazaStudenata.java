@@ -5,53 +5,53 @@ import java.util.ArrayList;
 
 public class BazaStudenata {
 
-	private ArrayList<Student> studenti;
-	private ArrayList<String> kolone;
+	private ArrayList<Student> students;
+	private ArrayList<String> colums;
 	
 	
 	public BazaStudenata() {
-		this.studenti = new ArrayList<Student>();
-		this.studenti.add(new Student());
-		this.kolone= new ArrayList<String>();
-		this.kolone.add("Ime");
-		this.kolone.add("Prezime");
-		this.kolone.add("Broj indeksa");
-		this.kolone.add("Datum rodjenja");
-		this.kolone.add("Godina upisa");
-		this.kolone.add("Trenutna godina");
-		this.kolone.add("Status");
-		this.kolone.add("Prosecna ocena");
+		this.students = new ArrayList<Student>();
+		this.students.add(new Student());
+		this.colums= new ArrayList<String>();
+		this.colums.add("Ime");
+		this.colums.add("Prezime");
+		this.colums.add("Broj indeksa");
+		this.colums.add("Datum rodjenja");
+		this.colums.add("Godina upisa");
+		this.colums.add("Trenutna godina");
+		this.colums.add("Status");
+		this.colums.add("Prosecna ocena");
 		
 		
 	}
 
 	public ArrayList<Student> getStudenti() {
-		return studenti;
+		return students;
 	}
 
 	public void setStudenti(ArrayList<Student> studenti) {
-		this.studenti = studenti;
+		this.students = studenti;
 	}
 	public int getColumnCnt() {
-		return kolone.size();
+		return colums.size();
 	}
 	public String getColumnName(int index) {
-		return kolone.get(index);
+		return colums.get(index);
 	}
 
 	public ArrayList<String> getKolone() {
-		return kolone;
+		return colums;
 	}
 
 	public void setKolone(ArrayList<String> kolone) {
-		this.kolone = kolone;
+		this.colums = kolone;
 	}
 	public Student getRow(int row) {
-		return this.studenti.get(row);
+		return this.students.get(row);
 	}
-	public String getStrValue(int r, int c) {
-		Student s= this.studenti.get(r);
-		switch(c) {
+	public String getStrValue(int row, int col) {
+		Student s= this.students.get(row);
+		switch(col) {
 		case 0:
 			return s.getIme();
 		case 1:

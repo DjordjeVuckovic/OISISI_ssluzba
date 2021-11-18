@@ -17,7 +17,7 @@ public class Toolbar extends JToolBar{
 
 	private static final long serialVersionUID = 1209699209668701828L;
 	
-public ImageIcon scaleImg(ImageIcon ic) {
+	public ImageIcon scaleImg(ImageIcon ic) {
 		
 		Image scaleImage = ic.getImage().getScaledInstance(32, 32,Image.SCALE_DEFAULT);
 		ImageIcon ic1 = new ImageIcon(scaleImage);

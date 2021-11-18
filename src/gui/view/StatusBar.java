@@ -19,8 +19,6 @@ import javax.swing.Timer;
 
 
 public class StatusBar extends JPanel implements ActionListener {
-	//
-	
 		
 	/**
 	 * 
@@ -36,7 +34,7 @@ public class StatusBar extends JPanel implements ActionListener {
 		date = new JLabel(dateFormat.format(new GregorianCalendar().getTime()));
 		Timer timer = new Timer(1000, this);
 		timer.start();
-		BoxLayout box = new BoxLayout(this, BoxLayout.X_AXIS);//horizontally component
+		BoxLayout box = new BoxLayout(this, BoxLayout.X_AXIS);//new horizontally component
 		this.setLayout(box);
 		this.add(name);
 		this.add(Box.createHorizontalGlue());

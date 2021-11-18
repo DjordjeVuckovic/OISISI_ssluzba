@@ -33,7 +33,7 @@ public class MainWindow extends JFrame {
 		setIconImage(img_student.getImage());
 		getContentPane().setBackground(Color.LIGHT_GRAY); 
 		
-		
+
 		MenuBar menu_bar= new MenuBar();
 		menu_bar.setBackground(new Color(51, 153, 255));
 		this.add(menu_bar);
@@ -42,7 +42,7 @@ public class MainWindow extends JFrame {
 		this.add(new Toolbar(),BorderLayout.NORTH);
 		
 	
-		getContentPane().add(new StatusBar(),BorderLayout.SOUTH);
+		this.getContentPane().add(new StatusBar(),BorderLayout.SOUTH);
 	}
 
 }
