@@ -10,7 +10,7 @@ public class Subject {
 	// POLJA
 	
 				private String id;
-				private String name_of_sub;
+				private String nameSub;
 				private Semester semester;
 				private YearOfStudy yearOfStudy;
 				private String profesor;
@@ -24,10 +24,10 @@ public class Subject {
 					this.id = id;
 				}
 				public String getName_of_sub() {
-					return name_of_sub;
+					return nameSub;
 				}
 				public void setName_of_sub(String name_of_sub) {
-					this.name_of_sub = name_of_sub;
+					this.nameSub = name_of_sub;
 				}
 				public Semester getSemester() {
 					return semester;
@@ -62,7 +62,7 @@ public class Subject {
 				}
 				@Override
 				public String toString() {
-					return "Subject [id=" + id + ", name_of_sub=" + name_of_sub + ", semester=" + semester
+					return "Subject [id=" + id + ", name_of_sub=" + nameSub + ", semester=" + semester
 							+ ", yearOfStudy=" + yearOfStudy + ", profesor=" + profesor + ", points=" + points
 							+ ", passed=" + passed + ", failed=" + failed + "]";
 				}

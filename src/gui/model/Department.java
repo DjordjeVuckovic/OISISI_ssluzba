@@ -8,7 +8,7 @@ public class Department {
 	private String id;
 	private String name;
 	private Professor director;
-	private ArrayList<Professor> professor_list = new ArrayList<Professor>();
+	private ArrayList<Professor> professors = new ArrayList<Professor>();
 	public String getId() {
 		return id;
 	}
@@ -28,10 +28,10 @@ public class Department {
 		this.director = director;
 	}
 	public ArrayList<Professor> getProfessor_list() {
-		return professor_list;
+		return professors;
 	}
 	public void setProfessor_list(ArrayList<Professor> professor_list) {
-		this.professor_list = professor_list;
+		this.professors = professor_list;
 	}
 	
 	
