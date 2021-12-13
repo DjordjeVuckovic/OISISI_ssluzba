@@ -10,8 +10,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
+import gui.view.ScaleImg;
 
-public class MenuBar extends JMenuBar {
+public class MenuBar extends JMenuBar implements ScaleImg {
 	private static final long serialVersionUID = 1L;
 	
 	public ImageIcon scaleImg(ImageIcon ic) {
@@ -22,7 +23,7 @@ public class MenuBar extends JMenuBar {
 	}
 	
 		MenuBar() {
-		
+
 			JMenu menu_file = new JMenu("File");
 			menu_file.setMnemonic(KeyEvent.VK_F);
 			

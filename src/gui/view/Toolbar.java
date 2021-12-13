@@ -13,7 +13,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-public class Toolbar extends JToolBar{
+public class Toolbar extends JToolBar implements ScaleImg{
 
 	private static final long serialVersionUID = 1209699209668701828L;
 	
@@ -70,6 +70,7 @@ public class Toolbar extends JToolBar{
 		LineBorder lineBorder1 = new LineBorder(Color.BLACK);
 	    searchable.setBorder(lineBorder1);
         JButton searchB = new JButton(scaleImg(new ImageIcon("img/sr.png")));
+        searchB.setToolTipText("Pretraga");
         searchB.setBackground(Color.WHITE);
 		searchB.setBorderPainted(false);
 		searchB.setFocusPainted(false);

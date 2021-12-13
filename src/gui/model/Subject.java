@@ -17,6 +17,7 @@ public class Subject {
 				private int points;
 				private ArrayList<Student> passed = new ArrayList<Student>();
 				private ArrayList<Student> failed = new ArrayList<Student>();
+				
 				public String getId() {
 					return id;
 				}
