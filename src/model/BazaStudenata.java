@@ -1,81 +1,83 @@
-package gui.model;
+package model;
 
 import java.util.ArrayList;
 
-
-public class BazaStudenata {
+public class BazaStudenata implements AbstractTableModel {
 
 	private ArrayList<Student> students;
 	private ArrayList<String> colums;
+	private static BazaStudenata instance;
+
+	public static BazaStudenata getInstance(){
+		if(instance ==null){
+			instance = new BazaStudenata();
+		}
+		return instance;
+	}
 	
 	
 	public BazaStudenata() {
-		this.students = new ArrayList<Student>();
-		this.students.add(new Student());
+		initStudents();
 		this.colums= new ArrayList<String>();
+		this.colums.add("Indeks");
 		this.colums.add("Ime");
 		this.colums.add("Prezime");
-		this.colums.add("Broj indeksa");
-		this.colums.add("Datum rodjenja");
-		this.colums.add("Godina upisa");
-		this.colums.add("Trenutna godina");
+		this.colums.add("Godina studija");
 		this.colums.add("Status");
-		this.colums.add("Prosecna ocena");
+		this.colums.add("Prosek");
 		
 		
 	}
+	private void initStudents(){
+		this.students= new ArrayList<>();
+		students.add(new Student("Mika", "Mikic", "RA8/2020", YearStudy.I,9.8, NacinFinansiranja.SAMOFINANSIRANJE ));
+		students.add(new Student("Igor", "Bodiroga", "RA5/2017", YearStudy.II,7.8, NacinFinansiranja.SAMOFINANSIRANJE ));
+		students.add(new Student("Marko", "Markovic", "RA88/2016", YearStudy.I,10.0, NacinFinansiranja.BUDZET ));
+	}
 
-	public ArrayList<Student> getStudenti() {
+	public ArrayList<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudenti(ArrayList<Student> studenti) {
-		this.students = studenti;
-	}
-	public int getColumnCnt() {
-		return colums.size();
-	}
-	public String getColumnName(int index) {
-		return colums.get(index);
+	public void setStudents(ArrayList<Student> students) {
+		this.students = students;
 	}
 
-	public ArrayList<String> getKolone() {
-		return colums;
+	public int getColumnCount() {
+		return this.colums.size();
 	}
 
-	public void setKolone(ArrayList<String> kolone) {
-		this.colums = kolone;
+	public int getRowCount() {
+		return this.students.size();
 	}
-	public Student getRow(int row) {
-		return this.students.get(row);
+
+	public String getColumnName(int col) {
+		return this.colums.get(col);
 	}
-	public String getStrValue(int row, int col) {
-		Student s= this.students.get(row);
-		switch(col) {
-		case 0:
-			return s.getIme();
-		case 1:
-			return s.getPrezime();
-		case 2:
-			return s.getIndex();
-		case 3:
-			return s.getDatumRodjenja().toString();
-		case 4:
-			return Integer.toString(s.getGodinaUpisa());
-		case 5:
-			return Integer.toString(s.getTrenGodStudija());
-		case 6:
-			if(s.getNacinFinansiranja()==Nacin_Finansiranja.BUDZET) {
-				return "B";
-			}
-			else {
-				return "S";
-			}
-		case 7:
-			return Double.toString(s.getProsecnaOcena());
-		default:
-			return null;
-				
+
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		Student st=this.students.get(rowIndex);
+		switch (columnIndex){
+			case 0:
+				return st.getIndex();
+			case 1:
+				return st.getIme();
+			case 2:
+				return st.getSurname();
+			case 3:
+				return st.getCurrentyear().name();
+			case 4:
+				return st.getNacinFinansiranja().name();
+			case 5:
+				return Double.toString(st.getavgGrade());
+			default:
+				return null;
+
 		}
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
 	}
 }

@@ -1,3 +1,3 @@
 package model;
 
-public enum Nacin_Finansiranja {SAMOFINANSIRANJE,BUDZET}
+public enum NacinFinansiranja {SAMOFINANSIRANJE,BUDZET}

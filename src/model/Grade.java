@@ -1,9 +1,6 @@
-package gui.model;
+package model;
 
 import java.util.Date;
-
-import gui.model.Student;
-import gui.model.Subject;
 
 public class Grade {
 	private Student studentPassed;

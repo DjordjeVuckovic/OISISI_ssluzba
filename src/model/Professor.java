@@ -1,10 +1,7 @@
-package gui.model;
+package model;
 
 import java.util.ArrayList;
 import java.util.Date;
-
-import gui.model.Adress;
-import gui.model.Subject;
 
 public class Professor {
 	
