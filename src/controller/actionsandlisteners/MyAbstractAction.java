@@ -1,4 +1,4 @@
-package actionsandlisteners;
+package controller.actionsandlisteners;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -100,6 +100,9 @@ public class MyAbstractAction extends AbstractAction implements ScaleImg{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(name.equals("close")) {
+			
+		}
 		
 	}
 

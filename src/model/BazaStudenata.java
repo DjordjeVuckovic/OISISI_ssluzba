@@ -6,7 +6,7 @@ public class BazaStudenata implements AbstractTableModel {
 
 	private ArrayList<Student> students;
 	private ArrayList<String> colums;
-	private static BazaStudenata instance;
+	private static BazaStudenata instance=null;
 
 	public static BazaStudenata getInstance(){
 		if(instance ==null){
@@ -16,7 +16,7 @@ public class BazaStudenata implements AbstractTableModel {
 	}
 	
 	
-	public BazaStudenata() {
+	private BazaStudenata() {
 		initStudents();
 		this.colums= new ArrayList<String>();
 		this.colums.add("Indeks");
@@ -79,5 +79,13 @@ public class BazaStudenata implements AbstractTableModel {
 	@Override
 	public boolean isEmpty() {
 		return false;
+	}
+	public Student getStudentById(String id){
+		for (Student st: students){
+			if(st.getIndex().equals(id)){
+				return st;
+			}
+		}
+		return null;
 	}
 }

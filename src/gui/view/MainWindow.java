@@ -7,9 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 
 public class MainWindow extends JFrame {
@@ -40,9 +38,13 @@ public class MainWindow extends JFrame {
 		this.setJMenuBar(menu_bar);
 		
 		this.add(new Toolbar(),BorderLayout.NORTH);
-		
-	
+
 		this.getContentPane().add(new StatusBar(),BorderLayout.SOUTH);
+
+		JPanel centralniPanel = new JPanel(new BorderLayout());
+		centralniPanel.add(CentralBox.getInstance());
+		add(centralniPanel, BorderLayout.CENTER);
+
 	}
 
 }

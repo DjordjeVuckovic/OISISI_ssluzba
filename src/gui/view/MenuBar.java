@@ -5,7 +5,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JSeparator;
-import actionsandlisteners.MyAbstractAction;
+
+import controller.actionsandlisteners.MyAbstractAction;
 
 
 public class MenuBar extends JMenuBar {
