@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Subject {
 
-		private String id;
+		private String idS;
 		private String nameSub;
 		private Semester semester;
 		private YearStudy yearOfStudy;
@@ -16,19 +16,19 @@ public class Subject {
 		private ArrayList<Student> failed = new ArrayList<Student>();
 
 	public Subject(String id, String nameSub, Semester semester, YearStudy yearOfStudy,  int pointsESPB) {
-		this.id = id;
+		this.idS = id;
 		this.nameSub = nameSub;
 		this.semester = semester;
 		this.yearOfStudy = yearOfStudy;
 		this.pointsESPB = pointsESPB;
 	}
 
-	public String getId() {
-		return id;
+	public String getIdS() {
+		return idS;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIdS(String idS) {
+		this.idS = idS;
 	}
 
 	public String getNameSub() {

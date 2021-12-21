@@ -1,4 +1,4 @@
-package gui.view.central;
+package gui.view.center;
 
 import model.BazaStudenata;
 

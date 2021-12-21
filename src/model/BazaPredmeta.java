@@ -1,6 +1,5 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BazaPredmeta implements  AbstractTableModel{
@@ -70,7 +69,7 @@ public class BazaPredmeta implements  AbstractTableModel{
         Subject sub= this.subjects.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return sub.getId();
+                return sub.getIdS();
             case 1:
                 return sub.getNameSub();
             case 2:
@@ -83,7 +82,17 @@ public class BazaPredmeta implements  AbstractTableModel{
                 return null;
         }
     }
-
+    public void addSubject(Subject sub) {
+        subjects.add(sub);
+    }
+    public boolean UniqueIdS(String ids) {
+        for (Subject predmet : subjects) {
+            if(predmet.getIdS().equals(ids)) {
+                return false;
+            }
+        }
+        return true;
+    }
     @Override
     public boolean isEmpty() {
         return false;

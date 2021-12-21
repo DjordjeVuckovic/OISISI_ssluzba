@@ -80,12 +80,35 @@ public class BazaStudenata implements AbstractTableModel {
 	public boolean isEmpty() {
 		return false;
 	}
+
 	public Student getStudentById(String id){
-		for (Student st: students){
+		for (Student st: this.students){
 			if(st.getIndex().equals(id)){
 				return st;
 			}
 		}
 		return null;
+	}
+	public void addStudent(Student st){
+		students.add(st);
+	}
+	public boolean deleteStudentById(String id){
+		boolean ret=false;
+		for(Student st: this.students){
+			if(st.getIndex().equals(id)){
+				this.students.remove(st);
+				ret=true;
+			}
+		}
+		return ret;
+	}
+	public boolean UniqueId(String id_){
+		boolean ret=true;
+		for(Student st:this.students){
+			if(st.getIndex().equals(id_)){
+				ret=false;
+			}
+		}
+		return ret;
 	}
 }

@@ -1,7 +1,7 @@
 package gui.view;
 
-import gui.view.central.StudentsTable;
-import gui.view.central.SubjectTable;
+import gui.view.center.StudentsTable;
+import gui.view.center.SubjectTable;
 
 import javax.swing.*;
 import java.awt.*;

@@ -9,7 +9,10 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
+import gui.view.CentralBox;
+import gui.view.MainWindow;
 import gui.view.ScaleImg;
+import gui.view.dialog.AddStudent;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImg{
 	
@@ -100,8 +103,27 @@ public class MyAbstractAction extends AbstractAction implements ScaleImg{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(name.equals("close")) {
-			
+		if(name.equals("New")){
+			switch (CentralBox.getInstance().getSelectedIndex()){
+				case 0:
+					AddStudent.getInstance().setVisible(true);
+					break;
+				case 1:
+					//AddProffesor
+				case 2:
+					//AddPredmet
+			}
+		}
+		else if(name.equals("Save")){
+			//
+		}
+		else if(name.equals("Delete")){
+			//
+		}
+
+
+		else if(name.equals("close")) {
+			//MainWindow.exit();
 		}
 		
 	}

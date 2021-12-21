@@ -1,15 +1,15 @@
-package gui.view.central;
+package gui.view.center;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
-public class SubjectTable extends JTable {
-    public SubjectTable() {
+public class StudentsTable extends JTable {
+    public StudentsTable() {
         setRowSelectionAllowed(true);
         setColumnSelectionAllowed(true);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        setModel(new AbstractTableSubject());
+        setModel(new AbstractTableStudents());
     }
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
         Component c = super.prepareRenderer(renderer, row, column);
@@ -20,4 +20,5 @@ public class SubjectTable extends JTable {
         }
         return c;
     }
+
 }

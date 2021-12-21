@@ -13,9 +13,14 @@ import javax.swing.*;
 public class MainWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
+	private static MainWindow instance = null;
+	public static MainWindow getInstance() {
+		if(MainWindow.instance==null) MainWindow.instance = new MainWindow();
+		return MainWindow.instance;
+	}
 
 	
-	public MainWindow() {
+	private MainWindow() {
 		super();
 		setTitle("Studentska  Slu\u017Eba ");
 		Toolkit kit= Toolkit.getDefaultToolkit();//klasa nije staticka ali metoda jeste
