@@ -1,6 +1,6 @@
 package model;
 
-public enum YearStudy {
+public enum YearofStudy {
     I,
     II,
     III,

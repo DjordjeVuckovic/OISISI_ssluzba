@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class BazaPredmeta implements  AbstractTableModel{
+public class BazaPredmeta implements AbstractModel {
     private static BazaPredmeta instance = null;
 
     public static BazaPredmeta getInstance() {
@@ -25,11 +25,11 @@ public class BazaPredmeta implements  AbstractTableModel{
     }
     private void initSubjects(){
         this.subjects=new ArrayList<>();
-        Subject sub=new Subject("R01","Analiza 1",Semester.SUMMER,YearStudy.I,8);
+        Subject sub=new Subject("R01","Analiza 1",Semester.SUMMER, YearofStudy.I,8);
         this.subjects.add(sub);
-        sub=new Subject("R02","Analiza 2",Semester.WINTER,YearStudy.II,8);
+        sub=new Subject("R02","Analiza 2",Semester.WINTER, YearofStudy.II,8);
         this.subjects.add(sub);
-        sub=new Subject("R03","Nemacki",Semester.SUMMER,YearStudy.I,2);
+        sub=new Subject("R03","Nemacki",Semester.SUMMER, YearofStudy.I,2);
         this.subjects.add(sub);
     }
 

@@ -13,7 +13,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-public class Toolbar extends JToolBar implements ScaleImg{
+public class Toolbar extends JToolBar implements ScaleImage {
 
 	private static final long serialVersionUID = 1209699209668701828L;
 	

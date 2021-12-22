@@ -9,13 +9,13 @@ public class Subject {
 		private String idS;
 		private String nameSub;
 		private Semester semester;
-		private YearStudy yearOfStudy;
+		private YearofStudy yearOfStudy;
 		private Professor professor;
 		private int pointsESPB;
 		private ArrayList<Student> passed = new ArrayList<Student>();
 		private ArrayList<Student> failed = new ArrayList<Student>();
 
-	public Subject(String id, String nameSub, Semester semester, YearStudy yearOfStudy,  int pointsESPB) {
+	public Subject(String id, String nameSub, Semester semester, YearofStudy yearOfStudy, int pointsESPB) {
 		this.idS = id;
 		this.nameSub = nameSub;
 		this.semester = semester;
@@ -47,11 +47,11 @@ public class Subject {
 		this.semester = semester;
 	}
 
-	public YearStudy getYearOfStudy() {
+	public YearofStudy getYearOfStudy() {
 		return yearOfStudy;
 	}
 
-	public void setYearOfStudy(YearStudy yearOfStudy) {
+	public void setYearOfStudy(YearofStudy yearOfStudy) {
 		this.yearOfStudy = yearOfStudy;
 	}
 

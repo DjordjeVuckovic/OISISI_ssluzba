@@ -10,11 +10,10 @@ import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
 import gui.view.CentralBox;
-import gui.view.MainWindow;
-import gui.view.ScaleImg;
+import gui.view.ScaleImage;
 import gui.view.dialog.AddStudent;
 
-public class MyAbstractAction extends AbstractAction implements ScaleImg{
+public class MyAbstractAction extends AbstractAction implements ScaleImage {
 	
 	
 	private static final long serialVersionUID = 2525487053356975101L;

@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class BazaStudenata implements AbstractTableModel {
+public class BazaStudenata implements AbstractModel {
 
 	private ArrayList<Student> students;
 	private ArrayList<String> colums;
@@ -30,9 +30,9 @@ public class BazaStudenata implements AbstractTableModel {
 	}
 	private void initStudents(){
 		this.students= new ArrayList<>();
-		students.add(new Student("Mika", "Mikic", "RA8/2020", YearStudy.I,9.8, NacinFinansiranja.SAMOFINANSIRANJE ));
-		students.add(new Student("Igor", "Bodiroga", "RA5/2017", YearStudy.II,7.8, NacinFinansiranja.SAMOFINANSIRANJE ));
-		students.add(new Student("Marko", "Markovic", "RA88/2016", YearStudy.I,10.0, NacinFinansiranja.BUDZET ));
+		students.add(new Student("Mika", "Mikic", "RA8/2020", YearofStudy.I,9.8, Status.SAMOFINANSIRANJE ));
+		students.add(new Student("Igor", "Bodiroga", "RA5/2017", YearofStudy.II,7.8, Status.SAMOFINANSIRANJE ));
+		students.add(new Student("Marko", "Markovic", "RA88/2016", YearofStudy.I,10.0, Status.BUDZET ));
 	}
 
 	public ArrayList<Student> getStudents() {

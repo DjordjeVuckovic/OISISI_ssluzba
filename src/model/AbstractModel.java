@@ -1,6 +1,6 @@
 package model;
 
-public interface AbstractTableModel {
+public interface AbstractModel {
     int getColumnCount();
     int getRowCount();
     String getColumnName(int col);

@@ -1,25 +1,24 @@
 package model;
 
 import java.util.Date;
-import model.BazaStudenata;
-import model.*;
+
 
 public class Student {
 	// POLJA
 		private String name;
 		private String surname;
 		private Date birthday;
-		private Adress adress;
+		private Address adress;
 		private String contactPhone;
 		private String Email;
 		private String index;
 		private int enrollYear;
-		private YearStudy currentYear;
+		private YearofStudy currentYear;
 		private double avgGrade;
-		private NacinFinansiranja status;
+		private Status status;
 
 
-	public Student(String name, String surname, String index, YearStudy currentYear, double avgGrade, NacinFinansiranja status) {
+	public Student(String name, String surname, String index, YearofStudy currentYear, double avgGrade, Status status) {
 		this.name = name;
 		this.surname = surname;
 		this.index = index;
@@ -31,8 +30,8 @@ public class Student {
 	public Student(){
 
 		}
-		public Student(String ime, String prezime, Date datum_rodjenja, Adress adresa, String kontakt_telefon,
-					   String email, String index, int godina_upisa, YearStudy tren_god_studiranja, double pr_ocena, NacinFinansiranja n_finansiranja) {
+		public Student(String ime, String prezime, Date datum_rodjenja, Address adresa, String kontakt_telefon,
+					   String email, String index, int godina_upisa, YearofStudy tren_god_studiranja, double pr_ocena, Status n_finansiranja) {
 			super();
 			this.name=ime;
 			this.surname =prezime;
@@ -68,10 +67,10 @@ public class Student {
 
 			this.birthday = birthday;
 		}
-		public Adress getAdress() {
+		public Address getAdress() {
 			return adress;
 		}
-		public void setAdress(Adress adresa) {
+		public void setAdress(Address adresa) {
 			this.adress = adresa;
 		}
 
@@ -99,10 +98,10 @@ public class Student {
 		public void setEnrollYear(int godina_upisa) {
 			this.enrollYear = godina_upisa;
 		}
-		public YearStudy getCurrentyear() {
+		public YearofStudy getCurrentyear() {
 			return currentYear;
 		}
-		public void setCurrentyear(YearStudy trenGodStudija) {
+		public void setCurrentyear(YearofStudy trenGodStudija) {
 			this.currentYear = trenGodStudija;
 		}
 		public double getavgGrade() {
@@ -112,10 +111,10 @@ public class Student {
 		public void setAvgGrade(double pr_ocena) {
 			this.avgGrade = pr_ocena;
 		}
-		public NacinFinansiranja getNacinFinansiranja() {
+		public Status getNacinFinansiranja() {
 			return status;
 		}
-		public void setFinansiranje(NacinFinansiranja n_finansiranja) {
+		public void setFinansiranje(Status n_finansiranja) {
 			this.status = n_finansiranja;
 		}
 		//STRING
