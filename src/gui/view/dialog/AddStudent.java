@@ -9,14 +9,13 @@ import model.YearofStudy;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AddStudent  extends Dialog{
+public class AddStudent  extends Dialog  {
 
     private JTextField txtFieldName;
     private JTextField txtFieldSurName;
@@ -60,6 +59,22 @@ public class AddStudent  extends Dialog{
         super(MainWindow.getInstance(),"Dodavanje studenta");
         setLayout(new BorderLayout());
         initStudentDialog();
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                instance.setVisible(false);
+                instance=null;
+                txtFieldAdress.setText("");
+                txtFieldName.setText("");
+                txtFieldSurName.setText("");
+                txtFieldDate.setText("");
+                txtFieldAdress.setText("");
+                txtFieldNUm.setText("");
+                txtFieldE.setText("");
+                txtFieldId.setText("");
+                txtFieldAssignYear.setText("");
+            }
+        });
     }
 
     private ArrayList<StudentListener> validations=new ArrayList<>();
@@ -228,9 +243,20 @@ public class AddStudent  extends Dialog{
         btDecline.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                txtFieldAdress.setText("");
+                txtFieldName.setText("");
+                txtFieldSurName.setText("");
+                txtFieldDate.setText("");
+                txtFieldAdress.setText("");
+                txtFieldNUm.setText("");
+                txtFieldE.setText("");
+                txtFieldId.setText("");
+                txtFieldAssignYear.setText("");
+                instance=null;
                 dispose();
             }
         });
+
         diaButtonPanel.add(btDecline);
         btAccept.addActionListener(new ActionListener() {
             @Override
@@ -282,12 +308,5 @@ public class AddStudent  extends Dialog{
         this.add(diaButtonPanel,BorderLayout.SOUTH);
 
     }
-
-
-
-
-
-
-
 
 }

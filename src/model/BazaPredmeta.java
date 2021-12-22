@@ -16,7 +16,7 @@ public class BazaPredmeta implements AbstractModel {
 
     private BazaPredmeta(){
         initSubjects();
-        this.colums= new ArrayList<String>();
+        this.colums= new ArrayList<>();
         this.colums.add("Šifra predmeta");
         this.colums.add("Naziv predmeta");
         this.colums.add("Broj ESPB bodova");

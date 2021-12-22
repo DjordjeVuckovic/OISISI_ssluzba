@@ -21,8 +21,6 @@ public class Dialog extends JDialog {
         setResizable(false);
         this.setLocationRelativeTo(parent);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-
     }
 
 

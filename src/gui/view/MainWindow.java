@@ -53,10 +53,7 @@ public class MainWindow extends JFrame {
 		this.getContentPane().add(new StatusBar(),BorderLayout.SOUTH);
 
 		JPanel centralniPanel = new JPanel(new BorderLayout());
-		JTable tabStudents= StudentsTable.getInstance();
-		JTable tabSubject = new SubjectTable();
-		centralWindow = new CentralBox(tabStudents,tabSubject);
-		centralniPanel.add(centralWindow);
+		centralniPanel.add(CentralBox.getInstance());
 		add(centralniPanel, BorderLayout.CENTER);
 
 	}

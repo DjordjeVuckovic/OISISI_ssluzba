@@ -9,26 +9,22 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class CentralBox extends JTabbedPane {
-//private static CentralBox instance = null;
-private JTable studentsTable;
-private JTable SubjectTable;
-/*
+private static CentralBox instance = null;
+
 public static CentralBox getInstance() {
 	if(instance==null) instance = new CentralBox();
 	return instance;
 }
-*/
 
-public CentralBox(JTable tabStudents,JTable tabSubject) {
+
+private  CentralBox() {
 	JPanel panelStudents = new JPanel(new BorderLayout());
-	//studentsTable = new StudentsTable();
-	JScrollPane jScrollPaneStudents= new JScrollPane(tabStudents);
+	JScrollPane jScrollPaneStudents= new JScrollPane(StudentsTable.getInstance());
 	panelStudents.add(jScrollPaneStudents,BorderLayout.CENTER);
 	this.addTab("Students",panelStudents);
 
 	JPanel panelSubject = new JPanel(new BorderLayout());
-	//SubjectTable = new SubjectTable();
-	JScrollPane jScrollPaneSubject= new JScrollPane(tabSubject);
+	JScrollPane jScrollPaneSubject= new JScrollPane(SubjectTable.getInstance());
 	panelSubject.add(jScrollPaneSubject,BorderLayout.CENTER);
 	this.addTab("Subject",panelSubject);
 	this.addChangeListener(new ChangeListener() {

@@ -105,7 +105,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 		// TODO Auto-generated method stub
 
 		if(name.equals("New")){
-			switch (MainWindow.getInstance().centralWindow.getSelectedIndex()){
+			switch (CentralBox.getInstance().getSelectedIndex()){
 				case 0:
 					AddStudent.getInstance().setVisible(true);
 					break;
