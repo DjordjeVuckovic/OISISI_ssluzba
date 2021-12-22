@@ -8,14 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CheckValidation {
-    public static boolean validName(String name){
+    public static boolean checkName(String name){
         boolean ret=false;
         if(name.matches("[a-zA-Z\u0161\u0111\u010d\u0107\u017e\u0160\u0110\u010c\u0106\u017d ]+")){
             ret = true;
         }
         return ret;
         }
-        public static boolean validDate(String date){
+        public static boolean checkDate(String date){
         //date format dd.mm.yyyy
             if(date.isEmpty() || date.isBlank()){
                 return false;
@@ -59,7 +59,7 @@ public class CheckValidation {
 
             return true;
         }
-    public static boolean validPhone(String text) {
+    public static boolean checkPhone(String text) {
         // unos brojeva u rasponu od 3 do 12
         if(text.isEmpty() || text.isBlank()) {
             return false;
@@ -92,7 +92,7 @@ public class CheckValidation {
         if(sEl.length != 3) return false;
 
         for(int i = 0; i < sEl[0].length(); i++) {
-            if( !Character.isAlphabetic( sEl[0].charAt(i) ) || !Character.isDigit( sEl[0].charAt(i) ) ) return false;
+            if( !Character.isAlphabetic( sEl[0].charAt(i) ) && !Character.isDigit( sEl[0].charAt(i) ) ) return false;
         }
 
         for(int i = 0; i < sEl[1].length(); i++) {
@@ -106,7 +106,7 @@ public class CheckValidation {
         }
         return true;
     }
-    public static boolean validAssignYear(String text) {
+    public static boolean checkAssignYear(String text) {
 
         if(text.isEmpty() || text.isBlank()) {
             return false;
@@ -123,7 +123,7 @@ public class CheckValidation {
 
         return true;
     }
-    public static boolean validSifraPredmeta(String text) {
+    public static boolean checkSubjectId(String text) {
 
         if(text.isEmpty() || text.isBlank()) {
             return false;
@@ -139,7 +139,7 @@ public class CheckValidation {
         return true;
     }
 
-    public static boolean validSubjectName(String text) {
+    public static boolean checkSubjectName(String text) {
         if(text.isEmpty() || text.isBlank()) {
             return false;
         }
@@ -147,7 +147,7 @@ public class CheckValidation {
         return true;
     }
 
-    public static boolean validESPB(String text) {
+    public static boolean checkESPB(String text) {
 
         if(text.isEmpty() || text.isBlank()) {
             return false;

@@ -17,7 +17,7 @@ public class Dialog extends JDialog {
         this.setBackground(Color.WHITE);
         this.setResizable(false);
 
-        this.setSize(500, 650);
+        this.setSize(500, 500);
         setResizable(false);
         this.setLocationRelativeTo(parent);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

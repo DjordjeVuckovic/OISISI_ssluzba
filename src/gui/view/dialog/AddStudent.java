@@ -1,40 +1,67 @@
 package gui.view.dialog;
 
-import gui.view.CentralBox;
+import controller.keyfocuslisteners.StudentListener;
 import gui.view.MainWindow;
-import model.Student;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class AddStudent  extends Dialog{
 
+    private JTextField txtFieldName;
+    private JTextField txtFieldSurName;
+    private JTextField txtFieldDate;
+    private JTextField txtFieldAdress;
+    private JTextField txtFieldNUm;
+    private JTextField txtFieldE;
+    private JTextField txtFieldId;
+    private JTextField txtFieldAssignYear;
+    private String[] currentYear;
+    private String[] status;
     private JButton btAccept;
     private JButton btDecline;
-    Dimension cellDim;
+    private  Dimension cellDim;
 
     private static AddStudent instance = null;
-
 
     public static AddStudent getInstance() {
         if(instance==null) instance = new AddStudent();
         return instance;
     }
-
+    public boolean allValid(){
+        for(StudentListener sl:validations){
+            if(!sl.getValidation()){
+                return false;
+            }
+        }
+        return true;
+    }
+    public void EnableButt(){
+        if(allValid()){
+            btAccept.setEnabled(true);
+        }
+        else{
+            btAccept.setEnabled(false);
+        }
+    }
 
     private AddStudent() {
         super(MainWindow.getInstance(),"Dodavanje studenta");
-
-
         setLayout(new BorderLayout());
+        initStudentDialog();
+    }
+
+    private ArrayList<StudentListener> validations=new ArrayList<>();
+    private void initStudentDialog(){
         cellDim = new Dimension(200, 20);
 
         JLabel lbName = new JLabel("Ime*");
         lbName.setToolTipText("Unesite svoje ime");
         lbName.setPreferredSize(cellDim);
-        JTextField txtFieldName = new JTextField();
+        txtFieldName = new JTextField();
         txtFieldName.setToolTipText("Ime je niz karaktera");
         txtFieldName.setPreferredSize(cellDim);
         txtFieldName.setName("txtName");
@@ -45,7 +72,7 @@ public class AddStudent  extends Dialog{
         JLabel lbSurname = new JLabel("Prezime*");
         lbSurname.setToolTipText("Unesite svoje prezime");
         lbSurname.setPreferredSize(cellDim);
-        JTextField txtFieldSurName = new JTextField();
+        txtFieldSurName = new JTextField();
         txtFieldSurName.setToolTipText("Prezime je niz karaktera");
         txtFieldSurName.setPreferredSize(cellDim);
         txtFieldSurName.setName("txtSurname");
@@ -56,7 +83,7 @@ public class AddStudent  extends Dialog{
         JLabel lbDate = new JLabel("Date*");
         lbDate.setToolTipText("Unesite datum rodjenja");
         lbDate.setPreferredSize(cellDim);
-        JTextField txtFieldDate = new JTextField();
+        txtFieldDate = new JTextField();
         txtFieldDate.setToolTipText("Trazeni format:");
         txtFieldDate.setPreferredSize(cellDim);
         txtFieldDate.setName("txtDate");
@@ -67,7 +94,7 @@ public class AddStudent  extends Dialog{
         JLabel lbAdress = new JLabel("Adresa stanovanja*");
         lbAdress.setToolTipText("Unesite svoju adresu");
         lbAdress.setPreferredSize(cellDim);
-        JTextField txtFieldAdress = new JTextField();
+        txtFieldAdress = new JTextField();
         txtFieldAdress.setToolTipText("Unesite svoju tacnu adresu");
         txtFieldAdress.setPreferredSize(cellDim);
         txtFieldAdress.setName("txtAdress");
@@ -78,7 +105,7 @@ public class AddStudent  extends Dialog{
         JLabel lbNum = new JLabel("Broj telefona*");
         lbNum.setToolTipText("Unesite svoj broj telefona");
         lbNum.setPreferredSize(cellDim);
-        JTextField txtFieldNUm = new JTextField();
+        txtFieldNUm = new JTextField();
         txtFieldNUm.setToolTipText("Broj telefona mora da ima najmanje 3 cifre");
         txtFieldNUm.setPreferredSize(cellDim);
         txtFieldNUm.setName("txtNum");
@@ -89,7 +116,7 @@ public class AddStudent  extends Dialog{
         JLabel lbEmail = new JLabel("E-mail adresa*");
         lbEmail.setToolTipText("Unesite svoj E-mail");
         lbEmail.setPreferredSize(cellDim);
-        JTextField txtFieldE = new JTextField();
+        txtFieldE = new JTextField();
         txtFieldE.setToolTipText("Trazeni format:");
         txtFieldE.setPreferredSize(cellDim);
         txtFieldE.setName("txtEmail");
@@ -100,7 +127,7 @@ public class AddStudent  extends Dialog{
         JLabel lbId = new JLabel("Broj indeksa*");
         lbId.setToolTipText("Unesite svoj indeks");
         lbId.setPreferredSize(cellDim);
-        JTextField txtFieldId = new JTextField();
+        txtFieldId = new JTextField();
         txtFieldId.setToolTipText("Trazeni format:");
         txtFieldId.setPreferredSize(cellDim);
         txtFieldId.setName("txtId");
@@ -111,7 +138,7 @@ public class AddStudent  extends Dialog{
         JLabel lbAssignYear = new JLabel("Godina Upisa*");
         lbAssignYear.setToolTipText("Unesite godinu svog upisa");
         lbAssignYear.setPreferredSize(cellDim);
-        JTextField txtFieldAssignYear = new JTextField();
+        txtFieldAssignYear = new JTextField();
         txtFieldAssignYear.setToolTipText("Trazeni format:");
         txtFieldAssignYear.setPreferredSize(cellDim);
         txtFieldAssignYear.setName("txtAssignYear");
@@ -121,8 +148,8 @@ public class AddStudent  extends Dialog{
 
         JLabel lbCurrentYear = new JLabel("Trenutna godina studija*");
         lbCurrentYear.setPreferredSize(cellDim);
-        String[] CurrentYear = {"I", "II", "III", "IV"};
-        JComboBox<String> txtFJComboBoxCurrentYear = new JComboBox<>(CurrentYear);
+        currentYear = new String[]{"I", "II", "III", "IV"};
+        JComboBox<String> txtFJComboBoxCurrentYear = new JComboBox<>(currentYear);
         txtFJComboBoxCurrentYear.setName("txtCurrentYear");
         txtFJComboBoxCurrentYear.setPreferredSize(cellDim);
         JPanel panelCY = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -131,7 +158,7 @@ public class AddStudent  extends Dialog{
 
         JLabel lbStatus = new JLabel("Način finansiranja*");
         lbStatus.setPreferredSize(cellDim);
-        String[] status = {"Budzet","Samofinansiranje"};
+        status = new String[]{"Budzet","Samofinansiranje"};
         JComboBox<String> CBStatus = new JComboBox<>(status);
         CBStatus.setName("txttatus");
         CBStatus.setPreferredSize(cellDim);
@@ -155,18 +182,64 @@ public class AddStudent  extends Dialog{
         CentralPanel.add(panelCY);
         CentralPanel.add(panelSt);
         this.add(CentralPanel,BorderLayout.CENTER);
-        //
+        //validation
+        StudentListener val= new StudentListener(lbName,txtFieldName,this);
+        txtFieldName.addFocusListener(val);
+        validations.add(val);
+        val =new StudentListener(lbSurname,txtFieldSurName,this);
+        txtFieldSurName.addFocusListener(val);
+        validations.add(val);
+        val= new StudentListener(lbAdress,txtFieldAdress,this);
+        txtFieldAdress.addFocusListener(val);
+        validations.add(val);
+        val=new StudentListener(lbAssignYear,txtFieldAssignYear,this);
+        txtFieldAssignYear.addFocusListener(val);
+        validations.add(val);
+        val=new StudentListener(lbEmail,txtFieldE,this);
+        txtFieldE.addFocusListener(val);
+        validations.add(val);
+        val=new StudentListener(lbDate,txtFieldDate,this);
+        txtFieldDate.addFocusListener(val);
+        validations.add(val);
+        val=new StudentListener(lbId,txtFieldId,this);
+        txtFieldId.addFocusListener(val);
+        validations.add(val);
+        val=new StudentListener(lbNum,txtFieldNUm);
+        txtFieldNUm.addFocusListener(val);
+        validations.add(val);
+
+
+
         JPanel diaButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         diaButtonPanel.setPreferredSize(new Dimension(60,60));
         btAccept = new JButton("Potvrdi");
         btAccept.setEnabled(false);
         btDecline = new JButton("Odustani");
+        btDecline.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        diaButtonPanel.add(btDecline);
+        btAccept.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(allValid()){
+                    System.out.println("Sva validna");
+                }
+            }
+        });
+
+
+
+
         diaButtonPanel.add(btAccept);
         diaButtonPanel.add(Box.createHorizontalStrut(20));
-        diaButtonPanel.add(btDecline);
         this.add(diaButtonPanel,BorderLayout.SOUTH);
 
     }
+
 
 
 
