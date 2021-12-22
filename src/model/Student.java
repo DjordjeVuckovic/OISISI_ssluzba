@@ -1,7 +1,8 @@
 package model;
 
 import java.util.Date;
-
+import model.BazaStudenata;
+import model.*;
 
 public class Student {
 	// POLJA
