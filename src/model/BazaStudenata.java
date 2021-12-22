@@ -18,7 +18,7 @@ public class BazaStudenata implements AbstractModel {
 	
 	private BazaStudenata() {
 		initStudents();
-		this.colums= new ArrayList<String>();
+		this.colums= new ArrayList<>();
 		this.colums.add("Indeks");
 		this.colums.add("Ime");
 		this.colums.add("Prezime");
@@ -61,7 +61,7 @@ public class BazaStudenata implements AbstractModel {
 			case 0:
 				return st.getIndex();
 			case 1:
-				return st.getIme();
+				return st.getName();
 			case 2:
 				return st.getSurname();
 			case 3:

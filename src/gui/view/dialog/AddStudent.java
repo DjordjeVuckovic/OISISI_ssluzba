@@ -1,13 +1,20 @@
 package gui.view.dialog;
 
+import controller.StudentController;
 import controller.keyfocuslisteners.StudentListener;
 import gui.view.MainWindow;
+import model.Status;
+import model.Student;
+import model.YearofStudy;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AddStudent  extends Dialog{
 
@@ -21,6 +28,7 @@ public class AddStudent  extends Dialog{
     private JTextField txtFieldAssignYear;
     private String[] currentYear;
     private String[] status;
+
     private JButton btAccept;
     private JButton btDecline;
     private  Dimension cellDim;
@@ -55,6 +63,7 @@ public class AddStudent  extends Dialog{
     }
 
     private ArrayList<StudentListener> validations=new ArrayList<>();
+
     private void initStudentDialog(){
         cellDim = new Dimension(200, 20);
 
@@ -84,7 +93,7 @@ public class AddStudent  extends Dialog{
         lbDate.setToolTipText("Unesite datum rodjenja");
         lbDate.setPreferredSize(cellDim);
         txtFieldDate = new JTextField();
-        txtFieldDate.setToolTipText("Trazeni format:");
+        txtFieldDate.setToolTipText("Trazeni format: gg.mm.yyyy");
         txtFieldDate.setPreferredSize(cellDim);
         txtFieldDate.setName("txtDate");
         JPanel panelD = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -95,7 +104,7 @@ public class AddStudent  extends Dialog{
         lbAdress.setToolTipText("Unesite svoju adresu");
         lbAdress.setPreferredSize(cellDim);
         txtFieldAdress = new JTextField();
-        txtFieldAdress.setToolTipText("Unesite svoju tacnu adresu");
+        txtFieldAdress.setToolTipText("Unesite svoju tacnu adresu!");
         txtFieldAdress.setPreferredSize(cellDim);
         txtFieldAdress.setName("txtAdress");
         JPanel panelA = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -106,7 +115,7 @@ public class AddStudent  extends Dialog{
         lbNum.setToolTipText("Unesite svoj broj telefona");
         lbNum.setPreferredSize(cellDim);
         txtFieldNUm = new JTextField();
-        txtFieldNUm.setToolTipText("Broj telefona mora da ima najmanje 3 cifre");
+        txtFieldNUm.setToolTipText("Broj telefona mora da ima najmanje 3 cifre,a najvise 12");
         txtFieldNUm.setPreferredSize(cellDim);
         txtFieldNUm.setName("txtNum");
         JPanel panelNum = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -117,7 +126,7 @@ public class AddStudent  extends Dialog{
         lbEmail.setToolTipText("Unesite svoj E-mail");
         lbEmail.setPreferredSize(cellDim);
         txtFieldE = new JTextField();
-        txtFieldE.setToolTipText("Trazeni format:");
+        txtFieldE.setToolTipText("Trazeni format:nesto@nesto");
         txtFieldE.setPreferredSize(cellDim);
         txtFieldE.setName("txtEmail");
         JPanel panelE = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -128,7 +137,7 @@ public class AddStudent  extends Dialog{
         lbId.setToolTipText("Unesite svoj indeks");
         lbId.setPreferredSize(cellDim);
         txtFieldId = new JTextField();
-        txtFieldId.setToolTipText("Trazeni format:");
+        txtFieldId.setToolTipText("Trazeni format: smer/upis/godina");
         txtFieldId.setPreferredSize(cellDim);
         txtFieldId.setName("txtId");
         JPanel panelID = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -182,6 +191,7 @@ public class AddStudent  extends Dialog{
         CentralPanel.add(panelCY);
         CentralPanel.add(panelSt);
         this.add(CentralPanel,BorderLayout.CENTER);
+
         //validation
         StudentListener val= new StudentListener(lbName,txtFieldName,this);
         txtFieldName.addFocusListener(val);
@@ -226,7 +236,40 @@ public class AddStudent  extends Dialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(allValid()){
-                    System.out.println("Sva validna");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+                    dateFormat.setLenient(false);
+                    Date birthday = null;
+                    try {
+                        birthday = dateFormat.parse(txtFieldDate.getText());
+                    } catch (ParseException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+
+                    Student student = new Student();
+                    student.setName(txtFieldName.getText());
+                    student.setSurname(txtFieldSurName.getText());
+                    student.setBirthday(birthday); 	//
+
+                    student.setAdress(txtFieldAdress.getText());
+                    student.setContactPhone(txtFieldNUm.getText());
+                    student.setEmail(txtFieldE.getText());
+                    student.setIndex(txtFieldId.getText());
+                    student.setEnrollYear(Integer.parseInt(txtFieldAssignYear.getText()) );
+
+                    student.setFinansiranje( Status.BUDZET);
+                    student.setCurrentyear(YearofStudy.I);
+                    /*// treba +1 jer je "I (prva)" na nultom indeksu
+                    if(CBStatus.getSelectedIndex() == 0) {
+                        student.setStatus( Status.B );
+                    }else {
+                        student.setStatus( Status.S );
+                    }
+
+                     */
+                    StudentController.getInstance().addStudent(student);
+                    dispose();
                 }
             }
         });

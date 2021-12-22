@@ -2,18 +2,24 @@ package gui.view;
 
 
 
+import gui.view.center.StudentsTable;
+import gui.view.center.SubjectTable;
+
 import java.awt.BorderLayout;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.Serial;
 import javax.swing.*;
 
 
 public class MainWindow extends JFrame {
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private static MainWindow instance = null;
+	public JTabbedPane centralWindow;
 	public static MainWindow getInstance() {
 		if(MainWindow.instance==null) MainWindow.instance = new MainWindow();
 		return MainWindow.instance;
@@ -47,7 +53,10 @@ public class MainWindow extends JFrame {
 		this.getContentPane().add(new StatusBar(),BorderLayout.SOUTH);
 
 		JPanel centralniPanel = new JPanel(new BorderLayout());
-		centralniPanel.add(CentralBox.getInstance());
+		JTable tabStudents= StudentsTable.getInstance();
+		JTable tabSubject = new SubjectTable();
+		centralWindow = new CentralBox(tabStudents,tabSubject);
+		centralniPanel.add(centralWindow);
 		add(centralniPanel, BorderLayout.CENTER);
 
 	}

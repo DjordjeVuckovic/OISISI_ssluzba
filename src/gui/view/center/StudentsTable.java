@@ -5,11 +5,22 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class StudentsTable extends JTable {
+    private static StudentsTable instance=null;
+
+    public static StudentsTable getInstance(){
+        if(instance==null){
+            instance = new StudentsTable();
+        }
+        return instance;
+    }
+
+
     public StudentsTable() {
         setRowSelectionAllowed(true);
         setColumnSelectionAllowed(true);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setModel(new AbstractTableStudents());
+        this.getTableHeader().setReorderingAllowed(false);
     }
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
         Component c = super.prepareRenderer(renderer, row, column);
@@ -19,6 +30,11 @@ public class StudentsTable extends JTable {
             c.setBackground(Color.WHITE);
         }
         return c;
+    }
+    public void refreshTable(){
+        AbstractTableStudents model =(AbstractTableStudents) this.getModel();
+        model.fireTableDataChanged();
+        validate();
     }
 
 }
