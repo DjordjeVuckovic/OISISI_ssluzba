@@ -22,4 +22,13 @@ public class StudentController {
         BazaStudenata.getInstance().addStudent(st);
         StudentsTable.getInstance().refreshTable();
     }
+    public void deleteStudent(int row){
+        if(row <0){
+            return;
+        }
+        Student student = BazaStudenata.getInstance().getStudentByRow(row);
+        BazaStudenata.getInstance().deleteStudent(student);
+        StudentsTable.getInstance().refreshTable();
+    }
+
 }

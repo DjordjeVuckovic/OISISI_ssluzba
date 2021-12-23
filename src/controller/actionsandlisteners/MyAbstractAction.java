@@ -4,14 +4,13 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
+import controller.StudentController;
 import gui.view.CentralBox;
 import gui.view.MainWindow;
 import gui.view.ScaleImage;
+import gui.view.center.StudentsTable;
 import gui.view.dialog.AddStudent;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImage {
@@ -115,16 +114,36 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					//AddPredmet
 			}
 		}
+		else if(name.equals("Studenti")){
+			//
+		}
 		else if(name.equals("Save")){
 			//
 		}
-		else if(name.equals("Delete")){
-			//
+		else if(name.equals("Delete")) {
+			switch (CentralBox.getInstance().getSelectedIndex()) {
+				case 0:
+				int rowSelected = StudentsTable.getInstance().getSelectedRow();
+
+				if (rowSelected == -1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali studenta", "Upozorenje", 0, null);
+					break;
+				}
+				int choice = JOptionPane.showConfirmDialog(null,"Upozorenje", "Da li ste sigurni?",0);
+				if(choice ==JOptionPane.YES_OPTION){
+					StudentController.getInstance().deleteStudent(rowSelected);
+				}
+				break;
+				//case 1:
+					//delete prof
+				//case 2:
+					//delete subj
+			}
 		}
 
 
-		else if(name.equals("close")) {
-			//MainWindow.exit();
+		else if(name.equals("Close")) {
+			//exit;
 		}
 		
 	}

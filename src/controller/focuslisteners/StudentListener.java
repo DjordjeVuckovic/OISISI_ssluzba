@@ -1,4 +1,4 @@
-package controller.keyfocuslisteners;
+package controller.focuslisteners;
 
 import controller.validation.CheckValidation;
 import gui.view.dialog.AddStudent;

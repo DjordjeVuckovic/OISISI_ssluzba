@@ -29,7 +29,7 @@ public class MainWindow extends JFrame {
 	private MainWindow() {
 		super();
 		setTitle("Studentska  Slu\u017Eba ");
-		Toolkit kit= Toolkit.getDefaultToolkit();//klasa nije staticka ali metoda jeste
+		Toolkit kit= Toolkit.getDefaultToolkit();
 		Dimension dim = kit.getScreenSize();
 		int width = dim.width;
 		int height = dim.height;
@@ -41,7 +41,6 @@ public class MainWindow extends JFrame {
 		ImageIcon img_student= new ImageIcon("img/student.jpg");
 		setIconImage(img_student.getImage());
 		getContentPane().setBackground(Color.LIGHT_GRAY); 
-		
 
 		MenuBar menu_bar= new MenuBar();
 		menu_bar.setBackground(new Color(51, 153, 255));
@@ -54,7 +53,7 @@ public class MainWindow extends JFrame {
 
 		JPanel centralniPanel = new JPanel(new BorderLayout());
 		centralniPanel.add(CentralBox.getInstance());
-		add(centralniPanel, BorderLayout.CENTER);
+		this.add(centralniPanel, BorderLayout.CENTER);
 
 	}
 

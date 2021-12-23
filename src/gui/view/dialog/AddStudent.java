@@ -1,7 +1,7 @@
 package gui.view.dialog;
 
 import controller.StudentController;
-import controller.keyfocuslisteners.StudentListener;
+import controller.focuslisteners.StudentListener;
 import gui.view.MainWindow;
 import model.Status;
 import model.Student;
@@ -64,21 +64,12 @@ public class AddStudent  extends Dialog  {
             public void windowClosing(WindowEvent e) {
                 instance.setVisible(false);
                 instance=null;
-                txtFieldAdress.setText("");
-                txtFieldName.setText("");
-                txtFieldSurName.setText("");
-                txtFieldDate.setText("");
-                txtFieldAdress.setText("");
-                txtFieldNUm.setText("");
-                txtFieldE.setText("");
-                txtFieldId.setText("");
-                txtFieldAssignYear.setText("");
+                clearFields();
             }
         });
     }
 
     private ArrayList<StudentListener> validations=new ArrayList<>();
-
     private void initStudentDialog(){
         cellDim = new Dimension(200, 20);
 
@@ -184,7 +175,7 @@ public class AddStudent  extends Dialog  {
         lbStatus.setPreferredSize(cellDim);
         status = new String[]{"Budzet","Samofinansiranje"};
         JComboBox<String> CBStatus = new JComboBox<>(status);
-        CBStatus.setName("txttatus");
+        CBStatus.setName("txtstatus");
         CBStatus.setPreferredSize(cellDim);
         JPanel panelSt = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelSt.add(lbStatus);
@@ -239,19 +230,15 @@ public class AddStudent  extends Dialog  {
         diaButtonPanel.setPreferredSize(new Dimension(60,60));
         btAccept = new JButton("Potvrdi");
         btAccept.setEnabled(false);
+        btAccept.setMnemonic(KeyEvent.VK_S);
+        btAccept.setForeground(Color.GREEN);
         btDecline = new JButton("Odustani");
+        btDecline.setForeground(Color.BLACK);
+        btDecline.setMnemonic(KeyEvent.VK_Q);
         btDecline.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                txtFieldAdress.setText("");
-                txtFieldName.setText("");
-                txtFieldSurName.setText("");
-                txtFieldDate.setText("");
-                txtFieldAdress.setText("");
-                txtFieldNUm.setText("");
-                txtFieldE.setText("");
-                txtFieldId.setText("");
-                txtFieldAssignYear.setText("");
+                clearFields();
                 instance=null;
                 dispose();
             }
@@ -286,15 +273,25 @@ public class AddStudent  extends Dialog  {
 
                     student.setFinansiranje( Status.BUDZET);
                     student.setCurrentyear(YearofStudy.I);
-                    /*// treba +1 jer je "I (prva)" na nultom indeksu
+
                     if(CBStatus.getSelectedIndex() == 0) {
-                        student.setStatus( Status.B );
+                        student.setFinansiranje( Status.BUDZET );
                     }else {
-                        student.setStatus( Status.S );
+                        student.setFinansiranje( Status.SAMOFINANSIRANJE );
                     }
 
-                     */
+                    if(txtFJComboBoxCurrentYear.getSelectedIndex()==0){
+                        student.setCurrentyear(YearofStudy.I);
+                    } else if(txtFJComboBoxCurrentYear.getSelectedIndex()==1){
+                        student.setCurrentyear(YearofStudy.II);
+                    }else if(txtFJComboBoxCurrentYear.getSelectedIndex()==2){
+                        student.setCurrentyear(YearofStudy.III);
+                    }else if(txtFJComboBoxCurrentYear.getSelectedIndex()==3){
+                        student.setCurrentyear(YearofStudy.IV);
+                    }
+
                     StudentController.getInstance().addStudent(student);
+                    clearFields();
                     dispose();
                 }
             }
@@ -307,6 +304,18 @@ public class AddStudent  extends Dialog  {
         diaButtonPanel.add(Box.createHorizontalStrut(20));
         this.add(diaButtonPanel,BorderLayout.SOUTH);
 
+    }
+
+    private void clearFields() {
+        txtFieldAdress.setText("");
+        txtFieldName.setText("");
+        txtFieldSurName.setText("");
+        txtFieldDate.setText("");
+        txtFieldAdress.setText("");
+        txtFieldNUm.setText("");
+        txtFieldE.setText("");
+        txtFieldId.setText("");
+        txtFieldAssignYear.setText("");
     }
 
 }

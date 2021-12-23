@@ -20,7 +20,7 @@ public class StudentsTable extends JTable {
         setColumnSelectionAllowed(true);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setModel(new AbstractTableStudents());
-        this.getTableHeader().setReorderingAllowed(false);
+        setName("Studenti");
     }
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
         Component c = super.prepareRenderer(renderer, row, column);
@@ -31,10 +31,17 @@ public class StudentsTable extends JTable {
         }
         return c;
     }
+
+
     public void refreshTable(){
         AbstractTableStudents model =(AbstractTableStudents) this.getModel();
         model.fireTableDataChanged();
         validate();
+    }
+    public String getRowCnt(){
+        int row = this.getSelectedRow();
+        if(row==-1) return null;
+        return (String) this.getValueAt(row,0);
     }
 
 }
