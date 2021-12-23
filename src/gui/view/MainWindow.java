@@ -2,25 +2,34 @@ package gui.view;
 
 
 
+import gui.view.center.StudentsTable;
+import gui.view.center.SubjectTable;
+
 import java.awt.BorderLayout;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+import java.io.Serial;
+import javax.swing.*;
 
 
 public class MainWindow extends JFrame {
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
+	private static MainWindow instance = null;
+	public JTabbedPane centralWindow;
+	public static MainWindow getInstance() {
+		if(MainWindow.instance==null) MainWindow.instance = new MainWindow();
+		return MainWindow.instance;
+	}
 
 	
-	public MainWindow() {
+	private MainWindow() {
 		super();
 		setTitle("Studentska  Slu\u017Eba ");
-		Toolkit kit= Toolkit.getDefaultToolkit();//klasa nije staticka ali metoda jeste
+		Toolkit kit= Toolkit.getDefaultToolkit();
 		Dimension dim = kit.getScreenSize();
 		int width = dim.width;
 		int height = dim.height;
@@ -32,7 +41,6 @@ public class MainWindow extends JFrame {
 		ImageIcon img_student= new ImageIcon("img/student.jpg");
 		setIconImage(img_student.getImage());
 		getContentPane().setBackground(Color.LIGHT_GRAY); 
-		
 
 		MenuBar menu_bar= new MenuBar();
 		menu_bar.setBackground(new Color(51, 153, 255));
@@ -40,9 +48,13 @@ public class MainWindow extends JFrame {
 		this.setJMenuBar(menu_bar);
 		
 		this.add(new Toolbar(),BorderLayout.NORTH);
-		
-	
+
 		this.getContentPane().add(new StatusBar(),BorderLayout.SOUTH);
+
+		JPanel centralniPanel = new JPanel(new BorderLayout());
+		centralniPanel.add(CentralBox.getInstance());
+		this.add(centralniPanel, BorderLayout.CENTER);
+
 	}
 
 }
