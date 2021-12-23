@@ -1,17 +1,14 @@
 package gui.view.dialog;
 
-import gui.view.MainWindow;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
-public class Dialog extends JDialog {
+public class MyDialog extends JDialog {
     private final Frame parent;
 
 
 
-    public Dialog(Frame parent,String windowName) {
+    public MyDialog(Frame parent, String windowName) {
         super(parent, windowName, true);
         this.parent=parent;
         this.setBackground(Color.WHITE);

@@ -124,7 +124,6 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 			switch (CentralBox.getInstance().getSelectedIndex()) {
 				case 0:
 				int rowSelected = StudentsTable.getInstance().getSelectedRow();
-
 				if (rowSelected == -1) {
 					JOptionPane.showMessageDialog(null, "Niste odabrali studenta", "Upozorenje", 0, null);
 					break;

@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AddStudent  extends Dialog  {
+public class AddStudent  extends MyDialog {
 
     private JTextField txtFieldName;
     private JTextField txtFieldSurName;
@@ -57,7 +57,6 @@ public class AddStudent  extends Dialog  {
 
     private AddStudent() {
         super(MainWindow.getInstance(),"Dodavanje studenta");
-        setLayout(new BorderLayout());
         initStudentDialog();
         addWindowListener(new WindowAdapter() {
             @Override
@@ -72,7 +71,7 @@ public class AddStudent  extends Dialog  {
     private ArrayList<StudentListener> validations=new ArrayList<>();
     private void initStudentDialog(){
         cellDim = new Dimension(200, 20);
-
+        setLayout(new BorderLayout());
         JLabel lbName = new JLabel("Ime*");
         lbName.setToolTipText("Unesite svoje ime");
         lbName.setPreferredSize(cellDim);
@@ -305,7 +304,9 @@ public class AddStudent  extends Dialog  {
         this.add(diaButtonPanel,BorderLayout.SOUTH);
 
     }
+    protected void validateOneByOne(){
 
+    }
     private void clearFields() {
         txtFieldAdress.setText("");
         txtFieldName.setText("");
