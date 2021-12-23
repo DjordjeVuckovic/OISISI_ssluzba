@@ -47,12 +47,16 @@ public class StudentListener implements FocusListener {
         return label.getText();
     }
     public void ValidateCell(){
-        if(!validation){
+        if(!validation) {
             label.setForeground(Color.RED);
             jTextField.setForeground(Color.RED);
             jTextField.setBorder(errorBorder);
-        }else {
-            jTextField.setBorder(correctBorder);
+        }
+            else if(validation) {
+                jTextField.setBorder(correctBorder);
+            }
+            else {
+            jTextField.setBorder(defaultBorer);
         }
     }
 

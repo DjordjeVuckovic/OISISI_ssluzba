@@ -110,11 +110,19 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					break;
 				case 1:
 					//AddProffesor
+					break;
 				case 2:
 					//AddPredmet
+					break;
 			}
 		}
 		else if(name.equals("Studenti")){
+			//
+		}
+		else if(name.equals("Profesori")){
+			//
+		}
+		else if(name.equals("Katedre")){
 			//
 		}
 		else if(name.equals("Save")){
@@ -124,7 +132,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 			switch (CentralBox.getInstance().getSelectedIndex()) {
 				case 0:
 				int rowSelected = StudentsTable.getInstance().getSelectedRow();
-				if (rowSelected == -1) {
+				if (rowSelected <0) {
 					JOptionPane.showMessageDialog(null, "Niste odabrali studenta", "Upozorenje", 0, null);
 					break;
 				}

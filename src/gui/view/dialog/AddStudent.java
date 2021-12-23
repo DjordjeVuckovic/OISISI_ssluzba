@@ -98,7 +98,7 @@ public class AddStudent  extends MyDialog {
         lbDate.setToolTipText("Unesite datum rodjenja");
         lbDate.setPreferredSize(cellDim);
         txtFieldDate = new JTextField();
-        txtFieldDate.setToolTipText("Trazeni format: gg.mm.yyyy");
+        txtFieldDate.setToolTipText("Trazeni format: dd.mm.yyyy");
         txtFieldDate.setPreferredSize(cellDim);
         txtFieldDate.setName("txtDate");
         JPanel panelD = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -274,7 +274,7 @@ public class AddStudent  extends MyDialog {
                     student.setCurrentyear(YearofStudy.I);
 
                     if(CBStatus.getSelectedIndex() == 0) {
-                        student.setFinansiranje( Status.BUDZET );
+                        student.setFinansiranje(Status.BUDZET);
                     }else {
                         student.setFinansiranje( Status.SAMOFINANSIRANJE );
                     }
