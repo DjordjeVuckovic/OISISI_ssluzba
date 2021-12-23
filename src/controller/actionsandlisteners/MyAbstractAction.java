@@ -11,6 +11,8 @@ import gui.view.CentralBox;
 import gui.view.MainWindow;
 import gui.view.ScaleImage;
 import gui.view.center.StudentsTable;
+import gui.view.center.ProfessorsTable;
+import gui.view.dialog.AddProfessor;
 import gui.view.dialog.AddStudent;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImage {
@@ -109,7 +111,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					AddStudent.getInstance().setVisible(true);
 					break;
 				case 1:
-					//AddProffesor
+					AddProfessor.getInstance().setVisible(true);
 				case 2:
 					//AddPredmet
 			}
@@ -133,8 +135,17 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					StudentController.getInstance().deleteStudent(rowSelected);
 				}
 				break;
-				//case 1:
-					//delete prof
+				case 1:
+					int rowSelectedP = ProfessorsTable.getInstance().getSelectedRow();
+					if (rowSelectedP == -1) {
+						JOptionPane.showMessageDialog(null, "Niste odabrali profesora", "Upozorenje", 0, null);
+						break;
+					}
+					int choiceP = JOptionPane.showConfirmDialog(null,"Upozorenje", "Da li ste sigurni?",0);
+					if(choiceP ==JOptionPane.YES_OPTION){
+						StudentController.getInstance().deleteStudent(rowSelectedP);
+					}
+					break;
 				//case 2:
 					//delete subj
 			}

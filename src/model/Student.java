@@ -8,7 +8,7 @@ public class Student {
 		private String name;
 		private String surname;
 		private Date birthday;
-		private String adress;
+		private String adress; //Adress adress?
 		private String contactPhone;
 		private String Email;
 		private String index;

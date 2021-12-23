@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Professor {
 	
-	// POLJA
+	// POLJA          //nema assignyear, currentyear, status
 	private String surname;
 	private String name;
 	private Date birthday;
