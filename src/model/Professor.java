@@ -17,6 +17,13 @@ public class Professor {
 	private int yearsOfTail;
 	private ArrayList<Subject> subjects = new ArrayList<Subject>();
 	
+	public Professor(String name, String surname, String title, String mail) {
+		this.name = name;
+		this.surname = surname;
+		this.title = title;
+		this.mail = mail;
+		
+	}
 	
 	
 	public Professor() {}
