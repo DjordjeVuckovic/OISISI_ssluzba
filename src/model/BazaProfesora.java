@@ -52,9 +52,9 @@ public class BazaProfesora implements AbstractModel {
 		return this.colums.get(col);
 	}
 
-	public Object getValueAt(int rowName, int columnName) {
-		Professor pr=this.professors.get(rowName);
-		switch (columnName){
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		Professor pr=this.professors.get(rowIndex);
+		switch (columnIndex){
 			case 0:
 				return pr.getName();
 			case 1:
