@@ -6,7 +6,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JSeparator;
 
-import controller.actionsandlisteners.MyAbstractAction;
+import gui.view.actionsandlisteners.MyAbstractAction;
 
 
 public class MenuBar extends JMenuBar {

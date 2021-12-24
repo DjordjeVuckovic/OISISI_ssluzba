@@ -58,14 +58,16 @@ public class AddStudent  extends MyDialog {
     private AddStudent() {
         super(MainWindow.getInstance(),"Dodavanje studenta");
         initStudentDialog();
+        /*
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                instance.setVisible(false);
-                instance=null;
-                clearFields();
+                //instance.setVisible(false);
+                //instance=null;
+                //clearFields();
             }
         });
+         */
     }
 
     private ArrayList<StudentListener> validations=new ArrayList<>();
@@ -237,8 +239,8 @@ public class AddStudent  extends MyDialog {
         btDecline.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clearFields();
-                instance=null;
+                //clearFields();
+                //instance=null;
                 dispose();
             }
         });

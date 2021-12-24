@@ -1,4 +1,4 @@
-package controller.actionsandlisteners;
+package gui.view.actionsandlisteners;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -8,7 +8,6 @@ import javax.swing.*;
 
 import controller.StudentController;
 import gui.view.CentralBox;
-import gui.view.MainWindow;
 import gui.view.ScaleImage;
 import gui.view.center.StudentsTable;
 import gui.view.dialog.AddStudent;
