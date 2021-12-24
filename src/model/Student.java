@@ -8,7 +8,7 @@ public class Student {
 		private String name;
 		private String surname;
 		private Date birthday;
-		private String adress;
+		private Address adress;
 		private String contactPhone;
 		private String Email;
 		private String index;
@@ -30,7 +30,7 @@ public class Student {
 	public Student(){
 
 		}
-		public Student(String ime, String prezime, Date datum_rodjenja, String adresa, String kontakt_telefon,
+		public Student(String ime, String prezime, Date datum_rodjenja, Address adresa, String kontakt_telefon,
 					   String email, String index, int godina_upisa, YearofStudy tren_god_studiranja, double pr_ocena, Status n_finansiranja) {
 			super();
 			this.name=ime;
@@ -67,10 +67,10 @@ public class Student {
 
 			this.birthday = birthday;
 		}
-		public String getAdress() {
+		public Address getAdress() {
 			return adress;
 		}
-		public void setAdress(String adresa) {
+		public void setAdress(Address adresa) {
 			this.adress = adresa;
 		}
 

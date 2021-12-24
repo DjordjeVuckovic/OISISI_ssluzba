@@ -123,6 +123,19 @@ public class CheckValidation {
 
         return true;
     }
+    public static boolean checkStreet(String text) {
+    	if(text.isEmpty() || text.isBlank()) {
+            return false;
+        }
+		return true;
+    }
+    public static boolean checkStreetNum(String text) {
+    	if(text.isEmpty() || text.isBlank()) {
+            return false;
+        }
+		return true;
+    }
+   
     public static boolean checkSubjectId(String text) {
 
         if(text.isEmpty() || text.isBlank()) {
