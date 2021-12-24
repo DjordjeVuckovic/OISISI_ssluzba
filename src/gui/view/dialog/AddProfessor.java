@@ -231,13 +231,11 @@ public class AddProfessor  extends MyDialog {
                     }
 
 
-
                     Professor Professor = new Professor();
-                    Professor.setSurname(txtFieldSurName.getText());
+                    Professor.setAdress(txtFieldAdress.getText());
                     Professor.setName(txtFieldName.getText());
-                    Professor.setBirthday(birthday); 	
-
-                    //Professor.setAdress(txtFieldAdress.getText());
+                    Professor.setSurname(txtFieldSurName.getText());               
+                    Professor.setBirthday(birthday); 	                    
                     Professor.setContact(txtFieldNUm.getText());
                     Professor.setMail(txtFieldEmail.getText());
                     Professor.setTitle(txtFieldTitle.getText());
@@ -248,8 +246,6 @@ public class AddProfessor  extends MyDialog {
                 }
             }
         });
-
-
 
 
         diaButtonPanel.add(btAccept);

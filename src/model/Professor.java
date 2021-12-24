@@ -9,7 +9,7 @@ public class Professor {
 	private String surname;
 	private String name;
 	private Date birthday;
-	private Address adress;
+	private String adress;
 	private String contact;
 	private String mail;
 	private String idNum;
@@ -27,7 +27,7 @@ public class Professor {
 	
 	
 	public Professor() {}
-	public Professor(String surname, String name, Date birthday, Address adress, String contact, String mail,
+	public Professor(String surname, String name, Date birthday, String adress, String contact, String mail,
 					 String idNumber, String title, int yearsOfTail, ArrayList<Subject> subjects) {
 		super();
 		this.surname = surname;
@@ -59,10 +59,10 @@ public class Professor {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	public Address getAdress() {
+	public String getAdress() {
 		return adress;
 	}
-	public void setAdress(Address adress) {
+	public void setAdress(String adress) {
 		this.adress = adress;
 	}
 	public String getContact() {
