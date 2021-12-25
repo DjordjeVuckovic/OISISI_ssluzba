@@ -264,7 +264,6 @@ public class AddProfessor  extends MyDialog {
         txtFieldNUm.setText("");
         txtFieldEmail.setText("");
         txtFieldId.setText("");
-        txtFieldTitle.setText("");
     }
 
 }
