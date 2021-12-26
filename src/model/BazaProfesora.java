@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.util.ArrayList;
 
 public class BazaProfesora implements AbstractModel {
@@ -19,8 +20,8 @@ public class BazaProfesora implements AbstractModel {
 	private BazaProfesora() {
 		initProfessors();
 		this.colums= new ArrayList<>();
-		this.colums.add("Ime");
-		this.colums.add("Prezime");
+		this.colums.add("Name");
+		this.colums.add("Surname");
 		this.colums.add("Zvanje");
 		this.colums.add("Email");
 		
@@ -85,7 +86,7 @@ public class BazaProfesora implements AbstractModel {
 	public Professor getProfessorByRow(int row){
 		return professors.get(row);
 	}
-	public void addProfessor(Professor pr){
+	public void AddProfessor(Professor pr){
 		professors.add(pr);
 	}
 
@@ -97,6 +98,9 @@ public class BazaProfesora implements AbstractModel {
 			}
 		}
 	}
+	
+	
+	
 	public void deleteProfessor(Professor pr){professors.remove(pr);}
 	public boolean UniqueId(String id_){
 		boolean ret=true;
@@ -106,5 +110,41 @@ public class BazaProfesora implements AbstractModel {
 			}
 		}
 		return ret;
+	}
+
+	
+	public void editProfessor(String Name, String Surname, Date datum, Adress adresa_stanovanja, String kontakt_telefon,String email_adresa, String id, int godine_staza, String titula) {
+		for (Professor i : professors) {
+			if (i.getIdNumber().equals(id)) {
+				i.setName(Name);
+				i.setSurname(Surname);
+				i.setBirthday(datum);
+				i.setAdress(adresa_stanovanja);
+				i.setContact(kontakt_telefon);
+				i.setMail(email_adresa);
+				i.setIdNumber(id) ;
+				i.setGodStaza(godine_staza);
+				i.setTitle(titula);
+			}
+		}
+		try {
+			for (Professor i : professors) {
+				if (i.getIdNumber().equals(id)) {
+					i.setName(Name);
+					i.setSurname(Surname);
+					i.setBirthday(datum);
+					i.setAdress(adresa_stanovanja);
+					i.setContact(kontakt_telefon);
+					i.setMail(email_adresa);
+					i.setIdNumber(id);
+					i.setGodStaza(godine_staza);
+					i.setTitle(titula);
+					
+				}
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
 	}
 }

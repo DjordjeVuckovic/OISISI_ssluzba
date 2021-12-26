@@ -38,12 +38,12 @@ private  CentralBox() {
 	
 	  JPanel panelProfessors = new JPanel(new BorderLayout()); JScrollPane
 	  jScrollPaneProfessors = new JScrollPane(ProfessorsTable.getInstance());
-	  panelSubject.add(jScrollPaneProfessors,BorderLayout.CENTER);
+	  panelProfessors.add(jScrollPaneProfessors,BorderLayout.CENTER);
 	  this.addTab("Profesori",panelProfessors);
 	  this.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				StudentsTable.getInstance().refreshTable();
+				ProfessorsTable.getInstance().refreshTable();
 			}
 		});
 }
