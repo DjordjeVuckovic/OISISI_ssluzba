@@ -1,7 +1,7 @@
 package controller.focuslisteners;
 
 import controller.validation.CheckValidation;
-import gui.view.dialog.AddStudent;
+import gui.view.dialog.AddProfessor;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,27 +10,27 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class StudentListener implements FocusListener {
+public class ProfessorListener implements FocusListener {
     Border defaultBorer = new LineBorder(Color.BLACK,1);
     Border correctBorder = new LineBorder(Color.GREEN,1);
     Border errorBorder = new LineBorder(Color.RED, 1);
     private JLabel label;
     private JTextField jTextField;
     private boolean validation;
-    private AddStudent addStudent=null;
+    private AddProfessor addProfessor=null;
     private int mode;
 
-    public StudentListener(JLabel lb, JTextField txt){
+    public ProfessorListener(JLabel lb, JTextField txt){
         label=lb;
         jTextField=txt;
         validation=false;
         mode=0;
     }
-    public StudentListener(JLabel lb,  JTextField txt, AddStudent addStudent) {
+    public ProfessorListener(JLabel lb,  JTextField txt, AddProfessor addProfessor) {
         label = lb;
         jTextField = txt;
         validation = false;
-        this.addStudent = addStudent;
+        this.addProfessor = addProfessor;
         mode = 1;
 
     }
@@ -47,18 +47,12 @@ public class StudentListener implements FocusListener {
         return label.getText();
     }
     public void ValidateCell(){
-
-        if(!validation) {
+        if(!validation){
             label.setForeground(Color.RED);
             jTextField.setForeground(Color.RED);
             jTextField.setBorder(errorBorder);
-        }
-            else if(validation) {
-                jTextField.setBorder(correctBorder);
-            }
-            else {
-            jTextField.setBorder(defaultBorer);
-
+        }else {
+            jTextField.setBorder(correctBorder);
         }
     }
 
@@ -77,36 +71,18 @@ public class StudentListener implements FocusListener {
         else if(getKey().equals("txtDate")){
             validation=CheckValidation.checkDate(getLine());
         }
-
+        else if(getKey().equals("txtAdress")){
+            validation=CheckValidation.checkAdress(getLine());
+        }
         else if(getKey().equals("txtNum")){
             validation=CheckValidation.checkPhone(getLine());
         }
         else if(getKey().equals("txtEmail")){
             validation=CheckValidation.checkEmail(getLine());
         }
-        else  if(getKey().equals("txtId")){
-            validation=CheckValidation.checkIndex(getLine());
-        }
-        else if(getKey().equals("txtAssignYear")){
-            validation=CheckValidation.checkAssignYear(getLine());
-        }
-
-        else if(getKey().equals("txtStreet")) {
-        	validation=CheckValidation.checkStreet(getLine());
-        }
-        else if(getKey().equals("txtStnum")) {
-        	validation=CheckValidation.checkStreetNum(getLine());
-        }
-		else if(getKey().equals("txtCity")) {
-			validation=CheckValidation.checkName(getLine());  	
-		}
-		else if(getKey().equals("txtContry")) {
-			validation=CheckValidation.checkName(getLine());	
-        }
-
         ValidateCell();
         if(mode==1){
-            addStudent.EnableButt();
+            addProfessor.EnableButt();
         }
 
         }

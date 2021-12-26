@@ -31,8 +31,10 @@ public class BazaPredmeta implements AbstractModel {
         this.subjects.add(sub);
         sub=new Subject("R03","Nemacki",Semester.SUMMER, YearofStudy.I,2);
         this.subjects.add(sub);
+
         sub=new Subject("R04","Metode graviranja",Semester.SUMMER, YearofStudy.II,2);
         this.subjects.add(sub);
+
     }
 
     public ArrayList<Subject> getSubjects() {
