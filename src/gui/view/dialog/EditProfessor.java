@@ -7,9 +7,10 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.focuslisteners.ProfessorListener;
+import gui.view.center.ProfessorsTable;
 import controller.FocusProfessor;
 import controller.ProfessorController;
 import model.BazaProfesora;
@@ -35,7 +37,7 @@ public class EditProfessor extends JDialog{
 	public static JTextField imeTF;
 	public static JTextField datumTF;
 	public static JTextField telefonTF;
-	public static JTextField adresaTF;
+	public static JTextField adresaTF; //treba da se ubaci adresaStreetTf itd.
 	public static JTextField emailTF;
 	public static JTextField idTF;
 	public static String titula;
@@ -258,15 +260,16 @@ public class EditProfessor extends JDialog{
 				return false;
 				}
 		});
-		Professor prof=new Professor(BazaProfesora.getInstance().getRow(ProfessorsTable.getInstance().getSelektovanRed()));
+		Professor prof=new Professor(BazaProfesora.getInstance().getRow(ProfessorsTable.getInstance().getRowCnt())); //treba se napraviti funkcija getSelectedRow
 		imeTF.setText(prof.getName());
 		prezimeTF.setText(prof.getSurname());
-		datumTF.setText(prof.getBirthday().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-		adresaTF.setAdress(prof.getAdress());
+		//datumTF.setText(prof.getBirthday().SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+       
+		//.setAdress(prof.getAdress());
 		telefonTF.setText(prof.getContact());
 		emailTF.setText(prof.getMail());
 		idTF.setText(prof.getIdNumber());
-		godineStazaTF.setText(prof.getGodStaza());
+		//godineStazaTF=prof.getGodStaza());
 		titula=prof.getTitle();
 		
 

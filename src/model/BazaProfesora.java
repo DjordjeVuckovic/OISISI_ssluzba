@@ -83,8 +83,8 @@ public class BazaProfesora implements AbstractModel {
 		}
 		return null;
 	}
-	public Professor getProfessorByRow(int row){
-		return professors.get(row);
+	public Professor getProfessorByRow(int string){
+		return professors.get(string);
 	}
 	public void AddProfessor(Professor pr){
 		professors.add(pr);
