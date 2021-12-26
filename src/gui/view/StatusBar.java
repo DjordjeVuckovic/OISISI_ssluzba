@@ -47,7 +47,6 @@ public class StatusBar extends JPanel implements ActionListener {
 				else if(CentralBox.getInstance().getSelectedIndex()==1){
 					name.setText(" Studentska Slu\u017eba- Predmeti");
 				}
-				
 				else if(CentralBox.getInstance().getSelectedIndex()==2){
 					name.setText(" Studentska Slu\u017eba- Profesori "); //Da li treba ovo?
 				}

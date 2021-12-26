@@ -3,6 +3,9 @@ package gui.view.dialog;
 import controller.StudentController;
 import controller.focuslisteners.StudentListener;
 import gui.view.MainWindow;
+
+import model.Address;
+
 import model.Status;
 import model.Student;
 import model.YearofStudy;
@@ -17,10 +20,21 @@ import java.util.Date;
 
 public class AddStudent  extends MyDialog {
 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6176645110187015550L;
+	
+	private JTextField txtFieldName;
+    private JTextField txtFieldSurName;
+    private JTextField txtFieldDate;
+    //private JTextField txtFieldAdress;
+
     private JTextField txtFieldName;
     private JTextField txtFieldSurName;
     private JTextField txtFieldDate;
     private JTextField txtFieldAdress;
+
     private JTextField txtFieldNUm;
     private JTextField txtFieldE;
     private JTextField txtFieldId;
@@ -31,6 +45,16 @@ public class AddStudent  extends MyDialog {
     private JButton btAccept;
     private JButton btDecline;
     private  Dimension cellDim;
+
+    
+    private JTextField txtAdressStreet;
+    private JTextField txtAdressNum;
+    private JTextField txtAdressCity;
+    private JTextField txtAdressContry;
+
+    
+
+
 
     private static AddStudent instance = null;
 
@@ -58,14 +82,17 @@ public class AddStudent  extends MyDialog {
     private AddStudent() {
         super(MainWindow.getInstance(),"Dodavanje studenta");
         initStudentDialog();
+        /*
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                instance.setVisible(false);
-                instance=null;
-                clearFields();
+                //instance.setVisible(false);
+                //instance=null;
+                //clearFields();
             }
         });
+         */
+
     }
 
     private ArrayList<StudentListener> validations=new ArrayList<>();
@@ -74,6 +101,7 @@ public class AddStudent  extends MyDialog {
         setLayout(new BorderLayout());
         JLabel lbName = new JLabel("Ime*");
         lbName.setToolTipText("Unesite svoje ime");
+
         lbName.setPreferredSize(cellDim);
         txtFieldName = new JTextField();
         txtFieldName.setToolTipText("Ime je niz karaktera");
@@ -98,12 +126,58 @@ public class AddStudent  extends MyDialog {
         lbDate.setToolTipText("Unesite datum rodjenja");
         lbDate.setPreferredSize(cellDim);
         txtFieldDate = new JTextField();
+
+        txtFieldDate.setToolTipText("Trazeni format: dd.mm.yyyy");
+
         txtFieldDate.setToolTipText("Trazeni format: gg.mm.yyyy");
+
         txtFieldDate.setPreferredSize(cellDim);
         txtFieldDate.setName("txtDate");
         JPanel panelD = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelD.add(lbDate);
         panelD.add(txtFieldDate);
+
+
+        JLabel lbAdressStreet = new JLabel("Ulica*");
+        txtAdressStreet= new JTextField();
+        lbAdressStreet.setPreferredSize(cellDim);
+        txtAdressStreet.setPreferredSize(cellDim);
+        txtAdressStreet.setName("txtStreet");
+        
+        JLabel lbAdressNum = new JLabel("Broj ulice*");
+        txtAdressNum= new JTextField();
+        lbAdressNum.setPreferredSize(cellDim);
+        txtAdressNum.setPreferredSize(cellDim);
+        txtAdressNum.setName("txtStnum");
+        
+        JLabel lbAdressCity = new JLabel("Grad*");
+        txtAdressCity= new JTextField();
+        txtAdressCity.setName("txtCity");
+        txtAdressCity.setPreferredSize(cellDim);
+        lbAdressCity.setPreferredSize(cellDim);
+        JLabel lbAdressContry = new JLabel("Drzava*");
+        txtAdressContry= new JTextField();
+        txtAdressCity.setName("txtCity");
+        txtAdressContry.setPreferredSize(cellDim);
+        lbAdressContry.setPreferredSize(cellDim);
+
+        txtAdressContry.setName("txtContry");
+        JPanel panelA1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelA1.add(lbAdressStreet);
+        panelA1.add(txtAdressStreet);
+       
+        JPanel panelA2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelA2.add(lbAdressNum);
+        panelA2.add(txtAdressNum);
+        
+        JPanel panelA3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelA3.add(lbAdressCity);
+        panelA3.add(txtAdressCity);
+        
+        JPanel panelA4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelA4.add(lbAdressContry);
+        panelA4.add(txtAdressContry);
+        
 
         JLabel lbAdress = new JLabel("Adresa stanovanja*");
         lbAdress.setToolTipText("Unesite svoju adresu");
@@ -115,6 +189,7 @@ public class AddStudent  extends MyDialog {
         JPanel panelA = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelA.add(lbAdress);
         panelA.add(txtFieldAdress);
+
 
         JLabel lbNum = new JLabel("Broj telefona*");
         lbNum.setToolTipText("Unesite svoj broj telefona");
@@ -188,11 +263,19 @@ public class AddStudent  extends MyDialog {
         CentralPanel.add(panelN);
         CentralPanel.add(panelS);
         CentralPanel.add(panelD);
+
         CentralPanel.add(panelA);
+
         CentralPanel.add(panelNum);
         CentralPanel.add(panelE);
         CentralPanel.add(panelID);
         CentralPanel.add(panelY);
+
+        CentralPanel.add(panelA1);
+        CentralPanel.add(panelA2);
+        CentralPanel.add(panelA3);
+        CentralPanel.add(panelA4);
+
         CentralPanel.add(panelCY);
         CentralPanel.add(panelSt);
         this.add(CentralPanel,BorderLayout.CENTER);
@@ -204,8 +287,10 @@ public class AddStudent  extends MyDialog {
         val =new StudentListener(lbSurname,txtFieldSurName,this);
         txtFieldSurName.addFocusListener(val);
         validations.add(val);
+
         val= new StudentListener(lbAdress,txtFieldAdress,this);
         txtFieldAdress.addFocusListener(val);
+
         validations.add(val);
         val=new StudentListener(lbAssignYear,txtFieldAssignYear,this);
         txtFieldAssignYear.addFocusListener(val);
@@ -219,9 +304,27 @@ public class AddStudent  extends MyDialog {
         val=new StudentListener(lbId,txtFieldId,this);
         txtFieldId.addFocusListener(val);
         validations.add(val);
+
+        val=new StudentListener(lbNum,txtFieldNUm,this);
+        txtFieldNUm.addFocusListener(val);
+        validations.add(val);
+        val = new StudentListener(lbAdressStreet, txtAdressStreet,this);
+        txtAdressStreet.addFocusListener(val);
+        validations.add(val);
+        val = new StudentListener(lbAdressNum, txtAdressNum,this);
+        txtAdressNum.addFocusListener(val);
+        validations.add(val);
+        val = new StudentListener(lbAdressCity, txtAdressCity,this);
+        txtAdressCity.addFocusListener(val);
+        validations.add(val);
+        val = new StudentListener(lbAdressContry, txtAdressContry,this);
+        txtAdressContry.addFocusListener(val);
+        validations.add(val);
+
         val=new StudentListener(lbNum,txtFieldNUm);
         txtFieldNUm.addFocusListener(val);
         validations.add(val);
+
 
 
 
@@ -237,8 +340,6 @@ public class AddStudent  extends MyDialog {
         btDecline.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clearFields();
-                instance=null;
                 dispose();
             }
         });
@@ -257,6 +358,12 @@ public class AddStudent  extends MyDialog {
                         ex.printStackTrace();
                     }
 
+                    Student student = new Student();
+                    student.setName(txtFieldName.getText());
+                    student.setSurname(txtFieldSurName.getText());
+                    student.setBirthday(birthday); 	
+
+
 
 
                     Student student = new Student();
@@ -265,16 +372,29 @@ public class AddStudent  extends MyDialog {
                     student.setBirthday(birthday); 	//
 
                     student.setAdress(txtFieldAdress.getText());
+
                     student.setContactPhone(txtFieldNUm.getText());
                     student.setEmail(txtFieldE.getText());
                     student.setIndex(txtFieldId.getText());
                     student.setEnrollYear(Integer.parseInt(txtFieldAssignYear.getText()) );
 
+                    Address adress= new Address();
+                    adress.setStreet(txtAdressStreet.getText());
+                    adress.setNumber(txtAdressNum.getText());
+                    adress.setCity(txtAdressCity.getText());
+                    adress.setCountry(txtAdressContry.getText());
+                    
+                    student.setAdress(adress);
+                    
                     student.setFinansiranje( Status.BUDZET);
                     student.setCurrentyear(YearofStudy.I);
 
                     if(CBStatus.getSelectedIndex() == 0) {
+
+                        student.setFinansiranje(Status.BUDZET);
+
                         student.setFinansiranje( Status.BUDZET );
+
                     }else {
                         student.setFinansiranje( Status.SAMOFINANSIRANJE );
                     }
@@ -308,15 +428,15 @@ public class AddStudent  extends MyDialog {
 
     }
     private void clearFields() {
-        txtFieldAdress.setText("");
-        txtFieldName.setText("");
-        txtFieldSurName.setText("");
-        txtFieldDate.setText("");
-        txtFieldAdress.setText("");
-        txtFieldNUm.setText("");
-        txtFieldE.setText("");
+   
+        //txtFieldName.setText("");
+       // txtFieldSurName.setText("");
+        //txtFieldDate.setText("");
+        //txtFieldNUm.setText("");
+       // txtFieldE.setText("");
         txtFieldId.setText("");
-        txtFieldAssignYear.setText("");
+       // txtFieldAssignYear.setText("");
+
     }
 
 }

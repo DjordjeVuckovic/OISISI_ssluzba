@@ -47,12 +47,18 @@ public class StudentListener implements FocusListener {
         return label.getText();
     }
     public void ValidateCell(){
-        if(!validation){
+
+        if(!validation) {
             label.setForeground(Color.RED);
             jTextField.setForeground(Color.RED);
             jTextField.setBorder(errorBorder);
-        }else {
-            jTextField.setBorder(correctBorder);
+        }
+            else if(validation) {
+                jTextField.setBorder(correctBorder);
+            }
+            else {
+            jTextField.setBorder(defaultBorer);
+
         }
     }
 
@@ -71,9 +77,7 @@ public class StudentListener implements FocusListener {
         else if(getKey().equals("txtDate")){
             validation=CheckValidation.checkDate(getLine());
         }
-        else if(getKey().equals("txtAdress")){
-            validation=CheckValidation.checkAdress(getLine());
-        }
+
         else if(getKey().equals("txtNum")){
             validation=CheckValidation.checkPhone(getLine());
         }
@@ -86,6 +90,20 @@ public class StudentListener implements FocusListener {
         else if(getKey().equals("txtAssignYear")){
             validation=CheckValidation.checkAssignYear(getLine());
         }
+
+        else if(getKey().equals("txtStreet")) {
+        	validation=CheckValidation.checkStreet(getLine());
+        }
+        else if(getKey().equals("txtStnum")) {
+        	validation=CheckValidation.checkStreetNum(getLine());
+        }
+		else if(getKey().equals("txtCity")) {
+			validation=CheckValidation.checkName(getLine());  	
+		}
+		else if(getKey().equals("txtContry")) {
+			validation=CheckValidation.checkName(getLine());	
+        }
+
         ValidateCell();
         if(mode==1){
             addStudent.EnableButt();

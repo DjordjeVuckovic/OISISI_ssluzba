@@ -1,5 +1,6 @@
 package gui.view;
 
+
 import gui.view.center.ProfessorsTable;
 import gui.view.center.StudentsTable;
 import gui.view.center.SubjectTable;
@@ -34,6 +35,10 @@ private  CentralBox() {
 			StudentsTable.getInstance().refreshTable();
 		}
 	});
+
+}
+
+
 	
 	
 	  JPanel panelProfessors = new JPanel(new BorderLayout()); JScrollPane
@@ -48,4 +53,5 @@ private  CentralBox() {
 		});
 }
 	  
+
 }

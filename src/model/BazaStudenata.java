@@ -29,9 +29,13 @@ public class BazaStudenata implements AbstractModel {
 	}
 	private void initStudents(){
 		this.students= new ArrayList<>();
-		students.add(new Student("Mika", "Mikic", "RA/8/2020", YearofStudy.I,9.8, Status.SAMOFINANSIRANJE ));
-		students.add(new Student("Igor", "Bodiroga", "RA/5/2017", YearofStudy.II,7.8, Status.SAMOFINANSIRANJE ));
+
+		students.add(new Student("Mika", "Mikic", "RA/8/2020", YearofStudy.I,9.8, Status.SAMOFINANSIRANJE));
+		students.add(new Student("Igor", "Bodiroga", "RA/5/2017", YearofStudy.II,7.8, Status.SAMOFINANSIRANJE));
 		students.add(new Student("Marko", "Markovic", "RA/88/2016", YearofStudy.I,10.0, Status.BUDZET ));
+		//students.add(new Student("Mirko", "Mikic", "RA/1/2020", YearofStudy.IV,9.8, Status.SAMOFINANSIRANJE));
+		//students.add(new Student("Igor", "Igic", "RA/8/2017", YearofStudy.II,7.8, Status.BUDZET));
+		//students.add(new Student("Marko", "Kraljevic", "RA/888/2016", YearofStudy.III,10.0, Status.BUDZET));
 	}
 
 	public ArrayList<Student> getStudents() {
@@ -98,7 +102,7 @@ public class BazaStudenata implements AbstractModel {
 	public void deleteStudentById(String id){
 		for(Student st: this.students){
 			if(st.getIndex().equals(id)){
-				//System.out.println(st);
+
 				this.students.remove(st);
 
 			}
