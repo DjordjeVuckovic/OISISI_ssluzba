@@ -2,6 +2,7 @@ package controller.focuslisteners;
 
 import controller.validation.CheckValidation;
 import gui.view.dialog.AddStudent;
+import gui.view.dialog.EditStudent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -18,6 +19,8 @@ public class StudentListener implements FocusListener {
     private JTextField jTextField;
     private boolean validation;
     private AddStudent addStudent=null;
+    private EditStudent editStudent=null;
+    private String index=null;
     private int mode;
 
     public StudentListener(JLabel lb, JTextField txt){
@@ -33,6 +36,19 @@ public class StudentListener implements FocusListener {
         this.addStudent = addStudent;
         mode = 1;
 
+    }
+    public StudentListener(JTextField txt,EditStudent editStudent) {
+    	jTextField = txt;
+    	validation = true;
+    	this.editStudent = editStudent;
+    	mode=2;
+    }
+    public StudentListener(JTextField txt,EditStudent editStudent,String index) {
+    	jTextField = txt;
+    	validation = true;
+    	this.editStudent = editStudent;
+    	this.index=index;
+    	mode=2;
     }
     public boolean getValidation(){
         return validation;
@@ -87,7 +103,17 @@ public class StudentListener implements FocusListener {
             validation=CheckValidation.checkEmail(getLine());
         }
         else  if(getKey().equals("txtId")){
+        	if(mode==2) {
+        		if(getKey().equals(index)) {
+        			validation=true;
+        		}
+        		else {
+        		validation=CheckValidation.checkIndex(getLine());
+        			}
+        	}
+        	else {
             validation=CheckValidation.checkIndex(getLine());
+        	}
         }
         else if(getKey().equals("txtAssignYear")){
             validation=CheckValidation.checkAssignYear(getLine());

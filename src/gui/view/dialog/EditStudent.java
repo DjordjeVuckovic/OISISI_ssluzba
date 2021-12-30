@@ -1,28 +1,40 @@
 package gui.view.dialog;
 
-import controller.StudentController;
-import controller.focuslisteners.StudentListener;
-import gui.view.MainWindow;
-import model.Address;
-import model.Status;
-import model.Student;
-import model.YearofStudy;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AddStudent  extends MyDialog {
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-    /**
+import controller.StudentController;
+import controller.focuslisteners.StudentListener;
+import model.Address;
+import model.Status;
+import model.Student;
+import model.YearofStudy;
+
+public class EditStudent extends JPanel{
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6176645110187015550L;
+	private static final long serialVersionUID = 6674408014723983134L;
 	
+	private Student student;
 	private JTextField txtFieldName;
 	private JTextField txtFieldSurName;
 	private JTextField txtFieldDate;
@@ -30,8 +42,9 @@ public class AddStudent  extends MyDialog {
 	private JTextField txtFieldE;
 	private JTextField txtFieldId;
 	private JTextField txtFieldAssignYear;
-	private String[] currentYear;
-	private String[] status;
+	private JComboBox<String> CBStatus;
+	private JComboBox<String> txtFJComboBoxCurrentYear;
+	
 
     private JButton btAccept;
     private JButton btDecline;
@@ -41,14 +54,7 @@ public class AddStudent  extends MyDialog {
     private JTextField txtAdressNum;
     private JTextField txtAdressCity;
     private JTextField txtAdressContry;
-
     
-    private static AddStudent instance = null;
-
-    public static AddStudent getInstance() {
-        if(instance==null) instance = new AddStudent();
-        return instance;
-    }
     public boolean allValid(){
         for(StudentListener sl:validations){
             if(!sl.getValidation()){
@@ -66,16 +72,11 @@ public class AddStudent  extends MyDialog {
         }
     }
     
-	private AddStudent() {
-        super(MainWindow.getInstance(),"Dodavanje studenta");
-        initStudentDialog();
-       
-    }
-	
 
     private ArrayList<StudentListener> validations=new ArrayList<>();
-    private void initStudentDialog(){
-        cellDim = new Dimension(200, 20);
+	public EditStudent(Student student) {
+		this.student=student;
+		cellDim = new Dimension(200, 20);
         setLayout(new BorderLayout());
         JLabel lbName = new JLabel("Ime*");
         lbName.setToolTipText("Unesite svoje ime");
@@ -194,11 +195,10 @@ public class AddStudent  extends MyDialog {
         JPanel panelY = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelY.add(lbAssignYear);
         panelY.add(txtFieldAssignYear);
-
         JLabel lbCurrentYear = new JLabel("Trenutna godina studija*");
         lbCurrentYear.setPreferredSize(cellDim);
-        currentYear = new String[]{"I", "II", "III", "IV"};
-        JComboBox<String> txtFJComboBoxCurrentYear = new JComboBox<>(currentYear);
+        String[] currentYear = new String[]{"I", "II", "III", "IV"};
+        txtFJComboBoxCurrentYear = new JComboBox<>(currentYear);
         txtFJComboBoxCurrentYear.setName("txtCurrentYear");
         txtFJComboBoxCurrentYear.setPreferredSize(cellDim);
         JPanel panelCY = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -207,15 +207,15 @@ public class AddStudent  extends MyDialog {
 
         JLabel lbStatus = new JLabel("Način finansiranja*");
         lbStatus.setPreferredSize(cellDim);
-        status = new String[]{"Budzet","Samofinansiranje"};
-        JComboBox<String> CBStatus = new JComboBox<>(status);
+        String[] status = new String[]{"Budzet","Samofinansiranje"};
+        CBStatus = new JComboBox<>(status);
         CBStatus.setName("txtstatus");
         CBStatus.setPreferredSize(cellDim);
         JPanel panelSt = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelSt.add(lbStatus);
         panelSt.add(CBStatus);
-
-
+        
+        initFields();
         JPanel CentralPanel = new JPanel();
         BoxLayout boxCenter = new BoxLayout(CentralPanel,BoxLayout.Y_AXIS);
         CentralPanel.setLayout(boxCenter);
@@ -234,43 +234,42 @@ public class AddStudent  extends MyDialog {
         CentralPanel.add(panelCY);
         CentralPanel.add(panelSt);
         this.add(CentralPanel,BorderLayout.CENTER);
-
-        //validation
-        StudentListener val= new StudentListener(lbName,txtFieldName,this);
+        //val
+        StudentListener val= new StudentListener(txtFieldName,this);
         txtFieldName.addFocusListener(val);
         validations.add(val);
-        val =new StudentListener(lbSurname,txtFieldSurName,this);
+        val =new StudentListener(txtFieldSurName,this);
         txtFieldSurName.addFocusListener(val);
         validations.add(val);
         validations.add(val);
-        val=new StudentListener(lbAssignYear,txtFieldAssignYear,this);
+        val=new StudentListener(txtFieldAssignYear,this);
         txtFieldAssignYear.addFocusListener(val);
         validations.add(val);
-        val=new StudentListener(lbEmail,txtFieldE,this);
+        val=new StudentListener(txtFieldE,this);
         txtFieldE.addFocusListener(val);
         validations.add(val);
-        val=new StudentListener(lbDate,txtFieldDate,this);
+        val=new StudentListener(txtFieldDate,this);
         txtFieldDate.addFocusListener(val);
         validations.add(val);
-        val=new StudentListener(lbId,txtFieldId,this);
+        val=new StudentListener(txtFieldId,this,student.getIndex());
         txtFieldId.addFocusListener(val);
         validations.add(val);
-        val=new StudentListener(lbNum,txtFieldNUm,this);
+        val=new StudentListener(txtFieldNUm,this);
         txtFieldNUm.addFocusListener(val);
         validations.add(val);
-        val = new StudentListener(lbAdressStreet, txtAdressStreet,this);
+        val = new StudentListener(txtAdressStreet,this);
         txtAdressStreet.addFocusListener(val);
         validations.add(val);
-        val = new StudentListener(lbAdressNum, txtAdressNum,this);
+        val = new StudentListener(txtAdressNum,this);
         txtAdressNum.addFocusListener(val);
         validations.add(val);
-        val = new StudentListener(lbAdressCity, txtAdressCity,this);
+        val = new StudentListener(txtAdressCity,this);
         txtAdressCity.addFocusListener(val);
         validations.add(val);
-        val = new StudentListener(lbAdressContry, txtAdressContry,this);
+        val = new StudentListener(txtAdressContry,this);
         txtAdressContry.addFocusListener(val);
         validations.add(val);
-
+        
         //button
         JPanel diaButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         diaButtonPanel.setPreferredSize(new Dimension(60,60));
@@ -284,7 +283,7 @@ public class AddStudent  extends MyDialog {
         btDecline.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                //
             }
         });
 
@@ -334,8 +333,8 @@ public class AddStudent  extends MyDialog {
                     }
 
                     StudentController.getInstance().addStudent(student);
-                    clearFields();
-                    dispose();
+                    //clearFields();
+                   // dispose();
                 }
             }
         });
@@ -347,16 +346,38 @@ public class AddStudent  extends MyDialog {
         diaButtonPanel.add(Box.createHorizontalStrut(20));
         this.add(diaButtonPanel,BorderLayout.SOUTH);
         
-    }
-   
-    private void clearFields() {
-        //txtFieldName.setText("");
-       // txtFieldSurName.setText("");
-        //txtFieldDate.setText("");
-        //txtFieldNUm.setText("");
-       // txtFieldE.setText("");
-        txtFieldId.setText("");
-       // txtFieldAssignYear.setText("");
-    }
-
+	}
+	private void initFields(){
+		 txtFieldName.setText(student.getName());
+		 txtFieldSurName.setText(student.getSurname());
+		 DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		 txtFieldDate.setText(dateFormat.format(student.getBirthday()));
+		 txtFieldNUm.setText(student.getContactPhone());
+		 txtFieldE.setText(student.getEmail());
+		 txtFieldId.setText(student.getIndex());
+		 txtFieldAssignYear.setText(String.valueOf(student.getEnrollYear()));
+		 if(student.getNacinFinansiranja() == Status.BUDZET) {
+			 CBStatus.setSelectedIndex(0);
+		 }
+		 if(student.getNacinFinansiranja() == Status.SAMOFINANSIRANJE) {
+			 CBStatus.setSelectedIndex(1);
+			 }
+		 if(student.getCurrentyear()== YearofStudy.I) {
+		 txtFJComboBoxCurrentYear.setSelectedIndex(0);
+		 }
+		 if(student.getCurrentyear()== YearofStudy.II) {
+			 txtFJComboBoxCurrentYear.setSelectedIndex(1);
+			 }
+		 if(student.getCurrentyear()== YearofStudy.I) {
+			 txtFJComboBoxCurrentYear.setSelectedIndex(2);
+			 }
+		 if(student.getCurrentyear()== YearofStudy.I) {
+			 txtFJComboBoxCurrentYear.setSelectedIndex(3);
+			 }
+	    
+	    txtAdressStreet.setText(student.getAdress().getStreet());
+	    txtAdressNum.setText(student.getAdress().getNumber());
+	    txtAdressCity.setText(student.getAdress().getCity());
+	    txtAdressContry.setText(student.getAdress().getCountry());
+	}
 }
