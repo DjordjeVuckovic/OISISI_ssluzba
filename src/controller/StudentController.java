@@ -30,5 +30,21 @@ public class StudentController {
         BazaStudenata.getInstance().deleteStudent(student);
         StudentsTable.getInstance().refreshTable();
     }
+    public Student getStudentByIndex(String index){
+        Student student = BazaStudenata.getInstance().getStudentById(index);
+        return student;
+    }
+    public void editStudent(Student student,Student oldstudent){
+        student.setName(oldstudent.getName());
+        student.setSurname(oldstudent.getSurname());
+        student.setCurrentyear(oldstudent.getCurrentyear());
+        student.setFinansiranje(oldstudent.getNacinFinansiranja());
+        student.setEnrollYear(oldstudent.getEnrollYear());
+        student.setIndex(oldstudent.getIndex());
+        student.setContactPhone(oldstudent.getContactPhone());
+        student.setAvgGrade(oldstudent.getavgGrade());
+        student.setAdress(student.getAdress().getStreet(),student.getAdress().getNumber(),student.getAdress().getCity(),student.getAdress().getCountry());
+        StudentsTable.getInstance().refreshTable();
+    }
 
 }

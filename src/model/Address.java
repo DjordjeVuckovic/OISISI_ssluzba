@@ -5,8 +5,17 @@ public class Address {
 	private String number;
 	private String city;
 	private String country;
-	
-	
+
+	public Address() {
+	}
+
+	public Address(String street, String number, String city, String country) {
+		this.street = street;
+		this.number = number;
+		this.city = city;
+		this.country = country;
+	}
+
 	public String getStreet() {
 		return street;
 	}

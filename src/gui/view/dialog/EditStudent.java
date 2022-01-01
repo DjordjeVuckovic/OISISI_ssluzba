@@ -235,38 +235,38 @@ public class EditStudent extends JPanel{
         CentralPanel.add(panelSt);
         this.add(CentralPanel,BorderLayout.CENTER);
         //val
-        StudentListener val= new StudentListener(txtFieldName,this);
+        StudentListener val= new StudentListener(lbName,txtFieldName,this);
         txtFieldName.addFocusListener(val);
         validations.add(val);
-        val =new StudentListener(txtFieldSurName,this);
+        val =new StudentListener(lbSurname,txtFieldSurName,this);
         txtFieldSurName.addFocusListener(val);
         validations.add(val);
         validations.add(val);
-        val=new StudentListener(txtFieldAssignYear,this);
+        val=new StudentListener(lbAssignYear,txtFieldAssignYear,this);
         txtFieldAssignYear.addFocusListener(val);
         validations.add(val);
-        val=new StudentListener(txtFieldE,this);
+        val=new StudentListener(lbEmail,txtFieldE,this);
         txtFieldE.addFocusListener(val);
         validations.add(val);
-        val=new StudentListener(txtFieldDate,this);
+        val=new StudentListener(lbDate,txtFieldDate,this);
         txtFieldDate.addFocusListener(val);
         validations.add(val);
-        val=new StudentListener(txtFieldId,this,student.getIndex());
-        txtFieldId.addFocusListener(val);
-        validations.add(val);
-        val=new StudentListener(txtFieldNUm,this);
+        StudentListener valId=new StudentListener(lbId,txtFieldId,this,student.getIndex());
+        txtFieldId.addFocusListener(valId);
+        validations.add(valId);
+        val=new StudentListener(lbNum,txtFieldNUm,this);
         txtFieldNUm.addFocusListener(val);
         validations.add(val);
-        val = new StudentListener(txtAdressStreet,this);
+        val = new StudentListener(lbAdressStreet,txtAdressStreet,this);
         txtAdressStreet.addFocusListener(val);
         validations.add(val);
-        val = new StudentListener(txtAdressNum,this);
+        val = new StudentListener(lbAdressNum,txtAdressNum,this);
         txtAdressNum.addFocusListener(val);
         validations.add(val);
-        val = new StudentListener(txtAdressCity,this);
+        val = new StudentListener(lbAdressCity,txtAdressCity,this);
         txtAdressCity.addFocusListener(val);
         validations.add(val);
-        val = new StudentListener(txtAdressContry,this);
+        val = new StudentListener(lbAdressContry,txtAdressContry,this);
         txtAdressContry.addFocusListener(val);
         validations.add(val);
         
@@ -286,8 +286,6 @@ public class EditStudent extends JPanel{
                 //
             }
         });
-
-        diaButtonPanel.add(btDecline);
         btAccept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -300,48 +298,46 @@ public class EditStudent extends JPanel{
                     } catch (ParseException ex) {
                         ex.printStackTrace();
                     }
-                    Student student = new Student();
-                    student.setName(txtFieldName.getText());
-                    student.setSurname(txtFieldSurName.getText());
-                    student.setBirthday(birthday); 	
-                    student.setContactPhone(txtFieldNUm.getText());
-                    student.setEmail(txtFieldE.getText());
-                    student.setIndex(txtFieldId.getText());
-                    student.setEnrollYear(Integer.parseInt(txtFieldAssignYear.getText()) );
+                    Student studentNew = new Student();
+                    studentNew.setName(txtFieldName.getText());
+                    studentNew.setSurname(txtFieldSurName.getText());
+                    studentNew.setBirthday(birthday);
+                    studentNew.setContactPhone(txtFieldNUm.getText());
+                    studentNew.setEmail(txtFieldE.getText());
+                    studentNew.setIndex(txtFieldId.getText());
+                    valId.setIndex(studentNew.getIndex());
+                    studentNew.setEnrollYear(Integer.parseInt(txtFieldAssignYear.getText()) );
                     Address adress= new Address();
                     adress.setStreet(txtAdressStreet.getText());
                     adress.setNumber(txtAdressNum.getText());
                     adress.setCity(txtAdressCity.getText());
                     adress.setCountry(txtAdressContry.getText());
-                    
-                    student.setAdress(adress);
+
+                    studentNew.setAdress(adress);
 
                     if(CBStatus.getSelectedIndex() == 0) {
-                        student.setFinansiranje(Status.BUDZET);
+                        studentNew.setFinansiranje(Status.BUDZET);
                     }else {
-                        student.setFinansiranje( Status.SAMOFINANSIRANJE );
+                        studentNew.setFinansiranje( Status.SAMOFINANSIRANJE );
                     }
 
                     if(txtFJComboBoxCurrentYear.getSelectedIndex()==0){
-                        student.setCurrentyear(YearofStudy.I);
+                        studentNew.setCurrentyear(YearofStudy.I);
                     } else if(txtFJComboBoxCurrentYear.getSelectedIndex()==1){
-                        student.setCurrentyear(YearofStudy.II);
+                        studentNew.setCurrentyear(YearofStudy.II);
                     }else if(txtFJComboBoxCurrentYear.getSelectedIndex()==2){
-                        student.setCurrentyear(YearofStudy.III);
+                        studentNew.setCurrentyear(YearofStudy.III);
                     }else if(txtFJComboBoxCurrentYear.getSelectedIndex()==3){
-                        student.setCurrentyear(YearofStudy.IV);
+                        studentNew.setCurrentyear(YearofStudy.IV);
                     }
 
-                    StudentController.getInstance().addStudent(student);
-                    //clearFields();
-                   // dispose();
+                    StudentController.getInstance().editStudent(student,studentNew);
+                    btAccept.setEnabled(false);
                 }
             }
         });
 
-
-
-
+        diaButtonPanel.add(btDecline);
         diaButtonPanel.add(btAccept);
         diaButtonPanel.add(Box.createHorizontalStrut(20));
         this.add(diaButtonPanel,BorderLayout.SOUTH);

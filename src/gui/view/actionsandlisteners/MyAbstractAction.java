@@ -8,9 +8,13 @@ import javax.swing.*;
 
 import controller.StudentController;
 import gui.view.CentralBox;
+import gui.view.MainWindow;
 import gui.view.ScaleImage;
 import gui.view.center.StudentsTable;
 import gui.view.dialog.AddStudent;
+import gui.view.dialog.EditStudent;
+import gui.view.dialog.change.ChangeStudentDialog;
+import model.Student;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImage {
 	
@@ -115,41 +119,57 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					break;
 			}
 		}
-		else if(name.equals("Studenti")){
+		//else if(name.equals("Studenti")){
+
+		//}
+		//else if(name.equals("Profesori")){
 			//
-		}
-		else if(name.equals("Profesori")){
+		//}
+		//else if(name.equals("Katedre")){
 			//
-		}
-		else if(name.equals("Katedre")){
+		//}
+		//else if(name.equals("Save")){
 			//
-		}
-		else if(name.equals("Save")){
-			//
-		}
+		//}
 		else if(name.equals("Delete")) {
 			switch (CentralBox.getInstance().getSelectedIndex()) {
 				case 0:
 				int rowSelected = StudentsTable.getInstance().getSelectedRow();
 				if (rowSelected <0) {
-					JOptionPane.showMessageDialog(null, "Niste odabrali studenta", "Upozorenje", 0, null);
-					break;
+					JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste odabrali studenta", "Upozorenje", 0, null);
+					return;
 				}
-				int choice = JOptionPane.showConfirmDialog(null,"Upozorenje", "Da li ste sigurni?",0);
+				int choice = JOptionPane.showConfirmDialog(MainWindow.getInstance(),"Upozorenje", "Da li ste sigurni?",0);
 				if(choice ==JOptionPane.YES_OPTION){
 					StudentController.getInstance().deleteStudent(rowSelected);
 				}
 				break;
-				//case 1:
+				case 1:
 					//delete prof
-				//case 2:
+					break;
+				case 2:
 					//delete subj
+					break;
 			}
 		}
 
 
-		else if(name.equals("Close")) {
+		//else if(name.equals("Close")) {
 			//exit;
+		//}
+		else if(name.equals("Edit")){
+			switch(CentralBox.getInstance().getSelectedIndex()){
+				case 0:
+				if(StudentsTable.getInstance().getSelectedIndexinTable()==-1){
+					JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali studenta za izmenu", "Upozorenje", 0, null);
+				}
+				else{
+					Student student = StudentController.getInstance().getStudentByIndex(StudentsTable.getInstance().getSelectedIndex());
+					ChangeStudentDialog changeStudentDialog = new ChangeStudentDialog(student);
+					changeStudentDialog.setVisible(true);
+				}
+				break;
+			}
 		}
 		
 	}

@@ -38,6 +38,13 @@ public class StudentsTable extends JTable {
         model.fireTableDataChanged();
         validate();
     }
+    public String getSelectedIndex(){
+        String index = (String) this.getValueAt(this.getSelectedRow(),0);
+        return index;
+    }
+    public int getSelectedIndexinTable(){
+        return this.getSelectedRow();
+    }
     public String getRowCnt(){
         int row = this.getSelectedRow();
         if(row==-1) return null;

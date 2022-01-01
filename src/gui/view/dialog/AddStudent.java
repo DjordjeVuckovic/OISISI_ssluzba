@@ -336,6 +336,7 @@ public class AddStudent  extends MyDialog {
                     StudentController.getInstance().addStudent(student);
                     clearFields();
                     dispose();
+                    btAccept.setEnabled(false);
                 }
             }
         });

@@ -26,7 +26,9 @@ public class Student {
 		this.avgGrade = avgGrade;
 		this.status = status;
 	}
-
+	Address adresa = new Address("Vojvode Supljikca","1a","Novi Sad","Srbija");
+	//Student student = new Student("Marko", "Jarkovic",11.11.2019,adresa,"060","asasd@das","RA/88/2016",2020, YearofStudy.I,10.0,6.1, Status.BUDZET )
+	//Student student = new Student("Marko","Jarkovic","11.11.2002",adresa,)
 	public Student(){
 
 		}
@@ -126,6 +128,9 @@ public class Student {
 					+ ", godina_upisa=" + enrollYear + ", tren_god_studiranja=" + currentYear + ", pr_ocena="
 					+ avgGrade + ", n_finansiranja=" + status + "]";
 		}
-		
-		
+
+
+	public void setAdress(String street, String number, String city, String country) {
+		this.adress=new Address(street,number,city,country);
+	}
 }

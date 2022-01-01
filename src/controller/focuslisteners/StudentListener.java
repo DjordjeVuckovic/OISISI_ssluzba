@@ -37,19 +37,22 @@ public class StudentListener implements FocusListener {
         mode = 1;
 
     }
-    public StudentListener(JTextField txt,EditStudent editStudent) {
-    	jTextField = txt;
+    public StudentListener(JLabel lb,JTextField txt,EditStudent editStudent) {
+    	label=lb;
+        jTextField = txt;
     	validation = true;
     	this.editStudent = editStudent;
     	mode=2;
     }
-    public StudentListener(JTextField txt,EditStudent editStudent,String index) {
-    	jTextField = txt;
+    public StudentListener(JLabel lb,JTextField txt,EditStudent editStudent,String index) {
+    	label=lb;
+        jTextField = txt;
     	validation = true;
     	this.editStudent = editStudent;
     	this.index=index;
     	mode=2;
     }
+    public void setIndex(String index){this.index = index; }
     public boolean getValidation(){
         return validation;
     }
@@ -133,6 +136,8 @@ public class StudentListener implements FocusListener {
         ValidateCell();
         if(mode==1){
             addStudent.EnableButt();
+        }else if(mode ==2){
+            editStudent.EnableButt();
         }
 
         }
