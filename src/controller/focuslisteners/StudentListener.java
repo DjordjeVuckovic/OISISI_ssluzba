@@ -71,12 +71,9 @@ public class StudentListener implements FocusListener {
             jTextField.setForeground(Color.RED);
             jTextField.setBorder(errorBorder);
         }
-            else if(validation) {
+            else {
                 jTextField.setBorder(correctBorder);
             }
-            else {
-            jTextField.setBorder(defaultBorer);
-        }
     }
 
     @Override

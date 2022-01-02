@@ -1,6 +1,8 @@
 package gui.view.dialog.add;
 
 import controller.SubjectController;
+import controller.focuslisteners.StudentListener;
+import controller.focuslisteners.SubjectListener;
 import gui.view.MainWindow;
 import gui.view.dialog.MyDialog;
 import model.Semester;
@@ -12,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class AddSubject extends MyDialog {
 
@@ -20,10 +23,8 @@ public class AddSubject extends MyDialog {
     private JComboBox<String> txtFJComboBoxCurrentYear;
     private JComboBox<String> txtSemester;
     private JTextField txtPointsESPB;
-    private JTextField txtProfessor;
+    //private JTextField txtProfessor;
     private JButton btAccept;
-    private JButton btDecline;
-    private  Dimension cellDim;
     private static AddSubject instance = null;
     public static AddSubject getInstance(){
         if(instance==null){
@@ -37,8 +38,21 @@ public class AddSubject extends MyDialog {
         initFields();
 
     }
+    public boolean allValid(){
+        for(SubjectListener sb:validations){
+            if(!sb.getValidation()){
+                return false;
+            }
+        }
+        return true;
+    }
+    public void EnableButt(){
+        btAccept.setEnabled(allValid());
+    }
+
+    private ArrayList<SubjectListener> validations=new ArrayList<>();
     private void initFields(){
-        cellDim = new Dimension(200,20);
+        Dimension cellDim = new Dimension(200, 20);
 
         setLayout(new BorderLayout());
         JLabel lbIds = new JLabel("Sifra*");
@@ -106,7 +120,18 @@ public class AddSubject extends MyDialog {
         CentralPanel.add(panelD);
         CentralPanel.add(panelE);
         this.add(CentralPanel,BorderLayout.CENTER);
+        //validation
+        SubjectListener val1 = new SubjectListener(lbIds,txtIdS,this);
+        txtIdS.addFocusListener(val1);
+        validations.add(val1);
 
+        SubjectListener val2 = new SubjectListener(lbESPB,txtPointsESPB,this);
+        txtPointsESPB.addFocusListener(val2);
+        validations.add(val2);
+
+        SubjectListener val3 = new SubjectListener(lbName,txtName,this);
+        txtName.addFocusListener(val3);
+        validations.add(val3);
         //button
         JPanel diaButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         diaButtonPanel.setPreferredSize(new Dimension(60,60));
@@ -114,7 +139,7 @@ public class AddSubject extends MyDialog {
         btAccept.setEnabled(false);
         btAccept.setMnemonic(KeyEvent.VK_S);
         btAccept.setForeground(Color.GREEN);
-        btDecline = new JButton("Odustani");
+        JButton btDecline = new JButton("Odustani");
         btDecline.setForeground(Color.BLACK);
         btDecline.setMnemonic(KeyEvent.VK_Q);
         btDecline.addActionListener(new ActionListener() {
@@ -125,7 +150,6 @@ public class AddSubject extends MyDialog {
         });
 
         diaButtonPanel.add(btDecline);
-        btAccept.setEnabled(true);
         btAccept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,8 +175,9 @@ public class AddSubject extends MyDialog {
                 else{
                     sub.setSemester(Semester.WINTER);
                 }
-                dispose();
                 SubjectController.getInstance().addSubject(sub);
+                btAccept.setEnabled(false);
+                dispose();
             }
         });
         diaButtonPanel.add(btAccept);

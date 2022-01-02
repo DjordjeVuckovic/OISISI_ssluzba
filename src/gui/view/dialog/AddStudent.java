@@ -30,13 +30,10 @@ public class AddStudent  extends MyDialog {
 	private JTextField txtFieldE;
 	private JTextField txtFieldId;
 	private JTextField txtFieldAssignYear;
-	private String[] currentYear;
-	private String[] status;
 
     private JButton btAccept;
     private JButton btDecline;
-    private  Dimension cellDim;
-    
+
     private JTextField txtAdressStreet;
     private JTextField txtAdressNum;
     private JTextField txtAdressCity;
@@ -58,12 +55,7 @@ public class AddStudent  extends MyDialog {
         return true;
     }
     public void EnableButt(){
-        if(allValid()){
-            btAccept.setEnabled(true);
-        }
-        else{
-            btAccept.setEnabled(false);
-        }
+        btAccept.setEnabled(allValid());
     }
     
 	private AddStudent() {
@@ -75,7 +67,7 @@ public class AddStudent  extends MyDialog {
 
     private ArrayList<StudentListener> validations=new ArrayList<>();
     private void initStudentDialog(){
-        cellDim = new Dimension(200, 20);
+        Dimension cellDim = new Dimension(200, 20);
         setLayout(new BorderLayout());
         JLabel lbName = new JLabel("Ime*");
         lbName.setToolTipText("Unesite svoje ime");
@@ -197,7 +189,7 @@ public class AddStudent  extends MyDialog {
 
         JLabel lbCurrentYear = new JLabel("Trenutna godina studija*");
         lbCurrentYear.setPreferredSize(cellDim);
-        currentYear = new String[]{"I", "II", "III", "IV"};
+        String[] currentYear = new String[]{"I", "II", "III", "IV"};
         JComboBox<String> txtFJComboBoxCurrentYear = new JComboBox<>(currentYear);
         txtFJComboBoxCurrentYear.setName("txtCurrentYear");
         txtFJComboBoxCurrentYear.setPreferredSize(cellDim);
@@ -207,7 +199,7 @@ public class AddStudent  extends MyDialog {
 
         JLabel lbStatus = new JLabel("Način finansiranja*");
         lbStatus.setPreferredSize(cellDim);
-        status = new String[]{"Budzet","Samofinansiranje"};
+        String[] status = new String[]{"Budzet", "Samofinansiranje"};
         JComboBox<String> CBStatus = new JComboBox<>(status);
         CBStatus.setName("txtstatus");
         CBStatus.setPreferredSize(cellDim);
@@ -335,8 +327,8 @@ public class AddStudent  extends MyDialog {
 
                     StudentController.getInstance().addStudent(student);
                     clearFields();
-                    dispose();
                     btAccept.setEnabled(false);
+                    dispose();
                 }
             }
         });

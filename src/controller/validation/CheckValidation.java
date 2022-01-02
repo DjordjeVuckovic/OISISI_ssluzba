@@ -146,9 +146,6 @@ public class CheckValidation {
         if(!BazaPredmeta.getInstance().UniqueIdS(text)) {
             return false;
         }
-
-
-
         return true;
     }
 
