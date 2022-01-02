@@ -28,4 +28,9 @@ public class SubjectTable extends JTable {
         }
         return c;
     }
+    public void refreshTable(){
+        AbstractTableSubject model =(AbstractTableSubject) this.getModel();
+        model.fireTableDataChanged();
+        validate();
+    }
 }

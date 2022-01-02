@@ -12,8 +12,8 @@ import gui.view.MainWindow;
 import gui.view.ScaleImage;
 import gui.view.center.StudentsTable;
 import gui.view.dialog.AddStudent;
-import gui.view.dialog.EditStudent;
-import gui.view.dialog.change.ChangeStudentDialog;
+import gui.view.dialog.add.AddSubject;
+import gui.view.dialog.edit.ChangeStudentDialog;
 import model.Student;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImage {
@@ -112,11 +112,11 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					AddStudent.getInstance().setVisible(true);
 					break;
 				case 1:
+					AddSubject.getInstance().setVisible(true);
+					break;
+				//case 2:
 					//AddProffesor
-					break;
-				case 2:
-					//AddPredmet
-					break;
+					//break;
 			}
 		}
 		//else if(name.equals("Studenti")){
@@ -145,11 +145,11 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				}
 				break;
 				case 1:
-					//delete prof
+					//delete sub
 					break;
-				case 2:
-					//delete subj
-					break;
+				//case 2:
+				//delete prof
+					//break;
 			}
 		}
 

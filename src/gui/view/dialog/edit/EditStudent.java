@@ -1,4 +1,4 @@
-package gui.view.dialog;
+package gui.view.dialog.edit;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

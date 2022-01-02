@@ -15,6 +15,10 @@ public class Subject {
 		private ArrayList<Student> passed = new ArrayList<Student>();
 		private ArrayList<Student> failed = new ArrayList<Student>();
 
+
+	public Subject(){
+
+	}
 	public Subject(String id, String nameSub, Semester semester, YearofStudy yearOfStudy, int pointsESPB) {
 		this.idS = id;
 		this.nameSub = nameSub;

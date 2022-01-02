@@ -1,14 +1,10 @@
-package gui.view.dialog.change;
+package gui.view.dialog.edit;
 
-import controller.StudentController;
 import gui.view.MainWindow;
-import gui.view.center.StudentsTable;
-import gui.view.dialog.EditStudent;
 import gui.view.dialog.MyDialog;
 import model.Student;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class ChangeStudentDialog extends MyDialog {
     //private static ChangeStudentDialog instance=null;
