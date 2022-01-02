@@ -17,4 +17,16 @@ public class SubjectController {
         BazaPredmeta.getInstance().addSubject(subject);
         SubjectTable.getInstance().refreshTable();
     }
+    public Subject findSubjectById( String id){
+        Subject subject =BazaPredmeta.getInstance().findSubjectById(id);
+        return subject;
+    }
+    public void editSubject(Subject oldSub,Subject nSub ){
+        oldSub.setNameSub(nSub.getNameSub());
+        oldSub.setIdS(nSub.getIdS());
+        oldSub.setESPBpoints(nSub.getESPBpoints());
+        oldSub.setYearOfStudy(nSub.getYearOfStudy());
+        oldSub.setSemester(nSub.getSemester());
+        SubjectTable.getInstance().refreshTable();
+    }
 }

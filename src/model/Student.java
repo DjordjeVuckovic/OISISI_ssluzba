@@ -26,9 +26,15 @@ public class Student {
 		this.avgGrade = avgGrade;
 		this.status = status;
 	}
-	Address adresa = new Address("Vojvode Supljikca","1a","Novi Sad","Srbija");
-	//Student student = new Student("Marko", "Jarkovic",11.11.2019,adresa,"060","asasd@das","RA/88/2016",2020, YearofStudy.I,10.0,6.1, Status.BUDZET )
-	//Student student = new Student("Marko","Jarkovic","11.11.2002",adresa,)
+	public Student(String name, String surname,Date birthday, String index, YearofStudy currentYear, double avgGrade, Status status) {
+		this.name = name;
+		this.surname = surname;
+		this.birthday=birthday;
+		this.index = index;
+		this.currentYear = currentYear;
+		this.avgGrade = avgGrade;
+		this.status = status;
+	}
 	public Student(){
 
 		}

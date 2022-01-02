@@ -104,7 +104,7 @@ public class StudentListener implements FocusListener {
         }
         else  if(getKey().equals("txtId")){
         	if(mode==2) {
-        		if(getKey().equals(index)) {
+        		if(getLine().trim().equals(index)) {
         			validation=true;
         		}
         		else {

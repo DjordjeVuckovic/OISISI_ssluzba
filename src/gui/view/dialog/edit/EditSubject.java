@@ -1,9 +1,10 @@
-package gui.view.dialog.add;
+package gui.view.dialog.edit;
 
 import controller.SubjectController;
 import controller.focuslisteners.SubjectListener;
 import gui.view.MainWindow;
 import gui.view.dialog.MyDialog;
+import gui.view.dialog.add.AddSubject;
 import model.Semester;
 import model.Subject;
 import model.YearofStudy;
@@ -15,27 +16,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class AddSubject extends MyDialog {
-
+public class EditSubject extends MyDialog {
     private JTextField txtIdS;
     private JTextField txtName;
     private JComboBox<String> txtFJComboBoxCurrentYear;
     private JComboBox<String> txtSemester;
     private JTextField txtPointsESPB;
-    //private JTextField txtProfessor;
     private JButton btAccept;
-    private static AddSubject instance = null;
-    public static AddSubject getInstance(){
+    private Subject oldsubject;
+    private static EditSubject instance = null;
+    public static EditSubject getInstance(String idS){
         if(instance==null){
-            instance = new AddSubject();
+            instance = new EditSubject(idS);
         }
         return instance;
-    }
-
-    private AddSubject() {
-        super(MainWindow.getInstance(), "Dodavanje predmeta");
-        initFields();
-
     }
     public boolean allValid(){
         for(SubjectListener sb:validations){
@@ -48,11 +42,14 @@ public class AddSubject extends MyDialog {
     public void EnableButt(){
         btAccept.setEnabled(allValid());
     }
-
-    private ArrayList<SubjectListener> validations=new ArrayList<>();
-    private void initFields(){
+    private ArrayList<SubjectListener> validations=new java.util.ArrayList<>();
+    public EditSubject(String idS) {
+        super(MainWindow.getInstance(), "Izmena predmeta");
+        oldsubject = SubjectController.getInstance().findSubjectById(idS);
+        initEditDialog();
+    }
+    private void initEditDialog(){
         Dimension cellDim = new Dimension(200, 20);
-
         setLayout(new BorderLayout());
         JLabel lbIds = new JLabel("Sifra*");
         lbIds.setToolTipText("Unesite jedinstvenu sifru predmeta");
@@ -109,18 +106,8 @@ public class AddSubject extends MyDialog {
         panelE.add(lbSem);
         panelE.add(txtSemester);
 
-        JPanel CentralPanel = new JPanel();
-        BoxLayout boxCenter = new BoxLayout(CentralPanel,BoxLayout.Y_AXIS);
-        CentralPanel.setLayout(boxCenter);
-        CentralPanel.add(Box.createVerticalGlue());
-        CentralPanel.add(panelA);
-        CentralPanel.add(panelB);
-        CentralPanel.add(panelC);
-        CentralPanel.add(panelD);
-        CentralPanel.add(panelE);
-        this.add(CentralPanel,BorderLayout.CENTER);
         //validation
-        SubjectListener val1 = new SubjectListener(lbIds,txtIdS,this);
+        SubjectListener val1 = new SubjectListener(lbIds,txtIdS,this,oldsubject.getIdS());
         txtIdS.addFocusListener(val1);
         validations.add(val1);
 
@@ -131,6 +118,19 @@ public class AddSubject extends MyDialog {
         SubjectListener val3 = new SubjectListener(lbName,txtName,this);
         txtName.addFocusListener(val3);
         validations.add(val3);
+        //
+        initFields(oldsubject);
+        //
+        JPanel CentralPanel = new JPanel();
+        BoxLayout boxCenter = new BoxLayout(CentralPanel,BoxLayout.Y_AXIS);
+        CentralPanel.setLayout(boxCenter);
+        CentralPanel.add(Box.createVerticalGlue());
+        CentralPanel.add(panelA);
+        CentralPanel.add(panelB);
+        CentralPanel.add(panelC);
+        CentralPanel.add(panelD);
+        CentralPanel.add(panelE);
+        this.add(CentralPanel,BorderLayout.CENTER);
         //button
         JPanel diaButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         diaButtonPanel.setPreferredSize(new Dimension(60,60));
@@ -154,6 +154,7 @@ public class AddSubject extends MyDialog {
             public void actionPerformed(ActionEvent e) {
                 Subject sub = new Subject();
                 sub.setIdS(txtIdS.getText());
+                val1.setIdSub(sub.getIdS());
                 sub.setNameSub(txtName.getText());
                 sub.setESPBpoints(Integer.parseInt(txtPointsESPB.getText()));
                 if(txtFJComboBoxCurrentYear.getSelectedIndex()==0){
@@ -174,7 +175,7 @@ public class AddSubject extends MyDialog {
                 else{
                     sub.setSemester(Semester.WINTER);
                 }
-                SubjectController.getInstance().addSubject(sub);
+                SubjectController.getInstance().editSubject(oldsubject,sub);
                 btAccept.setEnabled(false);
                 dispose();
             }
@@ -183,4 +184,27 @@ public class AddSubject extends MyDialog {
         diaButtonPanel.add(Box.createHorizontalStrut(20));
         this.add(diaButtonPanel,BorderLayout.SOUTH);
     }
-}
+    private void initFields(Subject subject){
+        txtIdS.setText(subject.getIdS());
+        txtName.setText(subject.getNameSub());
+        txtPointsESPB.setText(String.valueOf(subject.getESPBpoints()));
+        if(subject.getSemester() ==Semester.SUMMER){
+            txtSemester.setSelectedIndex(0);
+        }else{
+            txtSemester.setSelectedIndex(1);
+        }
+        if(subject.getYearOfStudy()== YearofStudy.I) {
+            txtFJComboBoxCurrentYear.setSelectedIndex(0);
+        }
+        if(subject.getYearOfStudy()== YearofStudy.II) {
+            txtFJComboBoxCurrentYear.setSelectedIndex(1);
+        }
+        if(subject.getYearOfStudy()== YearofStudy.I) {
+            txtFJComboBoxCurrentYear.setSelectedIndex(2);
+        }
+        if(subject.getYearOfStudy()== YearofStudy.I) {
+            txtFJComboBoxCurrentYear.setSelectedIndex(3);
+        }
+    }
+    }
+

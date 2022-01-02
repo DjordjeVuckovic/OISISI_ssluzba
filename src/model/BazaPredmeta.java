@@ -95,6 +95,14 @@ public class BazaPredmeta implements AbstractModel {
         }
         return true;
     }
+    public Subject findSubjectById(String id){
+        for(Subject subject :subjects){
+            if(subject.getIdS().equals(id)){
+                return subject;
+            }
+        }
+        return null;
+    }
     @Override
     public boolean isEmpty() {
         return false;

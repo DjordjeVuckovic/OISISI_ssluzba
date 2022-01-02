@@ -34,15 +34,15 @@ public class StudentController {
         Student student = BazaStudenata.getInstance().getStudentById(index);
         return student;
     }
-    public void editStudent(Student student,Student oldstudent){
-        student.setName(oldstudent.getName());
-        student.setSurname(oldstudent.getSurname());
-        student.setCurrentyear(oldstudent.getCurrentyear());
-        student.setFinansiranje(oldstudent.getNacinFinansiranja());
-        student.setEnrollYear(oldstudent.getEnrollYear());
-        student.setIndex(oldstudent.getIndex());
-        student.setContactPhone(oldstudent.getContactPhone());
-        student.setAvgGrade(oldstudent.getavgGrade());
+    public void editStudent(Student student,Student stN){
+        student.setName(stN.getName());
+        student.setSurname(stN.getSurname());
+        student.setCurrentyear(stN.getCurrentyear());
+        student.setFinansiranje(stN.getNacinFinansiranja());
+        student.setEnrollYear(stN.getEnrollYear());
+        student.setIndex(stN.getIndex());
+        student.setContactPhone(stN.getContactPhone());
+        student.setAvgGrade(stN.getavgGrade());
         student.setAdress(student.getAdress().getStreet(),student.getAdress().getNumber(),student.getAdress().getCity(),student.getAdress().getCountry());
         StudentsTable.getInstance().refreshTable();
     }

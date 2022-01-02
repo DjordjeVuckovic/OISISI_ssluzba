@@ -7,14 +7,18 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 import controller.StudentController;
+import controller.SubjectController;
 import gui.view.CentralBox;
 import gui.view.MainWindow;
 import gui.view.ScaleImage;
 import gui.view.center.StudentsTable;
+import gui.view.center.SubjectTable;
 import gui.view.dialog.AddStudent;
 import gui.view.dialog.add.AddSubject;
 import gui.view.dialog.edit.ChangeStudentDialog;
+import gui.view.dialog.edit.EditSubject;
 import model.Student;
+import model.Subject;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImage {
 	
@@ -169,6 +173,15 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					changeStudentDialog.setVisible(true);
 				}
 				break;
+				case 1:
+					if(SubjectTable.getInstance().getSelectedRow()==-1){
+						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali premet za izmenu", "Upozorenje", 0, null);
+					}
+					else{
+						Subject subject = SubjectController.getInstance().findSubjectById(SubjectTable.getInstance().getSelectedId());
+						EditSubject.getInstance(subject.getIdS()).setVisible(true);
+					}
+					break;
 			}
 		}
 		

@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.Serial;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +33,8 @@ public class EditStudent extends JPanel{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6674408014723983134L;
+	@Serial
+    private static final long serialVersionUID = 6674408014723983134L;
 	
 	private Student student;
 	private JTextField txtFieldName;
@@ -181,6 +183,8 @@ public class EditStudent extends JPanel{
         txtFieldId.setToolTipText("Trazeni format: smer/upis/godina");
         txtFieldId.setPreferredSize(cellDim);
         txtFieldId.setName("txtId");
+        StudentListener valId=new StudentListener(lbId,txtFieldId,this,student.getIndex());
+        txtFieldId.addFocusListener(valId);
         JPanel panelID = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelID.add(lbId);
         panelID.add(txtFieldId);
@@ -216,6 +220,40 @@ public class EditStudent extends JPanel{
         panelSt.add(CBStatus);
         
         initFields();
+
+        //validation
+        StudentListener val= new StudentListener(lbName,txtFieldName,this);
+        txtFieldName.addFocusListener(val);
+        validations.add(val);
+        val =new StudentListener(lbSurname,txtFieldSurName,this);
+        txtFieldSurName.addFocusListener(val);
+        validations.add(val);
+        val=new StudentListener(lbAssignYear,txtFieldAssignYear,this);
+        txtFieldAssignYear.addFocusListener(val);
+        validations.add(val);
+        val=new StudentListener(lbEmail,txtFieldE,this);
+        txtFieldE.addFocusListener(val);
+        validations.add(val);
+        val=new StudentListener(lbDate,txtFieldDate,this);
+        txtFieldDate.addFocusListener(val);
+        validations.add(val);
+        validations.add(valId);
+        val=new StudentListener(lbNum,txtFieldNUm,this);
+        txtFieldNUm.addFocusListener(val);
+        validations.add(val);
+        val = new StudentListener(lbAdressStreet,txtAdressStreet,this);
+        txtAdressStreet.addFocusListener(val);
+        validations.add(val);
+        val = new StudentListener(lbAdressNum,txtAdressNum,this);
+        txtAdressNum.addFocusListener(val);
+        validations.add(val);
+        val = new StudentListener(lbAdressCity,txtAdressCity,this);
+        txtAdressCity.addFocusListener(val);
+        validations.add(val);
+        val = new StudentListener(lbAdressContry,txtAdressContry,this);
+        txtAdressContry.addFocusListener(val);
+        validations.add(val);
+        //addition of components
         JPanel CentralPanel = new JPanel();
         BoxLayout boxCenter = new BoxLayout(CentralPanel,BoxLayout.Y_AXIS);
         CentralPanel.setLayout(boxCenter);
@@ -234,41 +272,6 @@ public class EditStudent extends JPanel{
         CentralPanel.add(panelCY);
         CentralPanel.add(panelSt);
         this.add(CentralPanel,BorderLayout.CENTER);
-        //val
-        StudentListener val= new StudentListener(lbName,txtFieldName,this);
-        txtFieldName.addFocusListener(val);
-        validations.add(val);
-        val =new StudentListener(lbSurname,txtFieldSurName,this);
-        txtFieldSurName.addFocusListener(val);
-        validations.add(val);
-        validations.add(val);
-        val=new StudentListener(lbAssignYear,txtFieldAssignYear,this);
-        txtFieldAssignYear.addFocusListener(val);
-        validations.add(val);
-        val=new StudentListener(lbEmail,txtFieldE,this);
-        txtFieldE.addFocusListener(val);
-        validations.add(val);
-        val=new StudentListener(lbDate,txtFieldDate,this);
-        txtFieldDate.addFocusListener(val);
-        validations.add(val);
-        StudentListener valId=new StudentListener(lbId,txtFieldId,this,student.getIndex());
-        txtFieldId.addFocusListener(valId);
-        validations.add(valId);
-        val=new StudentListener(lbNum,txtFieldNUm,this);
-        txtFieldNUm.addFocusListener(val);
-        validations.add(val);
-        val = new StudentListener(lbAdressStreet,txtAdressStreet,this);
-        txtAdressStreet.addFocusListener(val);
-        validations.add(val);
-        val = new StudentListener(lbAdressNum,txtAdressNum,this);
-        txtAdressNum.addFocusListener(val);
-        validations.add(val);
-        val = new StudentListener(lbAdressCity,txtAdressCity,this);
-        txtAdressCity.addFocusListener(val);
-        validations.add(val);
-        val = new StudentListener(lbAdressContry,txtAdressContry,this);
-        txtAdressContry.addFocusListener(val);
-        validations.add(val);
         
         //button
         JPanel diaButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));

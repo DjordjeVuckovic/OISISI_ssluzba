@@ -2,6 +2,7 @@ package controller.focuslisteners;
 
 import controller.validation.CheckValidation;
 import gui.view.dialog.add.AddSubject;
+import gui.view.dialog.edit.EditSubject;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,14 +18,36 @@ public class SubjectListener implements FocusListener {
     private JLabel label;
     private JTextField jTextField;
     private boolean validation;
-    private int mode;
-    private AddSubject subject = null;
+    private final int mode;
+    private AddSubject addSubject = null;
+    private EditSubject editSubject = null;
+    private String idSub;
     public SubjectListener(JLabel lb, JTextField txt, AddSubject sub){
         label = lb;
         jTextField = txt;
-        subject = sub;
+        validation=false;
+        this.addSubject = sub;
         mode =1;
     }
+    public SubjectListener(JLabel lb, JTextField txt, EditSubject editSubject){
+        label = lb;
+        jTextField = txt;
+        validation = true;
+        this.editSubject = editSubject;
+        mode = 2;
+    }
+    public SubjectListener(JLabel lb, JTextField txt, EditSubject editSubject,String idSub){
+        label = lb;
+        jTextField = txt;
+        this.editSubject = editSubject;
+        validation = true;
+        this.idSub = idSub;
+        mode = 2;
+    }
+    public String getIdSub(){
+        return idSub;
+    }
+    public void setIdSub(String id){ idSub=id;}
     public boolean getValidation(){
         return validation;
     }
@@ -59,7 +82,17 @@ public class SubjectListener implements FocusListener {
     @Override
     public void focusLost(FocusEvent e) {
         if(getKey().equals("txtId")){
-            validation = CheckValidation.checkSubjectId(getLine());
+            if(mode ==2){
+                if(getLine().equals(getIdSub())){
+                    validation = true;
+                }
+                else{
+                    validation = CheckValidation.checkSubjectId(getLine());
+                }
+            }
+            else{
+                validation = CheckValidation.checkSubjectId(getLine());
+            }
         }
         else if(getKey().equals("txtName")){
             validation = CheckValidation.checkSubjectName(getLine());
@@ -70,6 +103,9 @@ public class SubjectListener implements FocusListener {
         ValidateCell();
         if(mode ==1){
         AddSubject.getInstance().EnableButt();
+        }
+        if(mode==2){
+            EditSubject.getInstance(getIdSub()).EnableButt();
         }
 
     }

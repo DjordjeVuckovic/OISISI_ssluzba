@@ -28,6 +28,10 @@ public class SubjectTable extends JTable {
         }
         return c;
     }
+    public String getSelectedId(){
+        String id = (String) this.getValueAt(this.getSelectedRow(),0);
+        return id;
+    }
     public void refreshTable(){
         AbstractTableSubject model =(AbstractTableSubject) this.getModel();
         model.fireTableDataChanged();
