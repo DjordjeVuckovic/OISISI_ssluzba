@@ -1,8 +1,9 @@
-package gui.view.dialog;
+package gui.view.dialog.add;
 
 import controller.StudentController;
 import controller.focuslisteners.StudentListener;
 import gui.view.MainWindow;
+import gui.view.dialog.MyDialog;
 import model.Address;
 import model.Status;
 import model.Student;
@@ -263,7 +264,7 @@ public class AddStudent  extends MyDialog {
         txtAdressContry.addFocusListener(val);
         validations.add(val);
 
-        //button
+        //buttons
         JPanel diaButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         diaButtonPanel.setPreferredSize(new Dimension(60,60));
         btAccept = new JButton("Potvrdi");

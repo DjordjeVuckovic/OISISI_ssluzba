@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 
 public class Student {
@@ -16,6 +18,9 @@ public class Student {
 		private YearofStudy currentYear;
 		private double avgGrade;
 		private Status status;
+		private ArrayList<Grade> passedExams;
+		//private Map<String,Subject> failedExams;
+
 
 
 	public Student(String name, String surname, String index, YearofStudy currentYear, double avgGrade, Status status) {
@@ -35,9 +40,7 @@ public class Student {
 		this.avgGrade = avgGrade;
 		this.status = status;
 	}
-	public Student(){
-
-		}
+	public Student(){}
 		public Student(String ime, String prezime, Date datum_rodjenja, Address adresa, String kontakt_telefon,
 					   String email, String index, int godina_upisa, YearofStudy tren_god_studiranja, double pr_ocena, Status n_finansiranja) {
 			super();
@@ -126,8 +129,11 @@ public class Student {
 		public void setFinansiranje(Status n_finansiranja) {
 			this.status = n_finansiranja;
 		}
-		//STRING
-		@Override
+
+	public ArrayList<Grade> getPassedExams() {
+		return passedExams;
+	}
+	@Override
 		public String toString() {
 			return "Student [ime=" + name + ", prezime=" + surname + ", datum_rodjenja=" + birthday + ", adresa="
 					+ adress + ", kontakt_telefon=" + contactPhone + ", email=" + Email + ", index=" + index

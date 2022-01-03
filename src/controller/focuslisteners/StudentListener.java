@@ -1,8 +1,8 @@
 package controller.focuslisteners;
 
 import controller.validation.CheckValidation;
-import gui.view.dialog.AddStudent;
-import gui.view.dialog.edit.EditStudent;
+import gui.view.dialog.add.AddStudent;
+import gui.view.dialog.edit.student.EditStudent;
 
 import javax.swing.*;
 import javax.swing.border.Border;

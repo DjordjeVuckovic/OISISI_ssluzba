@@ -1,4 +1,4 @@
-package gui.view.dialog.edit;
+package gui.view.dialog.edit.student;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

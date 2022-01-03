@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Grade {
@@ -37,8 +39,9 @@ public class Grade {
 		return examDate;
 	}
 
-	public void setExamDate(Date examDate) {
-		this.examDate = examDate;
+	public String getExamDateString(){
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		return dateFormat.format(examDate);
 	}
 
 	public int getGrade() {

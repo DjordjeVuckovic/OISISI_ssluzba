@@ -1,4 +1,4 @@
-package gui.view.dialog.edit;
+package gui.view.dialog.edit.student;
 
 import gui.view.MainWindow;
 import gui.view.dialog.MyDialog;
@@ -23,6 +23,5 @@ public class ChangeStudentDialog extends MyDialog {
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Informacije",editStudent);
         this.add(tabbedPane);
-
     }
 }

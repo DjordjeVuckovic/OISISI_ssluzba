@@ -31,6 +31,7 @@ private  CentralBox() {
 		@Override
 		public void stateChanged(ChangeEvent e) {
 			StudentsTable.getInstance().refreshTable();
+			SubjectTable.getInstance().refreshTable();
 		}
 	});
 }
