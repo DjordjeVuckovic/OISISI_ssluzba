@@ -34,6 +34,9 @@ public class Professor {
 		this.yearsOfTail = yearsOfTail;
 		this.subjects = subjects;
 	}
+	public Professor(String ime, String prezime, String zvanje, String email) {
+	}
+	
 	public String getSurname() {
 		return surname;
 	}
