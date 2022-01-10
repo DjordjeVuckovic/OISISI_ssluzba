@@ -3,8 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
-
-
 public class Professor {
 	
 	// POLJA
@@ -15,7 +13,7 @@ public class Professor {
 	private String contact;
 	private String mail;
 	private String idNum;
-	private String title;
+	private Zvanje title;
 	private int yearsOfTail;
 	private ArrayList<Subject> subjects = new ArrayList<Subject>();
 	
@@ -23,7 +21,7 @@ public class Professor {
 	
 	public Professor() {}
 	public Professor(String surname, String name, Date birthday, Address adress, String contact, String mail,
-					 String idNumber, String title, int yearsOfTail, ArrayList<Subject> subjects) {
+					 String idNumber, Zvanje title, int yearsOfTail, ArrayList<Subject> subjects) {
 		super();
 		this.surname = surname;
 		this.name = name;
@@ -36,7 +34,7 @@ public class Professor {
 		this.yearsOfTail = yearsOfTail;
 		this.subjects = subjects;
 	}
-	public Professor(String ime, String prezime, String zvanje, String email) {
+	public Professor(String ime, String prezime, Zvanje title, String email) {
 	}
 	
 	public Address getAdresaKancelarije() {
@@ -88,11 +86,18 @@ public class Professor {
 		this.idNum = idNumber;
 	}
 	
-	public String getTitle() {
+	public Zvanje getTitle() {
 		return title;
 	}
-	public void setTitle(String title) {
+	public void setTitle(Zvanje title) {
 		this.title = title;
+	}
+	
+	public int getYearsTail() {
+		return yearsOfTail;
+	}
+	public void setYearsTail(int yearsTail) {
+		this.yearsOfTail = yearsTail;
 	}
 	
 	public ArrayList<Subject> getSubjects() {
@@ -112,5 +117,4 @@ public class Professor {
 	public void setAdress(String street, String number, String city, String country) {
 		this.adresaKancelarije = new Address(street,number,city,country);
 	}
-	
 }

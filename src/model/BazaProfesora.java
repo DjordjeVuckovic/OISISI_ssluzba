@@ -28,9 +28,9 @@ public class BazaProfesora implements AbstractModel {
 	}
 	private void initProfessors(){
 		this.Professors= new ArrayList<>();
-		Professors.add(new Professor("Mika", "Mikic", "Docent", "mika@gmail.com"));
-		Professors.add(new Professor("Vladimir", "Radic", "Master", "vladimir@gmail.com"));
-		Professors.add(new Professor("Marko", "Markic", "VanredniProfesor", "milos@gmail.com"));
+		Professors.add(new Professor("Mika", "Mikic", Zvanje.SARADNIK_U_NASTAVI, "mika@gmail.com"));
+		Professors.add(new Professor("Vladimir", "Radic", Zvanje.ASISTENT, "vladimir@gmail.com"));
+		Professors.add(new Professor("Marko", "Markic", Zvanje.DOCENT , "milos@gmail.com"));
 	}
 
 	public ArrayList<Professor> getProfessors() {
@@ -76,9 +76,9 @@ public class BazaProfesora implements AbstractModel {
 	}
 
 	public Professor getProfessorById(String id){ //da li ovde mora jedna od ove 4 metode?
-		for (Professor st: this.Professors){
-			if(st.getMail().equals(id)){
-				return st;
+		for (Professor pr: this.Professors){
+			if(pr.getIdNumber().equals(id)){
+				return pr;
 			}
 		}
 		return null;
@@ -91,18 +91,18 @@ public class BazaProfesora implements AbstractModel {
 	}
 
 	public void deleteProfessorById(String id){
-		for(Professor st: this.Professors){
-			if(st.getMail().equals(id)){
-				this.Professors.remove(st);
+		for(Professor pr: this.Professors){
+			if(pr.getIdNumber().equals(id)){
+				this.Professors.remove(pr);
 
 			}
 		}
 	}
-	public void deleteProfessor(Professor st){Professors.remove(st);}
+	public void deleteProfessor(Professor pr){Professors.remove(pr);}
 	public boolean UniqueId(String id_){
 		boolean ret=true;
-		for(Professor st:this.Professors){
-			if(st.getMail().equals(id_)){
+		for(Professor pr:this.Professors){
+			if(pr.getIdNumber().equals(id_)){
 				ret=false;
 			}
 		}

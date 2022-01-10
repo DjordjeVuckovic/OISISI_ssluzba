@@ -6,6 +6,7 @@ import gui.view.MainWindow;
 import gui.view.dialog.MyDialog;
 import model.Address;
 import model.Professor;
+import model.Zvanje;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,15 +29,15 @@ public class AddProfessor  extends MyDialog {
 	private JTextField txtFieldNUm;
 	private JTextField txtFieldE;
 	private JTextField txtFieldId;
-	private JTextField txtFieldTitle;
+	private JTextField txtFieldYearsTail;
 
     private JButton btAccept;
     private JButton btDecline;
 
-    private JTextField txtAdressStreet;
-    private JTextField txtAdressNum;
-    private JTextField txtAdressCity;
-    private JTextField txtAdressContry;
+    private JTextField txtKancelarijaStreet;
+    private JTextField txtKancelarijaNum;
+    private JTextField txtKancelarijaCity;
+    private JTextField txtKancelarijaContry;
 
     
     private static AddProfessor instance = null;
@@ -103,44 +104,44 @@ public class AddProfessor  extends MyDialog {
         panelD.add(txtFieldDate);
 
         JLabel lbAdressStreet = new JLabel("Ulica*");
-        txtAdressStreet= new JTextField();
+        txtKancelarijaStreet= new JTextField();
         lbAdressStreet.setPreferredSize(cellDim);
-        txtAdressStreet.setPreferredSize(cellDim);
-        txtAdressStreet.setName("txtStreet");
+        txtKancelarijaStreet.setPreferredSize(cellDim);
+        txtKancelarijaStreet.setName("txtStreet");
         
         JLabel lbAdressNum = new JLabel("Broj ulice*");
-        txtAdressNum= new JTextField();
+        txtKancelarijaNum= new JTextField();
         lbAdressNum.setPreferredSize(cellDim);
-        txtAdressNum.setPreferredSize(cellDim);
-        txtAdressNum.setName("txtStnum");
+        txtKancelarijaNum.setPreferredSize(cellDim);
+        txtKancelarijaNum.setName("txtStnum");
         
         JLabel lbAdressCity = new JLabel("Grad*");
-        txtAdressCity= new JTextField();
-        txtAdressCity.setName("txtCity");
-        txtAdressCity.setPreferredSize(cellDim);
+        txtKancelarijaCity= new JTextField();
+        txtKancelarijaCity.setName("txtCity");
+        txtKancelarijaCity.setPreferredSize(cellDim);
         lbAdressCity.setPreferredSize(cellDim);
         JLabel lbAdressContry = new JLabel("Drzava*");
-        txtAdressContry= new JTextField();
-        txtAdressCity.setName("txtCity");
-        txtAdressContry.setPreferredSize(cellDim);
+        txtKancelarijaContry= new JTextField();
+        txtKancelarijaCity.setName("txtCity");
+        txtKancelarijaContry.setPreferredSize(cellDim);
         lbAdressContry.setPreferredSize(cellDim);
 
-        txtAdressContry.setName("txtContry");
+        txtKancelarijaContry.setName("txtContry");
         JPanel panelA1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelA1.add(lbAdressStreet);
-        panelA1.add(txtAdressStreet);
+        panelA1.add(txtKancelarijaStreet);
        
         JPanel panelA2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelA2.add(lbAdressNum);
-        panelA2.add(txtAdressNum);
+        panelA2.add(txtKancelarijaNum);
         
         JPanel panelA3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelA3.add(lbAdressCity);
-        panelA3.add(txtAdressCity);
+        panelA3.add(txtKancelarijaCity);
         
         JPanel panelA4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelA4.add(lbAdressContry);
-        panelA4.add(txtAdressContry);
+        panelA4.add(txtKancelarijaContry);
         
         JLabel lbNum = new JLabel("Broj telefona*");
         lbNum.setToolTipText("Unesite svoj broj telefona");
@@ -175,16 +176,26 @@ public class AddProfessor  extends MyDialog {
         panelID.add(lbId);
         panelID.add(txtFieldId);
 
-        JLabel lbAssignYear = new JLabel("Godina Upisa*");
-        lbAssignYear.setToolTipText("Unesite godinu svog upisa");
-        lbAssignYear.setPreferredSize(cellDim);
-        txtFieldAssignYear = new JTextField();
-        txtFieldAssignYear.setToolTipText("Trazeni format:");
-        txtFieldAssignYear.setPreferredSize(cellDim);
-        txtFieldAssignYear.setName("txtAssignYear");
+        JLabel lbZvanje = new JLabel("Zvanje*");
+        lbZvanje.setPreferredSize(cellDim);
+        String[] Zvanje = new String[]{"SARADNIK_U_NASTAVI", "ASISTENT", "DOCENT", "VANREDNI_PROFESOR", "REDOVNI_PROFESOR", "ASISTENT_SA_DOKTORATOM"};
+        JComboBox<String> txtFJComboBoxZvanje = new JComboBox<>(Zvanje);
+        txtFJComboBoxZvanje.setName("txtZvanje");
+        txtFJComboBoxZvanje.setPreferredSize(cellDim);
+        JPanel panelZ = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelZ.add(lbZvanje);
+        panelZ.add(txtFJComboBoxZvanje);
+        
+        JLabel lbYearsTail = new JLabel("Godine radnog staza*");
+        lbYearsTail.setToolTipText("Unesite godine radnog staza");
+        lbYearsTail.setPreferredSize(cellDim);
+        txtFieldYearsTail = new JTextField();
+        txtFieldYearsTail.setToolTipText("Trazeni format:");
+        txtFieldYearsTail.setPreferredSize(cellDim);
+        txtFieldYearsTail.setName("txtYearsTail");
         JPanel panelY = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelY.add(lbAssignYear);
-        panelY.add(txtFieldAssignYear);
+        panelY.add(lbYearsTail);
+        panelY.add(txtFieldYearsTail);
 
 
         JPanel CentralPanel = new JPanel();
@@ -194,16 +205,15 @@ public class AddProfessor  extends MyDialog {
         CentralPanel.add(panelN);
         CentralPanel.add(panelS);
         CentralPanel.add(panelD);
-        CentralPanel.add(panelNum);
-        CentralPanel.add(panelE);
-        CentralPanel.add(panelID);
-        CentralPanel.add(panelY);
         CentralPanel.add(panelA1);
         CentralPanel.add(panelA2);
         CentralPanel.add(panelA3);
         CentralPanel.add(panelA4);
-        CentralPanel.add(panelCY);
-        CentralPanel.add(panelSt);
+        CentralPanel.add(panelNum);
+        CentralPanel.add(panelE);
+        CentralPanel.add(panelID);
+        CentralPanel.add(panelZ);
+        CentralPanel.add(panelY);
         this.add(CentralPanel,BorderLayout.CENTER);
 
         //validation
@@ -214,8 +224,8 @@ public class AddProfessor  extends MyDialog {
         txtFieldSurName.addFocusListener(val);
         validations.add(val);
         validations.add(val);
-        val=new ProfessorListener(lbAssignYear,txtFieldAssignYear,this);
-        txtFieldAssignYear.addFocusListener(val);
+        val=new ProfessorListener(lbYearsTail,txtFieldYearsTail,this);
+        txtFieldYearsTail.addFocusListener(val);
         validations.add(val);
         val=new ProfessorListener(lbEmail,txtFieldE,this);
         txtFieldE.addFocusListener(val);
@@ -229,17 +239,17 @@ public class AddProfessor  extends MyDialog {
         val=new ProfessorListener(lbNum,txtFieldNUm,this);
         txtFieldNUm.addFocusListener(val);
         validations.add(val);
-        val = new ProfessorListener(lbAdressStreet, txtAdressStreet,this);
-        txtAdressStreet.addFocusListener(val);
+        val = new ProfessorListener(lbAdressStreet, txtKancelarijaStreet,this);
+        txtKancelarijaStreet.addFocusListener(val);
         validations.add(val);
-        val = new ProfessorListener(lbAdressNum, txtAdressNum,this);
-        txtAdressNum.addFocusListener(val);
+        val = new ProfessorListener(lbAdressNum, txtKancelarijaNum,this);
+        txtKancelarijaNum.addFocusListener(val);
         validations.add(val);
-        val = new ProfessorListener(lbAdressCity, txtAdressCity,this);
-        txtAdressCity.addFocusListener(val);
+        val = new ProfessorListener(lbAdressCity, txtKancelarijaCity,this);
+        txtKancelarijaCity.addFocusListener(val);
         validations.add(val);
-        val = new ProfessorListener(lbAdressContry, txtAdressContry,this);
-        txtAdressContry.addFocusListener(val);
+        val = new ProfessorListener(lbAdressContry, txtKancelarijaContry,this);
+        txtKancelarijaContry.addFocusListener(val);
         validations.add(val);
 
         //buttons
@@ -276,32 +286,32 @@ public class AddProfessor  extends MyDialog {
                     Professor.setName(txtFieldName.getText());
                     Professor.setSurname(txtFieldSurName.getText());
                     Professor.setBirthday(birthday); 	
-                    Professor.setContactPhone(txtFieldNUm.getText());
-                    Professor.setEmail(txtFieldE.getText());
-                    Professor.setIndex(txtFieldId.getText());
-                    Professor.setEnrollYear(Integer.parseInt(txtFieldAssignYear.getText()) );
+                    Professor.setContact(txtFieldNUm.getText());
+                    Professor.setMail(txtFieldE.getText());
+                    Professor.setIdNumber(txtFieldId.getText());
+                    Professor.setYearsTail(Integer.parseInt(txtFieldYearsTail.getText()) );
                     Address adress= new Address();
-                    adress.setStreet(txtAdressStreet.getText());
-                    adress.setNumber(txtAdressNum.getText());
-                    adress.setCity(txtAdressCity.getText());
-                    adress.setCountry(txtAdressContry.getText());
+                    adress.setStreet(txtKancelarijaStreet.getText());
+                    adress.setNumber(txtKancelarijaNum.getText());
+                    adress.setCity(txtKancelarijaCity.getText());
+                    adress.setCountry(txtKancelarijaContry.getText());
                     
-                    Professor.setAdress(adress);
+                    Professor.setAdresaKancelarije(adress);
 
-                    if(CBStatus.getSelectedIndex() == 0) {
-                        Professor.setFinansiranje(Status.BUDZET);
-                    }else {
-                        Professor.setFinansiranje( Status.SAMOFINANSIRANJE );
-                    }
+      
 
-                    if(txtFJComboBoxCurrentYear.getSelectedIndex()==0){
-                        Professor.setCurrentyear(YearofStudy.I);
-                    } else if(txtFJComboBoxCurrentYear.getSelectedIndex()==1){
-                        Professor.setCurrentyear(YearofStudy.II);
-                    }else if(txtFJComboBoxCurrentYear.getSelectedIndex()==2){
-                        Professor.setCurrentyear(YearofStudy.III);
-                    }else if(txtFJComboBoxCurrentYear.getSelectedIndex()==3){
-                        Professor.setCurrentyear(YearofStudy.IV);
+                    if(txtFJComboBoxZvanje.getSelectedIndex()==0){
+                        Professor.setTitle(model.Zvanje.SARADNIK_U_NASTAVI);
+                    } else if(txtFJComboBoxZvanje.getSelectedIndex()==1){
+                        Professor.setTitle(model.Zvanje.ASISTENT);
+                    }else if(txtFJComboBoxZvanje.getSelectedIndex()==2){
+                        Professor.setTitle(model.Zvanje.DOCENT);
+                    }else if(txtFJComboBoxZvanje.getSelectedIndex()==3){
+                        Professor.setTitle(model.Zvanje.VANREDNI_PROFESOR);
+                    }else if(txtFJComboBoxZvanje.getSelectedIndex()==4){
+                        Professor.setTitle(model.Zvanje.REDOVNI_PROFESOR);
+                    }else if(txtFJComboBoxZvanje.getSelectedIndex()==5){
+                        Professor.setTitle(model.Zvanje.ASISTENT_SA_DOKTORATOM);
                     }
 
                     ProfessorController.getInstance().addProfessor(Professor);
@@ -311,7 +321,6 @@ public class AddProfessor  extends MyDialog {
                 }
             }
         });
-
 
 
 
