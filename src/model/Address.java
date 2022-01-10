@@ -1,5 +1,6 @@
 package model;
 
+
 public class Address {
 	private String street;
 	private String number;
@@ -41,4 +42,8 @@ public class Address {
 		this.country = country;
 	}
 
+	@Override
+	public String toString() {
+		return  street + ", " + number + ", " + city + ", " + country + "";
+	}
 }

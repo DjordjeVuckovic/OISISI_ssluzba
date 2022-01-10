@@ -2,6 +2,7 @@ package gui.view;
 
 import gui.view.center.StudentsTable;
 import gui.view.center.SubjectTable;
+import gui.view.center.ProfessorsTable;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -32,6 +33,19 @@ private  CentralBox() {
 		public void stateChanged(ChangeEvent e) {
 			StudentsTable.getInstance().refreshTable();
 			SubjectTable.getInstance().refreshTable();
+		}
+	});
+	
+	JPanel panelProfessor = new JPanel(new BorderLayout());
+	JScrollPane jScrollPaneProfessor= new JScrollPane(ProfessorsTable.getInstance());
+	panelProfessor.add(jScrollPaneProfessor,BorderLayout.CENTER);
+	this.addTab("Professor",panelProfessor);
+	this.addChangeListener(new ChangeListener() {
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			StudentsTable.getInstance().refreshTable();
+			SubjectTable.getInstance().refreshTable();
+			ProfessorsTable.getInstance().refreshTable();
 		}
 	});
 }
