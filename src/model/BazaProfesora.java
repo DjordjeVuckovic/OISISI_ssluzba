@@ -1,150 +1,112 @@
 package model;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.List;
 
-public class BazaProfesora implements AbstractModel {
+import model.Adress;
+import model.Osoba;
+import model.Subject;
+import model.Professor;
 
-	private ArrayList<Professor> professors;
-	private ArrayList<String> colums;
-	private static BazaProfesora instance=null;
-
-	public static BazaProfesora getInstance(){
-		if(instance ==null){
+public class BazaProfesora {
+	private static BazaProfesora instance = null;
+	
+	public static BazaProfesora getInstance() {
+		if(instance == null) {
 			instance = new BazaProfesora();
 		}
 		return instance;
 	}
 	
 	
+	
+	public static List<Professor> Professori = new ArrayList<Professor>();
+	private List<String> kolone = new ArrayList<String>();
+	
 	private BazaProfesora() {
-		initProfessors();
-		this.colums= new ArrayList<>();
-		this.colums.add("Name");
-		this.colums.add("Surname");
-		this.colums.add("Zvanje");
-		this.colums.add("Email");
+		
+		this.kolone = new ArrayList<String>();
+		this.kolone.add("Ime");
+		this.kolone.add("Prezime");
+		this.kolone.add("Zvanje");
+		this.kolone.add("E-mail Adress");
 		
 	}
-	private void initProfessors(){
-		this.professors= new ArrayList<>();
-		professors.add(new Professor("Nikola", "Nikolic", "Doktor" , "nikola@gmail.com"));
-		professors.add(new Professor("Stefan", "Stefanovic", "Docent", "stefan@gmail.com"));
-		professors.add(new Professor("Bosko", "Boskic",  "Master", "boskic@gmail.com" ));
+
+	public List<Professor> getProfessori() {
+		return Professori;
 	}
 
-	public ArrayList<Professor> getProfessors() {
-		return professors;
+	public void setProfessori(List<Professor> Professori) {
+		BazaProfesora.Professori = Professori;
 	}
 
-	public void setprofessors(ArrayList<Professor> professors) {
-		this.professors = professors;
+	public List<String> getKolone() {
+		return kolone;
 	}
 
+	public void setKolone(List<String> kolone) {
+		this.kolone = kolone;
+	}
+
+	public String getColumnName(int index) {
+		return this.kolone.get(index);
+	}
+
+	public Professor getRow(int rowIndex) {
+		return BazaProfesora.Professori.get(rowIndex);
+	}
+	
 	public int getColumnCount() {
-		return this.colums.size();
+		return 4;
 	}
-
-	public int getRowCount() {
-		return this.professors.size();
-	}
-
-	public String getColumnName(int col) {
-		return this.colums.get(col);
-	}
-
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		Professor pr=this.professors.get(rowIndex);
-		switch (columnIndex){
-			case 0:
-				return pr.getName();
-			case 1:
-				return pr.getSurname();
-			case 2:
-				return pr.getTitle();
-			case 3:
-				return pr.getMail();
-			default:
-				return null;
-
+	
+	public String getValueAt(int row, int column) {
+		Professor Professor = BazaProfesora.Professori.get(row);
+		switch (column) {
+		case 0:
+			return Professor.getIme();
+		case 1:
+			return Professor.getPrezime();
+		case 2:
+			return Professor.getZvanje();
+		case 3:
+			return Professor.getEmail();
+		default:
+			return null;
 		}
 	}
-
-	@Override
-	public boolean isEmpty() {
-		return false;
+	
+	public void dodajProfessora(Osoba o, Adress AdressKancelarije, int brLicne, String zvanje,
+							int godineStaza, ArrayList<Subject> predaje) {
+		BazaProfesora.Professori.add(new Professor(o, AdressKancelarije, brLicne, zvanje, godineStaza, predaje));
 	}
-
-	public Professor getProfessorById(String id){
-		for (Professor pr: this.professors){
-			if(pr.getIdNumber().equals(id)){
-				return pr;
-			}
-		}
-		return null;
-	}
-	public Professor getProfessorByRow(int string){
-		return professors.get(string);
-	}
-	public void AddProfessor(Professor pr){
-		professors.add(pr);
-	}
-
-	public void deleteProfessorById(String id){
-		for(Professor pr: this.professors){
-			if(pr.getIdNumber().equals(id)){
-				this.professors.remove(pr);
-
+	
+	public void izbrisiProfessora(int brLicne) {
+		for (Professor p: Professori) {
+			if(p.getBrLicne() == brLicne) {
+				Professori.remove(p);
+				break;
 			}
 		}
 	}
 	
-	
-	
-	public void deleteProfessor(Professor pr){professors.remove(pr);}
-	public boolean UniqueId(String id_){
-		boolean ret=true;
-		for(Professor pr:this.professors){
-			if(pr.getIdNumber().equals(id_)){
-				ret=false;
+	public void izmeniProfessora(Osoba o, Adress AdressKancelarije, int brLicne, String zvanje,
+			int godineStaza, ArrayList<Subject> predaje) {
+		for (Professor p: Professori) {
+			if(p.getBrLicne() == brLicne) {
+				p.setAdressKancelarije(AdressKancelarije);
+				p.setAdresaStanovanja(o.getAdresaStanovanja());
+				p.setDatumRodjenja(o.getDatumRodjenja());
+				p.setGodineStaza(godineStaza);
+				p.setIme(o.getIme());
+				p.setPredaje(predaje);
+				p.setPrezime(o.getPrezime());
+				p.setTelefon(o.getTelefon());
+				p.setZvanje(zvanje);
 			}
 		}
-		return ret;
 	}
+		
 
-	
-	public void editProfessor(String Name, String Surname, Date datum, Adress adresa_stanovanja, String kontakt_telefon,String email_adresa, String id, int godine_staza, String titula) {
-		for (Professor i : professors) {
-			if (i.getIdNumber().equals(id)) {
-				i.setName(Name);
-				i.setSurname(Surname);
-				i.setBirthday(datum);
-				i.setAdress(adresa_stanovanja);
-				i.setContact(kontakt_telefon);
-				i.setMail(email_adresa);
-				i.setIdNumber(id) ;
-				i.setGodStaza(godine_staza);
-				i.setTitle(titula);
-			}
-		}
-		try {
-			for (Professor i : professors) {
-				if (i.getIdNumber().equals(id)) {
-					i.setName(Name);
-					i.setSurname(Surname);
-					i.setBirthday(datum);
-					i.setAdress(adresa_stanovanja);
-					i.setContact(kontakt_telefon);
-					i.setMail(email_adresa);
-					i.setIdNumber(id);
-					i.setGodStaza(godine_staza);
-					i.setTitle(titula);
-					
-				}
-			}
-		}catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-		}
-	}
 }
