@@ -1,36 +1,58 @@
 package controller;
 
-import gui.view.center.ProfessorsTable;
+import java.util.ArrayList;
+
 import model.Adress;
+import model.Osoba;
+import model.Subject;
+import model.Professor;
 import model.BazaProfesora;
 
-import model.Professor;
-import java.util.Date;
-
 public class ProfessorController {
-    private static  ProfessorController instance = null;
-    public static ProfessorController getInstance(){
-        if(instance==null){
-            instance = new ProfessorController();
-        }
-        return instance;
-    }
-    private ProfessorController(){}
-    public void AddProfessor(Professor pr){
-        BazaProfesora.getInstance().AddProfessor(pr);
-        ProfessorsTable.getInstance().refreshTable();
-    }
-    public void deleteProfessor(int row){
-        if(row <0){
-            return;
-        }
-        Professor Professor = BazaProfesora.getInstance().getProfessorByRow(row);
-        BazaProfesora.getInstance().deleteProfessor(Professor);
-        ProfessorsTable.getInstance().refreshTable();
-    }
-    public void editProfessor(String ime, String prezime, Date datum, Adress adresa_stanovanja, String kontakt_telefon,String email_adresa, String id, int godine_staza, String titula) {
-		BazaProfesora.getInstance().editProfessor(ime, prezime, datum, adresa_stanovanja, kontakt_telefon, email_adresa, id, godine_staza , titula);
-		ProfessorsTable.getInstance().refreshTable();
+	private static ProfessorController instance = null;
+	
+	public static ProfessorController getInstance() {
+		if(instance == null) {
+			instance = new ProfessorController();
+		}
+		return instance;
 	}
+	
+	private ProfessorController() {}
+	
+	public void dodajProfessora(Osoba o, Adress AdressKancelarije, int brLicne, String zvanje,
+							int godineStaza, ArrayList<Subject> predaje) {
+		// izmena modela
+		BazaProfesora.getInstance().dodajProfessora(o, AdressKancelarije, brLicne, zvanje, godineStaza, predaje);
+		
+		// azuriranje prikaza
+		Frame.getInstance().azurirajPrikaz("DODAT", -1, "Professori");
+	}
+	
+	public void izbrisiProfessora(int rowSelectedIndex) {
+		if(rowSelectedIndex < 0) 
+			return;
+		
+		// izmena modela
+		Professor Professor = BazaProfesora.getInstance().getRow(rowSelectedIndex);
+		BazaProfesora.getInstance().izbrisiProfessora(Professor.getBrLicne());
+		// azuriranje prikaza
+		Frame.getInstance().azurirajPrikaz("UKLONJEN", rowSelectedIndex, "Professori");
+		
+	}
+	
+	// izmena Professora
+	public Professor uzmiProfessora(int rowSelectedIndex) {
+		return BazaProfesora.getInstance().getRow(rowSelectedIndex);
+	}
+	    //uraditi izmenu Professora
+	public void izmeniProfessora(Osoba o, Adress AdressKancelarije, int brLicne, String zvanje,
+			int godineStaza, ArrayList<Subject> predaje) {
 
+		BazaProfesora.getInstance().izmeniProfessora(o, AdressKancelarije, brLicne, zvanje, godineStaza, predaje);
+		
+		// azuriranje prikaza
+		Frame.getInstance().azurirajPrikaz("AZURIRAN", -1, "Professori");
+		}	
+	
 }
