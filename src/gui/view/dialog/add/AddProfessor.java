@@ -105,28 +105,29 @@ public class AddProfessor  extends MyDialog {
 
         JLabel lbAdressStreet = new JLabel("Ulica*");
         txtKancelarijaStreet= new JTextField();
-        lbAdressStreet.setPreferredSize(cellDim);
         txtKancelarijaStreet.setPreferredSize(cellDim);
         txtKancelarijaStreet.setName("txtStreet");
+        lbAdressStreet.setPreferredSize(cellDim);
         
         JLabel lbAdressNum = new JLabel("Broj ulice*");
         txtKancelarijaNum= new JTextField();
-        lbAdressNum.setPreferredSize(cellDim);
         txtKancelarijaNum.setPreferredSize(cellDim);
         txtKancelarijaNum.setName("txtStnum");
+        lbAdressNum.setPreferredSize(cellDim);
         
         JLabel lbAdressCity = new JLabel("Grad*");
         txtKancelarijaCity= new JTextField();
         txtKancelarijaCity.setName("txtCity");
         txtKancelarijaCity.setPreferredSize(cellDim);
         lbAdressCity.setPreferredSize(cellDim);
+        
         JLabel lbAdressContry = new JLabel("Drzava*");
         txtKancelarijaContry= new JTextField();
-        txtKancelarijaCity.setName("txtCity");
+        txtKancelarijaContry.setName("txtContry");
         txtKancelarijaContry.setPreferredSize(cellDim);
         lbAdressContry.setPreferredSize(cellDim);
 
-        txtKancelarijaContry.setName("txtContry");
+
         JPanel panelA1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelA1.add(lbAdressStreet);
         panelA1.add(txtKancelarijaStreet);
@@ -216,6 +217,7 @@ public class AddProfessor  extends MyDialog {
         CentralPanel.add(panelY);
         this.add(CentralPanel,BorderLayout.CENTER);
 
+        
         //validation
         ProfessorListener val= new ProfessorListener(lbName,txtFieldName,this);
         txtFieldName.addFocusListener(val);
@@ -224,18 +226,20 @@ public class AddProfessor  extends MyDialog {
         txtFieldSurName.addFocusListener(val);
         validations.add(val);
         validations.add(val);
-        val=new ProfessorListener(lbYearsTail,txtFieldYearsTail,this);
-        txtFieldYearsTail.addFocusListener(val);
-        validations.add(val);
+		/*
+		 * val=new ProfessorListener(lbYearsTail,txtFieldYearsTail,this);
+		 * txtFieldYearsTail.addFocusListener(val); validations.add(val);
+		 */
         val=new ProfessorListener(lbEmail,txtFieldE,this);
         txtFieldE.addFocusListener(val);
         validations.add(val);
         val=new ProfessorListener(lbDate,txtFieldDate,this);
         txtFieldDate.addFocusListener(val);
         validations.add(val);
-        val=new ProfessorListener(lbId,txtFieldId,this);
-        txtFieldId.addFocusListener(val);
-        validations.add(val);
+		/*
+		 * val=new ProfessorListener(lbId,txtFieldId,this);
+		 * txtFieldId.addFocusListener(val); validations.add(val);
+		 */
         val=new ProfessorListener(lbNum,txtFieldNUm,this);
         txtFieldNUm.addFocusListener(val);
         validations.add(val);

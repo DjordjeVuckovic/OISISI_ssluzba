@@ -1,6 +1,7 @@
 package controller.validation;
 
 import model.BazaPredmeta;
+import model.BazaProfesora;
 import model.BazaStudenata;
 
 import java.text.ParseException;
@@ -172,5 +173,24 @@ public class CheckValidation {
         return true;
     }
 
+    public static boolean checkProfId(String text) {
+        if(text.isEmpty() || text.isBlank() || text.length() != 8) {
+            return false;
+        }
+        // treba da bude jedinstvena
+        if(!BazaProfesora.getInstance().UniqueIdP(text)) {
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean checkGodRadnog(String text) {
+    	if(text.isEmpty() || text.isBlank() ) {
+    		return false;
+    	}
+    	return true;
+    }
+    
+    
     }
 

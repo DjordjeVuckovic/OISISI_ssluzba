@@ -55,16 +55,16 @@ public class BazaProfesora implements AbstractModel {
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Professor st=this.Professors.get(rowIndex);
+		Professor pr=this.Professors.get(rowIndex);
 		switch (columnIndex){
 			case 0:
-				return st.getName();
+				return pr.getName();
 			case 1:
-				return st.getSurname();
+				return pr.getSurname();
 			case 2:
-				return st.getTitle();
+				return pr.getTitle();
 			case 3:
-				return st.getMail();
+				return pr.getMail();
 			default:
 				return null;
 
@@ -84,11 +84,21 @@ public class BazaProfesora implements AbstractModel {
 		}
 		return null;
 	}
+	
+	public boolean UniqueIdP(String idp) { //svaki broj licne mora biti jedinstven
+        for (Professor pr : this.Professors) {
+            if(pr.getIdNumber().equals(idp)) {
+                return false;
+            }
+        }
+        return true;
+    }
+	
 	public Professor getProfessorByRow(int row){
 		return Professors.get(row);
 	}
-	public void addProfessor(Professor st){
-		Professors.add(st);
+	public void addProfessor(Professor pr){
+		Professors.add(pr);
 	}
 
 	public void deleteProfessorById(String id){
