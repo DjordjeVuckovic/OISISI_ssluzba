@@ -30,14 +30,18 @@ public class BazaStudenata implements AbstractModel {
 	}
 	private void initStudents(){
 		this.students= new ArrayList<>();
+		Address address = new Address("N","N","N","N");
+		Date date = new Date();
+		Student st = new Student("Milan","Milic",date,address,"06125412","dsa@asdas","RA/1/2011",2011,YearofStudy.I,9.1,Status.SAMOFINANSIRANJE);
+		students.add(st);
 		students.add(new Student("Mika", "Mikic", "RA/8/2020", YearofStudy.I,9.8, Status.SAMOFINANSIRANJE));
 		students.add(new Student("Igor", "Bodiroga", "RA/5/2017", YearofStudy.II,7.8, Status.SAMOFINANSIRANJE));
 		students.add(new Student("Marko", "Markovic", "RA/88/2016", YearofStudy.I,10.0, Status.BUDZET ));
-		Date date = new Date();
 		students.add(new Student("Mirko", "Mikic",date, "RA/1/2020", YearofStudy.IV,9.8, Status.SAMOFINANSIRANJE));
 		students.add(new Student("Igor", "Igic",date, "RA/8/2017", YearofStudy.II,7.8, Status.BUDZET));
 		students.add(new Student("Marko", "Kraljevic",date, "RA/888/2016", YearofStudy.III,10.0, Status.BUDZET));
 	}
+	
 
 	public ArrayList<Student> getStudents() {
 		return students;
@@ -71,7 +75,12 @@ public class BazaStudenata implements AbstractModel {
 			case 3:
 				return st.getCurrentyear().name();
 			case 4:
-				return st.getNacinFinansiranja().name();
+				if(st.getNacinFinansiranja()==Status.BUDZET) {
+					return "B";
+				}
+				else{
+					return "S";
+				}
 			case 5:
 				return Double.toString(st.getavgGrade());
 			default:
@@ -93,9 +102,11 @@ public class BazaStudenata implements AbstractModel {
 		}
 		return null;
 	}
+	
 	public Student getStudentByRow(int row){
 		return students.get(row);
 	}
+	
 	public void addStudent(Student st){
 		students.add(st);
 	}
@@ -104,11 +115,12 @@ public class BazaStudenata implements AbstractModel {
 		for(Student st: this.students){
 			if(st.getIndex().equals(id)){
 				this.students.remove(st);
-
 			}
 		}
 	}
+	
 	public void deleteStudent(Student st){students.remove(st);}
+	
 	public boolean UniqueId(String id_){
 		boolean ret=true;
 		for(Student st:this.students){

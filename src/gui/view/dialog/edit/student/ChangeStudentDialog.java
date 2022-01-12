@@ -22,6 +22,9 @@ public class ChangeStudentDialog extends MyDialog {
         EditStudent editStudent = new EditStudent(student);
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Informacije",editStudent);
+
+        PassedSubjects passedSubjects = new PassedSubjects(student);
+        tabbedPane.addTab("Polozeni",passedSubjects);
         this.add(tabbedPane);
     }
 }

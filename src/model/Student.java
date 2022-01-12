@@ -29,7 +29,10 @@ public class Student {
 		this.currentYear = currentYear;
 		this.avgGrade = avgGrade;
 		this.status = status;
+		passedExams = new ArrayList<>();
 	}
+	
+	
 	public Student(String name, String surname,Date birthday, String index, YearofStudy currentYear, double avgGrade, Status status) {
 		this.name = name;
 		this.surname = surname;
@@ -39,7 +42,7 @@ public class Student {
 		this.avgGrade = avgGrade;
 		this.status = status;
 	}
-	public Student(){}
+	public Student(){passedExams = new ArrayList<>();}
 		public Student(String ime, String prezime, Date datum_rodjenja, Address adresa, String kontakt_telefon,
 					   String email, String index, int godina_upisa, YearofStudy tren_god_studiranja, double pr_ocena, Status n_finansiranja) {
 			super();
@@ -54,6 +57,7 @@ public class Student {
 			this.currentYear =tren_god_studiranja;
 			this.avgGrade =pr_ocena;
 			this.status=n_finansiranja;
+			passedExams = new ArrayList<>();
 		}
 		//GET i SET metode
 		public String getName() {
@@ -77,10 +81,10 @@ public class Student {
 
 			this.birthday = birthday;
 		}
-		public Address getAdress() {
+		public Address getAddress() {
 			return adress;
 		}
-		public void setAdress(Address adresa) {
+		public void setAddress(Address adresa) {
 			this.adress = adresa;
 		}
 
@@ -129,9 +133,33 @@ public class Student {
 			this.status = n_finansiranja;
 		}
 
-	public ArrayList<Grade> getPassedExams() {
-		return passedExams;
-	}
+		public ArrayList<Grade> getPassedExams() {
+			return passedExams;
+		}
+		
+		public double CalculateAvgGrade(){
+			double sum = 0;
+			for(Grade grade : passedExams){
+				sum += grade.getGrade();
+			}
+			if(passedExams.size()==0){
+				avgGrade=0;
+			}else{
+				avgGrade  = sum/passedExams.size();
+			}
+			return  avgGrade;
+		}
+		
+		public int SumPoints(){
+			int sum = 0;
+			for(Grade grade:passedExams){
+				if(grade.getSubject() !=null){
+					sum +=grade.getSubject().getESPBpoints();
+				}
+			}
+			return sum;
+		}
+		
 	@Override
 		public String toString() {
 			return "Student [ime=" + name + ", prezime=" + surname + ", datum_rodjenja=" + birthday + ", adresa="

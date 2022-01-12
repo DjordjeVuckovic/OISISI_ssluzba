@@ -4,11 +4,6 @@ import gui.view.center.StudentsTable;
 import model.BazaStudenata;
 import model.Student;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 public class StudentController {
     private static  StudentController instance = null;
     public static StudentController getInstance(){
@@ -43,7 +38,7 @@ public class StudentController {
         student.setIndex(stN.getIndex());
         student.setContactPhone(stN.getContactPhone());
         student.setAvgGrade(stN.getavgGrade());
-        student.setAdress(student.getAdress().getStreet(),student.getAdress().getNumber(),student.getAdress().getCity(),student.getAdress().getCountry());
+        student.setAdress(student.getAddress().getStreet(),student.getAddress().getNumber(),student.getAddress().getCity(),student.getAddress().getCountry());
         StudentsTable.getInstance().refreshTable();
     }
 

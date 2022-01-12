@@ -7,27 +7,18 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-
-public class PassedTable extends JTable {
-    private Student student;
-    private JTextField txtAvgGrade;
-    private JTextField txtEspbSum;
-    public PassedTable(){
+import gui.view.dialog.edit.student.PassedSubjects;
+/*
+public class PassedSubjectsTable extends JTable {
+    private PassedSubjects passedSubjects = new PassedSubjects();
+    private Student student = passedSubjects.getStudentForSubject() ;
+    public PassedSubjectsTable(){
         setRowSelectionAllowed(true);
         setColumnSelectionAllowed(true);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setModel(new AbstractPassedTable());
     }
 
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
 
     @Override
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -85,12 +76,12 @@ public class PassedTable extends JTable {
                     return null;
             }
         }
-        public void refreshTable(){
-
-        }
 
     }
 
 
-
     }
+
+
+ */
+

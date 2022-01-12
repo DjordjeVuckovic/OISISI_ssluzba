@@ -6,6 +6,7 @@ public class Address {
 	private String number;
 	private String city;
 	private String country;
+	private int idAddress;
 
 	public Address() {
 	}
@@ -16,7 +17,8 @@ public class Address {
 		this.city = city;
 		this.country = country;
 	}
-
+	
+	
 	public String getStreet() {
 		return street;
 	}
@@ -41,9 +43,5 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
-	@Override
-	public String toString() {
-		return  street + ", " + number + ", " + city + ", " + country + "";
-	}
 }
+

@@ -102,10 +102,10 @@ public class SubjectListener implements FocusListener {
         }
         ValidateCell();
         if(mode ==1){
-        AddSubject.getInstance().EnableButt();
+            addSubject.EnableButt();
         }
         if(mode==2){
-            EditSubject.getInstance(getIdSub()).EnableButt();
+            editSubject.EnableButt();
         }
 
     }

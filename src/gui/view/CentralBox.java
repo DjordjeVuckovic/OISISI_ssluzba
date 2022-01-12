@@ -1,8 +1,8 @@
 package gui.view;
 
+import gui.view.center.ProfessorsTable;
 import gui.view.center.StudentsTable;
 import gui.view.center.SubjectTable;
-import gui.view.center.ProfessorsTable;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -13,11 +13,16 @@ public class CentralBox extends JTabbedPane {
 private static CentralBox instance = null;
 
 public static CentralBox getInstance() {
-	if(instance==null) instance = new CentralBox();
+	if(instance==null)
+	{
+		synchronized (CentralBox.class){
+			if(instance == null){
+				instance = new CentralBox();
+			}
+		}
+	}
 	return instance;
 }
-
-
 private  CentralBox() {
 	JPanel panelStudents = new JPanel(new BorderLayout());
 	JScrollPane jScrollPaneStudents= new JScrollPane(StudentsTable.getInstance());
@@ -36,12 +41,11 @@ private  CentralBox() {
 		}
 	});
 	
-	JPanel panelProfesor = new JPanel(new BorderLayout());
-	JScrollPane jScrollPaneProfesor = new JScrollPane(ProfessorsTable.getInstance());
-	panelProfesor.add(jScrollPaneProfesor,BorderLayout.CENTER);
-	this.addTab("Profesori",panelProfesor);
-	
-}
-
+	JPanel panelProfesori = new JPanel(new BorderLayout());
+	JScrollPane jScrollPaneProfesori = new JScrollPane(ProfessorsTable.getInstance());
+	panelProfesori.add(jScrollPaneProfesori,BorderLayout.CENTER);
+	this.addTab("Profesori",panelProfesori);
+		
+	}
 
 }

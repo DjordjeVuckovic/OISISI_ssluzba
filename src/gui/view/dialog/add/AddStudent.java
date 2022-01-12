@@ -40,13 +40,7 @@ public class AddStudent  extends MyDialog {
     private JTextField txtAdressCity;
     private JTextField txtAdressContry;
 
-    
-    private static AddStudent instance = null;
 
-    public static AddStudent getInstance() {
-        if(instance==null) instance = new AddStudent();
-        return instance;
-    }
     public boolean allValid(){
         for(StudentListener sl:validations){
             if(!sl.getValidation()){
@@ -59,7 +53,7 @@ public class AddStudent  extends MyDialog {
         btAccept.setEnabled(allValid());
     }
     
-	private AddStudent() {
+	public AddStudent() {
         super(MainWindow.getInstance(),"Dodavanje studenta");
         initStudentDialog();
        
@@ -93,7 +87,7 @@ public class AddStudent  extends MyDialog {
         panelS.add(lbSurname);
         panelS.add(txtFieldSurName);
 
-        JLabel lbDate = new JLabel("Date*");
+        JLabel lbDate = new JLabel("Datum rodjenja*");
         lbDate.setToolTipText("Unesite datum rodjenja");
         lbDate.setPreferredSize(cellDim);
         txtFieldDate = new JTextField();
@@ -198,7 +192,7 @@ public class AddStudent  extends MyDialog {
         panelCY.add(lbCurrentYear);
         panelCY.add(txtFJComboBoxCurrentYear);
 
-        JLabel lbStatus = new JLabel("Naƒçin finansiranja*");
+        JLabel lbStatus = new JLabel("NaËin finansiranja*");
         lbStatus.setPreferredSize(cellDim);
         String[] status = new String[]{"Budzet", "Samofinansiranje"};
         JComboBox<String> CBStatus = new JComboBox<>(status);
@@ -297,7 +291,7 @@ public class AddStudent  extends MyDialog {
                     Student student = new Student();
                     student.setName(txtFieldName.getText());
                     student.setSurname(txtFieldSurName.getText());
-                    student.setBirthday(birthday); 	
+                    student.setBirthday(birthday);
                     student.setContactPhone(txtFieldNUm.getText());
                     student.setEmail(txtFieldE.getText());
                     student.setIndex(txtFieldId.getText());
@@ -308,7 +302,7 @@ public class AddStudent  extends MyDialog {
                     adress.setCity(txtAdressCity.getText());
                     adress.setCountry(txtAdressContry.getText());
                     
-                    student.setAdress(adress);
+                    student.setAddress(adress);
 
                     if(CBStatus.getSelectedIndex() == 0) {
                         student.setFinansiranje(Status.BUDZET);
