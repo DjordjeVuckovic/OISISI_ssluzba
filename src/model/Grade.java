@@ -10,6 +10,10 @@ public class Grade {
 	private int grade;
 	private Date examDate;
 	
+	public Grade(Student student, Subject subject, int vrednost, Date datumPolaganja) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setGrade(int gr) {
 		if(gr>=6 && gr<=10) {
 			grade = gr;

@@ -1,382 +1,728 @@
 package gui.view.dialog.edit.student;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.io.Serial;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import controller.StudentController;
-import controller.focuslisteners.StudentListener;
+import gui.view.CentralBox;
+import gui.view.center.StudentsTable;
+import gui.view.dialog.DodajPredmetStudentu;
+import gui.view.dialog.ObrisiOcenu;
+import gui.view.dialog.ObrisiPredmetStudentu;
+import gui.view.dialog.UpisiOcenu;
 import model.Address;
 import model.Status;
 import model.Student;
-import model.YearofStudy;
 
-public class EditStudent extends JPanel{
+public class EditStudent extends JDialog {
+
+	
 	/**
 	 * 
 	 */
-	@Serial
-    private static final long serialVersionUID = 6674408014723983134L;
+	private static final long serialVersionUID = -3483057378640442927L;
+	private boolean ispravni[] = {true, true, true, true, true, true, true, true};
+	String ime;
+	String prezime;
+	String brojTelefona;
+	String datumRodjenja;
+	Address adresa;
+	String brIndeksa;
+	String email;
+	//String prosecnaOcena;
+	int godinaUpisa;
 	
-	private Student student;
-	private JTextField txtFieldName;
-	private JTextField txtFieldSurName;
-	private JTextField txtFieldDate;
-	private JTextField txtFieldNUm;
-	private JTextField txtFieldE;
-	private JTextField txtFieldId;
-	private JTextField txtFieldAssignYear;
-	private JComboBox<String> CBStatus;
-	private JComboBox<String> txtFJComboBoxCurrentYear;
+	public EditStudent(int selectedIndex) {
+	super();
+	setTitle("Izmeni studenta");
+	setSize(750, 750);
+	this.setModal(true);
+	setLocationRelativeTo(CentralBox.getInstance());
 	
+	JTabbedPane tabbedPane = new JTabbedPane();
+	
+	JPanel panelInformacije = new JPanel();
+	BoxLayout dialogLayout = new BoxLayout(panelInformacije, BoxLayout.Y_AXIS);
+	panelInformacije.setLayout(dialogLayout);
+	tabbedPane.addTab("Informacije", panelInformacije );
+	
+	JPanel panelPolozeni = new JPanel();
+	BorderLayout polozeniLayout = new BorderLayout();
+	panelPolozeni.setLayout(polozeniLayout);
+	tabbedPane.addTab("Polozeni", panelPolozeni);
 
-    private JButton btAccept;
-    private JButton btDecline;
-    private  Dimension cellDim;
+	JPanel panelNepolozeni = new JPanel();
+	BorderLayout nepolozeniLayout = new BorderLayout();
+	panelNepolozeni.setLayout(nepolozeniLayout);
+	tabbedPane.addTab("Nepolozeni", panelNepolozeni);
+	
+	add(tabbedPane, BorderLayout.CENTER);
+	
+	FlowLayout layout = new FlowLayout(FlowLayout.CENTER);
+	Dimension dimension = new Dimension(200, 30);
+	
+	JPanel imePanel = new JPanel(layout);
+	JPanel prezimePanel = new JPanel(layout);
+	JPanel datumRodjenjaPanel = new JPanel(layout);
+	JPanel adresaPanel = new JPanel(layout);
+	JPanel kontaktPanel = new JPanel(layout);
+	JPanel emailPanel = new JPanel(layout);
+	JPanel brIndeksaPanel = new JPanel(layout);
+	JPanel godinaUpisaPanel = new JPanel(layout);
+	JPanel godinaStudijaPanel = new JPanel(layout);
+	JPanel nacinFinansiranjaPanel = new JPanel(layout);
+//	JPanel prosecnaOcenaPanel = new JPanel(layout);
+		
+	JLabel imeLabel = new JLabel("Ime*: ");
+	JLabel prezimeLabel = new JLabel("Prezime*: ");
+	JLabel datumRodjenjaLabel = new JLabel("Datum rodjenja*: ");
+	JLabel adresaLabel = new JLabel("Adresa stanovanja*: ");
+	JLabel kontaktLabel = new JLabel("Broj telefona*: ");
+	JLabel emailLabel = new JLabel("E-mail adresa*: ");
+	JLabel brIndeksaLabel = new JLabel("Broj indeksa*: ");
+	JLabel godinaUpisaLabel = new JLabel("Godina upisa*: ");
+	JLabel godinaStudijaLabel = new JLabel("Trenutna godina studija*: ");
+//	JLabel prosecnaOcenaLabel = new JLabel("Prosecna ocena*: ");
+	JLabel nacinFinansiranjaLabel = new JLabel("Nacin finansiranja*:");
+	
+	imeLabel.setPreferredSize(dimension);
+	prezimeLabel.setPreferredSize(dimension);
+	datumRodjenjaLabel.setPreferredSize(dimension);
+	adresaLabel.setPreferredSize(dimension);
+	kontaktLabel.setPreferredSize(dimension);
+	emailLabel.setPreferredSize(dimension);
+	brIndeksaLabel.setPreferredSize(dimension);
+	godinaUpisaLabel.setPreferredSize(dimension);
+	godinaStudijaLabel.setPreferredSize(dimension);
+	//prosecnaOcenaLabel.setPreferredSize(dimension);
+	nacinFinansiranjaLabel.setPreferredSize(dimension);
+	
+	
+	Student student = StudentController.getInstance().getListaSvihStudenata().get(selectedIndex);
+	ime = student.getName();
+	prezime = student.getSurname();
+	DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+	datumRodjenja = date.format(student.getBirthday());
+	brojTelefona = student.getContactPhone();
+	adresa = student.getAddress();
+	brIndeksa = student.getIndex();
+	email = student.getEmail();
+	//prosecnaOcena = Double.toString(student.getProsecnaOcena());
+	godinaUpisa = student.getEnrollYear();
     
-    private JTextField txtAdressStreet;
-    private JTextField txtAdressNum;
-    private JTextField txtAdressCity;
-    private JTextField txtAdressContry;
-    
-    public boolean allValid(){
-        for(StudentListener sl:validations){
-            if(!sl.getValidation()){
-                return false;
-            }
-        }
-        return true;
-    }
-    public void EnableButt(){
-        if(allValid()){
-            btAccept.setEnabled(true);
-        }
-        else{
-            btAccept.setEnabled(false);
-        }
-    }
-    
+	
+	
+	JTextField imeText = new JTextField(student.getName());
+	imeText.setToolTipText("Format: slova i razmaci");
+	JTextField prezimeText = new JTextField(student.getSurname());
+	prezimeText.setToolTipText("Format: slova i razmaci");
+	JTextField datumRodjenjaText = new JTextField(date.format(student.getBirthday()));
+	datumRodjenjaText.setToolTipText("Format: dd-MM-yyyy");
+	JTextField adresaText = new JTextField();
+	adresaText.setToolTipText("Format: slova i razmaci + broj + zapeta + slova i razmaci");
+	JTextField kontaktText = new JTextField(student.getContactPhone());
+	JTextField emailText = new JTextField(student.getEmail());
+	JTextField brIndeksaText = new JTextField(student.getIndex());
+	brIndeksaText.setToolTipText("Format: AAxxx-yyyy");
+	JTextField godinaUpisaText = new JTextField(student.getEnrollYear());
+	godinaUpisaText.setToolTipText("Format: yyyy");
+//	JTextField prosecnaOcenaText = new JTextField(Double.toString(student.getProsecnaOcena()));
+//	prosecnaOcenaText.setToolTipText("Format: cifra + tacka + dve cifre ili 10.00");
+	String[] godineStudija = { "I (prva)", "II (druga)", "III (treca)", "IV (cetvrta)" };
+	JComboBox<String> godineStudijaComboBox = new JComboBox<String>(godineStudija);	
+	String[] budzet_samofinansiranje = { "Budzet", "Samofinansiranje" };
+	JComboBox<String> budzet_samofinansiranjeComboBox = new JComboBox<String>(budzet_samofinansiranje);
+	
+	godineStudijaComboBox.setSelectedItem(student.getCurrentyear());
+    budzet_samofinansiranjeComboBox.setSelectedIndex(student.getNacinFinansiranja().ordinal());	
+	
+	imeText.setPreferredSize(dimension);
+	prezimeText.setPreferredSize(dimension);
+	datumRodjenjaText.setPreferredSize(dimension);
+	adresaText.setPreferredSize(dimension);
+	kontaktText.setPreferredSize(dimension);
+	emailText.setPreferredSize(dimension);
+	brIndeksaText.setPreferredSize(dimension);
+	godinaUpisaText.setPreferredSize(dimension);
+//	prosecnaOcenaText.setPreferredSize(dimension);
+	godineStudijaComboBox.setPreferredSize(dimension);
+	budzet_samofinansiranjeComboBox.setPreferredSize(dimension);
+			
+	
+	imePanel.add(imeLabel);
+	imePanel.add(imeText);
+	prezimePanel.add(prezimeLabel);
+	prezimePanel.add(prezimeText);
+	datumRodjenjaPanel.add(datumRodjenjaLabel);
+	datumRodjenjaPanel.add(datumRodjenjaText);
+	adresaPanel.add(adresaLabel);
+	adresaPanel.add(adresaText);
+	kontaktPanel.add(kontaktLabel);
+	kontaktPanel.add(kontaktText);
+	emailPanel.add(emailLabel);
+	emailPanel.add(emailText);	
+	brIndeksaPanel.add(brIndeksaLabel);
+	brIndeksaPanel.add(brIndeksaText);	
+	godinaUpisaPanel.add(godinaUpisaLabel);
+	godinaUpisaPanel.add(godinaUpisaText);
+//	prosecnaOcenaPanel.add(prosecnaOcenaLabel);
+//	prosecnaOcenaPanel.add(prosecnaOcenaText);	
+	godinaStudijaPanel.add(godinaStudijaLabel);
+	godinaStudijaPanel.add(godineStudijaComboBox);
+	nacinFinansiranjaPanel.add(nacinFinansiranjaLabel);
+	nacinFinansiranjaPanel.add(budzet_samofinansiranjeComboBox);
+	
+	panelInformacije.add(imePanel);
+	panelInformacije.add(prezimePanel);
+	panelInformacije.add(datumRodjenjaPanel);
+	panelInformacije.add(adresaPanel);
+	panelInformacije.add(kontaktPanel);
+	panelInformacije.add(emailPanel);
+	panelInformacije.add(brIndeksaPanel);
+//	panelInformacije.add(prosecnaOcenaPanel);
+	panelInformacije.add(godinaUpisaPanel);
+	panelInformacije.add(godinaStudijaPanel);
+	panelInformacije.add(nacinFinansiranjaPanel);
+	panelInformacije.add(Box.createVerticalStrut(25));
+	
+	add(tabbedPane, BorderLayout.CENTER);
+	
+	JPanel buttonPanel = new JPanel();
+	BoxLayout buttonLayout = new BoxLayout(buttonPanel, BoxLayout.X_AXIS);
+	buttonPanel.setLayout(buttonLayout);
+	
+	JButton potvrda = new JButton("Potvrdi");
+	JButton odustanak = new JButton("Odustani");
+	potvrda.setPreferredSize(new Dimension(100, 30));
+	odustanak.setPreferredSize(new Dimension(100, 30));
+	buttonPanel.add(Box.createGlue());
+	buttonPanel.add(potvrda);
+	buttonPanel.add(Box.createHorizontalStrut(50));
+	buttonPanel.add(odustanak);
+	buttonPanel.add(Box.createGlue());
+	
+	panelInformacije.add(buttonPanel);
+	setLocationRelativeTo(CentralBox.getInstance());
+	
+	potvrda.setEnabled(true);
+	
+	
+	imeText.getDocument().addDocumentListener(new DocumentListener() {
 
-    private ArrayList<StudentListener> validations=new ArrayList<>();
-	public EditStudent(Student student) {
-		this.student=student;
-		cellDim = new Dimension(200, 20);
-        setLayout(new BorderLayout());
-        JLabel lbName = new JLabel("Ime*");
-        lbName.setToolTipText("Unesite svoje ime");
-        
-        lbName.setPreferredSize(cellDim);
-        txtFieldName = new JTextField();
-        txtFieldName.setToolTipText("Ime je niz karaktera");
-        txtFieldName.setPreferredSize(cellDim);
-        txtFieldName.setName("txtName");
-        JPanel panelN = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelN.add(lbName);
-        panelN.add(txtFieldName);
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			ime = imeText.getText();
+			String regex_ime = "[[\\p{L}]\s]+";
+			potvrda.setEnabled(proveraUnosa(ime, regex_ime, 0));		
+		}
 
-        JLabel lbSurname = new JLabel("Prezime*");
-        lbSurname.setToolTipText("Unesite svoje prezime");
-        lbSurname.setPreferredSize(cellDim);
-        txtFieldSurName = new JTextField();
-        txtFieldSurName.setToolTipText("Prezime je niz karaktera");
-        txtFieldSurName.setPreferredSize(cellDim);
-        txtFieldSurName.setName("txtSurname");
-        JPanel panelS = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelS.add(lbSurname);
-        panelS.add(txtFieldSurName);
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			ime = imeText.getText();
+			String regex_ime = "[[\\p{L}]\s]+";
+			potvrda.setEnabled(proveraUnosa(ime, regex_ime, 0));	
+		}
 
-        JLabel lbDate = new JLabel("Date*");
-        lbDate.setToolTipText("Unesite datum rodjenja");
-        lbDate.setPreferredSize(cellDim);
-        txtFieldDate = new JTextField();
-        txtFieldDate.setToolTipText("Trazeni format: dd.mm.yyyy");
-        txtFieldDate.setPreferredSize(cellDim);
-        txtFieldDate.setName("txtDate");
-        JPanel panelD = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelD.add(lbDate);
-        panelD.add(txtFieldDate);
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			ime = imeText.getText();
+			String regex_ime = "[[\\p{L}]\s]+";
+			potvrda.setEnabled(proveraUnosa(ime, regex_ime, 0));	
+		}
+			
+	});
+	
+	
+	prezimeText.getDocument().addDocumentListener(new DocumentListener() {
 
-        JLabel lbAdressStreet = new JLabel("Ulica*");
-        txtAdressStreet= new JTextField();
-        lbAdressStreet.setPreferredSize(cellDim);
-        txtAdressStreet.setPreferredSize(cellDim);
-        txtAdressStreet.setName("txtStreet");
-        
-        JLabel lbAdressNum = new JLabel("Broj ulice*");
-        txtAdressNum= new JTextField();
-        lbAdressNum.setPreferredSize(cellDim);
-        txtAdressNum.setPreferredSize(cellDim);
-        txtAdressNum.setName("txtStnum");
-        
-        JLabel lbAdressCity = new JLabel("Grad*");
-        txtAdressCity= new JTextField();
-        txtAdressCity.setName("txtCity");
-        txtAdressCity.setPreferredSize(cellDim);
-        lbAdressCity.setPreferredSize(cellDim);
-        JLabel lbAdressContry = new JLabel("Drzava*");
-        txtAdressContry= new JTextField();
-        txtAdressCity.setName("txtCity");
-        txtAdressContry.setPreferredSize(cellDim);
-        lbAdressContry.setPreferredSize(cellDim);
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			prezime = prezimeText.getText();
+			String regex_prezime = "[\\p{L}\s]+";
+			potvrda.setEnabled(proveraUnosa(prezime, regex_prezime, 1));		
+		}
 
-        txtAdressContry.setName("txtContry");
-        JPanel panelA1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelA1.add(lbAdressStreet);
-        panelA1.add(txtAdressStreet);
-       
-        JPanel panelA2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelA2.add(lbAdressNum);
-        panelA2.add(txtAdressNum);
-        
-        JPanel panelA3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelA3.add(lbAdressCity);
-        panelA3.add(txtAdressCity);
-        
-        JPanel panelA4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelA4.add(lbAdressContry);
-        panelA4.add(txtAdressContry);
-        
-        JLabel lbNum = new JLabel("Broj telefona*");
-        lbNum.setToolTipText("Unesite svoj broj telefona");
-        lbNum.setPreferredSize(cellDim);
-        txtFieldNUm = new JTextField();
-        txtFieldNUm.setToolTipText("Broj telefona mora da ima najmanje 3 cifre,a najvise 12");
-        txtFieldNUm.setPreferredSize(cellDim);
-        txtFieldNUm.setName("txtNum");
-        JPanel panelNum = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelNum.add(lbNum);
-        panelNum.add(txtFieldNUm);
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			prezime = prezimeText.getText();
+			String regex_prezime = "[\\p{L}\s]+";
+			potvrda.setEnabled(proveraUnosa(prezime, regex_prezime, 1));		
+		}
 
-        JLabel lbEmail = new JLabel("E-mail adresa*");
-        lbEmail.setToolTipText("Unesite svoj E-mail");
-        lbEmail.setPreferredSize(cellDim);
-        txtFieldE = new JTextField();
-        txtFieldE.setToolTipText("Trazeni format:nesto@nesto");
-        txtFieldE.setPreferredSize(cellDim);
-        txtFieldE.setName("txtEmail");
-        JPanel panelE = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelE.add(lbEmail);
-        panelE.add(txtFieldE);
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			prezime = prezimeText.getText();
+			String regex_prezime = "[\\p{L}\s]+";
+			potvrda.setEnabled(proveraUnosa(prezime, regex_prezime, 1));	
+		}
+			
+	});
+	
+	
+	datumRodjenjaText.getDocument().addDocumentListener(new DocumentListener() {
 
-        JLabel lbId = new JLabel("Broj indeksa*");
-        lbId.setToolTipText("Unesite svoj indeks");
-        lbId.setPreferredSize(cellDim);
-        txtFieldId = new JTextField();
-        txtFieldId.setToolTipText("Trazeni format: smer/upis/godina");
-        txtFieldId.setPreferredSize(cellDim);
-        txtFieldId.setName("txtId");
-        StudentListener valId=new StudentListener(lbId,txtFieldId,this,student.getIndex());
-        txtFieldId.addFocusListener(valId);
-        JPanel panelID = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelID.add(lbId);
-        panelID.add(txtFieldId);
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			datumRodjenja = datumRodjenjaText.getText();
+			String regex_datumRodjenja = "\\d{1,2}-\\d{1,2}-\\d{4}";
+			potvrda.setEnabled(proveraUnosa(datumRodjenja, regex_datumRodjenja, 2));
+			
+		}
 
-        JLabel lbAssignYear = new JLabel("Godina Upisa*");
-        lbAssignYear.setToolTipText("Unesite godinu svog upisa");
-        lbAssignYear.setPreferredSize(cellDim);
-        txtFieldAssignYear = new JTextField();
-        txtFieldAssignYear.setToolTipText("Trazeni format:");
-        txtFieldAssignYear.setPreferredSize(cellDim);
-        txtFieldAssignYear.setName("txtAssignYear");
-        JPanel panelY = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelY.add(lbAssignYear);
-        panelY.add(txtFieldAssignYear);
-        JLabel lbCurrentYear = new JLabel("Trenutna godina studija*");
-        lbCurrentYear.setPreferredSize(cellDim);
-        String[] currentYear = new String[]{"I", "II", "III", "IV"};
-        txtFJComboBoxCurrentYear = new JComboBox<>(currentYear);
-        txtFJComboBoxCurrentYear.setName("txtCurrentYear");
-        txtFJComboBoxCurrentYear.setPreferredSize(cellDim);
-        JPanel panelCY = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelCY.add(lbCurrentYear);
-        panelCY.add(txtFJComboBoxCurrentYear);
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			datumRodjenja = datumRodjenjaText.getText();
+			String regex_datumRodjenja = "\\d{1,2}-\\d{1,2}-\\d{4}";
+			potvrda.setEnabled(proveraUnosa(datumRodjenja, regex_datumRodjenja, 2));
+			
+		}
 
-        JLabel lbStatus = new JLabel("Naèin finansiranja*");
-        lbStatus.setPreferredSize(cellDim);
-        String[] status = new String[]{"Budzet","Samofinansiranje"};
-        CBStatus = new JComboBox<>(status);
-        CBStatus.setName("txtstatus");
-        CBStatus.setPreferredSize(cellDim);
-        JPanel panelSt = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelSt.add(lbStatus);
-        panelSt.add(CBStatus);
-        
-        initFields();
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			datumRodjenja = datumRodjenjaText.getText();
+			String regex_datumRodjenja = "\\d{1,2}-\\d{1,2}-\\d{4}";
+			potvrda.setEnabled(proveraUnosa(datumRodjenja, regex_datumRodjenja, 2));
+			
+		}
+		
+	});
+	
+	
+	adresaText.getDocument().addDocumentListener(new DocumentListener() {
 
-        //validation
-        StudentListener val= new StudentListener(lbName,txtFieldName,this);
-        txtFieldName.addFocusListener(val);
-        validations.add(val);
-        val =new StudentListener(lbSurname,txtFieldSurName,this);
-        txtFieldSurName.addFocusListener(val);
-        validations.add(val);
-        val=new StudentListener(lbAssignYear,txtFieldAssignYear,this);
-        txtFieldAssignYear.addFocusListener(val);
-        validations.add(val);
-        val=new StudentListener(lbEmail,txtFieldE,this);
-        txtFieldE.addFocusListener(val);
-        validations.add(val);
-        val=new StudentListener(lbDate,txtFieldDate,this);
-        txtFieldDate.addFocusListener(val);
-        validations.add(val);
-        validations.add(valId);
-        val=new StudentListener(lbNum,txtFieldNUm,this);
-        txtFieldNUm.addFocusListener(val);
-        validations.add(val);
-        val = new StudentListener(lbAdressStreet,txtAdressStreet,this);
-        txtAdressStreet.addFocusListener(val);
-        validations.add(val);
-        val = new StudentListener(lbAdressNum,txtAdressNum,this);
-        txtAdressNum.addFocusListener(val);
-        validations.add(val);
-        val = new StudentListener(lbAdressCity,txtAdressCity,this);
-        txtAdressCity.addFocusListener(val);
-        validations.add(val);
-        val = new StudentListener(lbAdressContry,txtAdressContry,this);
-        txtAdressContry.addFocusListener(val);
-        validations.add(val);
-        //addition of components
-        JPanel CentralPanel = new JPanel();
-        BoxLayout boxCenter = new BoxLayout(CentralPanel,BoxLayout.Y_AXIS);
-        CentralPanel.setLayout(boxCenter);
-        CentralPanel.add(Box.createVerticalGlue());
-        CentralPanel.add(panelN);
-        CentralPanel.add(panelS);
-        CentralPanel.add(panelD);
-        CentralPanel.add(panelNum);
-        CentralPanel.add(panelE);
-        CentralPanel.add(panelID);
-        CentralPanel.add(panelY);
-        CentralPanel.add(panelA1);
-        CentralPanel.add(panelA2);
-        CentralPanel.add(panelA3);
-        CentralPanel.add(panelA4);
-        CentralPanel.add(panelCY);
-        CentralPanel.add(panelSt);
-        this.add(CentralPanel,BorderLayout.CENTER);
-        
-        //button
-        JPanel diaButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        diaButtonPanel.setPreferredSize(new Dimension(60,60));
-        btAccept = new JButton("Potvrdi");
-        btAccept.setEnabled(false);
-        btAccept.setMnemonic(KeyEvent.VK_S);
-        btAccept.setForeground(Color.GREEN);
-        btDecline = new JButton("Odustani");
-        btDecline.setForeground(Color.BLACK);
-        btDecline.setMnemonic(KeyEvent.VK_Q);
-        btDecline.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //
-            }
-        });
-        btAccept.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(allValid()){
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-                    dateFormat.setLenient(false);
-                    Date birthday = null;
-                    try {
-                        birthday = dateFormat.parse(txtFieldDate.getText());
-                    } catch (ParseException ex) {
-                        ex.printStackTrace();
-                    }
-                    Student studentNew = new Student();
-                    studentNew.setName(txtFieldName.getText());
-                    studentNew.setSurname(txtFieldSurName.getText());
-                    studentNew.setBirthday(birthday);
-                    studentNew.setContactPhone(txtFieldNUm.getText());
-                    studentNew.setEmail(txtFieldE.getText());
-                    studentNew.setIndex(txtFieldId.getText());
-                    valId.setIndex(studentNew.getIndex());
-                    studentNew.setEnrollYear(Integer.parseInt(txtFieldAssignYear.getText()) );
-                    Address adress= new Address();
-                    adress.setStreet(txtAdressStreet.getText());
-                    adress.setNumber(txtAdressNum.getText());
-                    adress.setCity(txtAdressCity.getText());
-                    adress.setCountry(txtAdressContry.getText());
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			adresa = adresaText.getText();
+			Address regex_adresa = "[[\\d\\p{L}]+\s]+\\d*\\,[[\\p{L}]+\s]+";
+			potvrda.setEnabled(proveraUnosa(adresa, regex_adresa, 3));
+		}
 
-                    studentNew.setAddress(adress);
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			adresa = adresaText.getText();
+			Address regex_adresa = "[[\\d\\p{L}]+\s]+\\d*\\,[[\\p{L}]+\s]+";
+			potvrda.setEnabled(proveraUnosa(adresa, regex_adresa, 3));
+			
+		}
 
-                    if(CBStatus.getSelectedIndex() == 0) {
-                        studentNew.setFinansiranje(Status.BUDZET);
-                    }else {
-                        studentNew.setFinansiranje( Status.SAMOFINANSIRANJE );
-                    }
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			adresa = adresaText.getText();
+			Address regex_adresa = "[[\\d\\p{L}]+\s]+\\d*\\,[[\\p{L}]+\s]+";
+			potvrda.setEnabled(proveraUnosa(adresa, regex_adresa, 3));		
+		}	
+	});
+	
+	
+	brIndeksaText.getDocument().addDocumentListener(new DocumentListener() {
 
-                    if(txtFJComboBoxCurrentYear.getSelectedIndex()==0){
-                        studentNew.setCurrentyear(YearofStudy.I);
-                    } else if(txtFJComboBoxCurrentYear.getSelectedIndex()==1){
-                        studentNew.setCurrentyear(YearofStudy.II);
-                    }else if(txtFJComboBoxCurrentYear.getSelectedIndex()==2){
-                        studentNew.setCurrentyear(YearofStudy.III);
-                    }else if(txtFJComboBoxCurrentYear.getSelectedIndex()==3){
-                        studentNew.setCurrentyear(YearofStudy.IV);
-                    }
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			brIndeksa = brIndeksaText.getText();
+			String regex_brIndeksa = "[A-Z]{1,3}[0-9]{1,3}-[2][0-9]{3}";
+			potvrda.setEnabled(proveraUnosa(brIndeksa, regex_brIndeksa, 4));	
+		}
 
-                    StudentController.getInstance().editStudent(student,studentNew);
-                    btAccept.setEnabled(false);
-                }
-            }
-        });
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			brIndeksa = brIndeksaText.getText();
+			String regex_brIndeksa = "[A-Z]{1,3}[0-9]{1,3}-[2][0-9]{3}";
+			potvrda.setEnabled(proveraUnosa(brIndeksa, regex_brIndeksa, 4));	
+		}
 
-        diaButtonPanel.add(btDecline);
-        diaButtonPanel.add(btAccept);
-        diaButtonPanel.add(Box.createHorizontalStrut(20));
-        this.add(diaButtonPanel,BorderLayout.SOUTH);
-        
-	}
-	private void initFields(){
-		 txtFieldName.setText(student.getName());
-		 txtFieldSurName.setText(student.getSurname());
-		 DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-		 txtFieldDate.setText(dateFormat.format(student.getBirthday()));
-		 txtFieldNUm.setText(student.getContactPhone());
-		 txtFieldE.setText(student.getEmail());
-		 txtFieldId.setText(student.getIndex());
-		 txtFieldAssignYear.setText(String.valueOf(student.getEnrollYear()));
-		 if(student.getNacinFinansiranja() == Status.BUDZET) {
-			 CBStatus.setSelectedIndex(0);
-		 }
-		 if(student.getNacinFinansiranja() == Status.SAMOFINANSIRANJE) {
-			 CBStatus.setSelectedIndex(1);
-			 }
-		 if(student.getCurrentyear()== YearofStudy.I) {
-		 txtFJComboBoxCurrentYear.setSelectedIndex(0);
-		 }
-		 if(student.getCurrentyear()== YearofStudy.II) {
-			 txtFJComboBoxCurrentYear.setSelectedIndex(1);
-			 }
-		 if(student.getCurrentyear()== YearofStudy.I) {
-			 txtFJComboBoxCurrentYear.setSelectedIndex(2);
-			 }
-		 if(student.getCurrentyear()== YearofStudy.I) {
-			 txtFJComboBoxCurrentYear.setSelectedIndex(3);
-			 }
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			brIndeksa = brIndeksaText.getText();
+			String regex_brIndeksa = "[A-Z]{1,3}[0-9]{1,3}-[2][0-9]{3}";
+			potvrda.setEnabled(proveraUnosa(brIndeksa, regex_brIndeksa, 4));	
+		}
+		
+	});
+	
+	
+	kontaktText.getDocument().addDocumentListener(new DocumentListener() {
+
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			brojTelefona = kontaktText.getText();
+			String regex_brojTelefona = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$";
+			potvrda.setEnabled(proveraUnosa(brojTelefona, regex_brojTelefona, 5));	
+		}
+
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			brojTelefona = kontaktText.getText();
+			String regex_brojTelefona = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$";
+			potvrda.setEnabled(proveraUnosa(brojTelefona, regex_brojTelefona, 5));			
+		}
+
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			brojTelefona = kontaktText.getText();
+			String regex_brojTelefona = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$";
+			potvrda.setEnabled(proveraUnosa(brojTelefona, regex_brojTelefona, 5));	
+		}
+		
+	});
+	
+	
+	emailText.getDocument().addDocumentListener(new DocumentListener() {
+
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			email = emailText.getText();
+			String regex_email = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[\\p{L}0-9-]+\\.)+[\\p{L}]{2,6}$";
+			potvrda.setEnabled(proveraUnosa(email, regex_email, 6));		
+		}
+
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			email = emailText.getText();
+			String regex_email = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[\\p{L}0-9-]+\\.)+[\\p{L}]{2,6}$";
+			potvrda.setEnabled(proveraUnosa(email, regex_email, 6));	
+		}
+
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			email = emailText.getText();
+			String regex_email = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[\\p{L}0-9-]+\\.)+[\\p{L}]{2,6}$";
+			potvrda.setEnabled(proveraUnosa(email, regex_email, 6));		
+		}
+		
+	});
+	
+/*	prosecnaOcenaText.getDocument().addDocumentListener(new DocumentListener() {
+
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			prosecnaOcena = prosecnaOcenaText.getText();
+			String regex_prosecnaOcena = "[6-9][.][0-9]{2}|10\\.00";
+			potvrda.setEnabled(proveraUnosa(prosecnaOcena, regex_prosecnaOcena, 7));
+			
+		}
+
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			prosecnaOcena = prosecnaOcenaText.getText();
+			String regex_prosecnaOcena = "[6-9][.][0-9]{2}|10\\.00";
+			potvrda.setEnabled(proveraUnosa(prosecnaOcena, regex_prosecnaOcena, 7));
+			
+		}
+
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			prosecnaOcena = prosecnaOcenaText.getText();
+			String regex_prosecnaOcena = "[6-9][.][0-9]{2}|10\\.00";
+			potvrda.setEnabled(proveraUnosa(prosecnaOcena, regex_prosecnaOcena, 7));
+		
+		}
+		
+	});*/
+	
+	godinaUpisaText.getDocument().addDocumentListener(new DocumentListener() {
+
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			godinaUpisa = godinaUpisaText.getText();
+			int regex_godinaUpisa = "\\d{4}";
+			potvrda.setEnabled(proveraUnosa(godinaUpisa, regex_godinaUpisa, 7));
+		}
+
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			godinaUpisa = godinaUpisaText.getText();
+			int regex_godinaUpisa = "\\d{4}";
+			potvrda.setEnabled(proveraUnosa(godinaUpisa, regex_godinaUpisa, 7));
+		}
+
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			// TODO Auto-generated method stub
+			godinaUpisa = godinaUpisaText.getText();
+			int regex_godinaUpisa = "\\d{4}";
+			potvrda.setEnabled(proveraUnosa(godinaUpisa, regex_godinaUpisa, 7));
+			
+		}
+		
+	});
+	
+	
+	potvrda.addActionListener(new ActionListener() {
 	    
-	    txtAdressStreet.setText(student.getAddress().getStreet());
-	    txtAdressNum.setText(student.getAddress().getNumber());
-	    txtAdressCity.setText(student.getAddress().getCity());
-	    txtAdressContry.setText(student.getAddress().getCountry());
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		String godinaStudija =  godineStudijaComboBox.getSelectedItem().toString();
+	    String nacinFinansiranja = budzet_samofinansiranjeComboBox.getSelectedItem().toString();
+	    
+		double ocena = student.getavgGrade();
+	    
+	    Status finansiranje;
+	    
+		if(nacinFinansiranja=="Budzet")
+			finansiranje = Status.BUDZET;
+		else
+			finansiranje = Status.SAMOFINANSIRANJE;
+		
+
+		for (Student s : StudentController.getInstance().getListaSvihStudenata()) {
+					if ((s!=StudentController.getInstance().getListaSvihStudenata().get(selectedIndex)) && (s.getIndex().equals(brIndeksa))) {
+						JOptionPane.showMessageDialog(null, "Student sa datim broj indeksa vec postoji u sistemu", "Greska pri unosu broja indeksa", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+				}
+			
+				try {	
+			Date datumRodjenjaDate = new SimpleDateFormat("dd-MM-yyyy").parse(datumRodjenja);
+		    Student student = new Student(ime, prezime, brojTelefona, datumRodjenja, adresa, email, godinaUpisa);
+			StudentController.getInstance().editStudent(student, student);
+				}
+				catch(java.text.ParseException pe) {
+					pe.printStackTrace();
+				}
+			dispose();
 	}
+	});
+	
+	odustanak.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			dispose();
+
+		}});
+	
+	
+	
+	
+	JPanel btnNpPan = new JPanel();
+	BoxLayout btnNpLayout = new BoxLayout(btnNpPan, BoxLayout.X_AXIS);
+	btnNpPan.setLayout(btnNpLayout);
+	
+	JButton btnDodaj = new JButton("Dodaj");
+	btnDodaj.setPreferredSize(new Dimension(100, 30));
+	JButton btnObrisi = new JButton("Obrisi");
+	btnObrisi.setPreferredSize(new Dimension(100, 30));
+	JButton btnPolaganje = new JButton("Polaganje");
+	btnPolaganje.setPreferredSize(new Dimension(100, 30));
+	
+	btnNpPan.add(Box.createHorizontalStrut(25));
+	btnNpPan.add(btnDodaj);
+	btnNpPan.add(Box.createHorizontalStrut(25));
+	btnNpPan.add(btnObrisi);
+	btnNpPan.add(Box.createHorizontalStrut(25));
+	btnNpPan.add(btnPolaganje);
+	buttonPanel.add(Box.createHorizontalGlue());
+	btnNpPan.setPreferredSize(new Dimension(750, 50));
+	panelNepolozeni.add(btnNpPan, BorderLayout.NORTH);
+	
+	NepolozeniPredmetiJTable failedExams = new NepolozeniPredmetiJTable(student);
+	JScrollPane nepolozeniScrollPane = new JScrollPane(failedExams);
+	nepolozeniScrollPane.setPreferredSize(new Dimension(300, 300));
+	panelNepolozeni.add(nepolozeniScrollPane, BorderLayout.CENTER);
+	
+	JPanel westPanel = new JPanel();
+	westPanel.setPreferredSize(new Dimension(25, 750));
+	panelNepolozeni.add(westPanel, BorderLayout.WEST);
+	
+	JPanel eastPanel = new JPanel();
+	eastPanel.setPreferredSize(new Dimension(25, 750));
+	panelNepolozeni.add(eastPanel, BorderLayout.EAST);
+	
+	JPanel southPanel = new JPanel();
+	southPanel.setPreferredSize(new Dimension(750, 50));
+	panelNepolozeni.add(southPanel, BorderLayout.SOUTH);
+	
+	btnDodaj.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			DodajPredmetStudentu dps = new DodajPredmetStudentu(student, failedExams);
+			dps.setVisible(true);
+		}
+		
+	});
+	
+	btnObrisi.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(failedExams.getSelectedRow() > -1) {
+				ObrisiPredmetStudentu ops = new ObrisiPredmetStudentu(failedExams, student);
+				ops.setVisible(true);
+			}
+		}
+	});
+	
+	
+	JPanel btnPolozeniPanel = new JPanel();
+	BoxLayout btnPolozeniLayout = new BoxLayout(btnPolozeniPanel, BoxLayout.X_AXIS);
+	btnPolozeniPanel.setLayout(btnPolozeniLayout);
+	
+	JButton btnPonistiOcenu = new JButton("Ponisti ocenu");
+	btnPonistiOcenu.setPreferredSize(new Dimension(150, 30));
+	
+	btnPolozeniPanel.add(Box.createHorizontalStrut(25));
+	btnPolozeniPanel.add(btnPonistiOcenu);
+	btnPolozeniPanel.add(Box.createHorizontalGlue());
+	btnPolozeniPanel.setPreferredSize(new Dimension(750, 50));
+	panelPolozeni.add(btnPolozeniPanel, BorderLayout.NORTH);
+	
+	
+	PolozeniPredmetiJTable polozeniPredmeti = new PolozeniPredmetiJTable(student);
+	JScrollPane polozeniScrollPane = new JScrollPane(polozeniPredmeti);
+	polozeniScrollPane.setPreferredSize(new Dimension(300, 300));
+	panelPolozeni.add(polozeniScrollPane, BorderLayout.CENTER);
+	
+	JPanel leviPanel = new JPanel();
+	leviPanel.setPreferredSize(new Dimension(25, 750));
+	panelPolozeni.add(leviPanel, BorderLayout.WEST);
+	
+	JPanel desniPanel = new JPanel();
+	desniPanel.setPreferredSize(new Dimension(25, 750));
+	panelPolozeni.add(desniPanel, BorderLayout.EAST);
+	
+	JPanel donjiPanel = new JPanel();
+	BoxLayout donjiLayout = new BoxLayout(donjiPanel, BoxLayout.Y_AXIS);
+	donjiPanel.setLayout(donjiLayout);
+	panelPolozeni.add(donjiPanel, BorderLayout.SOUTH);
+	
+	JPanel panelOcene = new JPanel();
+	BoxLayout desniLayout = new BoxLayout(panelOcene, BoxLayout.X_AXIS);
+	panelOcene.setLayout(desniLayout);
+	
+	JPanel panelBodovi = new JPanel();
+	BoxLayout desni1Layout = new BoxLayout(panelBodovi, BoxLayout.X_AXIS);
+	panelBodovi.setLayout(desni1Layout);
+	
+	JLabel srednjaOcena = new JLabel("Prosecna ocena:  " + student.CalculateAvgGrade());
+	panelOcene.add(Box.createHorizontalGlue());
+	panelOcene.add(srednjaOcena);
+	panelOcene.add(Box.createHorizontalStrut(10));
+	
+	JLabel ukupniBodovi = new JLabel("Ukupno ESPB:  " + student.SumPoints());
+	panelBodovi.add(Box.createHorizontalGlue());
+	panelBodovi.add(ukupniBodovi);
+	panelBodovi.add(Box.createHorizontalStrut(10));
+	
+	donjiPanel.add(Box.createVerticalStrut(10));
+	donjiPanel.add(panelOcene);
+	donjiPanel.add(Box.createVerticalStrut(10));
+	donjiPanel.add(panelBodovi);
+	donjiPanel.add(Box.createVerticalStrut(10));
+
+	polozeniPredmeti.getModel().addTableModelListener(new TableModelListener() {
+
+		@Override
+		public void tableChanged(TableModelEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			srednjaOcena.setText("Prosecna ocena:  " + student.CalculateAvgGrade());
+			ukupniBodovi.setText("Ukupno ESPB:  " + student.SumPoints());
+			
+			StudentsTable.getInstance().refreshTable();
+			
+		}
+		
+	});
+	
+	
+	btnPolaganje.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(failedExams.getSelectedRow() > -1) {
+				UpisiOcenu duo = new UpisiOcenu(failedExams, polozeniPredmeti, student);
+				duo.setVisible(true);
+			}
+		}
+		
+	});
+	
+	
+	btnPonistiOcenu.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(polozeniPredmeti.getSelectedRow() > -1) {
+				ObrisiOcenu doo = new ObrisiOcenu(polozeniPredmeti, failedExams, student);
+				doo.setVisible(true);
+			}
+		}
+	});
+	
+	}
+	
+	
+	
+	public boolean proveraUnosa(String text, String regex, int index) {
+		if(!text.matches(regex))
+			ispravni[index] = false;
+		else
+			ispravni[index] = true;
+		
+		boolean ispravnoSve = true;
+		
+		for(boolean i : ispravni)
+			if(i == false)
+				ispravnoSve = false;
+		if(ispravnoSve == true)
+			return true;
+		else
+			return false;
+	}
+	
+
 }

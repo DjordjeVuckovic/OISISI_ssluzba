@@ -40,7 +40,8 @@ public class ProfessorController {
         Professor.setContact(prof.getContact());
         Professor.setMail(prof.getMail());
         Professor.setIdNumber(prof.getIdNumber());
-        Professor.setAdress(prof.getAdresaKancelarije().getStreet(),prof.getAdresaKancelarije().getNumber(),prof.getAdresaKancelarije().getCity(),prof.getAdresaKancelarije().getCountry());
+        Professor.setAddressK(prof.getAdresaKanc().getStreet(),prof.getAdresaKanc().getNumber(),prof.getAdresaKanc().getCity(),prof.getAdresaKanc().getCountry());
+        Professor.setAddressS(prof.getAdresaStan().getStreet(),prof.getAdresaStan().getNumber(),prof.getAdresaStan().getCity(),prof.getAdresaStan().getCountry());
         ProfessorsTable.getInstance().refreshTable();
     }
 

@@ -6,7 +6,6 @@ import gui.view.MainWindow;
 import gui.view.dialog.MyDialog;
 import model.Address;
 import model.Professor;
-import model.Zvanje;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,12 +39,6 @@ public class AddProfessor  extends MyDialog {
     private JTextField txtKancelarijaContry;
 
     
-    private static AddProfessor instance = null;
-
-    public static AddProfessor getInstance() {
-        if(instance==null) instance = new AddProfessor();
-        return instance;
-    }
     public boolean allValid(){
         for(ProfessorListener pl:validations){
             if(!pl.getValidation()){
@@ -58,7 +51,7 @@ public class AddProfessor  extends MyDialog {
         btAccept.setEnabled(allValid());
     }
     
-	private AddProfessor() {
+	public AddProfessor() {
         super(MainWindow.getInstance(),"Dodavanje Profesora");
         initProfessorDialog();
        
@@ -300,7 +293,8 @@ public class AddProfessor  extends MyDialog {
                     adress.setCity(txtKancelarijaCity.getText());
                     adress.setCountry(txtKancelarijaContry.getText());
                     
-                    Professor.setAdresaKancelarije(adress);
+                 
+                    Professor.setAdresaKanc(adress);
 
       
 

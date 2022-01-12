@@ -103,6 +103,13 @@ public class BazaPredmeta implements AbstractModel {
         }
         return null;
     }
+    
+    public Subject getSubjectByRow(int row){
+		return subjects.get(row);
+	}
+    
+    public void deleteSubject(Subject sb){subjects.remove(sb);}
+    
     @Override
     public boolean isEmpty() {
         return false;

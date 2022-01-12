@@ -9,7 +9,8 @@ public class Professor {
 	private String surname;
 	private String name;
 	private Date birthday;
-	private Address adresaKancelarije;
+	private Address adresaStan;
+	private Address adresaKanc;
 	private String contact;
 	private String mail;
 	private String idNum;
@@ -18,30 +19,52 @@ public class Professor {
 	private ArrayList<Subject> subjects = new ArrayList<Subject>();
 	
 	
+	public Professor(String surname, String name, Zvanje title, String mail) {
+		this.surname = surname;
+		this.name = name;
+		this.title = title;
+		this.mail = mail;
+		subjects = new ArrayList<>();
+	}
 	
-	public Professor() {}
-	public Professor(String surname, String name, Date birthday, Address adress, String contact, String mail,
-					 String idNumber, Zvanje title, int yearsOfTail, ArrayList<Subject> subjects) {
-		super();
+	public Professor(String surname, String name, Date birthday, Zvanje title, String mail) {
 		this.surname = surname;
 		this.name = name;
 		this.birthday = birthday;
-		this.adresaKancelarije = adress;
-		this.contact = contact;
-		this.mail = mail;
-		this.idNum = idNumber;
 		this.title = title;
-		this.yearsOfTail = yearsOfTail;
-		this.subjects = subjects;
-	}
-	public Professor(String ime, String prezime, Zvanje title, String email) {
+		this.mail = mail;
 	}
 	
-	public Address getAdresaKancelarije() {
-		return adresaKancelarije;
+	public Professor() {subjects = new ArrayList<>();}
+	public Professor(String ime, String prezime, Date datum_rodjenja, Address adresaStan, Address adresaKanc, String kontakt_telefon, String email,
+					 String brLicne, Zvanje zvanje, int godStaza) {
+		super();
+		this.name = ime;
+		this.surname = prezime;
+		this.birthday = datum_rodjenja;
+		this.adresaStan = adresaStan;
+		this.adresaKanc = adresaKanc;
+		this.contact = kontakt_telefon;
+		this.mail = email;
+		this.idNum = brLicne;
+		this.title = zvanje;
+		this.yearsOfTail = godStaza;
+		subjects = new ArrayList<>();
 	}
-	public void setAdresaKancelarije(Address adresa) {
-		this.adresaKancelarije = adresa;
+	
+	
+	public Address getAdresaKanc() {
+		return adresaKanc;
+	}
+	public void setAdresaKanc(Address adresaKanc) {
+		this.adresaKanc = adresaKanc;
+	}
+	
+	public Address getAdresaStan() {
+		return adresaStan;
+	}
+	public void setAdresaStan(Address adresaStan) {
+		this.adresaStan = adresaStan;
 	}
 	
 	public String getSurname() {
@@ -109,12 +132,17 @@ public class Professor {
 	
 	@Override
 	public String toString() {
-		return "Professor [surname=" + surname + ", name=" + name + ", birthday=" + birthday + ", adress=" + adresaKancelarije
-				+ ", contact=" + contact + ", mail=" + mail + ", idNumber=" + idNum + ", title=" + title
+		return "Professor [surname=" + surname + ", name=" + name + ", birthday=" + birthday + ", adresaKanc=" + adresaKanc + ", adresaStan=" + adresaStan +
+				 ", contact=" + contact + ", mail=" + mail + ", idNumber=" + idNum + ", title=" + title
 				+ ", yearsOfTail=" + yearsOfTail + ", subjects=" + subjects + "]";
 	}
 
-	public void setAdress(String street, String number, String city, String country) {
-		this.adresaKancelarije = new Address(street,number,city,country);
+	public void setAddressS(String street, String number, String city, String country) {
+		this.adresaStan = new Address(street,number,city,country);
 	}
+	
+	public void setAddressK(String street, String number, String city, String country) {
+		this.adresaKanc = new Address(street,number,city,country);
+	}
+	
 }

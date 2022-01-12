@@ -2,7 +2,7 @@ package controller.focuslisteners;
 
 import controller.validation.CheckValidation;
 import gui.view.dialog.add.AddProfessor;
-import gui.view.dialog.edit.professor.EditProfessor;
+import gui.view.dialog.edit.profesor.EditProfessor;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -134,7 +134,7 @@ public class ProfessorListener implements FocusListener {
         if(mode==1){
             addProfessor.EnableButt();
         }else if(mode ==2){
-            //editProfessor.EnableButt();
+            editProfessor.EnableButt();
         }
 
         }

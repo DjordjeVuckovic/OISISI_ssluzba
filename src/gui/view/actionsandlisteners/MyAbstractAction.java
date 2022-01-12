@@ -6,19 +6,23 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 
+import controller.ProfessorController;
 import controller.StudentController;
 import controller.SubjectController;
 import gui.view.CentralBox;
 import gui.view.MainWindow;
 import gui.view.ScaleImage;
+import gui.view.center.ProfessorsTable;
 import gui.view.center.StudentsTable;
 import gui.view.center.SubjectTable;
+import gui.view.dialog.add.AddProfessor;
 import gui.view.dialog.add.AddStudent;
 import gui.view.dialog.add.AddSubject;
-import gui.view.dialog.edit.student.ChangeStudentDialog;
 import gui.view.dialog.edit.EditSubject;
+import gui.view.dialog.edit.profesor.ChangeProfessorDialog;
 import model.Student;
 import model.Subject;
+import model.Professor;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImage {
 	
@@ -113,6 +117,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 		if(name.equals("New")){
 			AddStudent addStudent = new AddStudent();
 			AddSubject addSubject = new AddSubject();
+			AddProfessor addProfessor = new AddProfessor();
 			switch (CentralBox.getInstance().getSelectedIndex()){
 				case 0:
 					addStudent.setVisible(true);
@@ -120,20 +125,21 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				case 1:
 					addSubject.setVisible(true);
 					break;
-				//case 2:
-					//AddProffesor
-					//break;
+				case 2:
+					addProfessor.setVisible(true);
+					break;
 			}
 		}
 		else if(name.equals("Studenti")){
 			CentralBox.getInstance().setSelectedIndex(0);
 		}
-		//else if(name.equals("Profesori")){
-			//
-		//}
 		else if(name.equals("Predmeti")){
 			CentralBox.getInstance().setSelectedIndex(1);
 		}
+		else if(name.equals("Profesori")){
+			CentralBox.getInstance().setSelectedIndex(2);
+		}
+		
 		//else if(name.equals("Save")){
 			//
 		//}
@@ -151,11 +157,27 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				}
 				break;
 				case 1:
-					//delete sub
+					int rowSelecteds = SubjectTable.getInstance().getSelectedRow();
+					if (rowSelecteds <0) {
+						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste odabrali predmet", "Upozorenje", 0, null);
+						return;
+					}
+					int choices = JOptionPane.showConfirmDialog(MainWindow.getInstance(),"Upozorenje", "Da li ste sigurni?",0);
+					if(choices ==JOptionPane.YES_OPTION){
+						SubjectController.getInstance().deleteSubject(rowSelecteds);
+					}
 					break;
-				//case 2:
-				//delete prof
-					//break;
+				case 2:
+					int rowSelectedp = ProfessorsTable.getInstance().getSelectedRow();
+					if (rowSelectedp <0) {
+						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste odabrali profesora", "Upozorenje", 0, null);
+						return;
+					}
+					int choicep = JOptionPane.showConfirmDialog(MainWindow.getInstance(),"Upozorenje", "Da li ste sigurni?",0);
+					if(choicep ==JOptionPane.YES_OPTION){
+						ProfessorController.getInstance().deleteProfessor(rowSelectedp);
+					}
+					break;
 			}
 		}
 
@@ -171,8 +193,8 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				}
 				else{
 					Student student = StudentController.getInstance().getStudentByIndex(StudentsTable.getInstance().getSelectedIndex());
-					ChangeStudentDialog changeStudentDialog = new ChangeStudentDialog(student);
-					changeStudentDialog.setVisible(true);
+					//ChangeStudentDialog changeStudentDialog = new ChangeStudentDialog(student);
+					//changeStudentDialog.setVisible(true);
 				}
 				break;
 				case 1:
@@ -185,6 +207,17 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 						editSubject.setVisible(true);
 					}
 					break;
+				case 2:
+					if(ProfessorsTable.getInstance().getSelectedIndexinTable()==-1){
+						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali profesora za izmenu", "Upozorenje", 0, null);
+					}
+					else{
+						Professor profesor = ProfessorController.getInstance().getProfessorByIndex(ProfessorsTable.getInstance().getSelectedIndex());
+						ChangeProfessorDialog changeProfessorDialog = new ChangeProfessorDialog(profesor);
+						changeProfessorDialog.setVisible(true);
+					}
+					break;
+				
 			}
 		}
 		
