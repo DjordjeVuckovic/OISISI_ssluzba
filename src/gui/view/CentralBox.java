@@ -12,11 +12,19 @@ public class CentralBox extends JTabbedPane {
 private static CentralBox instance = null;
 
 public static CentralBox getInstance() {
-	if(instance==null) instance = new CentralBox();
+	if(instance==null)
+	{
+		synchronized (CentralBox.class){
+			if(instance == null){
+				instance = new CentralBox();
+			}
+		}
+	}
 	return instance;
 }
 
-
+private int previosIndex = 0;
+private int nextIndex= this.getSelectedIndex();
 private  CentralBox() {
 	JPanel panelStudents = new JPanel(new BorderLayout());
 	JScrollPane jScrollPaneStudents= new JScrollPane(StudentsTable.getInstance());
@@ -35,5 +43,14 @@ private  CentralBox() {
 		}
 	});
 }
+	/*
+	public void notifyStatusBar(){
+		if(previosIndex != nextIndex) {
+			StatusBar.getInstance();
+			nextIndex= previosIndex;
+		}
 
+	}
+
+	 */
 }

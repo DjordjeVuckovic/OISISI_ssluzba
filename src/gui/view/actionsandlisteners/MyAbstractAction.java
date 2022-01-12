@@ -111,12 +111,14 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 		// TODO Auto-generated method stub
 
 		if(name.equals("New")){
+			AddStudent addStudent = new AddStudent();
+			AddSubject addSubject = new AddSubject();
 			switch (CentralBox.getInstance().getSelectedIndex()){
 				case 0:
-					AddStudent.getInstance().setVisible(true);
+					addStudent.setVisible(true);
 					break;
 				case 1:
-					AddSubject.getInstance().setVisible(true);
+					addSubject.setVisible(true);
 					break;
 				//case 2:
 					//AddProffesor
@@ -179,7 +181,8 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					}
 					else{
 						Subject subject = SubjectController.getInstance().findSubjectById(SubjectTable.getInstance().getSelectedId());
-						EditSubject.getInstance(subject.getIdS()).setVisible(true);
+						EditSubject editSubject = new EditSubject(subject.getIdS());
+						editSubject.setVisible(true);
 					}
 					break;
 			}

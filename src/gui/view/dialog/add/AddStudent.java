@@ -40,13 +40,7 @@ public class AddStudent  extends MyDialog {
     private JTextField txtAdressCity;
     private JTextField txtAdressContry;
 
-    
-    private static AddStudent instance = null;
 
-    public static AddStudent getInstance() {
-        if(instance==null) instance = new AddStudent();
-        return instance;
-    }
     public boolean allValid(){
         for(StudentListener sl:validations){
             if(!sl.getValidation()){
@@ -59,7 +53,7 @@ public class AddStudent  extends MyDialog {
         btAccept.setEnabled(allValid());
     }
     
-	private AddStudent() {
+	public AddStudent() {
         super(MainWindow.getInstance(),"Dodavanje studenta");
         initStudentDialog();
        

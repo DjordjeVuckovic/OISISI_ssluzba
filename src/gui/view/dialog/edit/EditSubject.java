@@ -24,6 +24,7 @@ public class EditSubject extends MyDialog {
     private JTextField txtPointsESPB;
     private JButton btAccept;
     private Subject oldsubject;
+    /*
     private static EditSubject instance = null;
     public static EditSubject getInstance(String idS){
         if(instance==null){
@@ -31,6 +32,8 @@ public class EditSubject extends MyDialog {
         }
         return instance;
     }
+    */
+
     public boolean allValid(){
         for(SubjectListener sb:validations){
             if(!sb.getValidation()){

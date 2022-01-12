@@ -49,10 +49,11 @@ public class MainWindow extends JFrame {
 		
 		this.add(new Toolbar(),BorderLayout.NORTH);
 
-		this.getContentPane().add(new StatusBar(),BorderLayout.SOUTH);
+		this.getContentPane().add(StatusBar.getInstance(),BorderLayout.SOUTH);
 
 		JPanel centralniPanel = new JPanel(new BorderLayout());
 		centralniPanel.add(CentralBox.getInstance());
+		//CentralBox.getInstance().notifyStatusBar();
 		this.add(centralniPanel, BorderLayout.CENTER);
 
 	}

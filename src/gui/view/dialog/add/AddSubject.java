@@ -24,6 +24,7 @@ public class AddSubject extends MyDialog {
     private JTextField txtPointsESPB;
     //private JTextField txtProfessor;
     private JButton btAccept;
+    /*
     private static AddSubject instance = null;
     public static AddSubject getInstance(){
         if(instance==null){
@@ -31,8 +32,10 @@ public class AddSubject extends MyDialog {
         }
         return instance;
     }
+    /*
+     */
 
-    private AddSubject() {
+    public AddSubject() {
         super(MainWindow.getInstance(), "Dodavanje predmeta");
         initFields();
 
