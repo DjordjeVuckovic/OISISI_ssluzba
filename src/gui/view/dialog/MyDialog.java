@@ -11,7 +11,7 @@ public class MyDialog extends JDialog {
         this.parent=parent;
         this.setBackground(Color.WHITE);
         this.setResizable(false);
-        this.setSize(500, 600);
+        this.setSize(550, 600);
         this.setResizable(false);
         this.setLocationRelativeTo(parent);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

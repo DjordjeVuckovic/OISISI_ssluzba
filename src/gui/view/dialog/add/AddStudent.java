@@ -87,7 +87,7 @@ public class AddStudent  extends MyDialog {
         panelS.add(lbSurname);
         panelS.add(txtFieldSurName);
 
-        JLabel lbDate = new JLabel("Date*");
+        JLabel lbDate = new JLabel("Datum rodjenja*");
         lbDate.setToolTipText("Unesite datum rodjenja");
         lbDate.setPreferredSize(cellDim);
         txtFieldDate = new JTextField();
@@ -291,7 +291,7 @@ public class AddStudent  extends MyDialog {
                     Student student = new Student();
                     student.setName(txtFieldName.getText());
                     student.setSurname(txtFieldSurName.getText());
-                    student.setBirthday(birthday); 	
+                    student.setBirthday(birthday);
                     student.setContactPhone(txtFieldNUm.getText());
                     student.setEmail(txtFieldE.getText());
                     student.setIndex(txtFieldId.getText());
@@ -302,7 +302,7 @@ public class AddStudent  extends MyDialog {
                     adress.setCity(txtAdressCity.getText());
                     adress.setCountry(txtAdressContry.getText());
                     
-                    student.setAdress(adress);
+                    student.setAddress(adress);
 
                     if(CBStatus.getSelectedIndex() == 0) {
                         student.setFinansiranje(Status.BUDZET);

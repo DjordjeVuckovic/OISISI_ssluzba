@@ -7,9 +7,11 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-
+import gui.view.dialog.edit.student.PassedSubjects;
+/*
 public class PassedSubjectsTable extends JTable {
-    private Student student;
+    private PassedSubjects passedSubjects = new PassedSubjects();
+    private Student student = passedSubjects.getStudentForSubject() ;
     public PassedSubjectsTable(){
         setRowSelectionAllowed(true);
         setColumnSelectionAllowed(true);
@@ -17,13 +19,6 @@ public class PassedSubjectsTable extends JTable {
         setModel(new AbstractPassedTable());
     }
 
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
 
     @Override
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -81,13 +76,13 @@ public class PassedSubjectsTable extends JTable {
                     return null;
             }
         }
-        public void refreshTable(){
-
-        }
 
     }
 
 
-
     }
+
+
+ */
+
 

@@ -43,7 +43,6 @@ public class MainWindow extends JFrame {
 		getContentPane().setBackground(Color.LIGHT_GRAY); 
 
 		MenuBar menu_bar= new MenuBar();
-		menu_bar.setBackground(new Color(51, 153, 255));
 		this.add(menu_bar);
 		this.setJMenuBar(menu_bar);
 		
@@ -53,7 +52,6 @@ public class MainWindow extends JFrame {
 
 		JPanel centralniPanel = new JPanel(new BorderLayout());
 		centralniPanel.add(CentralBox.getInstance());
-		//CentralBox.getInstance().notifyStatusBar();
 		this.add(centralniPanel, BorderLayout.CENTER);
 
 	}

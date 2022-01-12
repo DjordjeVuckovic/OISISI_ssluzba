@@ -316,7 +316,7 @@ public class EditStudent extends JPanel{
                     adress.setCity(txtAdressCity.getText());
                     adress.setCountry(txtAdressContry.getText());
 
-                    studentNew.setAdress(adress);
+                    studentNew.setAddress(adress);
 
                     if(CBStatus.getSelectedIndex() == 0) {
                         studentNew.setFinansiranje(Status.BUDZET);
@@ -374,9 +374,9 @@ public class EditStudent extends JPanel{
 			 txtFJComboBoxCurrentYear.setSelectedIndex(3);
 			 }
 	    
-	    txtAdressStreet.setText(student.getAdress().getStreet());
-	    txtAdressNum.setText(student.getAdress().getNumber());
-	    txtAdressCity.setText(student.getAdress().getCity());
-	    txtAdressContry.setText(student.getAdress().getCountry());
+	    txtAdressStreet.setText(student.getAddress().getStreet());
+	    txtAdressNum.setText(student.getAddress().getNumber());
+	    txtAdressCity.setText(student.getAddress().getCity());
+	    txtAdressContry.setText(student.getAddress().getCountry());
 	}
 }

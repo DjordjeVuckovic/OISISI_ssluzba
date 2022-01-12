@@ -125,15 +125,15 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					//break;
 			}
 		}
-		//else if(name.equals("Studenti")){
-
-		//}
+		else if(name.equals("Studenti")){
+			CentralBox.getInstance().setSelectedIndex(0);
+		}
 		//else if(name.equals("Profesori")){
 			//
 		//}
-		//else if(name.equals("Katedre")){
-			//
-		//}
+		else if(name.equals("Predmeti")){
+			CentralBox.getInstance().setSelectedIndex(1);
+		}
 		//else if(name.equals("Save")){
 			//
 		//}

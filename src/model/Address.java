@@ -5,6 +5,7 @@ public class Address {
 	private String number;
 	private String city;
 	private String country;
+	private int idAddress;
 
 	public Address() {
 	}

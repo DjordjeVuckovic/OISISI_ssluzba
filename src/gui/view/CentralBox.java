@@ -22,9 +22,6 @@ public static CentralBox getInstance() {
 	}
 	return instance;
 }
-
-private int previosIndex = 0;
-private int nextIndex= this.getSelectedIndex();
 private  CentralBox() {
 	JPanel panelStudents = new JPanel(new BorderLayout());
 	JScrollPane jScrollPaneStudents= new JScrollPane(StudentsTable.getInstance());
@@ -43,14 +40,5 @@ private  CentralBox() {
 		}
 	});
 }
-	/*
-	public void notifyStatusBar(){
-		if(previosIndex != nextIndex) {
-			StatusBar.getInstance();
-			nextIndex= previosIndex;
-		}
 
-	}
-
-	 */
 }

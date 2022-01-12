@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 
 
 public class Student {
@@ -10,7 +9,7 @@ public class Student {
 		private String name;
 		private String surname;
 		private Date birthday;
-		private Address adress;
+		private Address address;
 		private String contactPhone;
 		private String Email;
 		private String index;
@@ -30,24 +29,26 @@ public class Student {
 		this.currentYear = currentYear;
 		this.avgGrade = avgGrade;
 		this.status = status;
+		passedExams = new ArrayList<>();
 	}
 	public Student(String name, String surname,Date birthday, String index, YearofStudy currentYear, double avgGrade, Status status) {
 		this.name = name;
 		this.surname = surname;
-		this.birthday=birthday;
+		this.birthday =birthday;
 		this.index = index;
 		this.currentYear = currentYear;
 		this.avgGrade = avgGrade;
 		this.status = status;
+		passedExams = new ArrayList<>();
 	}
-	public Student(){}
-		public Student(String ime, String prezime, Date datum_rodjenja, Address adresa, String kontakt_telefon,
+	public Student(){passedExams = new ArrayList<>();}
+		public Student(String ime, String prezime, Date datum_rodjenja, Address address, String kontakt_telefon,
 					   String email, String index, int godina_upisa, YearofStudy tren_god_studiranja, double pr_ocena, Status n_finansiranja) {
 			super();
 			this.name=ime;
 			this.surname =prezime;
-			this.birthday= datum_rodjenja;
-			this.adress= adresa;
+			this.birthday = datum_rodjenja;
+			this.address = address;
 			this.contactPhone =kontakt_telefon;
 			this.Email =email;
 			this.index=index;
@@ -55,6 +56,7 @@ public class Student {
 			this.currentYear =tren_god_studiranja;
 			this.avgGrade =pr_ocena;
 			this.status=n_finansiranja;
+			passedExams = new ArrayList<>();
 		}
 		//GET i SET metode
 		public String getName() {
@@ -78,11 +80,11 @@ public class Student {
 
 			this.birthday = birthday;
 		}
-		public Address getAdress() {
-			return adress;
+		public Address getAddress() {
+			return address;
 		}
-		public void setAdress(Address adresa) {
-			this.adress = adresa;
+		public void setAddress(Address adresa) {
+			this.address = adresa;
 		}
 
 		public String getContactPhone() {
@@ -129,20 +131,42 @@ public class Student {
 		public void setFinansiranje(Status n_finansiranja) {
 			this.status = n_finansiranja;
 		}
+		//passed Subjects
 
 	public ArrayList<Grade> getPassedExams() {
 		return passedExams;
 	}
+	public double CalculateAvgGrade(){
+		double sum = 0;
+		for(Grade grade : passedExams){
+			sum += grade.getGrade();
+		}
+		if(passedExams.size()==0){
+			avgGrade=0;
+		}else{
+			avgGrade  = sum/passedExams.size();
+		}
+		return  avgGrade;
+	}
+	public int SumPoints(){
+		int sum = 0;
+		for(Grade grade:passedExams){
+			if(grade.getSubject() !=null){
+				sum +=grade.getSubject().getESPBpoints();
+			}
+		}
+		return sum;
+	}
 	@Override
 		public String toString() {
 			return "Student [ime=" + name + ", prezime=" + surname + ", datum_rodjenja=" + birthday + ", adresa="
-					+ adress + ", kontakt_telefon=" + contactPhone + ", email=" + Email + ", index=" + index
+					+ address + ", kontakt_telefon=" + contactPhone + ", email=" + Email + ", index=" + index
 					+ ", godina_upisa=" + enrollYear + ", tren_god_studiranja=" + currentYear + ", pr_ocena="
 					+ avgGrade + ", n_finansiranja=" + status + "]";
 		}
 
 
 	public void setAdress(String street, String number, String city, String country) {
-		this.adress=new Address(street,number,city,country);
+		this.address =new Address(street,number,city,country);
 	}
 }
