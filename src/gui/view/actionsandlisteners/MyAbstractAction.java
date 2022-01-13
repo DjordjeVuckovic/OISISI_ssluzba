@@ -20,6 +20,7 @@ import gui.view.dialog.add.AddStudent;
 import gui.view.dialog.add.AddSubject;
 import gui.view.dialog.edit.EditSubject;
 import gui.view.dialog.edit.profesor.ChangeProfessorDialog;
+import gui.view.dialog.edit.student.ChangeStudentDialog;
 import model.Student;
 import model.Subject;
 import model.Professor;
@@ -193,8 +194,8 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				}
 				else{
 					Student student = StudentController.getInstance().getStudentByIndex(StudentsTable.getInstance().getSelectedIndex());
-					//ChangeStudentDialog changeStudentDialog = new ChangeStudentDialog(student);
-					//changeStudentDialog.setVisible(true);
+					ChangeStudentDialog changeStudentDialog = new ChangeStudentDialog(student);
+					changeStudentDialog.setVisible(true);
 				}
 				break;
 				case 1:
@@ -207,16 +208,16 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 						editSubject.setVisible(true);
 					}
 					break;
-				case 2:
-					if(ProfessorsTable.getInstance().getSelectedIndexinTable()==-1){
-						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali profesora za izmenu", "Upozorenje", 0, null);
-					}
-					else{
-						Professor profesor = ProfessorController.getInstance().getProfessorByIndex(ProfessorsTable.getInstance().getSelectedIndex());
-						ChangeProfessorDialog changeProfessorDialog = new ChangeProfessorDialog(profesor);
-						changeProfessorDialog.setVisible(true);
-					}
-					break;
+				/*
+				 * case 2: if(ProfessorsTable.getInstance().getSelectedIndexinTable()==-1){
+				 * JOptionPane.showMessageDialog(MainWindow.getInstance(),
+				 * "Niste izabrali profesora za izmenu", "Upozorenje", 0, null); } else{
+				 * Professor profesor =
+				 * ProfessorController.getInstance().getProfessorByIndex(ProfessorsTable.
+				 * getInstance().getSelectedIndex()); ChangeProfessorDialog
+				 * changeProfessorDialog = new ChangeProfessorDialog(profesor);
+				 * changeProfessorDialog.setVisible(true); } break;
+				 */
 				
 			}
 		}
