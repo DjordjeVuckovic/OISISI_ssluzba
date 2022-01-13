@@ -36,19 +36,19 @@ public class Professor {
 	}
 	
 	public Professor() {subjects = new ArrayList<>();}
-	public Professor(String ime, String prezime, Date datum_rodjenja, Address adresaStan, Address adresaKanc, String kontakt_telefon, String email,
-					 String brLicne, Zvanje zvanje, int godStaza) {
+	public Professor(String ime, String prezime, Date datum_rodjenja, Address adresaStan, String kontaktTelefon, String emailAdresa, Address adresaKancelarije,
+					 String brLicne, int godStaza, Zvanje zvanje) {
 		super();
 		this.name = ime;
 		this.surname = prezime;
 		this.birthday = datum_rodjenja;
 		this.adresaStan = adresaStan;
-		this.adresaKanc = adresaKanc;
-		this.contact = kontakt_telefon;
-		this.mail = email;
+		this.contact = kontaktTelefon;
+		this.mail = emailAdresa;
+		this.adresaKanc = adresaKancelarije;
 		this.idNum = brLicne;
-		this.title = zvanje;
 		this.yearsOfTail = godStaza;
+		this.title = zvanje;
 		subjects = new ArrayList<>();
 	}
 	

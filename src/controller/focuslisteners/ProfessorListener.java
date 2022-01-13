@@ -1,6 +1,5 @@
 package controller.focuslisteners;
 
-import controller.validation.CheckValidation;
 import gui.view.dialog.add.AddProfessor;
 import gui.view.dialog.edit.profesor.EditProfessor;
 
@@ -18,41 +17,28 @@ public class ProfessorListener implements FocusListener {
     private JLabel label;
     private JTextField jTextField;
     private boolean validation;
-    private AddProfessor addProfessor=null;
-    private EditProfessor editProfessor=null;
-    private String index=null;
-    private int mode;
-
     public ProfessorListener(JLabel lb, JTextField txt){
         label=lb;
         jTextField=txt;
         validation=false;
-        mode=0;
     }
     public ProfessorListener(JLabel lb,  JTextField txt, AddProfessor addProfessor) {
         label = lb;
         jTextField = txt;
         validation = false;
-        this.addProfessor = addProfessor;
-        mode = 1;
 
     }
     public ProfessorListener(JLabel lb,JTextField txt,EditProfessor editProfessor) {
     	label=lb;
         jTextField = txt;
     	validation = true;
-    	this.editProfessor = editProfessor;
-    	mode=2;
     }
     public ProfessorListener(JLabel lb,JTextField txt,EditProfessor editProfessor,String index) {
     	label=lb;
         jTextField = txt;
     	validation = true;
-    	this.editProfessor = editProfessor;
-    	this.index=index;
-    	mode=2;
     }
-    public void setIndex(String index){this.index = index; }
+    public void setIndex(String index){ }
     public boolean getValidation(){
         return validation;
     }
@@ -82,61 +68,10 @@ public class ProfessorListener implements FocusListener {
         jTextField.setForeground(Color.BLACK);
         jTextField.setBorder(defaultBorer);
     }
-
-    @Override
-    public void focusLost(FocusEvent e) {
-        if(getKey().equals("txtName") || getKey().equals("txtSurname")){
-            validation= CheckValidation.checkName(getLine());
-            }
-        else if(getKey().equals("txtDate")){
-            validation=CheckValidation.checkDate(getLine());
-        }
-        /*
-        else if(getKey().equals("txtAdress")){
-            validation=CheckValidation.checkAdress(getLine());
-        }
-        */
-        else if(getKey().equals("txtNum")){
-            validation=CheckValidation.checkPhone(getLine());
-        }
-        else if(getKey().equals("txtEmail")){
-            validation=CheckValidation.checkEmail(getLine());
-        }
-        else  if(getKey().equals("txtId")){
-        	if(mode==2) {
-        		if(getLine().trim().equals(index)) {
-        			validation=true;
-        		}
-        		else {
-        		validation=CheckValidation.checkIndex(getLine());
-        			}
-        	}
-        	else {
-            validation=CheckValidation.checkIndex(getLine());
-        	}
-        }
-        else if(getKey().equals("txtAssignYear")){
-            validation=CheckValidation.checkAssignYear(getLine());
-        }
-        else if(getKey().equals("txtStreet")) {
-        	validation=CheckValidation.checkStreet(getLine());
-        }
-        else if(getKey().equals("txtStnum")) {
-        	validation=CheckValidation.checkStreetNum(getLine());
-        }
-		else if(getKey().equals("txtCity")) {
-			validation=CheckValidation.checkName(getLine());  	
-		}
-		else if(getKey().equals("txtContry")) {
-			validation=CheckValidation.checkName(getLine());	
-        }
-        ValidateCell();
-        if(mode==1){
-            addProfessor.EnableButt();
-        }else if(mode ==2){
-            editProfessor.EnableButt();
-        }
-
-        }
+	@Override
+	public void focusLost(FocusEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

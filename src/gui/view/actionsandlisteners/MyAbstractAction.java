@@ -4,7 +4,11 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 import controller.ProfessorController;
 import controller.StudentController;
@@ -19,11 +23,9 @@ import gui.view.dialog.add.AddProfessor;
 import gui.view.dialog.add.AddStudent;
 import gui.view.dialog.add.AddSubject;
 import gui.view.dialog.edit.EditSubject;
-import gui.view.dialog.edit.profesor.ChangeProfessorDialog;
 import gui.view.dialog.edit.student.ChangeStudentDialog;
 import model.Student;
 import model.Subject;
-import model.Professor;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImage {
 	
@@ -118,7 +120,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 		if(name.equals("New")){
 			AddStudent addStudent = new AddStudent();
 			AddSubject addSubject = new AddSubject();
-			AddProfessor addProfessor = new AddProfessor();
+			//AddProfessor addProfessor = new AddProfessor();
 			switch (CentralBox.getInstance().getSelectedIndex()){
 				case 0:
 					addStudent.setVisible(true);
@@ -126,9 +128,9 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				case 1:
 					addSubject.setVisible(true);
 					break;
-				case 2:
-					addProfessor.setVisible(true);
-					break;
+				 case 2: 
+					 AddProfessor novi = new AddProfessor();
+					 novi.setVisible(true);
 			}
 		}
 		else if(name.equals("Studenti")){

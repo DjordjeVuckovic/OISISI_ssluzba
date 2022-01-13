@@ -43,5 +43,10 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+	public boolean matches(Address fieldRegex) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 

@@ -8,6 +8,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 
 public class ProfessorController {
     private static  ProfessorController instance = null;
@@ -18,10 +19,16 @@ public class ProfessorController {
         return instance;
     }
     private ProfessorController(){}
-    public void addProfessor(Professor st){
-        BazaProfesora.getInstance().addProfessor(st);
+    
+    public List<Professor> getProfessors() {
+		return BazaProfesora.getInstance().getProfessors();
+	}
+    
+    public void addProfessor(Professor pr){
+        BazaProfesora.getInstance().addProfessor(pr);
         ProfessorsTable.getInstance().refreshTable();
     }
+    
     public void deleteProfessor(int row){
         if(row <0){
             return;
@@ -30,10 +37,12 @@ public class ProfessorController {
         BazaProfesora.getInstance().deleteProfessor(Professor);
         ProfessorsTable.getInstance().refreshTable();
     }
+    
     public Professor getProfessorByIndex(String index){
         Professor Professor = BazaProfesora.getInstance().getProfessorById(index);
         return Professor;
     }
+    
     public void editProfessor(Professor Professor,Professor prof){
         Professor.setName(prof.getName());
         Professor.setSurname(prof.getSurname());
