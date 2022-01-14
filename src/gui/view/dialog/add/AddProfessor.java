@@ -43,7 +43,7 @@ public class AddProfessor extends JDialog {
 	private Address adresaKancelarije;
 	private String brojLicneKarte;
 	private int godStaza;
-	//predmeti
+	//predmeti /
 	
 	public AddProfessor() {
 		super();
