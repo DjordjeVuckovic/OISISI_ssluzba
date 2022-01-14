@@ -134,7 +134,7 @@ public class StudentListener implements FocusListener {
         if(mode==1){
             addStudent.EnableButt();
         }else if(mode ==2){
-            editStudent.EnableButt();
+          //  editStudent.EnableButt();
         }
 
         }

@@ -136,8 +136,8 @@ public class AddProfessor extends JDialog {
 		adresaKancPanel.add(adresaKancTF);
 		brLicneKartePanel.add(brLicneKarteLabel);
 		brLicneKartePanel.add(brLicneKarteTF);
-		godStazaLabel.add(godStazaLabel);
-		godStazaLabel.add(godStazaTF);
+		godStazaPanel.add(godStazaLabel);
+		godStazaPanel.add(godStazaTF);
 		zvanjePanel.add(zvanjeLabel);
 		zvanjePanel.add(zvanjeComboBox);
 		
