@@ -90,4 +90,6 @@ public class Subject {
 	public void setFailed(ArrayList<Student> failed) {
 		this.failed = failed;
 	}
+
+
 }

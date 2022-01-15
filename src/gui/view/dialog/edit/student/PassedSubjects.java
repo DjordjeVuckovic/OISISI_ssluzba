@@ -1,5 +1,7 @@
 package gui.view.dialog.edit.student;
 
+import controller.StudentController;
+import gui.view.MainWindow;
 import model.Grade;
 import model.Student;
 
@@ -8,6 +10,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PassedSubjects extends JPanel {
     private JButton btCancelGrade;
@@ -41,9 +45,24 @@ public class PassedSubjects extends JPanel {
         centralTablePane.add(panScroll,BorderLayout.CENTER);
 
         btCancelGrade = new JButton("Cancel Grade");
-        //btCancelGrade.setPreferredSize(new Dimension(60,20));
         cancelGradePane.add(btCancelGrade);
-        //btCancelGrade.addActionListener() - ovde dodajes akciju brisanja
+        btCancelGrade.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedSubject = passedSubjectsTable.getSelectedRow();
+                if(selectedSubject==-1){
+                    JOptionPane.showMessageDialog(MainWindow.getInstance(),"Odaberite predmet za brisanje","Upozorenje",0,null);
+                }
+                else{
+                    int choice = JOptionPane.showConfirmDialog(MainWindow.getInstance(),"Upozorenje", "Da li ste sigurni?",0);
+                    if(choice ==JOptionPane.YES_OPTION){
+                        Grade grade = student.getGradeTable(selectedSubject);
+                        student.cancelGrade(grade);
+
+                    }
+                }
+            }
+        });    //- ovde dodajes akciju brisanja
         JLabel lbAvgGrade  =new JLabel("Prosecna ocena:");
         JLabel lbSum = new JLabel("Ukupno ESPB:");
         lbAvgGrade.setPreferredSize(new Dimension(100,20));
@@ -69,7 +88,7 @@ public class PassedSubjects extends JPanel {
 
 
     }
-    public class PassedSubjectsTable extends JTable {
+    private class PassedSubjectsTable extends JTable {
         public PassedSubjectsTable(){
             setRowSelectionAllowed(true);
             setColumnSelectionAllowed(true);
@@ -88,55 +107,56 @@ public class PassedSubjects extends JPanel {
             }
             return c;
         }
-        public class AbstractPassedTable extends AbstractTableModel {
 
-            @Override
-            public int getRowCount() {
-                return student.getPassedExams().size();
-            }
 
-            @Override
-            public int getColumnCount() {
-                return 5;
-            }
 
-            @Override
-            public Object getValueAt(int rowIndex, int columnIndex) {
-                Grade grade=student.getPassedExams().get(rowIndex);
-                switch (columnIndex){
-                    case 0:
-                        return grade.getSubject().getIdS();
-                    case 1:
-                        return grade.getSubject().getNameSub();
-                    case 2:
-                        return Integer.toString(grade.getSubject().getESPBpoints());
-                    case 3:
-                        return Integer.toString(grade.getGrade());
-                    case 4:
-                        return grade.getExamDateString();
-                    default:
-                        return  null;
-                }
-            }
-            public String getColumnName(int column) {
-                switch (column){
-                    case 0:
-                        return "Id of Subject";
-                    case 1:
-                        return "Name of Subject";
-                    case 2:
-                        return "ESPB points";
-                    case 3:
-                        return "Grade";
-                    case 4:
-                        return "Date";
-                    default:
-                        return null;
-                }
-            }
+    }
+    private class AbstractPassedTable extends AbstractTableModel {
 
+        @Override
+        public int getRowCount() {
+            return student.getPassedExams().size();
         }
 
+        @Override
+        public int getColumnCount() {
+            return 5;
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            Grade grade=student.getPassedExams().get(rowIndex);
+            switch (columnIndex){
+                case 0:
+                    return grade.getSubject().getIdS();
+                case 1:
+                    return grade.getSubject().getNameSub();
+                case 2:
+                    return Integer.toString(grade.getSubject().getESPBpoints());
+                case 3:
+                    return Integer.toString(grade.getGrade());
+                case 4:
+                    return grade.getExamDateString();
+                default:
+                    return  null;
+            }
+        }
+        public String getColumnName(int column) {
+            switch (column){
+                case 0:
+                    return "Id of Subject";
+                case 1:
+                    return "Name of Subject";
+                case 2:
+                    return "ESPB points";
+                case 3:
+                    return "Grade";
+                case 4:
+                    return "Date";
+                default:
+                    return null;
+            }
+        }
 
     }
 

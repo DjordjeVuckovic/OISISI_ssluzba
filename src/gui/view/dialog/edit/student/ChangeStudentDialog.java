@@ -25,6 +25,10 @@ public class ChangeStudentDialog extends MyDialog {
 
         PassedSubjects passedSubjects = new PassedSubjects(student);
         tabbedPane.addTab("Polozeni",passedSubjects);
+
+
+        FailedSubjects failedSubjects = new FailedSubjects(this,student);
+        tabbedPane.addTab("Nepolozeni",failedSubjects);
         this.add(tabbedPane);
     }
 }

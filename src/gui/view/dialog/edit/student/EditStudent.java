@@ -367,10 +367,10 @@ public class EditStudent extends JPanel{
 		 if(student.getCurrentyear()== YearofStudy.II) {
 			 txtFJComboBoxCurrentYear.setSelectedIndex(1);
 			 }
-		 if(student.getCurrentyear()== YearofStudy.I) {
+		 if(student.getCurrentyear()== YearofStudy.III) {
 			 txtFJComboBoxCurrentYear.setSelectedIndex(2);
 			 }
-		 if(student.getCurrentyear()== YearofStudy.I) {
+		 if(student.getCurrentyear()== YearofStudy.IV) {
 			 txtFJComboBoxCurrentYear.setSelectedIndex(3);
 			 }
 	    
