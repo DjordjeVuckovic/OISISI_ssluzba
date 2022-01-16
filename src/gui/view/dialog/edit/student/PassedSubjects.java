@@ -2,6 +2,7 @@ package gui.view.dialog.edit.student;
 
 import controller.StudentController;
 import gui.view.MainWindow;
+import gui.view.center.StudentsTable;
 import model.Grade;
 import model.Student;
 
@@ -58,6 +59,11 @@ public class PassedSubjects extends JPanel {
                     if(choice ==JOptionPane.YES_OPTION){
                         Grade grade = student.getGradeTable(selectedSubject);
                         student.cancelGrade(grade);
+                        if(grade.getSubject() !=null){
+                            student.addFailedExam(grade.getSubject());
+                        }
+                        refreshTablePassed();
+                        StudentsTable.getInstance().refreshTable();
 
                     }
                 }
@@ -77,6 +83,8 @@ public class PassedSubjects extends JPanel {
         panSum.add(txtSumPoints);
         AvgSumPane.add(panAvgGrade);
         AvgSumPane.add(panSum);
+
+        refreshTablePassed();
 
         this.add(cancelGradePane,BorderLayout.NORTH);
         this.add(centralTablePane,BorderLayout.CENTER);
@@ -161,7 +169,11 @@ public class PassedSubjects extends JPanel {
     }
 
 
-    public void refreshTable(){
-
+    public void refreshTablePassed(){
+        txtAvgGrade.setText(String.valueOf(student.CalculateAvgGrade()));
+        txtSumPoints.setText(String.valueOf(student.SumPoints()));
+        AbstractTableModel model = (AbstractPassedTable) passedSubjectsTable.getModel();
+        model.fireTableDataChanged();
+        validate();
     }
 }

@@ -1,6 +1,7 @@
 package gui.view.dialog.edit.student;
 
 import gui.view.MainWindow;
+import gui.view.center.StudentsTable;
 import model.Grade;
 import model.Student;
 import model.Subject;
@@ -21,6 +22,7 @@ public class FailedSubjects extends JPanel{
     private JButton buttonTC;
     private FailedSubjectsTable failedSubjectsTable;
     private FailedSubjects failedSubjectsThis;
+    private  Subject subject;
 
     public FailedSubjects(JDialog parent,Student st){
         this.student = st;
@@ -77,17 +79,26 @@ public class FailedSubjects extends JPanel{
                 }
             }
         });
-        /*
+
         buttonTC.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+            int selection  = failedSubjectsTable.getSelectedRow();
+            if(selection==-1){
+                JOptionPane.showMessageDialog(parent, "Please select subject from table", "Warning", 0, null);
+            }else{
+                subject = failedSubjects.get(selection);
+                GradeDialog gradeDialog = new GradeDialog(parent,student,subject);
+                gradeDialog.setVisible(true);
+                refreshTableFailed();
+                StudentsTable.getInstance().refreshTable();
+            }
 
             }
         });
 
 
-         */
+
 
         this.add(buttonPane,BorderLayout.NORTH);
         this.add(cenPane,BorderLayout.CENTER);

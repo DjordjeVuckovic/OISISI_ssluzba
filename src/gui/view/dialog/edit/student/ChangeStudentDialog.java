@@ -1,10 +1,13 @@
 package gui.view.dialog.edit.student;
 
 import gui.view.MainWindow;
+import gui.view.center.StudentsTable;
 import gui.view.dialog.MyDialog;
 import model.Student;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class ChangeStudentDialog extends MyDialog {
     //private static ChangeStudentDialog instance=null;
@@ -30,5 +33,18 @@ public class ChangeStudentDialog extends MyDialog {
         FailedSubjects failedSubjects = new FailedSubjects(this,student);
         tabbedPane.addTab("Nepolozeni",failedSubjects);
         this.add(tabbedPane);
+        tabbedPane.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(tabbedPane.getSelectedIndex()==1){
+                    passedSubjects.refreshTablePassed();
+                    StudentsTable.getInstance().refreshTable();
+                }
+                if(tabbedPane.getSelectedIndex()==2){
+                    failedSubjects.refreshTableFailed();
+                    StudentsTable.getInstance().refreshTable();
+                }
+            }
+        });
     }
 }

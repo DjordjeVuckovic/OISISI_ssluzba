@@ -139,6 +139,9 @@ public class Student {
 	public ArrayList<Grade> getPassedExams() {
 		return passedExams;
 	}
+	public void addGrade(Grade grade){
+		passedExams.add(grade);
+	}
 	public double CalculateAvgGrade(){
 		double sum = 0;
 		for(Grade grade : passedExams){

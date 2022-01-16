@@ -19,6 +19,13 @@ public class Grade {
 		
 	}
 
+	public Grade(Student studentPassed, Subject subject, int grade, Date examDate) {
+		this.studentPassed = studentPassed;
+		this.subject = subject;
+		this.grade = grade;
+		this.examDate = examDate;
+	}
+
 	public Student getStudentPassed() {
 		return studentPassed;
 	}

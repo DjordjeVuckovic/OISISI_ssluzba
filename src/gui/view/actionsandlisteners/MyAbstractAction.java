@@ -17,6 +17,7 @@ import gui.view.dialog.add.AddStudent;
 import gui.view.dialog.add.AddSubject;
 import gui.view.dialog.edit.student.ChangeStudentDialog;
 import gui.view.dialog.edit.EditSubject;
+import gui.view.dialog.edit.student.GradeDialog;
 import model.Student;
 import model.Subject;
 
@@ -131,6 +132,9 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 		//else if(name.equals("Profesori")){
 			//
 		//}
+		else if(name.equals("Katedre")){
+
+		}
 		else if(name.equals("Predmeti")){
 			CentralBox.getInstance().setSelectedIndex(1);
 		}
