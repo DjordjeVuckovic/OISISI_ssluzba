@@ -22,31 +22,30 @@ public class Toolbar extends JToolBar implements ScaleImage {
 	private static final long serialVersionUID = 1209699209668701828L;
 	private SearchStudent searchStudent = new SearchStudent();
 	private JTextField searchTextField = new JTextField();
-	
+
 	public ImageIcon scaleImg(ImageIcon ic) {
-		
+
 		Image scaleImage = ic.getImage().getScaledInstance(32, 32,Image.SCALE_DEFAULT);
-		ImageIcon ic1 = new ImageIcon(scaleImage);
-		return ic1;
+		return new ImageIcon(scaleImage);
 	}
 
 	public Toolbar() {
-		
-		
+
+
 		super(SwingConstants.HORIZONTAL);
-		
-		
+
+
 		JButton btnNew = new JButton();
 		btnNew.setToolTipText("Kreiraj entitet");
 		btnNew.setIcon(scaleImg(new ImageIcon("img/add1.png")));
 		btnNew.setBackground(Color.WHITE);
 		btnNew.setBorderPainted(false);
-		btnNew.setFocusPainted(false);		
+		btnNew.setFocusPainted(false);
 		addSeparator();
 		add(btnNew);
 		addSeparator();
-		
-		
+
+
 		JButton btnNew1 = new JButton();
 		btnNew1.setToolTipText("Izmeni entitet");
 		btnNew1.setIcon(scaleImg(new ImageIcon("img/ch.png")));
@@ -55,7 +54,7 @@ public class Toolbar extends JToolBar implements ScaleImage {
 		btnNew1.setFocusPainted(false);
 		add(btnNew1);
 		addSeparator();
-		
+
 		JButton btnNew2 = new JButton();
 		btnNew2.setToolTipText("Obrisi entitet");
 		btnNew2.setIcon(scaleImg(new ImageIcon("img/trash1.png")));
@@ -64,8 +63,8 @@ public class Toolbar extends JToolBar implements ScaleImage {
 		btnNew2.setFocusPainted(false);
 		add(btnNew2);
 		addSeparator();
-		
-		
+
+
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		add(Box.createHorizontalStrut(screenSize.width/2));

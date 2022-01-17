@@ -1,11 +1,5 @@
 package gui.view.actionsandlisteners;
 
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-
-import javax.swing.*;
-
 import controller.StudentController;
 import controller.SubjectController;
 import gui.view.CentralBox;
@@ -15,11 +9,15 @@ import gui.view.center.StudentsTable;
 import gui.view.center.SubjectTable;
 import gui.view.dialog.add.AddStudent;
 import gui.view.dialog.add.AddSubject;
-import gui.view.dialog.edit.student.ChangeStudentDialog;
 import gui.view.dialog.edit.EditSubject;
-import gui.view.dialog.edit.student.GradeDialog;
+import gui.view.dialog.edit.student.ChangeStudentDialog;
 import model.Student;
 import model.Subject;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImage {
 	
@@ -31,8 +29,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 	public ImageIcon scaleImg(ImageIcon ic) {
 		
 		Image scaleImage = ic.getImage().getScaledInstance(25, 25,Image.SCALE_DEFAULT);
-		ImageIcon ic1 = new ImageIcon(scaleImage);
-		return ic1;
+		return new ImageIcon(scaleImage);
 }
 	public  MyAbstractAction(String s) {
 		name=s;

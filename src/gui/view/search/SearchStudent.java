@@ -18,7 +18,7 @@ public class SearchStudent {
         }
         ArrayList<Student> search = new ArrayList<>();
         string = string.toLowerCase();
-        String arraySt[] =string.split(",");
+        String[] arraySt =string.split(",");
         // sw-1-2019, Marko, Marković
         if(arraySt.length ==3){
             for(Student student :BazaStudenata.getInstance().getStudents()){
