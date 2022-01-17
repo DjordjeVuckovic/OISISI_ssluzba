@@ -1,5 +1,7 @@
 package model;
 
+import gui.view.center.StudentsTable;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ public class BazaStudenata implements AbstractModel {
 	private ArrayList<Student> students;
 	private ArrayList<String> colums;
 	private static BazaStudenata instance=null;
+	private boolean searchMode;
+	private ArrayList<Student> searchStudents;
 
 	public static BazaStudenata getInstance(){
 		if(instance ==null){
@@ -28,7 +32,9 @@ public class BazaStudenata implements AbstractModel {
 		this.colums.add("Godina studija");
 		this.colums.add("Status");
 		this.colums.add("Prosek");
-		
+
+		searchStudents = new ArrayList<>();
+		searchMode = false;
 	}
 	private void initStudents(){
 		this.students= new ArrayList<>();
@@ -65,7 +71,13 @@ public class BazaStudenata implements AbstractModel {
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Student st=this.students.get(rowIndex);
+		Student st;
+		if(searchMode) {
+			st = this.searchStudents.get(rowIndex);
+		}
+		else{
+			st = students.get(rowIndex);
+		}
 		switch (columnIndex){
 			case 0:
 				return st.getIndex();
@@ -127,5 +139,36 @@ public class BazaStudenata implements AbstractModel {
 			}
 		}
 		return ret;
+	}
+	public void editStudent(Student student,Student stN){
+		student.setName(stN.getName());
+		student.setSurname(stN.getSurname());
+		student.setCurrentyear(stN.getCurrentyear());
+		student.setFinansiranje(stN.getNacinFinansiranja());
+		student.setEnrollYear(stN.getEnrollYear());
+		student.setIndex(stN.getIndex());
+		student.setContactPhone(stN.getContactPhone());
+		student.setAvgGrade(stN.getavgGrade());
+		student.setAdress(student.getAddress().getStreet(),student.getAddress().getNumber(),student.getAddress().getCity(),student.getAddress().getCountry());
+	}
+	public boolean isSearchMode() {
+		return searchMode;
+	}
+
+	public void setSearchMode(boolean searchMode) {
+		this.searchMode = searchMode;
+	}
+
+	public ArrayList<Student> getSearchStudents() {
+		return searchStudents;
+	}
+
+	public void setSearchStudents(ArrayList<Student> searchStudents) {
+		this.searchStudents = searchStudents;
+	}
+	public void removeSearchSt(Student student){
+		if(searchMode){
+			searchStudents.remove(student);
+		}
 	}
 }

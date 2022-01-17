@@ -64,7 +64,8 @@ public class AddSubjectForStudent extends JDialog {
                 dispose();
             }
         });
-        JPanel btnPane = new JPanel(new FlowLayout(50,10,10));
+        JPanel btnPane = new JPanel(new FlowLayout(5,10,10));
+        btnPane.setPreferredSize(new Dimension(50,50));
         btnPane.add(Box.createHorizontalStrut(30));
         btnPane.add(btnAdd);
         btnPane.add(Box.createHorizontalStrut(15));
@@ -74,7 +75,6 @@ public class AddSubjectForStudent extends JDialog {
         JPanel leftPane = new JPanel();
         JPanel rightPane = new JPanel();
         downPane.setPreferredSize(new Dimension(30,30));
-        btnPane.setPreferredSize(new Dimension(50,50));
         leftPane.setPreferredSize(new Dimension(10,10));
         rightPane.setPreferredSize(new Dimension(10,10));
         add(downPane, BorderLayout.NORTH);

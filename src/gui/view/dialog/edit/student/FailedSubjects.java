@@ -46,9 +46,9 @@ public class FailedSubjects extends JPanel{
 
         JPanel buttonPane = new JPanel(new FlowLayout(20,15,10));
         buttonPane.setPreferredSize(new Dimension(50,50));
-        buttonAdd=new JButton("Add");
-        buttonDelete=new JButton("Delete");
-        buttonTC=new JButton("TakeExam");
+        buttonAdd=new JButton("Dodaj");
+        buttonDelete=new JButton("Brisanje");
+        buttonTC=new JButton("Polaganje");
 
         buttonPane.add(Box.createHorizontalStrut(0));
         buttonPane.add(buttonAdd);

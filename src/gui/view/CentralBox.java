@@ -12,20 +12,20 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 
 public class CentralBox extends JTabbedPane {
-private static CentralBox instance = null;
+	private static CentralBox instance = null;
 
-public static CentralBox getInstance() {
-	if(instance==null)
-	{
-		synchronized (CentralBox.class){
-			if(instance == null){
-				instance = new CentralBox();
+	public static CentralBox getInstance() {
+		if(instance==null)
+		{
+			synchronized (CentralBox.class){
+				if(instance == null){
+					instance = new CentralBox();
+				}
 			}
 		}
+		return instance;
 	}
-	return instance;
-}
-private  CentralBox() {
+	private  CentralBox() {
 	JPanel panelStudents = new JPanel(new BorderLayout());
 	JScrollPane jScrollPaneStudents= new JScrollPane(StudentsTable.getInstance());
 	panelStudents.add(jScrollPaneStudents,BorderLayout.CENTER);
