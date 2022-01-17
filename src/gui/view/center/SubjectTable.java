@@ -1,7 +1,5 @@
 package gui.view.center;
 
-import gui.view.CentralBox;
-
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
@@ -37,4 +35,5 @@ public class SubjectTable extends JTable {
         model.fireTableDataChanged();
         validate();
     }
+
 }

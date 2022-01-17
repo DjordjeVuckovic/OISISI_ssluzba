@@ -64,7 +64,7 @@ public class AddSubjectForStudent extends JDialog {
                 dispose();
             }
         });
-        JPanel btnPane = new JPanel(new FlowLayout(10,10,10));//,FlowLayout.CENTER));
+        JPanel btnPane = new JPanel(new FlowLayout(50,10,10));
         btnPane.add(Box.createHorizontalStrut(30));
         btnPane.add(btnAdd);
         btnPane.add(Box.createHorizontalStrut(15));

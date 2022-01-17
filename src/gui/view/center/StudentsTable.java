@@ -13,14 +13,13 @@ public class StudentsTable extends JTable {
         }
         return instance;
     }
-
-
-    public StudentsTable() {
+    private StudentsTable() {
+        setName("Studenti");
         setRowSelectionAllowed(true);
         setColumnSelectionAllowed(true);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setModel(new AbstractTableStudents());
-        setName("Studenti");
+        setAutoCreateRowSorter(true);
     }
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
         Component c = super.prepareRenderer(renderer, row, column);
@@ -45,10 +44,12 @@ public class StudentsTable extends JTable {
     public int getSelectedIndexinTable(){
         return this.getSelectedRow();
     }
+
     public String getRowCnt(){
         int row = this.getSelectedRow();
         if(row==-1) return null;
         return (String) this.getValueAt(row,0);
     }
+
 
 }
