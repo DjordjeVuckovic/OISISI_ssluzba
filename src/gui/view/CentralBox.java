@@ -36,8 +36,7 @@ private  CentralBox() {
 	panelSubject.add(jScrollPaneSubject,BorderLayout.CENTER);
 	this.addTab("Subject",panelSubject);
 
-	sortIdRow();
-	sortAvg();
+	sortRows();
 	this.addChangeListener(new ChangeListener() {
 		@Override
 		public void stateChanged(ChangeEvent e) {
@@ -46,15 +45,12 @@ private  CentralBox() {
 		}
 	});
 }
-	public void  sortIdRow(){
+	public void  sortRows(){
 		TableRowSorter tableRowSorter = new TableRowSorter(StudentsTable.getInstance().getModel());
 		tableRowSorter.setComparator(0, new StudentIdComparator());
+		tableRowSorter.setComparator(5,new StudentAvgGradeCmp());
 		StudentsTable.getInstance().setRowSorter(tableRowSorter);
 	}
-	public void sortAvg(){
-		TableRowSorter tableRowSorter = new TableRowSorter(StudentsTable.getInstance().getModel());
-		tableRowSorter.setComparator(5, new StudentAvgGradeCmp());
-		StudentsTable.getInstance().setRowSorter(tableRowSorter);
-	}
+
 
 }
