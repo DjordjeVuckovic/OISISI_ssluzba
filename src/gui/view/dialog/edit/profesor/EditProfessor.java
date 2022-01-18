@@ -58,8 +58,8 @@ public class EditProfessor extends JPanel{
     private JTextField txtAdressContry;
     
     public boolean allValid(){
-        for(ProfessorListener sl:validations){
-            if(!sl.getValidation()){
+        for(ProfessorListener pl:validations){
+            if(!pl.getValidation()){
                 return false;
             }
         }
@@ -181,7 +181,7 @@ public class EditProfessor extends JPanel{
         lbId.setToolTipText("Unesite svoj broj licne karte");
         lbId.setPreferredSize(cellDim);
         txtFieldId = new JTextField();
-        txtFieldId.setToolTipText("Trazeni format: xxxxxxxx");
+        txtFieldId.setToolTipText("9 cifara");
         txtFieldId.setPreferredSize(cellDim);
         txtFieldId.setName("txtId");
         ProfessorListener valId=new ProfessorListener(lbId,txtFieldId,this,Professor.getIdNumber());
@@ -203,7 +203,7 @@ public class EditProfessor extends JPanel{
         
         JLabel lbZvanje = new JLabel("Zvanje*");
         lbZvanje.setPreferredSize(cellDim);
-        String[] Zvanje = new String[]{"SARADNIK_U_NASTAVI", "ASISTENT", "DOCENT", "VANREDNI_PROFESOR", "REDOVNI_PROFESOR", "ASISTENT_SA_DOKTORATOM"};
+        String[] Zvanje = new String[]{"SARADNIK U NASTAVI", "ASISTENT", "DOCENT", "VANREDNI PROFESOR", "REDOVNI PROFESOR", "ASISTENT SA DOKTORATOM"};
         txtFJComboBoxZvanje = new JComboBox<>(Zvanje);
         txtFJComboBoxZvanje.setName("txtZvanje");
         txtFJComboBoxZvanje.setPreferredSize(cellDim);
@@ -299,8 +299,7 @@ public class EditProfessor extends JPanel{
                     ProfessorNew.setBirthday(birthday);
                     ProfessorNew.setContact(txtFieldNUm.getText());
                     ProfessorNew.setMail(txtFieldE.getText());
-                    ProfessorNew.setIdNumber(txtFieldId.getText());
-                    valId.setIndex(ProfessorNew.getIdNumber());
+                    Professor.setIdNumber(txtFieldId.getText());
                     ProfessorNew.setYearsTail(Integer.parseInt(txtFieldYearsTail.getText()) );
                     Address adress= new Address();
                     adress.setStreet(txtAdressStreet.getText());
@@ -345,7 +344,7 @@ public class EditProfessor extends JPanel{
 		 txtFieldDate.setText(dateFormat.format(Professor.getBirthday()));
 		 txtFieldNUm.setText(Professor.getContact());
 		 txtFieldE.setText(Professor.getMail());
-		 txtFieldId.setText(Professor.getIdNumber());
+		 txtFieldId.setText(String.valueOf(Professor.getIdNumber()));
 		 txtFieldYearsTail.setText(String.valueOf(Professor.getYearsTail()));
 		 
 		 if(Professor.getTitle()== Zvanje.ASISTENT) {

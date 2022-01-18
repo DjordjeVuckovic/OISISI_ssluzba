@@ -172,17 +172,12 @@ public class CheckValidation {
         
         return true;
     }
-
-    public static boolean checkProfId(String text) {
-        if(text.isEmpty() || text.isBlank() || text.length() != 8) {
-            return false;
-        }
-        // treba da bude jedinstvena
-        if(!BazaProfesora.getInstance().UniqueIdP(text)) {
-            return false;
-        }
-        return true;
-    }
+    
+	/*
+	 * public static boolean checkIdNumber(int id){ return
+	 * id.matches("([a-zA-Z0-9]+\\.?)*[a-zA-Z0-9]@[a-z0-9]+"); }
+	 */
+ 
     
     public static boolean checkGodRadnog(String text) {
     	if(text.isEmpty() || text.isBlank() ) {

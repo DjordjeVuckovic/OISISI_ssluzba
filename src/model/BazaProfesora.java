@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BazaProfesora implements AbstractModel {
 
@@ -28,6 +29,9 @@ public class BazaProfesora implements AbstractModel {
 	}
 	private void initProfessors(){
 		this.Professors= new ArrayList<>();
+
+		Professor pr = new Professor("Milan","Milic",Zvanje.DOCENT,"dsa@asdas");
+		Professors.add(pr);
 		Professors.add(new Professor("Mika", "Mikic", Zvanje.SARADNIK_U_NASTAVI, "mika@gmail.com"));
 		Professors.add(new Professor("Vladimir", "Radic", Zvanje.ASISTENT, "vladimir@gmail.com"));
 		Professors.add(new Professor("Marko", "Markic", Zvanje.DOCENT , "milos@gmail.com"));
@@ -62,12 +66,25 @@ public class BazaProfesora implements AbstractModel {
 			case 1:
 				return pr.getSurname();
 			case 2:
-				return pr.getTitle();
+				if(pr.getTitle()==Zvanje.SARADNIK_U_NASTAVI) {
+					return "SARADNIK U NASTAVI";
+				}else if(pr.getTitle()==Zvanje.ASISTENT){
+					return "ASISTENT";
+				}else if(pr.getTitle()==Zvanje.DOCENT){
+					return "DOCENT";
+				}else if(pr.getTitle()==Zvanje.VANREDNI_PROFESOR){
+					return "VANREDNI PROFESOR";
+				}
+				else if(pr.getTitle()==Zvanje.REDOVNI_PROFESOR){
+					return "REDOVNI PROFESOR";
+				}
+				else if(pr.getTitle()==Zvanje.ASISTENT_SA_DOKTORATOM){
+					return "ASISTENT SA DOKTORATOM";
+				}
 			case 3:
 				return pr.getMail();
 			default:
 				return null;
-
 		}
 	}
 
@@ -84,15 +101,6 @@ public class BazaProfesora implements AbstractModel {
 		}
 		return null;
 	}
-	
-	public boolean UniqueIdP(String idp) { //svaki broj licne mora biti jedinstven
-        for (Professor pr : this.Professors) {
-            if(pr.getIdNumber().equals(idp)) {
-                return false;
-            }
-        }
-        return true;
-    }
 	
 	public Professor getProfessorByRow(int row){
 		return Professors.get(row);

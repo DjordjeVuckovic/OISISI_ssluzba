@@ -38,8 +38,8 @@ public class ProfessorController {
         ProfessorsTable.getInstance().refreshTable();
     }
     
-    public Professor getProfessorByIndex(String index){
-        Professor Professor = BazaProfesora.getInstance().getProfessorById(index);
+    public Professor getProfessorById(String id){
+        Professor Professor = BazaProfesora.getInstance().getProfessorById(id);
         return Professor;
     }
     

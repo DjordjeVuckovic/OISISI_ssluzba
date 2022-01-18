@@ -33,6 +33,7 @@ public class Professor {
 		this.birthday = birthday;
 		this.title = title;
 		this.mail = mail;
+		subjects = new ArrayList<>();
 	}
 	
 	public Professor() {subjects = new ArrayList<>();}

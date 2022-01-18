@@ -44,9 +44,9 @@ public class ProfessorsTable extends JTable {
         model.fireTableDataChanged();
         validate();
     }
-    public String getSelectedIndex(){
-        String index = (String) this.getValueAt(this.getSelectedRow(),0);
-        return index;
+    public String getSelectedId(){
+        String id = (String) this.getValueAt(this.getSelectedRow(),0);
+        return id;
     }
     public int getSelectedIndexinTable(){
         return this.getSelectedRow();

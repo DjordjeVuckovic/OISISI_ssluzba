@@ -23,7 +23,9 @@ import gui.view.dialog.add.AddProfessor;
 import gui.view.dialog.add.AddStudent;
 import gui.view.dialog.add.AddSubject;
 import gui.view.dialog.edit.EditSubject;
+import gui.view.dialog.edit.profesor.ChangeProfessorDialog;
 import gui.view.dialog.edit.student.ChangeStudentDialog;
+import model.Professor;
 import model.Student;
 import model.Subject;
 
@@ -120,7 +122,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 		if(name.equals("New")){
 			AddStudent addStudent = new AddStudent();
 			AddSubject addSubject = new AddSubject();
-			//AddProfessor addProfessor = new AddProfessor();
+			AddProfessor addProfessor = new AddProfessor();
 			switch (CentralBox.getInstance().getSelectedIndex()){
 				case 0:
 					addStudent.setVisible(true);
@@ -128,21 +130,20 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				case 1:
 					addSubject.setVisible(true);
 					break;
-				 case 2: 
-					 AddProfessor novi = new AddProfessor();
-					 novi.setVisible(true);
+				case 2:
+					addProfessor.setVisible(true);
+					break;
 			}
 		}
 		else if(name.equals("Studenti")){
 			CentralBox.getInstance().setSelectedIndex(0);
 		}
-		else if(name.equals("Predmeti")){
-			CentralBox.getInstance().setSelectedIndex(1);
-		}
 		else if(name.equals("Profesori")){
 			CentralBox.getInstance().setSelectedIndex(2);
 		}
-		
+		else if(name.equals("Predmeti")){
+			CentralBox.getInstance().setSelectedIndex(1);
+		}
 		//else if(name.equals("Save")){
 			//
 		//}
@@ -160,15 +161,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				}
 				break;
 				case 1:
-					int rowSelecteds = SubjectTable.getInstance().getSelectedRow();
-					if (rowSelecteds <0) {
-						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste odabrali predmet", "Upozorenje", 0, null);
-						return;
-					}
-					int choices = JOptionPane.showConfirmDialog(MainWindow.getInstance(),"Upozorenje", "Da li ste sigurni?",0);
-					if(choices ==JOptionPane.YES_OPTION){
-						SubjectController.getInstance().deleteSubject(rowSelecteds);
-					}
+					//delete sub
 					break;
 				case 2:
 					int rowSelectedp = ProfessorsTable.getInstance().getSelectedRow();
@@ -210,17 +203,16 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 						editSubject.setVisible(true);
 					}
 					break;
-				/*
-				 * case 2: if(ProfessorsTable.getInstance().getSelectedIndexinTable()==-1){
-				 * JOptionPane.showMessageDialog(MainWindow.getInstance(),
-				 * "Niste izabrali profesora za izmenu", "Upozorenje", 0, null); } else{
-				 * Professor profesor =
-				 * ProfessorController.getInstance().getProfessorByIndex(ProfessorsTable.
-				 * getInstance().getSelectedIndex()); ChangeProfessorDialog
-				 * changeProfessorDialog = new ChangeProfessorDialog(profesor);
-				 * changeProfessorDialog.setVisible(true); } break;
-				 */
-				
+				case 2:
+					if(ProfessorsTable.getInstance().getSelectedIndexinTable()==-1){
+						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali profesora za izmenu", "Upozorenje", 0, null);
+					}
+					else{
+						Professor profesor = ProfessorController.getInstance().getProfessorById(ProfessorsTable.getInstance().getSelectedId());
+						ChangeProfessorDialog changeProfessorDialog = new ChangeProfessorDialog(profesor);
+						changeProfessorDialog.setVisible(true);
+					}
+					break;
 			}
 		}
 		
