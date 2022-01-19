@@ -27,6 +27,15 @@ public class Professor {
 		subjects = new ArrayList<>();
 	}
 	
+	public Professor(String name, String surname, Zvanje title, String mail, String idNum) {
+		this.name = name;
+		this.surname = surname;
+		this.title = title;
+		this.mail = mail;
+		this.idNum = idNum;
+		subjects = new ArrayList<>();
+	}
+	
 	public Professor() {subjects = new ArrayList<>();}
 	public Professor(String ime, String prezime, Date datum_rodjenja, Address adresaStan, String kontaktTelefon, String emailAdresa, Address adresaKanc,
 					 String idNum, int godStaza, Zvanje zvanje) {
