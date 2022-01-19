@@ -1,6 +1,7 @@
 package gui.view;
 
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -14,7 +15,7 @@ public class MenuBar extends JMenuBar {
 	
 	
 		MenuBar() {
-
+			this.setBackground(new Color(51, 153, 255));
 			JMenu menu_file = new JMenu("File");
 			menu_file.setMnemonic(KeyEvent.VK_F);
 			MyAbstractAction New= new MyAbstractAction("New");

@@ -8,6 +8,8 @@ public class BazaProfesora implements AbstractModel {
 	private ArrayList<Professor> Professors;
 	private ArrayList<String> colums;
 	private static BazaProfesora instance=null;
+	private boolean searchMode;
+	private ArrayList<Professor> searchProfessors;
 
 	public static BazaProfesora getInstance(){
 		if(instance ==null){
@@ -25,12 +27,14 @@ public class BazaProfesora implements AbstractModel {
 		this.colums.add("Zvanje");
 		this.colums.add("Email");
 
+		searchProfessors = new ArrayList<>();
+		searchMode = false;
 		
 	}
 	private void initProfessors(){
 		this.Professors= new ArrayList<>();
 
-		Professor pr = new Professor("Milan","Milic",Zvanje.DOCENT,"dsa@asdas");
+		Professor pr = new Professor("Milan","Milic",Zvanje.DOCENT,"volim@oisisi");
 		Professors.add(pr);
 		Professors.add(new Professor("Mika", "Mikic", Zvanje.SARADNIK_U_NASTAVI, "mika@gmail.com"));
 		Professors.add(new Professor("Vladimir", "Radic", Zvanje.ASISTENT, "vladimir@gmail.com"));
@@ -59,7 +63,13 @@ public class BazaProfesora implements AbstractModel {
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Professor pr=this.Professors.get(rowIndex);
+		Professor pr;
+		if(searchMode) {
+			pr = this.searchProfessors.get(rowIndex);
+		}
+		else {
+			pr = Professors.get(rowIndex);
+		}
 		switch (columnIndex){
 			case 0:
 				return pr.getName();
@@ -126,5 +136,40 @@ public class BazaProfesora implements AbstractModel {
 			}
 		}
 		return ret;
+	}
+	
+	public boolean isSearchMode() {
+		return searchMode;
+	}
+
+	public void setSearchMode(boolean searchMode) {
+		this.searchMode = searchMode;
+	}
+
+	public ArrayList<Professor> getSearchProfessors() {
+		return searchProfessors;
+	}
+
+	public void setSearchProfessors(ArrayList<Professor> searchProfessors) {
+		this.searchProfessors = searchProfessors;
+	}
+	public void removeSearchSt(Professor Professor){
+		if(searchMode){
+			searchProfessors.remove(Professor);
+		}
+	}
+	
+	public void editProfessor(Professor profesor, Professor noviProf) {
+		profesor.setName(noviProf.getName());
+		profesor.setSurname(noviProf.getName());
+		profesor.setName(noviProf.getName());
+		profesor.setContact(noviProf.getContact());
+		profesor.setMail(noviProf.getMail());
+		profesor.setBirthday(noviProf.getBirthday());
+		profesor.setIdNumber(noviProf.getIdNumber());
+		profesor.setAddressS(noviProf.getAddressS().getStreet(), noviProf.getAddressS().getNumber(),noviProf.getAddressS().getCity(),noviProf.getAddressS().getCountry());
+		profesor.setAddressK(noviProf.getAddressK().getStreet(), noviProf.getAddressK().getNumber(),noviProf.getAddressK().getCity(),noviProf.getAddressK().getCountry());
+		profesor.setTitle(noviProf.getTitle());
+		profesor.setYearsTail(noviProf.getYearsTail());
 	}
 }

@@ -29,13 +29,4 @@ public class SubjectController {
         oldSub.setSemester(nSub.getSemester());
         SubjectTable.getInstance().refreshTable();
     }
-    
-    public void deleteSubject(int row){
-        if(row <0){
-            return;
-        }
-        Subject subject = BazaPredmeta.getInstance().getSubjectByRow(row);
-        BazaPredmeta.getInstance().deleteSubject(subject);
-        SubjectTable.getInstance().refreshTable();
-    }
 }

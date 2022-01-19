@@ -294,7 +294,7 @@ public class AddProfessor  extends MyDialog {
                     adress.setCity(txtAdressCity.getText());
                     adress.setCountry(txtAdressContry.getText());
                     
-                    Professor.setAdresaStan(adress);
+                    Professor.setAddressS(adress);
 
 
                     if(txtFJComboBoxZvanje.getSelectedIndex()==0){

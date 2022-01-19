@@ -1,6 +1,5 @@
 package model;
 
-
 public class Address {
 	private String street;
 	private String number;
@@ -17,8 +16,7 @@ public class Address {
 		this.city = city;
 		this.country = country;
 	}
-	
-	
+
 	public String getStreet() {
 		return street;
 	}
@@ -44,9 +42,4 @@ public class Address {
 		this.country = country;
 	}
 
-	public boolean matches(Address fieldRegex) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
-

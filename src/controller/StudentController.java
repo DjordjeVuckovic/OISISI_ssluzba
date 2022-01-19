@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.List;
-
 import gui.view.center.StudentsTable;
 import model.BazaStudenata;
 import model.Student;
@@ -31,21 +29,8 @@ public class StudentController {
         Student student = BazaStudenata.getInstance().getStudentById(index);
         return student;
     }
-    
-    public List<Student> getListaSvihStudenata() {
-		return BazaStudenata.getInstance().getStudents();
-	}
-    
     public void editStudent(Student student,Student stN){
-        student.setName(stN.getName());
-        student.setSurname(stN.getSurname());
-        student.setCurrentyear(stN.getCurrentyear());
-        student.setFinansiranje(stN.getNacinFinansiranja());
-        student.setEnrollYear(stN.getEnrollYear());
-        student.setIndex(stN.getIndex());
-        student.setContactPhone(stN.getContactPhone());
-        student.setAvgGrade(stN.getavgGrade());
-        student.setAdress(student.getAddress().getStreet(),student.getAddress().getNumber(),student.getAddress().getCity(),student.getAddress().getCountry());
+        BazaStudenata.getInstance().editStudent(student,stN);
         StudentsTable.getInstance().refreshTable();
     }
 

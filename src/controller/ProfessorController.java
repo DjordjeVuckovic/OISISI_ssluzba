@@ -1,7 +1,9 @@
 package controller;
 
 import gui.view.center.ProfessorsTable;
+import gui.view.center.StudentsTable;
 import model.BazaProfesora;
+import model.BazaStudenata;
 import model.Professor;
 
 import java.awt.event.FocusEvent;
@@ -43,14 +45,8 @@ public class ProfessorController {
         return Professor;
     }
     
-    public void editProfessor(Professor Professor,Professor prof){
-        Professor.setName(prof.getName());
-        Professor.setSurname(prof.getSurname());
-        Professor.setContact(prof.getContact());
-        Professor.setMail(prof.getMail());
-        Professor.setIdNumber(prof.getIdNumber());
-        Professor.setAddressK(prof.getAdresaKanc().getStreet(),prof.getAdresaKanc().getNumber(),prof.getAdresaKanc().getCity(),prof.getAdresaKanc().getCountry());
-        Professor.setAddressS(prof.getAdresaStan().getStreet(),prof.getAdresaStan().getNumber(),prof.getAdresaStan().getCity(),prof.getAdresaStan().getCountry());
+    public void editProfessor(Professor Professor,Professor noviProf){
+    	BazaProfesora.getInstance().editProfessor(Professor,noviProf);
         ProfessorsTable.getInstance().refreshTable();
     }
 

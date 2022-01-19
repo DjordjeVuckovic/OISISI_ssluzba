@@ -16,7 +16,7 @@ public class Professor {
 	private String idNum;
 	private Zvanje title;
 	private int yearsOfTail;
-	private ArrayList<Subject> subjects = new ArrayList<Subject>();
+	private ArrayList<Subject> subjects;
 	
 	
 	public Professor(String surname, String name, Zvanje title, String mail) {
@@ -54,17 +54,17 @@ public class Professor {
 	}
 	
 	
-	public Address getAdresaKanc() {
+	public Address getAddressK() {
 		return adresaKanc;
 	}
-	public void setAdresaKanc(Address adresaKanc) {
+	public void setAddressK(Address adresaKanc) {
 		this.adresaKanc = adresaKanc;
 	}
 	
-	public Address getAdresaStan() {
+	public Address getAddressS() {
 		return adresaStan;
 	}
-	public void setAdresaStan(Address adresaStan) {
+	public void setAddressS(Address adresaStan) {
 		this.adresaStan = adresaStan;
 	}
 	
@@ -133,9 +133,9 @@ public class Professor {
 	
 	@Override
 	public String toString() {
-		return "Professor [surname=" + surname + ", name=" + name + ", birthday=" + birthday + ", adresaKanc=" + adresaKanc + ", adresaStan=" + adresaStan +
-				 ", contact=" + contact + ", mail=" + mail + ", idNumber=" + idNum + ", title=" + title
-				+ ", yearsOfTail=" + yearsOfTail + ", subjects=" + subjects + "]";
+		return "Professor [ime=" + name + ", prezime=" + surname + ", rodjendan=" + birthday + ", adresaKanc=" + adresaKanc + ", adresaStan=" + adresaStan +
+				 ", kontakt_telefon=" + contact + ", mail=" + mail + ", brLicne=" + idNum + ", zvanje=" + title
+				+ ", godineStaza=" + yearsOfTail + ", predmeti=" + subjects + "]";
 	}
 
 	public void setAddressS(String street, String number, String city, String country) {

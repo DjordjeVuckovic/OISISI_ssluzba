@@ -293,21 +293,21 @@ public class EditProfessor extends JPanel{
                     } catch (ParseException ex) {
                         ex.printStackTrace();
                     }
-                    Professor ProfessorNew = new Professor();
-                    ProfessorNew.setName(txtFieldName.getText());
-                    ProfessorNew.setSurname(txtFieldSurName.getText());
-                    ProfessorNew.setBirthday(birthday);
-                    ProfessorNew.setContact(txtFieldNUm.getText());
-                    ProfessorNew.setMail(txtFieldE.getText());
-                    Professor.setIdNumber(txtFieldId.getText());
-                    ProfessorNew.setYearsTail(Integer.parseInt(txtFieldYearsTail.getText()) );
+                    Professor noviProf = new Professor();
+                    noviProf.setName(txtFieldName.getText());
+                    noviProf.setSurname(txtFieldSurName.getText());
+                    noviProf.setBirthday(birthday);
+                    noviProf.setContact(txtFieldNUm.getText());
+                    noviProf.setMail(txtFieldE.getText());
+                    valId.setIndex(noviProf.getIdNumber());
+                    noviProf.setYearsTail(Integer.parseInt(txtFieldYearsTail.getText()) );
                     Address adress= new Address();
                     adress.setStreet(txtAdressStreet.getText());
                     adress.setNumber(txtAdressNum.getText());
                     adress.setCity(txtAdressCity.getText());
                     adress.setCountry(txtAdressContry.getText());
 
-                    ProfessorNew.setAdresaKanc(adress);
+                    noviProf.setAddressS(adress);
 
 
                     if(txtFJComboBoxZvanje.getSelectedIndex()==0){
@@ -325,7 +325,7 @@ public class EditProfessor extends JPanel{
                     }
 
                     
-                    ProfessorController.getInstance().editProfessor(Professor,ProfessorNew);
+                    ProfessorController.getInstance().editProfessor(Professor,noviProf);
                     btAccept.setEnabled(false);
                 }
             }
@@ -344,7 +344,7 @@ public class EditProfessor extends JPanel{
 		 txtFieldDate.setText(dateFormat.format(Professor.getBirthday()));
 		 txtFieldNUm.setText(Professor.getContact());
 		 txtFieldE.setText(Professor.getMail());
-		 txtFieldId.setText(String.valueOf(Professor.getIdNumber()));
+		 txtFieldId.setText(Professor.getIdNumber());
 		 txtFieldYearsTail.setText(String.valueOf(Professor.getYearsTail()));
 		 
 		 if(Professor.getTitle()== Zvanje.ASISTENT) {
@@ -367,9 +367,9 @@ public class EditProfessor extends JPanel{
 		 }
 
 	    
-	    txtAdressStreet.setText(Professor.getAdresaKanc().getStreet());
-	    txtAdressNum.setText(Professor.getAdresaKanc().getNumber());
-	    txtAdressCity.setText(Professor.getAdresaKanc().getCity());
-	    txtAdressContry.setText(Professor.getAdresaKanc().getCountry());
+	    txtAdressStreet.setText(Professor.getAddressS().getStreet());
+	    txtAdressNum.setText(Professor.getAddressS().getNumber());
+	    txtAdressCity.setText(Professor.getAddressS().getCity());
+	    txtAdressContry.setText(Professor.getAddressS().getCountry());
 	}
 }
