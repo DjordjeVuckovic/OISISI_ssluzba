@@ -13,14 +13,13 @@ public class ProfessorsTable extends JTable {
         }
         return instance;
     }
-
-
-    public ProfessorsTable() {
+    private ProfessorsTable() {
+        setName("Profesori");
         setRowSelectionAllowed(true);
         setColumnSelectionAllowed(true);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setModel(new AbstractTableProfessors());
-        setName("Profesori");
+        setAutoCreateRowSorter(true);
     }
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
         Component c = super.prepareRenderer(renderer, row, column);
@@ -38,10 +37,19 @@ public class ProfessorsTable extends JTable {
         model.fireTableDataChanged();
         validate();
     }
+    public String getSelectedIndex(){
+        String index = (String) this.getValueAt(this.getSelectedRow(),0);
+        return index;
+    }
+    public int getSelectedIndexinTable(){
+        return this.getSelectedRow();
+    }
+
     public String getRowCnt(){
         int row = this.getSelectedRow();
         if(row==-1) return null;
         return (String) this.getValueAt(row,0);
     }
+
 
 }

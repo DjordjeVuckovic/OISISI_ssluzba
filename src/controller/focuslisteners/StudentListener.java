@@ -1,7 +1,8 @@
 package controller.focuslisteners;
 
 import controller.validation.CheckValidation;
-import gui.view.dialog.AddStudent;
+import gui.view.dialog.add.AddStudent;
+import gui.view.dialog.edit.student.EditStudent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -18,6 +19,8 @@ public class StudentListener implements FocusListener {
     private JTextField jTextField;
     private boolean validation;
     private AddStudent addStudent=null;
+    private EditStudent editStudent=null;
+    private String index=null;
     private int mode;
 
     public StudentListener(JLabel lb, JTextField txt){
@@ -34,6 +37,22 @@ public class StudentListener implements FocusListener {
         mode = 1;
 
     }
+    public StudentListener(JLabel lb,JTextField txt,EditStudent editStudent) {
+    	label=lb;
+        jTextField = txt;
+    	validation = true;
+    	this.editStudent = editStudent;
+    	mode=2;
+    }
+    public StudentListener(JLabel lb,JTextField txt,EditStudent editStudent,String index) {
+    	label=lb;
+        jTextField = txt;
+    	validation = true;
+    	this.editStudent = editStudent;
+    	this.index=index;
+    	mode=2;
+    }
+    public void setIndex(String index){this.index = index; }
     public boolean getValidation(){
         return validation;
     }
@@ -47,13 +66,14 @@ public class StudentListener implements FocusListener {
         return label.getText();
     }
     public void ValidateCell(){
-        if(!validation){
+        if(!validation) {
             label.setForeground(Color.RED);
             jTextField.setForeground(Color.RED);
             jTextField.setBorder(errorBorder);
-        }else {
-            jTextField.setBorder(correctBorder);
         }
+            else {
+                jTextField.setBorder(correctBorder);
+            }
     }
 
     @Override
@@ -71,9 +91,11 @@ public class StudentListener implements FocusListener {
         else if(getKey().equals("txtDate")){
             validation=CheckValidation.checkDate(getLine());
         }
+        /*
         else if(getKey().equals("txtAdress")){
             validation=CheckValidation.checkAdress(getLine());
         }
+        */
         else if(getKey().equals("txtNum")){
             validation=CheckValidation.checkPhone(getLine());
         }
@@ -81,14 +103,38 @@ public class StudentListener implements FocusListener {
             validation=CheckValidation.checkEmail(getLine());
         }
         else  if(getKey().equals("txtId")){
+        	if(mode==2) {
+        		if(getLine().trim().equals(index)) {
+        			validation=true;
+        		}
+        		else {
+        		validation=CheckValidation.checkIndex(getLine());
+        			}
+        	}
+        	else {
             validation=CheckValidation.checkIndex(getLine());
+        	}
         }
         else if(getKey().equals("txtAssignYear")){
             validation=CheckValidation.checkAssignYear(getLine());
         }
+        else if(getKey().equals("txtStreet")) {
+        	validation=CheckValidation.checkStreet(getLine());
+        }
+        else if(getKey().equals("txtStnum")) {
+        	validation=CheckValidation.checkStreetNum(getLine());
+        }
+		else if(getKey().equals("txtCity")) {
+			validation=CheckValidation.checkName(getLine());  	
+		}
+		else if(getKey().equals("txtContry")) {
+			validation=CheckValidation.checkName(getLine());	
+        }
         ValidateCell();
         if(mode==1){
             addStudent.EnableButt();
+        }else if(mode ==2){
+            editStudent.EnableButt();
         }
 
         }

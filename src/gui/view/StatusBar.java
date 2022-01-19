@@ -16,29 +16,33 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import static java.lang.Thread.sleep;
 
 
-
-public class StatusBar extends JPanel implements ActionListener {
+public class StatusBar extends JPanel {
 		
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
+
+	private static StatusBar instance = null;
+	public static StatusBar getInstance(){
+		if(instance==null)instance=new StatusBar();
+		return instance;
+	}
 	
 	private JLabel date;
+	private String switchName = new String();
+	JLabel name = new JLabel();
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat( "E  HH:mm:ss  dd.MM.yyyy." );
-	StatusBar() {
+	private StatusBar() {
 
 		this.setBackground(new Color(51, 153, 255));
-		JLabel name = new JLabel();
 		date = new JLabel(dateFormat.format(new GregorianCalendar().getTime()));
-		Timer timer = new Timer(1000, this);
-		timer.start();
+		//Timer timer = new Timer(1000, this);
+		//timer.start();
 		BoxLayout box = new BoxLayout(this, BoxLayout.X_AXIS);//new horizontally component
 		this.setLayout(box);
-		//this.add(name);
 		Thread nit = new Thread(() -> {
 			while(true) {
 				if(CentralBox.getInstance().getSelectedIndex()==0){
@@ -47,44 +51,25 @@ public class StatusBar extends JPanel implements ActionListener {
 				else if(CentralBox.getInstance().getSelectedIndex()==1){
 					name.setText(" Studentska Slu\u017eba- Predmeti");
 				}
-				
 				else if(CentralBox.getInstance().getSelectedIndex()==2){
-					name.setText(" Studentska Slu\u017eba- Profesori "); //Da li treba ovo?
+					name.setText(" Studentska Slu\u017eba- Profesori");
 				}
-
-				 
+				date.setText(dateFormat.format(new GregorianCalendar().getTime()));
 				try {
-
-					Thread.sleep(100);
+					sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 		});
 		nit.start();
+		name.setText("Studentska Slu\u017eba-"+switchName);
 		this.add(name,BoxLayout.X_AXIS);
 		this.add(Box.createHorizontalGlue());
 		this.add(Box.createHorizontalStrut(50));
 		this.setSize(100, 100);
 		this.add(date);
-
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
 
-		date.setText(dateFormat.format(new GregorianCalendar().getTime()));
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//Create panel 	
 
 }

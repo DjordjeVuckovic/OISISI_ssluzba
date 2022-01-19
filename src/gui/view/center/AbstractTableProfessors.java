@@ -1,14 +1,20 @@
 package gui.view.center;
 
-import model.BazaProfesora;
-
 import javax.swing.table.AbstractTableModel;
+
+import model.BazaProfesora;
+import model.BazaStudenata;
 
 public class AbstractTableProfessors extends AbstractTableModel {
     public AbstractTableProfessors(){}
     @Override
     public int getRowCount() {
-        return BazaProfesora.getInstance().getRowCount();
+        if(BazaProfesora.getInstance().isSearchMode()){
+            return BazaProfesora.getInstance().getSearchProfessors().size();
+        }
+        else {
+            return BazaProfesora.getInstance().getProfessors().size();
+        }
     }
 
     @Override
@@ -18,7 +24,7 @@ public class AbstractTableProfessors extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return BazaProfesora.getInstance().getValueAt(rowIndex , columnIndex);
+        return BazaProfesora.getInstance().getValueAt(rowIndex,columnIndex);
     }
     public String getColumnName(int column){
         return BazaProfesora.getInstance().getColumnName(column);

@@ -1,12 +1,19 @@
 package model;
 
+import gui.view.center.StudentsTable;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BazaStudenata implements AbstractModel {
 
 	private ArrayList<Student> students;
 	private ArrayList<String> colums;
 	private static BazaStudenata instance=null;
+	private boolean searchMode;
+	private ArrayList<Student> searchStudents;
 
 	public static BazaStudenata getInstance(){
 		if(instance ==null){
@@ -25,13 +32,22 @@ public class BazaStudenata implements AbstractModel {
 		this.colums.add("Godina studija");
 		this.colums.add("Status");
 		this.colums.add("Prosek");
-		
+
+		searchStudents = new ArrayList<>();
+		searchMode = false;
 	}
 	private void initStudents(){
 		this.students= new ArrayList<>();
-		students.add(new Student("Mika", "Mikic", "RA/8/2020", YearofStudy.I,9.8, Status.SAMOFINANSIRANJE ));
-		students.add(new Student("Igor", "Bodiroga", "RA/5/2017", YearofStudy.II,7.8, Status.SAMOFINANSIRANJE ));
+		Address address = new Address("N","N","N","N");
+		Date date = new Date();
+		Student st = new Student("Milan","Milic",date,address,"06125412","dsa@asdas","RA/1/2011",2011,YearofStudy.I,9.1,Status.SAMOFINANSIRANJE);
+		students.add(st);
+		students.add(new Student("Mika", "Mikic", "RA/8/2020", YearofStudy.I,9.8, Status.SAMOFINANSIRANJE));
+		students.add(new Student("Igor", "Bodiroga", "RA/5/2017", YearofStudy.II,7.8, Status.SAMOFINANSIRANJE));
 		students.add(new Student("Marko", "Markovic", "RA/88/2016", YearofStudy.I,10.0, Status.BUDZET ));
+		students.add(new Student("Mirko", "Mikic",date, "RA/1/2020", YearofStudy.IV,9.8, Status.SAMOFINANSIRANJE));
+		students.add(new Student("Igor", "Igic",date, "RA/8/2017", YearofStudy.II,7.8, Status.BUDZET));
+		students.add(new Student("Marko", "Kraljevic",date, "RA/888/2016", YearofStudy.III,10.0, Status.BUDZET));
 	}
 
 	public ArrayList<Student> getStudents() {
@@ -55,7 +71,13 @@ public class BazaStudenata implements AbstractModel {
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Student st=this.students.get(rowIndex);
+		Student st;
+		if(searchMode) {
+			st = this.searchStudents.get(rowIndex);
+		}
+		else{
+			st = students.get(rowIndex);
+		}
 		switch (columnIndex){
 			case 0:
 				return st.getIndex();
@@ -66,7 +88,12 @@ public class BazaStudenata implements AbstractModel {
 			case 3:
 				return st.getCurrentyear().name();
 			case 4:
-				return st.getNacinFinansiranja().name();
+					if(st.getNacinFinansiranja()==Status.BUDZET) {
+						return "B";
+					}
+					else{
+						return "S";
+					}
 			case 5:
 				return Double.toString(st.getavgGrade());
 			default:
@@ -98,7 +125,6 @@ public class BazaStudenata implements AbstractModel {
 	public void deleteStudentById(String id){
 		for(Student st: this.students){
 			if(st.getIndex().equals(id)){
-				//System.out.println(st);
 				this.students.remove(st);
 
 			}
@@ -113,5 +139,36 @@ public class BazaStudenata implements AbstractModel {
 			}
 		}
 		return ret;
+	}
+	public void editStudent(Student student,Student stN){
+		student.setName(stN.getName());
+		student.setSurname(stN.getSurname());
+		student.setCurrentyear(stN.getCurrentyear());
+		student.setFinansiranje(stN.getNacinFinansiranja());
+		student.setEnrollYear(stN.getEnrollYear());
+		student.setIndex(stN.getIndex());
+		student.setContactPhone(stN.getContactPhone());
+		student.setAvgGrade(stN.getavgGrade());
+		student.setAdress(student.getAddress().getStreet(),student.getAddress().getNumber(),student.getAddress().getCity(),student.getAddress().getCountry());
+	}
+	public boolean isSearchMode() {
+		return searchMode;
+	}
+
+	public void setSearchMode(boolean searchMode) {
+		this.searchMode = searchMode;
+	}
+
+	public ArrayList<Student> getSearchStudents() {
+		return searchStudents;
+	}
+
+	public void setSearchStudents(ArrayList<Student> searchStudents) {
+		this.searchStudents = searchStudents;
+	}
+	public void removeSearchSt(Student student){
+		if(searchMode){
+			searchStudents.remove(student);
+		}
 	}
 }

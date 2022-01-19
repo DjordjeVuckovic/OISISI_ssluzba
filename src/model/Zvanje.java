@@ -1,0 +1,10 @@
+package model;
+
+public enum Zvanje {
+    ASISTENT,
+    ASISTENT_SA_DOKTORATOM,
+    DOCENT,
+    VANREDNI_PROFESOR,
+    REDOVNI_PROFESOR,
+    SARADNIK_U_NASTAVI
+}

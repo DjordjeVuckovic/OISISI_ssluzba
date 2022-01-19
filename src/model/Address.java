@@ -1,12 +1,22 @@
 package model;
 
-public class Adress {
+public class Address {
 	private String street;
 	private String number;
 	private String city;
 	private String country;
-	
-	
+	private int idAddress;
+
+	public Address() {
+	}
+
+	public Address(String street, String number, String city, String country) {
+		this.street = street;
+		this.number = number;
+		this.city = city;
+		this.country = country;
+	}
+
 	public String getStreet() {
 		return street;
 	}

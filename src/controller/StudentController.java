@@ -4,11 +4,6 @@ import gui.view.center.StudentsTable;
 import model.BazaStudenata;
 import model.Student;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 public class StudentController {
     private static  StudentController instance = null;
     public static StudentController getInstance(){
@@ -28,6 +23,14 @@ public class StudentController {
         }
         Student student = BazaStudenata.getInstance().getStudentByRow(row);
         BazaStudenata.getInstance().deleteStudent(student);
+        StudentsTable.getInstance().refreshTable();
+    }
+    public Student getStudentByIndex(String index){
+        Student student = BazaStudenata.getInstance().getStudentById(index);
+        return student;
+    }
+    public void editStudent(Student student,Student stN){
+        BazaStudenata.getInstance().editStudent(student,stN);
         StudentsTable.getInstance().refreshTable();
     }
 

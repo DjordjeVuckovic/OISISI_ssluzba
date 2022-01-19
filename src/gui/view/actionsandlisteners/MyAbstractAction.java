@@ -1,19 +1,23 @@
-package controller.actionsandlisteners;
-
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-
-import javax.swing.*;
+package gui.view.actionsandlisteners;
 
 import controller.StudentController;
+import controller.SubjectController;
 import gui.view.CentralBox;
 import gui.view.MainWindow;
 import gui.view.ScaleImage;
 import gui.view.center.StudentsTable;
-import gui.view.center.ProfessorsTable;
-import gui.view.dialog.AddProfessor;
-import gui.view.dialog.AddStudent;
+import gui.view.center.SubjectTable;
+import gui.view.dialog.add.AddStudent;
+import gui.view.dialog.add.AddSubject;
+import gui.view.dialog.edit.EditSubject;
+import gui.view.dialog.edit.student.ChangeStudentDialog;
+import model.Student;
+import model.Subject;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImage {
 	
@@ -25,8 +29,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 	public ImageIcon scaleImg(ImageIcon ic) {
 		
 		Image scaleImage = ic.getImage().getScaledInstance(25, 25,Image.SCALE_DEFAULT);
-		ImageIcon ic1 = new ImageIcon(scaleImage);
-		return ic1;
+		return new ImageIcon(scaleImage);
 }
 	public  MyAbstractAction(String s) {
 		name=s;
@@ -106,54 +109,85 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 		// TODO Auto-generated method stub
 
 		if(name.equals("New")){
+			AddStudent addStudent = new AddStudent();
+			AddSubject addSubject = new AddSubject();
 			switch (CentralBox.getInstance().getSelectedIndex()){
 				case 0:
-					AddStudent.getInstance().setVisible(true);
+					addStudent.setVisible(true);
 					break;
 				case 1:
-					AddProfessor.getInstance().setVisible(true);
-				case 2:
-					//AddPredmet
+					addSubject.setVisible(true);
+					break;
+				//case 2:
+					//AddProffesor
+					//break;
 			}
 		}
 		else if(name.equals("Studenti")){
-			//
+			CentralBox.getInstance().setSelectedIndex(0);
 		}
-		else if(name.equals("Save")){
-			//
+		else if(name.equals("Predmeti")){
+			CentralBox.getInstance().setSelectedIndex(1);
 		}
+		else if(name.equals("Profesori")){
+			CentralBox.getInstance().setSelectedIndex(2);
+		}
+		else if(name.equals("Katedre")){
+		}
+		
+		
+		//else if(name.equals("Save")){
+			//
+		//}
 		else if(name.equals("Delete")) {
 			switch (CentralBox.getInstance().getSelectedIndex()) {
 				case 0:
 				int rowSelected = StudentsTable.getInstance().getSelectedRow();
-				if (rowSelected == -1) {
-					JOptionPane.showMessageDialog(null, "Niste odabrali studenta", "Upozorenje", 0, null);
-					break;
+				if (rowSelected <0) {
+					JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste odabrali studenta", "Upozorenje", 0, null);
+					return;
 				}
-				int choice = JOptionPane.showConfirmDialog(null,"Upozorenje", "Da li ste sigurni?",0);
+				int choice = JOptionPane.showConfirmDialog(MainWindow.getInstance(),"Upozorenje", "Da li ste sigurni?",0);
 				if(choice ==JOptionPane.YES_OPTION){
 					StudentController.getInstance().deleteStudent(rowSelected);
 				}
 				break;
 				case 1:
-					int rowSelectedP = ProfessorsTable.getInstance().getSelectedRow();
-					if (rowSelectedP == -1) {
-						JOptionPane.showMessageDialog(null, "Niste odabrali profesora", "Upozorenje", 0, null);
-						break;
-					}
-					int choiceP = JOptionPane.showConfirmDialog(null,"Upozorenje", "Da li ste sigurni?",0);
-					if(choiceP ==JOptionPane.YES_OPTION){
-						StudentController.getInstance().deleteStudent(rowSelectedP);
-					}
+					//delete sub
 					break;
 				//case 2:
-					//delete subj
+				//delete prof
+					//break;
 			}
 		}
 
 
-		else if(name.equals("Close")) {
+		//else if(name.equals("Close")) {
 			//exit;
+		//}
+		else if(name.equals("Edit")){
+			switch(CentralBox.getInstance().getSelectedIndex()){
+				case 0:
+				if(StudentsTable.getInstance().getSelectedIndexinTable()==-1){
+					JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali studenta za izmenu", "Upozorenje", 0, null);
+				}
+				else{
+					Student student = StudentController.getInstance().getStudentByIndex(StudentsTable.getInstance().getSelectedIndex());
+					ChangeStudentDialog changeStudentDialog = new ChangeStudentDialog(student);
+					changeStudentDialog.setVisible(true);
+				}
+				break;
+				case 1:
+					if(SubjectTable.getInstance().getSelectedRow()==-1){
+						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali premet za izmenu", "Upozorenje", 0, null);
+					}
+					else{
+						Subject subject = SubjectController.getInstance().findSubjectById(SubjectTable.getInstance().getSelectedId());
+						EditSubject editSubject = new EditSubject(subject.getIdS());
+						editSubject.setVisible(true);
+					}
+					break;
+			}
 		}
 		
 	}

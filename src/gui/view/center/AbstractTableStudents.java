@@ -8,7 +8,12 @@ public class AbstractTableStudents extends AbstractTableModel {
     public AbstractTableStudents(){}
     @Override
     public int getRowCount() {
-        return BazaStudenata.getInstance().getRowCount();
+        if(BazaStudenata.getInstance().isSearchMode()){
+            return BazaStudenata.getInstance().getSearchStudents().size();
+        }
+        else {
+            return BazaStudenata.getInstance().getStudents().size();
+        }
     }
 
     @Override

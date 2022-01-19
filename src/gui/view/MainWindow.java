@@ -1,10 +1,5 @@
 package gui.view;
 
-
-
-import gui.view.center.StudentsTable;
-import gui.view.center.SubjectTable;
-
 import java.awt.BorderLayout;
 
 import java.awt.Color;
@@ -43,17 +38,16 @@ public class MainWindow extends JFrame {
 		getContentPane().setBackground(Color.LIGHT_GRAY); 
 
 		MenuBar menu_bar= new MenuBar();
-		menu_bar.setBackground(new Color(51, 153, 255));
 		this.add(menu_bar);
 		this.setJMenuBar(menu_bar);
 		
 		this.add(new Toolbar(),BorderLayout.NORTH);
 
-		this.getContentPane().add(new StatusBar(),BorderLayout.SOUTH);
+		this.getContentPane().add(StatusBar.getInstance(),BorderLayout.SOUTH);
 
-		JPanel centralniPanel = new JPanel(new BorderLayout());
-		centralniPanel.add(CentralBox.getInstance());
-		this.add(centralniPanel, BorderLayout.CENTER);
+		JPanel centralPanel = new JPanel(new BorderLayout());
+		centralPanel.add(CentralBox.getInstance());
+		this.add(centralPanel, BorderLayout.CENTER);
 
 	}
 

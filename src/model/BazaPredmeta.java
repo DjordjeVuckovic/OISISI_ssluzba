@@ -12,16 +12,16 @@ public class BazaPredmeta implements AbstractModel {
         return instance;
     }
     private ArrayList<Subject> subjects;
-    private ArrayList<String> colums;
+    private ArrayList<String> columns;
 
     private BazaPredmeta(){
         initSubjects();
-        this.colums= new ArrayList<>();
-        this.colums.add("Šifra predmeta");
-        this.colums.add("Naziv predmeta");
-        this.colums.add("Broj ESPB bodova");
-        this.colums.add("Godina u kojoj se predmet izvodi");
-        this.colums.add("Semestar u kome se predmet izvodi");
+        this.columns = new ArrayList<>();
+        this.columns.add("Šifra predmeta");
+        this.columns.add("Naziv predmeta");
+        this.columns.add("Broj ESPB bodova");
+        this.columns.add("Godina u kojoj se predmet izvodi");
+        this.columns.add("Semestar u kome se predmet izvodi");
     }
     private void initSubjects(){
         this.subjects=new ArrayList<>();
@@ -30,6 +30,8 @@ public class BazaPredmeta implements AbstractModel {
         sub=new Subject("R02","Analiza 2",Semester.WINTER, YearofStudy.II,8);
         this.subjects.add(sub);
         sub=new Subject("R03","Nemacki",Semester.SUMMER, YearofStudy.I,2);
+        this.subjects.add(sub);
+        sub=new Subject("R04","Metode graviranja",Semester.SUMMER, YearofStudy.II,2);
         this.subjects.add(sub);
     }
 
@@ -41,17 +43,17 @@ public class BazaPredmeta implements AbstractModel {
         this.subjects = subjects;
     }
 
-    public ArrayList<String> getColums() {
-        return colums;
+    public ArrayList<String> getColumns() {
+        return columns;
     }
 
-    public void setColums(ArrayList<String> colums) {
-        this.colums = colums;
+    public void setColumns(ArrayList<String> columns) {
+        this.columns = columns;
     }
 
     @Override
     public int getColumnCount() {
-        return this.colums.size();
+        return this.columns.size();
     }
 
     @Override
@@ -61,7 +63,7 @@ public class BazaPredmeta implements AbstractModel {
 
     @Override
     public String getColumnName(int col) {
-        return this.colums.get(col);
+        return this.columns.get(col);
     }
 
     @Override
@@ -93,8 +95,28 @@ public class BazaPredmeta implements AbstractModel {
         }
         return true;
     }
+    public Subject findSubjectById(String id){
+        for(Subject subject :subjects){
+            if(subject.getIdS().equals(id)){
+                return subject;
+            }
+        }
+        return null;
+    }
     @Override
     public boolean isEmpty() {
         return false;
+    }
+
+    public  ArrayList<Subject> getPossibleSubject(Student student){
+        ArrayList<Subject> subs = new ArrayList<>();
+        for(Subject subject : subjects){
+            if(student.checkYears(subject,student)){
+                if(!student.checkExams(subject)){
+                    subs.add(subject);
+                }
+            }
+        }
+        return subs;
     }
 }

@@ -1,7 +1,5 @@
 package gui.view.center;
 
-import gui.view.CentralBox;
-
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
@@ -28,4 +26,14 @@ public class SubjectTable extends JTable {
         }
         return c;
     }
+    public String getSelectedId(){
+        String id = (String) this.getValueAt(this.getSelectedRow(),0);
+        return id;
+    }
+    public void refreshTable(){
+        AbstractTableSubject model =(AbstractTableSubject) this.getModel();
+        model.fireTableDataChanged();
+        validate();
+    }
+
 }
