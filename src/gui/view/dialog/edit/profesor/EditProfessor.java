@@ -25,9 +25,7 @@ import javax.swing.JTextField;
 import controller.ProfessorController;
 import controller.focuslisteners.ProfessorListener;
 import model.Address;
-import model.Status;
 import model.Professor;
-import model.YearofStudy;
 import model.Zvanje;
 
 public class EditProfessor extends JPanel{
@@ -37,7 +35,7 @@ public class EditProfessor extends JPanel{
 	@Serial
     private static final long serialVersionUID = 6674408014723983134L;
 	
-	private Professor Professor;
+	private Professor professor;
 	private JTextField txtFieldName;
 	private JTextField txtFieldSurName;
 	private JTextField txtFieldDate;
@@ -76,13 +74,13 @@ public class EditProfessor extends JPanel{
     
 
     private ArrayList<ProfessorListener> validations=new ArrayList<>();
-	public EditProfessor(Professor Professor) {
-		this.Professor=Professor;
+	public EditProfessor(Professor professor) { //ovo ovde je null
+		this.professor = professor ;
 		cellDim = new Dimension(200, 20);
         setLayout(new BorderLayout());
-        
         JLabel lbName = new JLabel("Ime*");
         lbName.setToolTipText("Unesite svoje ime");
+        
         lbName.setPreferredSize(cellDim);
         txtFieldName = new JTextField();
         txtFieldName.setToolTipText("Ime je niz karaktera");
@@ -131,15 +129,14 @@ public class EditProfessor extends JPanel{
         txtAdressCity.setName("txtCity");
         txtAdressCity.setPreferredSize(cellDim);
         lbAdressCity.setPreferredSize(cellDim);
-        
         JLabel lbAdressContry = new JLabel("Drzava*");
         txtAdressContry= new JTextField();
         txtAdressCity.setName("txtCity");
         txtAdressContry.setPreferredSize(cellDim);
         lbAdressContry.setPreferredSize(cellDim);
+
         txtAdressContry.setName("txtContry");
         JPanel panelA1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        
         panelA1.add(lbAdressStreet);
         panelA1.add(txtAdressStreet);
        
@@ -178,20 +175,20 @@ public class EditProfessor extends JPanel{
         panelE.add(txtFieldE);
 
         JLabel lbId = new JLabel("Broj licne karte*");
-        lbId.setToolTipText("Unesite svoj broj licne karte");
+        lbId.setToolTipText("Unesite broj licne karte");
         lbId.setPreferredSize(cellDim);
         txtFieldId = new JTextField();
         txtFieldId.setToolTipText("9 cifara");
         txtFieldId.setPreferredSize(cellDim);
         txtFieldId.setName("txtId");
-        ProfessorListener valId=new ProfessorListener(lbId,txtFieldId,this,Professor.getIdNumber());
+        ProfessorListener valId=new ProfessorListener(lbId,txtFieldId,this,professor.getIdNumber());
         txtFieldId.addFocusListener(valId);
         JPanel panelID = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelID.add(lbId);
         panelID.add(txtFieldId);
 
-        JLabel lbYearsTail = new JLabel("Godine Radnog Staza*");
-        lbYearsTail.setToolTipText("Unesite godine radnog staza");
+        JLabel lbYearsTail = new JLabel("Godine staza*");
+        lbYearsTail.setToolTipText("Unesite godine staza");
         lbYearsTail.setPreferredSize(cellDim);
         txtFieldYearsTail = new JTextField();
         txtFieldYearsTail.setToolTipText("Trazeni format:");
@@ -201,15 +198,15 @@ public class EditProfessor extends JPanel{
         panelY.add(lbYearsTail);
         panelY.add(txtFieldYearsTail);
         
-        JLabel lbZvanje = new JLabel("Zvanje*");
+        JLabel lbZvanje = new JLabel("Trenutna godina studija*");
         lbZvanje.setPreferredSize(cellDim);
-        String[] Zvanje = new String[]{"SARADNIK U NASTAVI", "ASISTENT", "DOCENT", "VANREDNI PROFESOR", "REDOVNI PROFESOR", "ASISTENT SA DOKTORATOM"};
+        String[] Zvanje = new String[]{"ASISTENT", "ASISTENT SA DOKTORATOM", "DOCENT", "VANREDNI PROFESOR", "REDOVNI PROFESOR", "SARADNIK U NASTAVI"};
         txtFJComboBoxZvanje = new JComboBox<>(Zvanje);
         txtFJComboBoxZvanje.setName("txtZvanje");
         txtFJComboBoxZvanje.setPreferredSize(cellDim);
-        JPanel panelZ = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelZ.add(lbZvanje);
-        panelZ.add(txtFJComboBoxZvanje);
+        JPanel panelCZ = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelCZ.add(lbZvanje);
+        panelCZ.add(txtFJComboBoxZvanje);
         
         initFields();
 
@@ -217,6 +214,7 @@ public class EditProfessor extends JPanel{
         ProfessorListener val= new ProfessorListener(lbName,txtFieldName,this);
         txtFieldName.addFocusListener(val);
         validations.add(val);
+        
         val =new ProfessorListener(lbSurname,txtFieldSurName,this);
         txtFieldSurName.addFocusListener(val);
         validations.add(val);
@@ -229,6 +227,7 @@ public class EditProfessor extends JPanel{
         val=new ProfessorListener(lbDate,txtFieldDate,this);
         txtFieldDate.addFocusListener(val);
         validations.add(val);
+        
         validations.add(valId);
         val=new ProfessorListener(lbNum,txtFieldNUm,this);
         txtFieldNUm.addFocusListener(val);
@@ -261,8 +260,7 @@ public class EditProfessor extends JPanel{
         CentralPanel.add(panelA2);
         CentralPanel.add(panelA3);
         CentralPanel.add(panelA4);
-        CentralPanel.add(panelZ);
-
+        CentralPanel.add(panelCZ);
         this.add(CentralPanel,BorderLayout.CENTER);
         
         //button
@@ -293,39 +291,40 @@ public class EditProfessor extends JPanel{
                     } catch (ParseException ex) {
                         ex.printStackTrace();
                     }
-                    Professor noviProf = new Professor();
-                    noviProf.setName(txtFieldName.getText());
-                    noviProf.setSurname(txtFieldSurName.getText());
-                    noviProf.setBirthday(birthday);
-                    noviProf.setContact(txtFieldNUm.getText());
-                    noviProf.setMail(txtFieldE.getText());
-                    valId.setIndex(noviProf.getIdNumber());
-                    noviProf.setYearsTail(Integer.parseInt(txtFieldYearsTail.getText()) );
+                    Professor ProfessorNew = new Professor();
+                    ProfessorNew.setName(txtFieldName.getText());
+                    ProfessorNew.setSurname(txtFieldSurName.getText());
+                    ProfessorNew.setBirthday(birthday);
+                    ProfessorNew.setContact(txtFieldNUm.getText());
+                    ProfessorNew.setMail(txtFieldE.getText());
+                    ProfessorNew.setIdNumber(txtFieldId.getText());
+                    valId.setIdNumber(ProfessorNew.getIdNumber());
+                    ProfessorNew.setYearsTail(Integer.parseInt(txtFieldYearsTail.getText()) );
                     Address adress= new Address();
                     adress.setStreet(txtAdressStreet.getText());
                     adress.setNumber(txtAdressNum.getText());
                     adress.setCity(txtAdressCity.getText());
                     adress.setCountry(txtAdressContry.getText());
 
-                    noviProf.setAddressS(adress);
+                    ProfessorNew.setAddressS(adress);
 
+ 
 
                     if(txtFJComboBoxZvanje.getSelectedIndex()==0){
-                        Professor.setTitle(model.Zvanje.SARADNIK_U_NASTAVI);
+                    	professor.setTitle(model.Zvanje.SARADNIK_U_NASTAVI);
                     } else if(txtFJComboBoxZvanje.getSelectedIndex()==1){
-                        Professor.setTitle(model.Zvanje.ASISTENT);
+                    	professor.setTitle(model.Zvanje.ASISTENT);
                     }else if(txtFJComboBoxZvanje.getSelectedIndex()==2){
-                        Professor.setTitle(model.Zvanje.DOCENT);
+                    	professor.setTitle(model.Zvanje.DOCENT);
                     }else if(txtFJComboBoxZvanje.getSelectedIndex()==3){
-                        Professor.setTitle(model.Zvanje.VANREDNI_PROFESOR);
+                    	professor.setTitle(model.Zvanje.VANREDNI_PROFESOR);
                     }else if(txtFJComboBoxZvanje.getSelectedIndex()==4){
-                        Professor.setTitle(model.Zvanje.REDOVNI_PROFESOR);
+                    	professor.setTitle(model.Zvanje.REDOVNI_PROFESOR);
                     }else if(txtFJComboBoxZvanje.getSelectedIndex()==5){
-                        Professor.setTitle(model.Zvanje.ASISTENT_SA_DOKTORATOM);
+                    	professor.setTitle(model.Zvanje.ASISTENT_SA_DOKTORATOM);
                     }
 
-                    
-                    ProfessorController.getInstance().editProfessor(Professor,noviProf);
+                    ProfessorController.getInstance().editProfessor(professor ,ProfessorNew);
                     btAccept.setEnabled(false);
                 }
             }
@@ -338,38 +337,40 @@ public class EditProfessor extends JPanel{
         
 	}
 	private void initFields(){
-		 txtFieldName.setText(Professor.getName());
-		 txtFieldSurName.setText(Professor.getSurname());
+		 txtFieldName.setText(professor.getName());
+		 txtFieldSurName.setText(professor.getSurname());
 		 DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-		 txtFieldDate.setText(dateFormat.format(Professor.getBirthday()));
-		 txtFieldNUm.setText(Professor.getContact());
-		 txtFieldE.setText(Professor.getMail());
-		 txtFieldId.setText(Professor.getIdNumber());
-		 txtFieldYearsTail.setText(String.valueOf(Professor.getYearsTail()));
+		 txtFieldDate.setText(dateFormat.format(professor.getBirthday()));
+		 txtFieldNUm.setText(professor.getContact());
+		 txtFieldE.setText(professor.getMail());
+		 txtFieldId.setText(professor.getIdNumber());
+		 txtFieldYearsTail.setText(String.valueOf(professor.getYearsTail()));
 		 
-		 if(Professor.getTitle()== Zvanje.ASISTENT) {
+		 if(professor.getTitle()== Zvanje.ASISTENT) {
 		 txtFJComboBoxZvanje.setSelectedIndex(0);
 		 }
-		 if(Professor.getTitle()== Zvanje.SARADNIK_U_NASTAVI) {
+		 if(professor.getTitle()== Zvanje.SARADNIK_U_NASTAVI) {
+			 txtFJComboBoxZvanje.setSelectedIndex(0);
+			 }
+		 if(professor.getTitle()== Zvanje.ASISTENT) {
 			 txtFJComboBoxZvanje.setSelectedIndex(1);
-		 }
-		 if(Professor.getTitle()== Zvanje.DOCENT) {
+			 }
+		 if(professor.getTitle()== Zvanje.DOCENT) {
 			 txtFJComboBoxZvanje.setSelectedIndex(2);
-		 }
-		 if(Professor.getTitle()== Zvanje.VANREDNI_PROFESOR) {
+			 }
+		 if(professor.getTitle()== Zvanje.VANREDNI_PROFESOR) {
 			 txtFJComboBoxZvanje.setSelectedIndex(3);
-		 }
-		 if(Professor.getTitle()== Zvanje.REDOVNI_PROFESOR) {
+			 }
+		 if(professor.getTitle()== Zvanje.REDOVNI_PROFESOR) {
 			 txtFJComboBoxZvanje.setSelectedIndex(4);
-		 }
-		 if(Professor.getTitle()== Zvanje.ASISTENT_SA_DOKTORATOM) {
+			 }
+		 if(professor.getTitle()== Zvanje.ASISTENT_SA_DOKTORATOM) {
 			 txtFJComboBoxZvanje.setSelectedIndex(5);
-		 }
-
+			 }
 	    
-	    txtAdressStreet.setText(Professor.getAddressS().getStreet());
-	    txtAdressNum.setText(Professor.getAddressS().getNumber());
-	    txtAdressCity.setText(Professor.getAddressS().getCity());
-	    txtAdressContry.setText(Professor.getAddressS().getCountry());
+	    txtAdressStreet.setText(professor.getAddressS().getStreet());
+	    txtAdressNum.setText(professor.getAddressS().getNumber());
+	    txtAdressCity.setText(professor.getAddressS().getCity());
+	    txtAdressContry.setText(professor.getAddressS().getCountry());
 	}
 }

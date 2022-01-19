@@ -208,7 +208,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali profesora za izmenu", "Upozorenje", 0, null);
 					}
 					else{
-						Professor profesor = ProfessorController.getInstance().getProfessorById(ProfessorsTable.getInstance().getSelectedId());
+						Professor profesor = ProfessorController.getInstance().getProfessorById(ProfessorsTable.getInstance().getSelectedIndex());
 						ChangeProfessorDialog changeProfessorDialog = new ChangeProfessorDialog(profesor);
 						changeProfessorDialog.setVisible(true);
 					}

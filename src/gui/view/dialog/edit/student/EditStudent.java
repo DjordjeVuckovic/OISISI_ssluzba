@@ -225,6 +225,7 @@ public class EditStudent extends JPanel{
         StudentListener val= new StudentListener(lbName,txtFieldName,this);
         txtFieldName.addFocusListener(val);
         validations.add(val);
+        
         val =new StudentListener(lbSurname,txtFieldSurName,this);
         txtFieldSurName.addFocusListener(val);
         validations.add(val);
@@ -237,6 +238,7 @@ public class EditStudent extends JPanel{
         val=new StudentListener(lbDate,txtFieldDate,this);
         txtFieldDate.addFocusListener(val);
         validations.add(val);
+        
         validations.add(valId);
         val=new StudentListener(lbNum,txtFieldNUm,this);
         txtFieldNUm.addFocusListener(val);

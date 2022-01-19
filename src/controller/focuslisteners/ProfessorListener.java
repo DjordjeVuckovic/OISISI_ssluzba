@@ -20,7 +20,7 @@ public class ProfessorListener implements FocusListener {
     private boolean validation;
     private AddProfessor addProfessor=null;
     private EditProfessor editProfessor=null;
-    private String index=null;
+    private String id=null;
     private int mode;
 
     public ProfessorListener(JLabel lb, JTextField txt){
@@ -37,21 +37,22 @@ public class ProfessorListener implements FocusListener {
         mode = 1;
 
     }
-
-	
-    public ProfessorListener(JLabel lb,JTextField txt,EditProfessor
-    		editProfessor) { label=lb; jTextField = txt; validation = true;
-    		this.editProfessor = editProfessor; mode=2; }
-	 
-    public ProfessorListener(JLabel lb,JTextField txt,EditProfessor editProfessor,String index) {
+    public ProfessorListener(JLabel lb,JTextField txt,EditProfessor editProfessor) {
     	label=lb;
         jTextField = txt;
     	validation = true;
     	this.editProfessor = editProfessor;
-    	this.index=index;
     	mode=2;
     }
-    public void setIndex(String index){this.index = index; }
+    public ProfessorListener(JLabel lb,JTextField txt,EditProfessor editProfessor,String id) {
+    	label=lb;
+        jTextField = txt;
+    	validation = true;
+    	this.editProfessor = editProfessor;
+    	this.id=id;
+    	mode=2;
+    }
+    public void setIdNumber(String id){this.id= id; }
     public boolean getValidation(){
         return validation;
     }
@@ -90,20 +91,22 @@ public class ProfessorListener implements FocusListener {
         else if(getKey().equals("txtDate")){
             validation=CheckValidation.checkDate(getLine());
         }
-        
-		
-		else if(getKey().equals("txtId")){
-		    validation=true; }
-		 
-        
+        /*
+        else if(getKey().equals("txtAdress")){
+            validation=CheckValidation.checkAdress(getLine());
+        }
+        */
         else if(getKey().equals("txtNum")){
             validation=CheckValidation.checkPhone(getLine());
         }
         else if(getKey().equals("txtEmail")){
             validation=CheckValidation.checkEmail(getLine());
         }
-        else if(getKey().equals("txtYearsTail")){
-            validation=CheckValidation.checkGodRadnog(getLine());
+        else  if(getKey().equals("txtId")){
+        	validation=CheckValidation.checkIdNumber(getLine());
+        }
+        else if(getKey().equals("txtAssignYear")){
+            validation=CheckValidation.checkAssignYear(getLine());
         }
         else if(getKey().equals("txtStreet")) {
         	validation=CheckValidation.checkStreet(getLine());
@@ -120,8 +123,10 @@ public class ProfessorListener implements FocusListener {
         ValidateCell();
         if(mode==1){
             addProfessor.EnableButt();
-		}else if(mode ==2){
-			editProfessor.EnableButt();
-		}	  
-     }
+        }else if(mode ==2){
+            editProfessor.EnableButt();
+        }
+
+        }
+
 }

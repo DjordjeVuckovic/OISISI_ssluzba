@@ -173,11 +173,12 @@ public class CheckValidation {
         return true;
     }
     
-	/*
-	 * public static boolean checkIdNumber(int id){ return
-	 * id.matches("([a-zA-Z0-9]+\\.?)*[a-zA-Z0-9]@[a-z0-9]+"); }
-	 */
- 
+    
+	public static boolean checkIdNumber(String id){
+		return id.matches("([a-zA-Z0-9]+\\.?)*[a-zA-Z0-9]@[a-z0-9]+");
+	}
+	
+
     
     public static boolean checkGodRadnog(String text) {
     	if(text.isEmpty() || text.isBlank() ) {

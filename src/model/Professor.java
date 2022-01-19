@@ -6,8 +6,8 @@ import java.util.Date;
 public class Professor {
 	
 	// POLJA
-	private String surname;
 	private String name;
+	private String surname;
 	private Date birthday;
 	private Address adresaStan;
 	private Address adresaKanc;
@@ -19,26 +19,17 @@ public class Professor {
 	private ArrayList<Subject> subjects;
 	
 	
-	public Professor(String surname, String name, Zvanje title, String mail) {
-		this.surname = surname;
+	public Professor(String name, String surname, Zvanje title, String mail) {
 		this.name = name;
-		this.title = title;
-		this.mail = mail;
-		subjects = new ArrayList<>();
-	}
-	
-	public Professor(String surname, String name, Date birthday, Zvanje title, String mail) {
 		this.surname = surname;
-		this.name = name;
-		this.birthday = birthday;
 		this.title = title;
 		this.mail = mail;
 		subjects = new ArrayList<>();
 	}
 	
 	public Professor() {subjects = new ArrayList<>();}
-	public Professor(String ime, String prezime, Date datum_rodjenja, Address adresaStan, String kontaktTelefon, String emailAdresa, Address adresaKancelarije,
-					 String brLicne, int godStaza, Zvanje zvanje) {
+	public Professor(String ime, String prezime, Date datum_rodjenja, Address adresaStan, String kontaktTelefon, String emailAdresa, Address adresaKanc,
+					 String idNum, int godStaza, Zvanje zvanje) {
 		super();
 		this.name = ime;
 		this.surname = prezime;
@@ -46,8 +37,8 @@ public class Professor {
 		this.adresaStan = adresaStan;
 		this.contact = kontaktTelefon;
 		this.mail = emailAdresa;
-		this.adresaKanc = adresaKancelarije;
-		this.idNum = brLicne;
+		this.adresaKanc = adresaKanc;
+		this.idNum = idNum;
 		this.yearsOfTail = godStaza;
 		this.title = zvanje;
 		subjects = new ArrayList<>();
@@ -106,8 +97,8 @@ public class Professor {
 	public String getIdNumber() {
 		return idNum;
 	}
-	public void setIdNumber(String idNumber) {
-		this.idNum = idNumber;
+	public void setIdNumber(String brLicne) {
+		this.idNum = brLicne;
 	}
 	
 	public Zvanje getTitle() {
