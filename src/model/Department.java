@@ -33,6 +33,13 @@ public class Department {
 	public void setProfessor_list(ArrayList<Professor> professor_list) {
 		this.professors = professor_list;
 	}
+
+	public Department(){};
+	public Department(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
 	
 	
 

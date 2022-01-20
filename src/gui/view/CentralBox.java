@@ -4,8 +4,7 @@ package gui.view;
 
 import controller.compare.StudentAvgGradeCmp;
 import controller.compare.StudentIdComparator;
-import gui.view.center.StudentsTable;
-import gui.view.center.SubjectTable;
+import gui.view.center.*;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -26,7 +25,6 @@ import javax.swing.table.TableRowSorter;
 
 import controller.compare.StudentAvgGradeCmp;
 import controller.compare.StudentIdComparator;
-import gui.view.center.ProfessorsTable;
 import gui.view.center.StudentsTable;
 import gui.view.center.SubjectTable;
 
@@ -61,19 +59,24 @@ public class CentralBox extends JTabbedPane {
 	JScrollPane jScrollPaneProfessors= new JScrollPane(ProfessorsTable.getInstance());
 	panelProfessors.add(jScrollPaneProfessors,BorderLayout.CENTER);
 	this.addTab("Professors",panelProfessors);
-	
 
-	sortRows();
+	JPanel pDep= new JPanel(new BorderLayout());
+	JScrollPane jDep= new JScrollPane(DepartmentsTable.getInstance());
+	pDep.add(jDep,BorderLayout.CENTER);
+	this.addTab("Departments",pDep);
+
+	sortStudentRows();
 	this.addChangeListener(new ChangeListener() {
 		@Override
 		public void stateChanged(ChangeEvent e) {
 			StudentsTable.getInstance().refreshTable();
 			SubjectTable.getInstance().refreshTable();
 			ProfessorsTable.getInstance().refreshTable();
+			DepartmentsTable.getInstance().refreshTable();
 		}
 	});
 }
-	public void  sortRows(){
+	public void  sortStudentRows(){
 		TableRowSorter tableRowSorter = new TableRowSorter(StudentsTable.getInstance().getModel());
 		tableRowSorter.setComparator(0, new StudentIdComparator());
 		tableRowSorter.setComparator(5,new StudentAvgGradeCmp());

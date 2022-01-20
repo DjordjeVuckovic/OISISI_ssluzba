@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import controller.DepartmentController;
 import controller.ProfessorController;
 
 import controller.StudentController;
@@ -18,9 +19,12 @@ import controller.SubjectController;
 import gui.view.CentralBox;
 import gui.view.MainWindow;
 import gui.view.ScaleImage;
+import gui.view.center.DepartmentsTable;
 import gui.view.center.ProfessorsTable;
 import gui.view.center.StudentsTable;
 import gui.view.center.SubjectTable;
+import gui.view.department.AddDepartment;
+import gui.view.department.EditDepartment;
 import gui.view.dialog.add.AddProfessor;
 import gui.view.dialog.add.AddStudent;
 import gui.view.dialog.add.AddSubject;
@@ -30,6 +34,7 @@ import gui.view.dialog.edit.student.ChangeStudentDialog;
 
 import gui.view.dialog.edit.profesor.ChangeProfessorDialog;
 import gui.view.dialog.edit.student.ChangeStudentDialog;
+import model.Department;
 import model.Professor;
 
 import model.Student;
@@ -133,8 +138,6 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 		if (name.equals("New")) {
 			AddStudent addStudent = new AddStudent();
 			AddSubject addSubject = new AddSubject();
-
-
 			AddProfessor addProfessor = new AddProfessor();
 
 			switch (CentralBox.getInstance().getSelectedIndex()) {
@@ -147,18 +150,17 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					break;
 				case 2:
 					addProfessor.setVisible(true);
-
 					break;
+				case 3:
+					AddDepartment addDepartment=  new AddDepartment();
+					addDepartment.setVisible(true);
 			}
 		} else if (name.equals("Studenti")) {
 			CentralBox.getInstance().setSelectedIndex(0);
 		}
 
-		//else if(name.equals("Profesori")){
-		//
-		//}
 		else if (name.equals("Katedre")) {
-
+			CentralBox.getInstance().setSelectedIndex(3);
 		} else if (name.equals("Profesori")) {
 			CentralBox.getInstance().setSelectedIndex(2);
 
@@ -231,6 +233,14 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 						ChangeProfessorDialog changeProfessorDialog = new ChangeProfessorDialog(profesor);
 						changeProfessorDialog.setVisible(true);
 
+					}
+				case 3:
+					if (DepartmentsTable.getInstance().getSelectedRow() == -1) {
+						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali katedru za izmenu", "Upozorenje", 0, null);
+					} else {
+						Department dep = DepartmentController.getInstance().getDepById(DepartmentsTable.getInstance().getSelectedIndex());
+						EditDepartment editDepartment = new EditDepartment(dep);
+						editDepartment.setVisible(true);
 					}
 					break;
 			}

@@ -11,6 +11,7 @@ public class BazaProfesora implements AbstractModel {
 	private boolean searchMode;
 	private ArrayList<Professor> searchProfessors;
 
+
 	public static BazaProfesora getInstance(){
 		if(instance ==null){
 			instance = new BazaProfesora();
@@ -36,7 +37,7 @@ public class BazaProfesora implements AbstractModel {
 		this.Professors= new ArrayList<>();
 		Date date = new Date();
 		Address address = new Address("N","N","N","N");
-		Professor professor = new Professor("Marko","Markodic",date,address,"0","aa@aa",address,"112",12,Zvanje.ASISTENT);
+		Professor professor = new Professor("Marko","Markodic",date,address,"0","aa@aa",address,"112",12,Zvanje.REDOVNI_PROFESOR);
 		Professors.add(professor);
 		//Professor pr = new Professor("Milan","Milic",Zvanje.DOCENT,"volim@oisisi");
 		//Professors.add(pr);
@@ -181,5 +182,18 @@ public class BazaProfesora implements AbstractModel {
 			searchProfessors.remove(Professor);
 		}
 	}
-	
+
+	public ArrayList<Professor> checkForBosses(){
+		ArrayList<Professor> profs = new ArrayList<>();
+		for(Professor professor:Professors) {
+			if (professor.getTitle().equals(Zvanje.REDOVNI_PROFESOR) || professor.getTitle().equals(Zvanje.VANREDNI_PROFESOR)) {
+				if (professor.getYearsTail() >=5){
+					profs.add(professor);
+				}
+			}
+		}
+		return profs;
+	}
+
+
 }

@@ -70,7 +70,7 @@ public class FailedSubjects extends JPanel{
                     JOptionPane.showMessageDialog(parent, "Please select subject from table", "Warning", 0, null);
                 }else {
                     int choice = JOptionPane.showConfirmDialog(MainWindow.getInstance(),"Upozorenje", "Da li ste sigurni?",0);
-                    if(choice ==JOptionPane.YES_OPTION){
+                    if(choice == JOptionPane.YES_OPTION){
                         Subject sub = failedSubjects.get(selectedRow);
                         failedSubjects.remove(selectedRow);
                         student.removeFailedExam(sub);
@@ -97,14 +97,8 @@ public class FailedSubjects extends JPanel{
             }
         });
 
-
-
-
         this.add(buttonPane,BorderLayout.NORTH);
         this.add(cenPane,BorderLayout.CENTER);
-
-
-
     }
     private class FailedSubjectsTable extends  JTable{
         public FailedSubjectsTable(){

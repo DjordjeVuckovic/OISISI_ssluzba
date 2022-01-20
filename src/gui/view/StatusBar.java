@@ -46,10 +46,18 @@ public class StatusBar extends JPanel {
 		Thread nit = new Thread(() -> {
 			while(true) {
 				if(CentralBox.getInstance().getSelectedIndex()==0){
-					name.setText(" Studentska Slu\u017eba- Studenti");
+
+					name.setText(" Studentska Slu\u017eba - Studenti");
 				}
 				else if(CentralBox.getInstance().getSelectedIndex()==1){
 					name.setText(" Studentska Slu\u017eba- Predmeti");
+
+				}
+				else if(CentralBox.getInstance().getSelectedIndex()==2){
+					name.setText("Studentska Slu\u017eba- Profesori");
+				}
+				else if(CentralBox.getInstance().getSelectedIndex()==3){
+					name.setText("Studentska Slu\u017eba- Katedre");
 				}
 				date.setText(dateFormat.format(new GregorianCalendar().getTime()));
 				try {
@@ -60,7 +68,6 @@ public class StatusBar extends JPanel {
 			}
 		});
 		nit.start();
-		name.setText("Studentska Slu\u017eba-"+switchName);
 		this.add(name,BoxLayout.X_AXIS);
 		this.add(Box.createHorizontalGlue());
 		this.add(Box.createHorizontalStrut(50));
