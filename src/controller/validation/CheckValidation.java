@@ -1,6 +1,7 @@
 package controller.validation;
 
 import model.BazaPredmeta;
+import model.BazaProfesora;
 import model.BazaStudenata;
 
 import java.text.ParseException;
@@ -171,6 +172,21 @@ public class CheckValidation {
         
         return true;
     }
+    
+    
+	public static boolean checkIdNumber(String id){
+		return id.matches("([a-zA-Z0-9]+\\.?)*[a-zA-Z0-9]@[a-z0-9]+");
+	}
+	
 
+    
+    public static boolean checkGodRadnog(String text) {
+    	if(text.isEmpty() || text.isBlank() ) {
+    		return false;
+    	}
+    	return true;
+    }
+    
+    
     }
 

@@ -6,95 +6,144 @@ import java.util.Date;
 public class Professor {
 	
 	// POLJA
-	private String surname;
 	private String name;
+	private String surname;
 	private Date birthday;
-	private Address adress;
+	private Address adresaStan;
+	private Address adresaKanc;
 	private String contact;
 	private String mail;
 	private String idNum;
-	private String title;
+	private Zvanje title;
 	private int yearsOfTail;
-	private ArrayList<Subject> subjects = new ArrayList<Subject>();
+	private ArrayList<Subject> subjects;
 	
 	
-	
-	public Professor() {}
-	public Professor(String surname, String name, Date birthday, Address adress, String contact, String mail,
-					 String idNumber, String title, int yearsOfTail, ArrayList<Subject> subjects) {
-		super();
-		this.surname = surname;
+	public Professor(String name, String surname, Zvanje title, String mail) {
 		this.name = name;
-		this.birthday = birthday;
-		this.adress = adress;
-		this.contact = contact;
-		this.mail = mail;
-		this.idNum = idNumber;
+		this.surname = surname;
 		this.title = title;
-		this.yearsOfTail = yearsOfTail;
-		this.subjects = subjects;
+		this.mail = mail;
+		subjects = new ArrayList<>();
 	}
+	
+	public Professor(String name, String surname, Zvanje title, String mail, String idNum) {
+		this.name = name;
+		this.surname = surname;
+		this.title = title;
+		this.mail = mail;
+		this.idNum = idNum;
+		subjects = new ArrayList<>();
+	}
+	
+	public Professor() {subjects = new ArrayList<>();}
+	public Professor(String ime, String prezime, Date datum_rodjenja, Address adresaStan, String kontaktTelefon, String emailAdresa, Address adresaKanc,
+					 String idNum, int godStaza, Zvanje zvanje) {
+		super();
+		this.name = ime;
+		this.surname = prezime;
+		this.birthday = datum_rodjenja;
+		this.adresaStan = adresaStan;
+		this.contact = kontaktTelefon;
+		this.mail = emailAdresa;
+		this.adresaKanc = adresaKanc;
+		this.idNum = idNum;
+		this.yearsOfTail = godStaza;
+		this.title = zvanje;
+		subjects = new ArrayList<>();
+	}
+	
+	
+	public Address getAddressK() {
+		return adresaKanc;
+	}
+	public void setAddressK(Address adresaKanc) {
+		this.adresaKanc = adresaKanc;
+	}
+	
+	public Address getAddressS() {
+		return adresaStan;
+	}
+	public void setAddressS(Address adresaStan) {
+		this.adresaStan = adresaStan;
+	}
+	
 	public String getSurname() {
 		return surname;
 	}
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public Date getBirthday() {
 		return birthday;
 	}
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	public Address getAdress() {
-		return adress;
-	}
-	public void setAdress(Address adress) {
-		this.adress = adress;
-	}
+	
 	public String getContact() {
 		return contact;
 	}
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
+	
 	public String getMail() {
 		return mail;
 	}
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+	
 	public String getIdNumber() {
 		return idNum;
 	}
-	public void setIdNumber(String idNumber) {
-		this.idNum = idNumber;
+	public void setIdNumber(String brLicne) {
+		this.idNum = brLicne;
 	}
-	public String getTitle() {
+	
+	public Zvanje getTitle() {
 		return title;
 	}
-	public void setTitle(String title) {
+	public void setTitle(Zvanje title) {
 		this.title = title;
 	}
+	
+	public int getYearsTail() {
+		return yearsOfTail;
+	}
+	public void setYearsTail(int yearsTail) {
+		this.yearsOfTail = yearsTail;
+	}
+	
 	public ArrayList<Subject> getSubjects() {
 		return subjects;
 	}
 	public void setSubjects(ArrayList<Subject> subjects) {
 		this.subjects = subjects;
 	}
+	
 	@Override
 	public String toString() {
-		return "Professor [surname=" + surname + ", name=" + name + ", birthday=" + birthday + ", adress=" + adress
-				+ ", contact=" + contact + ", mail=" + mail + ", idNumber=" + idNum + ", title=" + title
-				+ ", yearsOfTail=" + yearsOfTail + ", subjects=" + subjects + "]";
+		return "Professor [ime=" + name + ", prezime=" + surname + ", rodjendan=" + birthday + ", adresaKanc=" + adresaKanc + ", adresaStan=" + adresaStan +
+				 ", kontakt_telefon=" + contact + ", mail=" + mail + ", brLicne=" + idNum + ", zvanje=" + title
+				+ ", godineStaza=" + yearsOfTail + ", predmeti=" + subjects + "]";
 	}
 
-			
+	public void setAddressS(String street, String number, String city, String country) {
+		this.adresaStan = new Address(street,number,city,country);
+	}
+	
+	public void setAddressK(String street, String number, String city, String country) {
+		this.adresaKanc = new Address(street,number,city,country);
+	}
 	
 }
