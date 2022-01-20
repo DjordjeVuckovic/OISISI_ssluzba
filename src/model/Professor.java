@@ -146,4 +146,18 @@ public class Professor {
 		this.adresaKanc = new Address(street,number,city,country);
 	}
 	
+	public  void addSubjects(Subject subject){
+		subjects.add(subject);
+	}
+	public void removeSubjects(Subject subject){
+		subjects.remove(subject);
+	}
+	
+	public boolean checkProf(Subject subject, Professor profesor) {
+		boolean ret = false;
+		if(subject.getPredmeti().equals(profesor.getSubjects())) {
+			ret = true;
+		}
+		return ret;
+	}
 }

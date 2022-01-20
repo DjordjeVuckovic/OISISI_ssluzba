@@ -14,11 +14,22 @@ public class Subject {
 		private int pointsESPB;
 		private ArrayList<Student> passed = new ArrayList<Student>();
 		private ArrayList<Student> failed = new ArrayList<Student>();
+		private ArrayList<Professor> predmeti = new ArrayList<Professor>();
 
 
 	public Subject(){
 
 	}
+	
+	public Subject(String id, String nameSub, Semester semester, YearofStudy yearOfStudy, int pointsESPB, Professor professor) {
+		this.idS = id;
+		this.nameSub = nameSub;
+		this.semester = semester;
+		this.yearOfStudy = yearOfStudy;
+		this.pointsESPB = pointsESPB;
+		this.professor = professor;
+	}
+	
 	public Subject(String id, String nameSub, Semester semester, YearofStudy yearOfStudy, int pointsESPB) {
 		this.idS = id;
 		this.nameSub = nameSub;
@@ -89,6 +100,14 @@ public class Subject {
 
 	public void setFailed(ArrayList<Student> failed) {
 		this.failed = failed;
+	}
+	
+	public ArrayList<Professor> getPredmeti() {
+		return predmeti;
+	}
+
+	public void setPredmeti(ArrayList<Professor> predmeti) {
+		this.predmeti = predmeti;
 	}
 
 

@@ -119,4 +119,14 @@ public class BazaPredmeta implements AbstractModel {
         }
         return subs;
     }
+    
+    public  ArrayList<Subject> getPossibleSubjectP(Professor profesor){
+        ArrayList<Subject> subs = new ArrayList<>();
+        for(Subject subject : subjects){
+            if(profesor.checkProf(subject,profesor)){
+                 subs.add(subject);
+            }
+        }
+        return subs;
+    }
 }
