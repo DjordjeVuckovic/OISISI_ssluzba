@@ -22,7 +22,7 @@ public class ChangeProfessorDialog extends MyDialog {
         EditProfessor editProfessor = new EditProfessor(Professor);
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Informacije",editProfessor);
-
+        this.add(tabbedPane);
 		/*
 		 * Subjects Subjects = new Subjects(Professor);
 		 * tabbedPane.addTab("Predmeti",Subjects ); this.add(tabbedPane);

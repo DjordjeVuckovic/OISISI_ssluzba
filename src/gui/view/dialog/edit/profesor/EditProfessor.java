@@ -181,8 +181,10 @@ public class EditProfessor extends JPanel{
         txtFieldId.setToolTipText("9 cifara");
         txtFieldId.setPreferredSize(cellDim);
         txtFieldId.setName("txtId");
-        ProfessorListener valId=new ProfessorListener(lbId,txtFieldId,this,professor.getIdNumber());
+        ProfessorListener valId = new ProfessorListener(lbId,txtFieldId,this);
         txtFieldId.addFocusListener(valId);
+        //ProfessorListener valId=new ProfessorListener(lbId,txtFieldId,this,professor.getIdNumber());
+        //txtFieldId.addFocusListener(valId);
         JPanel panelID = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelID.add(lbId);
         panelID.add(txtFieldId);

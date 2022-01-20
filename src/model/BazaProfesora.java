@@ -26,6 +26,7 @@ public class BazaProfesora implements AbstractModel {
 		this.colums.add("Prezime");
 		this.colums.add("Zvanje");
 		this.colums.add("Email");
+		this.colums.add("Licna karta");
 
 		searchProfessors = new ArrayList<>();
 		searchMode = false;
@@ -33,13 +34,16 @@ public class BazaProfesora implements AbstractModel {
 	}
 	private void initProfessors(){
 		this.Professors= new ArrayList<>();
-
-		Professor pr = new Professor("Milan","Milic",Zvanje.DOCENT,"volim@oisisi");
-		Professors.add(pr);
-		Professors.add(new Professor("Mika", "Mikic", Zvanje.SARADNIK_U_NASTAVI, "mika@gmail.com"));
-		Professors.add(new Professor("Vladimir", "Radic", Zvanje.ASISTENT, "vladimir@gmail.com"));
-		Professors.add(new Professor("Marko", "Markic", Zvanje.DOCENT , "milos@gmail.com"));
-		Professors.add(new Professor("Darko", "Darkic", Zvanje.ASISTENT_SA_DOKTORATOM, "minjule@gmail.com"));
+		Date date = new Date();
+		Address address = new Address("N","N","N","N");
+		Professor professor = new Professor("Marko","Markodic",date,address,"0","aa@aa",address,"112",12,Zvanje.ASISTENT);
+		Professors.add(professor);
+		//Professor pr = new Professor("Milan","Milic",Zvanje.DOCENT,"volim@oisisi");
+		//Professors.add(pr);
+		//Professors.add(new Professor("Mika", "Mikic", Zvanje.SARADNIK_U_NASTAVI, "mika@gmail.com"));
+		//Professors.add(new Professor("Vladimir", "Radic", Zvanje.ASISTENT, "vladimir@gmail.com"));
+		//Professors.add(new Professor("Marko", "Markic", Zvanje.DOCENT , "milos@gmail.com"));
+		//Professors.add(new Professor("Darko", "Darkic", Zvanje.ASISTENT_SA_DOKTORATOM, "minjule@gmail.com"));
 	}
 
 	public ArrayList<Professor> getProfessors() {
@@ -93,6 +97,8 @@ public class BazaProfesora implements AbstractModel {
 				}
 			case 3:
 				return pr.getMail();
+			case 4:
+				return pr.getIdNumber();
 			default:
 				return null;
 		}
@@ -103,12 +109,14 @@ public class BazaProfesora implements AbstractModel {
 		return false;
 	}
 
-	public Professor getProfessorById(String id){ //da li ovde mora jedna od ove 4 metode?
+	public Professor getProfessorById(String id){ //da li ovde mora jedna od ove 4 metode?--ovde nesto ne valja ne vrati profesora
 		for (Professor pr: this.Professors){
 			if(pr.getIdNumber().equals(id)){
 				return pr;
 			}
 		}
+		//return null;
+		//Professor  pr= Professors.get(0);
 		return null;
 	}
 	
