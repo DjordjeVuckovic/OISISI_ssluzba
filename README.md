@@ -1,18 +1,25 @@
 # OISISI_ssluzba
 Projekat iz predmeta OISISI Studentska Služba Fakulteta Tehničkih Nauka
 
-#Student1: Đordđe Vučković RA/8/2019 #Student2:  Dusan Vukovic RA/16/2019
+# Student1: Đordđe Vučković RA/8/2019 #Student2:  Dusan Vukovic RA/16/2019
 JDK 17.01
 
 Glavne promene u preporucenoj raspodeli i nasoj su:
-**Student1:
- #prikaz_nepolozenih_ispita
- #upis_ocene
- #ponistavanje_ocene
+**Student1: 
+
+# prikaz_nepolozenih_ispita
+ 
+# upis_ocene
+ 
+# ponistavanje_ocene
+ 
 **Student2:
- #profesor_predaje_predmete
- #dodavanje_predmeta_profesoru
- #uklanjanje_predmeta_sa_profesora
+
+# profesor_predaje_predmete
+ 
+# dodavanje_predmeta_profesoru
+ 
+# uklanjanje_predmeta_sa_profesora
 
 
 Tacna raspodela posla:
