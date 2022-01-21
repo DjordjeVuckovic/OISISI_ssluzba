@@ -16,17 +16,13 @@ import java.awt.*;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.TableRowSorter;
 
-import controller.compare.StudentAvgGradeCmp;
-import controller.compare.StudentIdComparator;
 import gui.view.center.StudentsTable;
 import gui.view.center.SubjectTable;
+import gui.view.center.ProfessorsTable;
 
 
 public class CentralBox extends JTabbedPane {
@@ -75,12 +71,47 @@ public class CentralBox extends JTabbedPane {
 			DepartmentsTable.getInstance().refreshTable();
 		}
 	});
+	
+	sortProfRows();
+	this.addChangeListener(new ChangeListener() {
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			StudentsTable.getInstance().refreshTable();
+			SubjectTable.getInstance().refreshTable();
+			ProfessorsTable.getInstance().refreshTable();
+			DepartmentsTable.getInstance().refreshTable();
+		}
+	});
+	
+	sortSubjRows();
+	this.addChangeListener(new ChangeListener() {
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			StudentsTable.getInstance().refreshTable();
+			SubjectTable.getInstance().refreshTable();
+			ProfessorsTable.getInstance().refreshTable();
+			DepartmentsTable.getInstance().refreshTable();
+		}
+	});
+	
 }
 	public void  sortStudentRows(){
 		TableRowSorter tableRowSorter = new TableRowSorter(StudentsTable.getInstance().getModel());
 		tableRowSorter.setComparator(0, new StudentIdComparator());
 		tableRowSorter.setComparator(5,new StudentAvgGradeCmp());
 		StudentsTable.getInstance().setRowSorter(tableRowSorter);
+	}
+	
+	public void  sortProfRows(){
+		TableRowSorter tableRowSorter = new TableRowSorter(ProfessorsTable.getInstance().getModel());
+		ProfessorsTable.getInstance().setRowSorter(tableRowSorter);
+	
+	}
+	
+	public void  sortSubjRows(){
+		TableRowSorter tableRowSorter = new TableRowSorter(SubjectTable.getInstance().getModel());
+		SubjectTable.getInstance().setRowSorter(tableRowSorter);
+	
 	}
 
 
