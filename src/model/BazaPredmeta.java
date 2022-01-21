@@ -39,6 +39,8 @@ public class BazaPredmeta implements AbstractModel, Serializable {
         this.subjects.add(sub);
         sub=new Subject("R04","Metode graviranja",Semester.SUMMER, YearofStudy.II,2);
         this.subjects.add(sub);
+        //ovako radis Subject(String idS, String nameSub, Semester semester, YearofStudy yearOfStudy, Professor professor, int pointsESPB)
+       subjects.add(new Subject("p1","osnove programiranja",Semester.WINTER,YearofStudy.I,BazaProfesora.getInstance().getProfessorById("321321321"),7));
     }
 
     public ArrayList<Subject> getSubjects() {

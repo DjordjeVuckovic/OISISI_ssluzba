@@ -20,6 +20,16 @@ public class Subject implements Serializable{
 	public Subject(){
 
 	}
+
+	public Subject(String idS, String nameSub, Semester semester, YearofStudy yearOfStudy, Professor professor, int pointsESPB) {
+		this.idS = idS;
+		this.nameSub = nameSub;
+		this.semester = semester;
+		this.yearOfStudy = yearOfStudy;
+		this.professor = professor;
+		this.pointsESPB = pointsESPB;
+	}
+
 	public Subject(String id, String nameSub, Semester semester, YearofStudy yearOfStudy, int pointsESPB) {
 		this.idS = id;
 		this.nameSub = nameSub;

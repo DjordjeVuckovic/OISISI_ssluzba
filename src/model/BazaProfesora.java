@@ -1,5 +1,7 @@
 package model;
 
+import serial.Serialization;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -65,6 +67,13 @@ public class BazaProfesora implements AbstractModel, Serializable {
 		Professors.add(new Professor("Marici\u0107", "Branko",new GregorianCalendar(1973, 0, 18).getTime() ,new Address("Nikole Tesle","56","Novi Sad","Srbija"),office,"021/487-265", "branko.maricic@mailinator.com",  "400400444", Zvanje.DOCENT,22 ));
 		Professors.add(new Professor("Lukovic", "Branislav",new GregorianCalendar(1982, 3, 8).getTime() ,new Address("Bulevar Patrijaha Pavla","3","Beograd","Srbija"),office,"021/159-478", "branislav.lukovic@mailinator.com",  "500500544", Zvanje.REDOVNI_PROFESOR,9));
 		Professors.add(new Professor("Obradovi\u0107", "Branimir",new GregorianCalendar(1979, 0, 17).getTime() ,new Address("\u0160afarikova","2","Novi Sad","Srbija"),office,"021/922-333", "branimir.obradovic@mailinator.com",  "600600644", Zvanje.DOCENT,17 ));
+		deserijalizacija();
+	}
+
+	private void deserijalizacija(){
+		BazaPodataka bp = Serialization.readFile();
+		if(bp !=null)
+			this.Professors = bp.getProfessors();
 	}
 
 	public ArrayList<Professor> getProfessors() {
