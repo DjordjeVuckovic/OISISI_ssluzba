@@ -1,10 +1,14 @@
 package model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 
-public class Department {
+public class Department implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 6732445630585765214L;
 	private String id;
 	private String name;
 	private Professor director;

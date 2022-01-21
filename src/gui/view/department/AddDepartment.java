@@ -15,7 +15,7 @@ public class AddDepartment extends JDialog {
 
     public AddDepartment() {
         super(MainWindow.getInstance(), "Dodavanje katedre");
-        this.setSize(300,450);
+        this.setSize(430,500);
         this.setBackground(Color.WHITE);
         this.setResizable(false);
         this.setLocationRelativeTo(MainWindow.getInstance());

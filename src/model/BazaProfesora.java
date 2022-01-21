@@ -1,9 +1,14 @@
 package model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BazaProfesora implements AbstractModel {
+public class BazaProfesora implements AbstractModel, Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 2875967262004282589L;
 
 	private ArrayList<Professor> Professors;
 	private ArrayList<String> colums;

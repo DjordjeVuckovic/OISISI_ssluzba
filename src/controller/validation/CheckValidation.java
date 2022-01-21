@@ -61,22 +61,23 @@ public class CheckValidation {
             return true;
         }
     public static boolean checkPhone(String text) {
-        // unos brojeva u rasponu od 3 do 12
+        // unos brojeva telefona u mora biti rasponu od 3 do 14
         if(text.isEmpty() || text.isBlank()) {
             return false;
         }
-        if(text.length()<3 || text.length()>12){
+        if(text.length()<3 || text.length()>14){
             return false;
         }
-        for(int i = 0; i < text.length(); i++) {
-            if(!Character.isDigit(text.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
+
+        //	0nn/nnn-nnn or 0nn/nnn-nnnn or 0nn/nnn-nnnnn for domestic numbers
+        //    +MMMnn/nnn-nnn or +MMMnn/nnn-nnnn or +MMMnn/nnn-nnnnn for foreign numbers
+
+        text = text.trim();
+        //return num.matches("0[1-9][0-9][/][0-9]{3}-[0-9]{3,5}");
+        return text.matches("(\\+[1-9][0-9]{3}|0)[0-9][0-9][/]?[0-9]{2,5}-?[0-9]{3,6}");
     }
     public static boolean checkEmail(String mail){
-        return mail.matches("([a-zA-Z0-9]+\\.?)*[a-zA-Z0-9]@[a-z0-9]+");
+        return mail.matches("([a-zA-Z0-9]+\\.?)*[a-zA-Z0-9]+@[a-z0-9]+(\\.[a-z]{2,3})+");
     }
     public static boolean checkAvgGrade(String prosek) {
         prosek = prosek.trim();
@@ -142,7 +143,6 @@ public class CheckValidation {
         if(text.isEmpty() || text.isBlank()) {
             return false;
         }
-
         // treba da bude jedinstvena
         if(!BazaPredmeta.getInstance().UniqueIdS(text)) {
             return false;

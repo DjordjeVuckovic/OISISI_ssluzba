@@ -142,7 +142,7 @@ public class AddStudent  extends MyDialog {
         lbNum.setToolTipText("Unesite svoj broj telefona");
         lbNum.setPreferredSize(cellDim);
         txtFieldNUm = new JTextField();
-        txtFieldNUm.setToolTipText("Broj telefona mora da ima najmanje 3 cifre,a najvise 12");
+        txtFieldNUm.setToolTipText("Tra\u017Eeni format(po\u017Eeljno): 0nn/nnn-nnn(niz) ili +MMMnn/nnn-nnn(niz) ");
         txtFieldNUm.setPreferredSize(cellDim);
         txtFieldNUm.setName("txtNum");
         JPanel panelNum = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -192,7 +192,7 @@ public class AddStudent  extends MyDialog {
         panelCY.add(lbCurrentYear);
         panelCY.add(txtFJComboBoxCurrentYear);
 
-        JLabel lbStatus = new JLabel("Naèin finansiranja*");
+        JLabel lbStatus = new JLabel("Na\u010Din finansiranja*");
         lbStatus.setPreferredSize(cellDim);
         String[] status = new String[]{"Budzet", "Samofinansiranje"};
         JComboBox<String> CBStatus = new JComboBox<>(status);

@@ -234,9 +234,11 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 						changeProfessorDialog.setVisible(true);
 
 					}
+					break;
 				case 3:
 					if (DepartmentsTable.getInstance().getSelectedRow() == -1) {
 						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali katedru za izmenu", "Upozorenje", 0, null);
+						return;
 					} else {
 						Department dep = DepartmentController.getInstance().getDepById(DepartmentsTable.getInstance().getSelectedIndex());
 						EditDepartment editDepartment = new EditDepartment(dep);

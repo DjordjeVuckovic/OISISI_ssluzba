@@ -1,8 +1,12 @@
 package model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BazaKatedri implements AbstractModel{
+public class BazaKatedri implements AbstractModel, Serializable {
+    @Serial
+    private static final long serialVersionUID = -801304646706947325L;
     private ArrayList<Department> departments;
     private ArrayList<String> columns;
     private static BazaKatedri instance = null;

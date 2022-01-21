@@ -1,8 +1,14 @@
 package model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BazaPredmeta implements AbstractModel {
+public class BazaPredmeta implements AbstractModel, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 3513823599632994126L;
+
     private static BazaPredmeta instance = null;
 
     public static BazaPredmeta getInstance() {

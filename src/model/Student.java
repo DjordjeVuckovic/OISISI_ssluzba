@@ -1,10 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 
-public class Student {
+public class Student implements Serializable {
+
+	private static final long serialVersionUID = 3482140730556264519L;
 	// POLJA
 		private String name;
 		private String surname;
@@ -45,7 +48,7 @@ public class Student {
 	}
 	public Student(){passedExams = new ArrayList<>();failedExams = new ArrayList<>();}
 		public Student(String ime, String prezime, Date datum_rodjenja, Address address, String kontakt_telefon,
-					   String email, String index, int godina_upisa, YearofStudy tren_god_studiranja, double pr_ocena, Status n_finansiranja) {
+					   String email, String index, int godina_upisa, YearofStudy tren_god_studiranja, Status n_finansiranja) {
 			super();
 			this.name=ime;
 			this.surname =prezime;
@@ -56,7 +59,6 @@ public class Student {
 			this.index=index;
 			this.enrollYear =godina_upisa;
 			this.currentYear =tren_god_studiranja;
-			this.avgGrade =pr_ocena;
 			this.status=n_finansiranja;
 			passedExams = new ArrayList<>();
 			failedExams = new ArrayList<>();

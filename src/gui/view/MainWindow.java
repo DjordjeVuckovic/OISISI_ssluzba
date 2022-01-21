@@ -32,10 +32,11 @@ public class MainWindow extends JFrame {
 		setResizable(true);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		ImageIcon img_student= new ImageIcon("img/student.jpg");
 		setIconImage(img_student.getImage());
-		getContentPane().setBackground(Color.LIGHT_GRAY); 
+		getContentPane().setBackground(Color.LIGHT_GRAY);
+		this.addWindowListener(new MyWindowListener());
 
 		MenuBar menu_bar= new MenuBar();
 		this.add(menu_bar);

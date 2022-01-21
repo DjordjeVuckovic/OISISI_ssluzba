@@ -1,10 +1,14 @@
 package model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Grade {
+public class Grade implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 8630380230244350235L;
 	private Student studentPassed;
 	private Subject subject;
 	private int grade;

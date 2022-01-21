@@ -1,14 +1,22 @@
 package model;
 
 import gui.view.center.StudentsTable;
+import serial.Serialization;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serial;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
-public class BazaStudenata implements AbstractModel {
+public class BazaStudenata implements AbstractModel, Serializable {
 
+	@Serial
+	private static final long serialVersionUID = -1783935642755010733L;
 	private ArrayList<Student> students;
 	private ArrayList<String> colums;
 	private static BazaStudenata instance=null;
@@ -38,18 +46,25 @@ public class BazaStudenata implements AbstractModel {
 	}
 	private void initStudents(){
 		this.students= new ArrayList<>();
-		Address address = new Address("N","N","N","N");
+		Address address1 = new Address("N","N","N","N");
 		Date date = new Date();
-		Student st = new Student("Milan","Milic",date,address,"06125412","dsa@asdas","RA/1/2011",2011,YearofStudy.I,9.1,Status.SAMOFINANSIRANJE);
+		Student st = new Student("Milan","Milic",date,address1,"06125412","dsa@asdas","RA/1/2011",2011,YearofStudy.I,Status.SAMOFINANSIRANJE);
 		students.add(st);
-		students.add(new Student("Mika", "Mikic", "RA/8/2020", YearofStudy.I,9.8, Status.SAMOFINANSIRANJE));
-		students.add(new Student("Igor", "Bodiroga", "RA/5/2017", YearofStudy.II,7.8, Status.SAMOFINANSIRANJE));
-		students.add(new Student("Marko", "Markovic", "RA/88/2016", YearofStudy.I,10.0, Status.BUDZET ));
-		students.add(new Student("Mirko", "Mikic",date, "RA/1/2020", YearofStudy.IV,9.8, Status.SAMOFINANSIRANJE));
-		students.add(new Student("Igor", "Igic",date, "RA/8/2017", YearofStudy.II,7.8, Status.BUDZET));
-		students.add(new Student("Marko", "Kraljevic",date, "RA/888/2016", YearofStudy.III,10.0, Status.BUDZET));
+		Address address= new Address();
+		students.add(new Student("Marko","Milosevic",new GregorianCalendar(2001, 2, 12).getTime(),address.generateAddress(1),"021/333-555", "marko.milosevic@mailinator.com","RA/2/2020", 2020,YearofStudy.I,Status.BUDZET));
+		students.add(new Student("Marija","Milić",new GregorianCalendar(2000, 0, 12).getTime(),address.generateAddress(2),"021/555-2222", "marija.milic@mailinator.com","RA/3/2019", 2019,YearofStudy.II,Status.SAMOFINANSIRANJE));
+		students.add(new Student("Nikola","Nikolic",new GregorianCalendar(2001, 7, 30).getTime(),address.generateAddress(3),"021/135-463", "nikola.nikolic@mailinator.com","RA/3/2017", 2017,YearofStudy.I,Status.BUDZET));
+		students.add(new Student("Pera","Peric",new GregorianCalendar(1995, 5, 7).getTime(),address.generateAddress(4),"021/903-463", "pera.peric@mailinator.com","RA/134/2015", 2015,YearofStudy.III,Status.BUDZET ));
+		students.add(new Student("Sofija","Ilic",new GregorianCalendar(1999, 4, 6).getTime(),address.generateAddress(5),"021/731-067", "sofija.ilic@mailinator.com","RA/5/2019", 2019,YearofStudy.III,Status.BUDZET));
+		students.add(new Student("Martina","Lukic",new GregorianCalendar(1999, 4, 16).getTime(),address.generateAddress(6),"011/4333-800", "martina.lukic@mailinator.com","RA/8/2018", 2018,YearofStudy.III,Status.SAMOFINANSIRANJE));
+		students.add(new Student("Stojan","Stojakovic",new GregorianCalendar(1999, 4, 16).getTime(),address.generateAddress(7),"011/4333-800", "martina.lukic@mailinator.com","RA 8/2018", 2018,YearofStudy.III,Status.SAMOFINANSIRANJE));
+		deserijalizacija();
 	}
-
+	private void deserijalizacija(){
+		BazaPodataka bp = Serialization.readFile();
+		if(bp !=null)
+		this.students = bp.getStudents();
+	}
 	public ArrayList<Student> getStudents() {
 		return students;
 	}

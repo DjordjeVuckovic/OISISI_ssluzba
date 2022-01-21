@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 
-public class Subject {
-
+public class Subject implements Serializable{
+		private static final long serialVersionUID =  2906642554793891389L;
 		private String idS;
 		private String nameSub;
 		private Semester semester;
