@@ -5,14 +5,14 @@ Projekat iz predmeta OISISI Studentska Služba Fakulteta Tehničkih Nauka
 JDK 17.01
 
 Glavne promene u preporucenoj raspodeli i nasoj su:
-#Student1:
-#prikaz_nepolozenih_ispita
-#upis_ocene
-#ponistavanje_ocene
-#Student2:
-#profesor_predaje_predmete
-#dodavanje_predmeta_profesoru
-#uklanjanje_predmeta_sa_profesora
+**Student1:
+ #prikaz_nepolozenih_ispita
+ #upis_ocene
+ #ponistavanje_ocene
+**Student2:
+ #profesor_predaje_predmete
+ #dodavanje_predmeta_profesoru
+ #uklanjanje_predmeta_sa_profesora
 
 
 Tacna raspodela posla:
