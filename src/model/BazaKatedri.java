@@ -90,7 +90,13 @@ public class BazaKatedri implements AbstractModel, Serializable {
         }
         return null;
 	}
-
+    public void deleteProf(String id){
+        for(Department dep: departments){
+            if(dep.getDirector().getIdNumber().equals(id)){
+                dep.setDirector(null);
+            }
+        }
+    }
     public Department getDepartmanByRow(int row){
 		return departments.get(row);
 	}

@@ -1,6 +1,7 @@
 package controller;
 
 import gui.view.center.ProfessorsTable;
+import model.BazaKatedri;
 import model.BazaProfesora;
 import model.Professor;
 import model.Subject;
@@ -39,7 +40,9 @@ public class ProfessorController {
         BazaProfesora.getInstance().deleteProfessor(Professor);
         //referencijalna zavisnost sa predmetom na kojem predaje i sa listom trazenih
         BazaProfesora.getInstance().deleteSearched(Professor);
-        BazaProfesora.getInstance().deleteProfFromSubject(Professor);
+       // BazaProfesora.getInstance().deleteProfFromSubject(Professor);
+        //sa katedrama
+        BazaKatedri.getInstance().deleteProf(Professor.getIdNumber());
         ProfessorsTable.getInstance().refreshTable();
     }
     
