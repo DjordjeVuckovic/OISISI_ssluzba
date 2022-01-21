@@ -141,6 +141,11 @@ public class Student implements Serializable {
 	public ArrayList<Grade> getPassedExams() {
 		return passedExams;
 	}
+
+	public void setPassedExams(ArrayList<Grade> passedExams) {
+		this.passedExams = passedExams;
+	}
+
 	public void addGrade(Grade grade){
 		passedExams.add(grade);
 	}

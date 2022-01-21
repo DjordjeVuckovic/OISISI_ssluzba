@@ -28,6 +28,8 @@ public class BazaStudenata implements AbstractModel, Serializable {
 	
 	private BazaStudenata() {
 		initStudents();
+		initFPassed();
+		CalculateAvgGrade();
 		this.colums= new ArrayList<>();
 		this.colums.add("Indeks");
 		this.colums.add("Ime");
@@ -41,8 +43,6 @@ public class BazaStudenata implements AbstractModel, Serializable {
 	}
 	private void initStudents(){
 		this.students= new ArrayList<>();
-
-
 		Address address= new Address();
 		Student st = new Student("Milan","Milic",new GregorianCalendar(2001, 9, 21).getTime(),address.generateAddress(2),"011/8172-372","milos.milic@mailinator.com","SW/12/2021",2021,YearofStudy.I,Status.SAMOFINANSIRANJE);
 		students.add(st);
@@ -53,8 +53,49 @@ public class BazaStudenata implements AbstractModel, Serializable {
 		students.add(new Student("Sofija","Ilic",new GregorianCalendar(1999, 4, 6).getTime(),address.generateAddress(5),"021/731-067", "sofija.ilic@mailinator.com","RA/5/2019", 2019,YearofStudy.III,Status.BUDZET));
 		students.add(new Student("Martina","Lukic",new GregorianCalendar(1999, 4, 16).getTime(),address.generateAddress(6),"011/4333-800", "martina.lukic@mailinator.com","RA/8/2018", 2018,YearofStudy.III,Status.SAMOFINANSIRANJE));
 		students.add(new Student("Stojan","Stojakovic",new GregorianCalendar(1999, 4, 16).getTime(),address.generateAddress(7),"011/4333-800", "martina.lukic@mailinator.com","RA 8/2018", 2018,YearofStudy.III,Status.SAMOFINANSIRANJE));
-		CalculateAvgGrade();
 		deserijalizacija();
+	}
+	private void initFPassed(){
+		Address office = new Address("Nikole Pa\u0161i\u0107a","6a","Novi Sad","Srbija");
+		Professor p2 = new Professor("Mirkovic", "Nikola",new GregorianCalendar(1978, 0, 1).getTime() ,new Address("Nikole Tesle","56","Novi Sad","Srbija"),office,"021/368-456", "nikola.mirkovic@mailinator.com",  "321321321", Zvanje.REDOVNI_PROFESOR,22);
+		Professor p7 = new Professor("Mihajlovic", "Branislav",new GregorianCalendar(1980, 5, 28).getTime() ,new Address("Tolstojeva","31", "Novi Sad","Srbija"),office,"021/778-323", "branislav.mihajlovic@mailinator.com",  "559585632", Zvanje.REDOVNI_PROFESOR,13 );
+
+		Subject s1 = new Subject("p1","osnove programiranja",Semester.WINTER,YearofStudy.I,BazaProfesora.getInstance().getProfessorById("321321321"),7);
+		Subject s5=new Subject("p5","matematika",Semester.SUMMER,YearofStudy.I,null,11);
+		Subject s3 = new Subject("p3","algoritmi i strukture podataka",Semester.SUMMER,YearofStudy.II,BazaProfesora.getInstance().getProfessorById("321321321"),9);
+		Subject s16 = new Subject("p16","konkurentno programiranje",Semester.SUMMER,YearofStudy.II,BazaProfesora.getInstance().getProfessorById("559585632"),9);
+		Subject s15 = new Subject("p15","paralelno programiranje",Semester.WINTER,YearofStudy.II,BazaProfesora.getInstance().getProfessorById("559585632"),8);
+
+		ArrayList<Grade> subjectsPassed4 = new ArrayList();
+		Grade grade45 = new Grade(this.getStudentById("RA/134/2015"),s5,10,new GregorianCalendar(2017, 11, 12).getTime());
+		Grade grade43 = new Grade(this.getStudentById("RA/134/2015"),s3,9,new GregorianCalendar(2019, 9, 10).getTime());
+		Grade grade41 = new Grade(this.getStudentById("RA/134/2015"),s1,8,new GregorianCalendar(2020, 10, 11).getTime());
+		subjectsPassed4.add(grade45);
+		subjectsPassed4.add(grade43);
+		subjectsPassed4.add(grade41);
+		this.getStudentById("RA/134/2015").setPassedExams(subjectsPassed4);
+
+		ArrayList<Grade> subjectsPassed2 = new ArrayList();
+		Grade grade21 = new Grade(this.getStudentById("RA/3/2019"),s1,10,new GregorianCalendar(2020, 10, 20).getTime());
+		Grade grade25 = new Grade(this.getStudentById("RA/3/2019"),s5,10,new GregorianCalendar(2021, 9, 30).getTime());
+		subjectsPassed2.add(grade21);
+		subjectsPassed4.add(grade25);
+		this.getStudentById("RA/3/2019").setPassedExams(subjectsPassed2);
+
+		ArrayList<Grade> subjectsPassed15 = new ArrayList();
+		Grade grade1515 = new Grade(this.getStudentById("RA/11/2018"),s15,7,new GregorianCalendar(2021, 0, 1).getTime());
+		Grade grade1516 = new Grade(this.getStudentById("RA/11/2018"),s16,10,new GregorianCalendar(2021, 0, 1).getTime());
+		subjectsPassed15.add(grade1515);
+		subjectsPassed15.add(grade1516);
+		this.getStudentById("RA/11/2018").setPassedExams(subjectsPassed15);
+
+		ArrayList<Grade> subjectsPassed16 = new ArrayList();
+		Grade grade1615 = new Grade(this.getStudentById("RA/12/2018"),s15,10,new GregorianCalendar(2018, 0, 12).getTime());
+		Grade grade1616 = new Grade(this.getStudentById("RA/12/2018"),s16,9,new GregorianCalendar(2019, 1, 4).getTime());
+		subjectsPassed16.add(grade1615);
+		subjectsPassed16.add(grade1616);
+		this.getStudentById("RA/12/2018").setPassedExams(subjectsPassed16);
+
 	}
 	private void deserijalizacija(){
 		BazaPodataka bp = Serialization.readFile();
