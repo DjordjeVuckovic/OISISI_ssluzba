@@ -120,6 +120,18 @@ public class ProfessorListener implements FocusListener {
 		else if(getKey().equals("txtContry")) {
 			validation=CheckValidation.checkName(getLine());	
         }
+		else if(getKey().equals("txtStreetK")) {
+        	validation=CheckValidation.checkStreet(getLine());
+        }
+        else if(getKey().equals("txtStnumK")) {
+        	validation=CheckValidation.checkStreetNum(getLine());
+        }
+		else if(getKey().equals("txtCityK")) {
+			validation=CheckValidation.checkName(getLine());  	
+		}
+		else if(getKey().equals("txtContryK")) {
+			validation=CheckValidation.checkName(getLine());	
+        }
         ValidateCell();
         if(mode==1){
             addProfessor.EnableButt();

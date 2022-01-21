@@ -1,20 +1,10 @@
 package gui.view;
 
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import static java.lang.Thread.sleep;
 
@@ -58,6 +48,9 @@ public class StatusBar extends JPanel {
 				}
 				else if(CentralBox.getInstance().getSelectedIndex()==3){
 					name.setText("Studentska Slu\u017eba- Katedre");
+				}
+				else if(CentralBox.getInstance().getSelectedIndex()==2){
+					name.setText(" Studentska Slu\u017eba- Profesori");
 				}
 				date.setText(dateFormat.format(new GregorianCalendar().getTime()));
 				try {

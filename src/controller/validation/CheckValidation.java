@@ -174,8 +174,24 @@ public class CheckValidation {
     }
     
     
-	public static boolean checkIdNumber(String id){
-		return id.matches("([a-zA-Z0-9]+\\.?)*[a-zA-Z0-9]@[a-z0-9]+");
+    public static boolean checkIdNumber(String text) {
+		//9 cifara
+		if(text == null) return false;
+		if(text.isEmpty() || text.isBlank()) {
+			return false;
+		}
+		for(int i = 0; i < text.length(); i++) {
+			if(!Character.isDigit(text.charAt(i))) {
+				return false;
+			}
+		}
+		if(text.length()!=9) {
+			return false;
+		}
+		if(!BazaProfesora.getInstance().UniqueId(text)) { //brLicne jedinstven
+			return false;
+		}
+		return true;
 	}
 	
 

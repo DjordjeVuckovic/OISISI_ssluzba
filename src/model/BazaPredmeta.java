@@ -135,6 +135,9 @@ public class BazaPredmeta implements AbstractModel, Serializable {
         }
         return true;
     }
+    
+    public void deleteSubject(Subject s){subjects.remove(s);}
+    
     public Subject findSubjectById(String id){
         for(Subject subject :subjects){
             if(subject.getIdS().equals(id)){
@@ -155,6 +158,20 @@ public class BazaPredmeta implements AbstractModel, Serializable {
                 if(!student.checkExams(subject)){
                     subs.add(subject);
                 }
+            }
+        }
+        return subs;
+    }
+    
+    public Subject getSubjectByRow(int row){
+		return subjects.get(row);
+	}
+    
+    public  ArrayList<Subject> getPossibleSubjectP(Professor profesor){
+        ArrayList<Subject> subs = new ArrayList<>();
+        for(Subject subject : subjects){
+            if(profesor.checkProf(subject,profesor)){
+                 subs.add(subject);
             }
         }
         return subs;

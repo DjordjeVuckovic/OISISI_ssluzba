@@ -43,7 +43,7 @@ public class Professor implements Serializable {
 		subjects = new ArrayList<>();
 	}
 	
-	public Professor(String name, String surname, Zvanje title, String mail, String idNum) {
+	public Professor(String name, String surname, Zvanje title, String mail, String idNum ) {
 		this.name = name;
 		this.surname = surname;
 		this.title = title;
@@ -162,4 +162,20 @@ public class Professor implements Serializable {
 		this.adresaKanc = new Address(street,number,city,country);
 	}
 	
+	public  void addSubjects(Subject subject){
+		this.getSubjects().add(subject);
+	}
+	public void removeSubjects(Subject subject){
+		if(subject == null) return;
+		
+		subjects.remove(subject);
+	}
+	
+	public boolean checkProf(Subject subject, Professor profesor) {
+		boolean ret = false;
+		if(subject.getPredmeti().equals(profesor.getSubjects())) {
+			ret = true;
+		}
+		return ret;
+	}
 }

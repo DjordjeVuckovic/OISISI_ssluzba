@@ -48,6 +48,7 @@ public class BazaStudenata implements AbstractModel, Serializable {
 	private void initStudents(){
 		this.students= new ArrayList<>();
 
+
 		Address address= new Address();
 		Student st = new Student("Milan","Milic",new GregorianCalendar(2001, 9, 21).getTime(),address.generateAddress(2),"011/8172-372","milos.milic@mailinator.com","SW/12/2021",2021,YearofStudy.I,Status.SAMOFINANSIRANJE);
 		students.add(st);

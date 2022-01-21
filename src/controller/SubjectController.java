@@ -1,7 +1,10 @@
 package controller;
 
+import gui.view.center.ProfessorsTable;
 import gui.view.center.SubjectTable;
 import model.BazaPredmeta;
+import model.BazaProfesora;
+import model.Professor;
 import model.Subject;
 
 public class SubjectController {
@@ -21,12 +24,23 @@ public class SubjectController {
         Subject subject =BazaPredmeta.getInstance().findSubjectById(id);
         return subject;
     }
+    
+    public void deleteSubject(int row){
+        if(row <0){
+            return;
+        }
+        Subject predmet= BazaPredmeta.getInstance().getSubjectByRow(row);
+        BazaPredmeta.getInstance().deleteSubject(predmet);
+        SubjectTable.getInstance().refreshTable();
+    }
+    
     public void editSubject(Subject oldSub,Subject nSub ){
         oldSub.setNameSub(nSub.getNameSub());
         oldSub.setIdS(nSub.getIdS());
         oldSub.setESPBpoints(nSub.getESPBpoints());
         oldSub.setYearOfStudy(nSub.getYearOfStudy());
         oldSub.setSemester(nSub.getSemester());
+        oldSub.setProfessor(nSub.getProfessor());
         SubjectTable.getInstance().refreshTable();
     }
 }

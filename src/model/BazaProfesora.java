@@ -167,6 +167,21 @@ public class BazaProfesora implements AbstractModel, Serializable {
 	}
 	public void deleteProfessor(Professor pr){Professors.remove(pr);}
 	
+	public void addSubjectForProf(Professor pro,Subject pre) {
+
+		if(pro == null || pre == null) return;
+		
+
+		for (Subject predmet : pro.getSubjects()) {
+			if(predmet.equals(pre)) {
+				return; 		
+			}
+		}
+		pro.addSubjects(pre);
+		return;
+	}
+	
+	
 	public boolean UniqueId(String id_){
 		boolean ret=true;
 		for(Professor pr:this.Professors){
@@ -186,7 +201,7 @@ public class BazaProfesora implements AbstractModel, Serializable {
 		profesor.setBirthday(noviProf.getBirthday());
 		profesor.setIdNumber(noviProf.getIdNumber());
 		profesor.setAddressS(noviProf.getAddressS().getStreet(), noviProf.getAddressS().getNumber(),noviProf.getAddressS().getCity(),noviProf.getAddressS().getCountry());
-		profesor.setAddressK(noviProf.getAddressK().getStreet(), noviProf.getAddressK().getNumber(),noviProf.getAddressK().getCity(),noviProf.getAddressK().getCountry());
+		//profesor.setAddressK(noviProf.getAddressK().getStreet(), noviProf.getAddressK().getNumber(),noviProf.getAddressK().getCity(),noviProf.getAddressK().getCountry());
 		profesor.setTitle(noviProf.getTitle());
 		profesor.setYearsTail(noviProf.getYearsTail());
 	}

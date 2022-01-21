@@ -13,13 +13,18 @@ public class Subject implements Serializable{
 		private YearofStudy yearOfStudy;
 		private Professor professor;
 		private int pointsESPB;
+
 		private ArrayList<Student> passed = new ArrayList<>();
 		private ArrayList<Student> failed = new ArrayList<>();
+
+		private ArrayList<Professor> predmeti = new ArrayList<Professor>();
+
 
 
 	public Subject(){
 
 	}
+
 
 	public Subject(String idS, String nameSub, Semester semester, YearofStudy yearOfStudy, Professor professor, int pointsESPB) {
 		this.idS = idS;
@@ -30,13 +35,26 @@ public class Subject implements Serializable{
 		this.pointsESPB = pointsESPB;
 	}
 
-	public Subject(String id, String nameSub, Semester semester, YearofStudy yearOfStudy, int pointsESPB) {
+
+
+	
+	public Subject(String id, String nameSub, Semester semester, YearofStudy yearOfStudy, int pointsESPB, Professor professor) {
+
 		this.idS = id;
 		this.nameSub = nameSub;
 		this.semester = semester;
 		this.yearOfStudy = yearOfStudy;
 		this.pointsESPB = pointsESPB;
+		this.professor = professor;
 	}
+	
+	
+	public Subject(String id, String nameSub, Semester semester, YearofStudy yearOfStudy, int pointsESPB) { this.idS = id; this.nameSub = nameSub;
+	  this.semester = semester;
+	  this.yearOfStudy = yearOfStudy;
+	  this.pointsESPB =pointsESPB;
+	}
+	 
 
 	public String getIdS() {
 		return idS;
@@ -100,6 +118,14 @@ public class Subject implements Serializable{
 
 	public void setFailed(ArrayList<Student> failed) {
 		this.failed = failed;
+	}
+	
+	public ArrayList<Professor> getPredmeti() {
+		return predmeti;
+	}
+
+	public void setPredmeti(ArrayList<Professor> predmeti) {
+		this.predmeti = predmeti;
 	}
 
 

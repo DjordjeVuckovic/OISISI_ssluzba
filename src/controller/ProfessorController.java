@@ -1,16 +1,11 @@
 package controller;
 
-import gui.view.center.ProfessorsTable;
-import gui.view.center.StudentsTable;
-import model.BazaProfesora;
-import model.BazaStudenata;
-import model.Professor;
-
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.List;
+
+import gui.view.center.ProfessorsTable;
+import model.BazaProfesora;
+import model.Professor;
+import model.Subject;
 
 public class ProfessorController {
     private static  ProfessorController instance = null;
@@ -24,6 +19,11 @@ public class ProfessorController {
     
     public List<Professor> getProfessors() {
 		return BazaProfesora.getInstance().getProfessors();
+	}
+    
+    public Professor getProfesor(int rowIndex) {
+		Professor p=BazaProfesora.getInstance().getProfessorByRow(rowIndex);		
+		return p;
 	}
     
     public void addProfessor(Professor pr){
@@ -49,5 +49,10 @@ public class ProfessorController {
     	BazaProfesora.getInstance().editProfessor(Professor,noviProf);
         ProfessorsTable.getInstance().refreshTable();
     }
+    
+    public void AddSubjectForProfessor(Professor pro,Subject pre) {
+		
+		BazaProfesora.getInstance().addSubjectForProf(pro,pre);
+	}
 
 }
