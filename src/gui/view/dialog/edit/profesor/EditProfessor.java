@@ -55,6 +55,11 @@ public class EditProfessor extends JPanel{
     private JTextField txtAdressCity;
     private JTextField txtAdressContry;
     
+    private JTextField txtAdressStreetK;
+    private JTextField txtAdressNumK;
+    private JTextField txtAdressCityK;
+    private JTextField txtAdressContryK;
+    
     public boolean allValid(){
         for(ProfessorListener pl:validations){
             if(!pl.getValidation()){
@@ -152,6 +157,51 @@ public class EditProfessor extends JPanel{
         panelA4.add(lbAdressContry);
         panelA4.add(txtAdressContry);
         
+        
+        //Adresa kancelarije
+        
+        JLabel lbAdressStreetK = new JLabel("Ulica kancelarije*");
+        txtAdressStreetK= new JTextField();
+        lbAdressStreetK.setPreferredSize(cellDim);
+        txtAdressStreetK.setPreferredSize(cellDim);
+        txtAdressStreetK.setName("txtStreetK");
+        
+        JLabel lbAdressNumK = new JLabel("Broj ulice kancelarije*");
+        txtAdressNumK= new JTextField();
+        lbAdressNumK.setPreferredSize(cellDim);
+        txtAdressNumK.setPreferredSize(cellDim);
+        txtAdressNumK.setName("txtStnumK");
+        
+        JLabel lbAdressCityK = new JLabel("Grad kancelarije*");
+        txtAdressCityK= new JTextField();
+        lbAdressCityK.setPreferredSize(cellDim);
+        txtAdressCityK.setPreferredSize(cellDim);
+        txtAdressCityK.setName("txtCityK");
+        
+        
+        JLabel lbAdressContryK = new JLabel("Drzava kancelarije*");
+        txtAdressContryK= new JTextField();
+        txtAdressContryK.setPreferredSize(cellDim);
+        lbAdressContryK.setPreferredSize(cellDim);
+        txtAdressContryK.setName("txtContryK");
+        
+        JPanel panelA5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelA5.add(lbAdressStreetK);
+        panelA5.add(txtAdressStreetK);
+       
+        JPanel panelA6 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelA6.add(lbAdressNumK);
+        panelA6.add(txtAdressNumK);
+        
+        JPanel panelA7 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelA7.add(lbAdressCityK);
+        panelA7.add(txtAdressCityK);
+        
+        JPanel panelA8 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelA8.add(lbAdressContryK);
+        panelA8.add(txtAdressContryK);
+        
+        
         JLabel lbNum = new JLabel("Broj telefona*");
         lbNum.setToolTipText("Unesite svoj broj telefona");
         lbNum.setPreferredSize(cellDim);
@@ -229,11 +279,11 @@ public class EditProfessor extends JPanel{
         val=new ProfessorListener(lbDate,txtFieldDate,this);
         txtFieldDate.addFocusListener(val);
         validations.add(val);
-        
         validations.add(valId);
         val=new ProfessorListener(lbNum,txtFieldNUm,this);
         txtFieldNUm.addFocusListener(val);
         validations.add(val);
+        
         val = new ProfessorListener(lbAdressStreet,txtAdressStreet,this);
         txtAdressStreet.addFocusListener(val);
         validations.add(val);
@@ -246,6 +296,20 @@ public class EditProfessor extends JPanel{
         val = new ProfessorListener(lbAdressContry,txtAdressContry,this);
         txtAdressContry.addFocusListener(val);
         validations.add(val);
+        
+        val = new ProfessorListener(lbAdressStreetK, txtAdressStreetK,this);
+        txtAdressStreetK.addFocusListener(val);
+        validations.add(val);
+        val = new ProfessorListener(lbAdressNumK, txtAdressNumK,this);
+        txtAdressNumK.addFocusListener(val);
+        validations.add(val);
+        val = new ProfessorListener(lbAdressCityK, txtAdressCityK,this);
+        txtAdressCityK.addFocusListener(val);
+        validations.add(val);
+        val = new ProfessorListener(lbAdressContryK, txtAdressContryK,this);
+        txtAdressContryK.addFocusListener(val);
+        validations.add(val);
+        
         //addition of components
         JPanel CentralPanel = new JPanel();
         BoxLayout boxCenter = new BoxLayout(CentralPanel,BoxLayout.Y_AXIS);
@@ -257,11 +321,17 @@ public class EditProfessor extends JPanel{
         CentralPanel.add(panelNum);
         CentralPanel.add(panelE);
         CentralPanel.add(panelID);
+        
         CentralPanel.add(panelY);
         CentralPanel.add(panelA1);
         CentralPanel.add(panelA2);
         CentralPanel.add(panelA3);
         CentralPanel.add(panelA4);
+        CentralPanel.add(panelA5);
+        CentralPanel.add(panelA6);
+        CentralPanel.add(panelA7);
+        CentralPanel.add(panelA8);
+        
         CentralPanel.add(panelCZ);
         this.add(CentralPanel,BorderLayout.CENTER);
         
@@ -374,5 +444,10 @@ public class EditProfessor extends JPanel{
 	    txtAdressNum.setText(professor.getAddressS().getNumber());
 	    txtAdressCity.setText(professor.getAddressS().getCity());
 	    txtAdressContry.setText(professor.getAddressS().getCountry());
+	    
+	    txtAdressStreetK.setText(professor.getAddressK().getStreet());
+	    txtAdressNumK.setText(professor.getAddressK().getNumber());
+	    txtAdressCityK.setText(professor.getAddressK().getCity());
+	    txtAdressContryK.setText(professor.getAddressK().getCountry());
 	}
 }

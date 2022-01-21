@@ -44,7 +44,6 @@ public class EditSubject extends MyDialog {
     private JButton btnDodajProf;
     private JButton btnUkloniProf;
     
-    
     private Professor profesor;
     
     /*
@@ -222,6 +221,7 @@ public class EditSubject extends MyDialog {
         CentralPanel.add(panelD);
         CentralPanel.add(panelE);
         CentralPanel.add(panelP);
+        
         panelP.add(btnDodajProf);
         panelP.add(Box.createHorizontalStrut(7));
         panelP.add(btnUkloniProf);
@@ -274,8 +274,11 @@ public class EditSubject extends MyDialog {
                 if(profesor != null) {
 					sub.setProfessor(profesor);
 				}
-                SubjectController.getInstance().editSubject(oldsubject,sub);
-                ProfessorController.getInstance().AddSubjectForProfessor(profesor, oldsubject);
+                //prvo menjamo predmet pa ga dodajemo profesoru
+                SubjectController.getInstance().editSubject(oldsubject, sub);
+                
+                ProfessorController.getInstance().AddSubjectForProfessor(profesor, sub);
+                
                 btAccept.setEnabled(false);
                 dispose();
             }

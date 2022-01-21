@@ -171,7 +171,7 @@ public class BazaProfesora implements AbstractModel {
 		profesor.setBirthday(noviProf.getBirthday());
 		profesor.setIdNumber(noviProf.getIdNumber());
 		profesor.setAddressS(noviProf.getAddressS().getStreet(), noviProf.getAddressS().getNumber(),noviProf.getAddressS().getCity(),noviProf.getAddressS().getCountry());
-		profesor.setAddressK(noviProf.getAddressK().getStreet(), noviProf.getAddressK().getNumber(),noviProf.getAddressK().getCity(),noviProf.getAddressK().getCountry());
+		//profesor.setAddressK(noviProf.getAddressK().getStreet(), noviProf.getAddressK().getNumber(),noviProf.getAddressK().getCity(),noviProf.getAddressK().getCountry());
 		profesor.setTitle(noviProf.getTitle());
 		profesor.setYearsTail(noviProf.getYearsTail());
 	}

@@ -95,6 +95,9 @@ public class BazaPredmeta implements AbstractModel {
         }
         return true;
     }
+    
+    public void deleteSubject(Subject s){subjects.remove(s);}
+    
     public Subject findSubjectById(String id){
         for(Subject subject :subjects){
             if(subject.getIdS().equals(id)){
@@ -119,6 +122,10 @@ public class BazaPredmeta implements AbstractModel {
         }
         return subs;
     }
+    
+    public Subject getSubjectByRow(int row){
+		return subjects.get(row);
+	}
     
     public  ArrayList<Subject> getPossibleSubjectP(Professor profesor){
         ArrayList<Subject> subs = new ArrayList<>();

@@ -161,7 +161,15 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				}
 				break;
 				case 1:
-					//delete sub
+					int rowSelecteds = SubjectTable.getInstance().getSelectedRow();
+					if (rowSelecteds <0) {
+						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste odabrali predmet", "Upozorenje", 0, null);
+						return;
+					}
+					int choices = JOptionPane.showConfirmDialog(MainWindow.getInstance(),"Upozorenje", "Da li ste sigurni?",0);
+					if(choices ==JOptionPane.YES_OPTION){
+						SubjectController.getInstance().deleteSubject(rowSelecteds);
+					}
 					break;
 				case 2:
 					int rowSelectedp = ProfessorsTable.getInstance().getSelectedRow();

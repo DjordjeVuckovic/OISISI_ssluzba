@@ -27,7 +27,7 @@ public class Professor {
 		subjects = new ArrayList<>();
 	}
 	
-	public Professor(String name, String surname, Zvanje title, String mail, String idNum) {
+	public Professor(String name, String surname, Zvanje title, String mail, String idNum ) {
 		this.name = name;
 		this.surname = surname;
 		this.title = title;

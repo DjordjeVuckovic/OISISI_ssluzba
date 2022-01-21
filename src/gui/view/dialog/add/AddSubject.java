@@ -1,19 +1,34 @@
 package gui.view.dialog.add;
 
-import controller.SubjectController;
-import controller.focuslisteners.SubjectListener;
-import gui.view.MainWindow;
-import gui.view.dialog.MyDialog;
-import model.Semester;
-import model.Subject;
-import model.YearofStudy;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import controller.ProfessorController;
+import controller.SubjectController;
+import controller.focuslisteners.SubjectListener;
+import gui.view.MainWindow;
+import gui.view.dialog.MyDialog;
+import gui.view.dialog.edit.AddProfessorForSubject;
+import model.Professor;
+import model.Semester;
+import model.Subject;
+import model.YearofStudy;
 
 public class AddSubject extends MyDialog {
 
@@ -22,8 +37,11 @@ public class AddSubject extends MyDialog {
     private JComboBox<String> txtFJComboBoxCurrentYear;
     private JComboBox<String> txtSemester;
     private JTextField txtPointsESPB;
-    //private JTextField txtProfessor;
+    private JTextField txtProfesor;
     private JButton btAccept;
+    
+    private JButton btnDodajProf;
+    private JButton btnUkloniProf;
     /*
     private static AddSubject instance = null;
     public static AddSubject getInstance(){
@@ -34,12 +52,24 @@ public class AddSubject extends MyDialog {
     }
     /*
      */
-
+    private Professor profesor;
+    
     public AddSubject() {
         super(MainWindow.getInstance(), "Dodavanje predmeta");
         initFields();
 
     }
+    
+    public void setEnableButtProf(boolean yes) {
+		if(yes) {
+			btnDodajProf.setEnabled(true);
+			btnUkloniProf.setEnabled(false);
+		}else {
+			btnDodajProf.setEnabled(false);
+			btnUkloniProf.setEnabled(true);
+		}
+	}
+    
     public boolean allValid(){
         for(SubjectListener sb:validations){
             if(!sb.getValidation()){
@@ -112,6 +142,56 @@ public class AddSubject extends MyDialog {
         panelE.add(lbSem);
         panelE.add(txtSemester);
 
+        
+        JLabel lbProf = new JLabel("Profesor*");
+        lbProf.setToolTipText("Samo jedan profesor");
+        lbProf.setPreferredSize(new Dimension(135,20));
+        txtProfesor = new JTextField();
+        txtProfesor.setToolTipText("Samo jedan profesor");
+        txtProfesor.setPreferredSize(cellDim);
+        txtProfesor.setName("txtProfesor");
+        txtProfesor.setEditable(false);  
+        JPanel panelP = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelP.add(lbProf);
+        panelP.add(txtProfesor);
+     
+		btnDodajProf = new JButton();
+		btnDodajProf.setIcon(new ImageIcon("img/add-icon.png"));
+		btnDodajProf.setPreferredSize(new Dimension(20,20));
+		btnUkloniProf = new JButton();
+		btnUkloniProf.setIcon(new ImageIcon("img/iconDelete.png"));
+		btnUkloniProf.setPreferredSize(new Dimension(20,20));
+		btnUkloniProf.setEnabled(false);
+        
+		btnDodajProf.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				AddProfessorForSubject dodajProfPredmetu = new AddProfessorForSubject(parent);
+				profesor = dodajProfPredmetu.getSelectedProf();
+				if(profesor != null) {
+					txtProfesor.setText(profesor.getName() + " " + profesor.getSurname());
+					setEnableButtProf(false);
+					allValid();
+				}
+			}
+		});
+		
+		btnUkloniProf.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String poruka = "Da li želite da uklonite predmetnog profesora?";
+				Object[] opcije = {"Odustani","Potvrdi"};
+				int option = JOptionPane.showOptionDialog(parent, poruka, "Ukloni Profesora", JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE, null, opcije, null);
+				if(option == JOptionPane.NO_OPTION) {
+					profesor = null; 
+					setEnableButtProf(true);
+					txtProfesor.setText("");
+					allValid();
+				}
+			}
+		});
+        
+		
         JPanel CentralPanel = new JPanel();
         BoxLayout boxCenter = new BoxLayout(CentralPanel,BoxLayout.Y_AXIS);
         CentralPanel.setLayout(boxCenter);
@@ -121,6 +201,12 @@ public class AddSubject extends MyDialog {
         CentralPanel.add(panelC);
         CentralPanel.add(panelD);
         CentralPanel.add(panelE);
+        CentralPanel.add(panelP);
+        
+        panelP.add(btnDodajProf);
+        panelP.add(Box.createHorizontalStrut(6));
+        panelP.add(btnUkloniProf);
+        
         this.add(CentralPanel,BorderLayout.CENTER);
         //validation
         SubjectListener val1 = new SubjectListener(lbIds,txtIdS,this);
@@ -177,9 +263,17 @@ public class AddSubject extends MyDialog {
                 else{
                     sub.setSemester(Semester.WINTER);
                 }
+                if(profesor != null) {
+                	sub.setProfessor(profesor);
+                }
                 SubjectController.getInstance().addSubject(sub);
-                btAccept.setEnabled(false);
-                dispose();
+                
+				if(profesor != null) {
+					ProfessorController.getInstance().AddSubjectForProfessor(profesor, sub);
+				}
+				
+				dispose();
+                
             }
         });
         diaButtonPanel.add(btAccept);
