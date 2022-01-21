@@ -1,24 +1,5 @@
 package gui.view.dialog.edit;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import controller.ProfessorController;
 import controller.SubjectController;
 import controller.focuslisteners.SubjectListener;
@@ -28,6 +9,13 @@ import model.Professor;
 import model.Semester;
 import model.Subject;
 import model.YearofStudy;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 
 public class EditSubject extends MyDialog {
@@ -183,7 +171,7 @@ public class EditSubject extends MyDialog {
 		btnUkloniProf.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String poruka = "Da li želite da uklonite predmetnog profesora?";
+				String poruka = "Da li \u017Eelite da uklonite predmetnog profesora?";
 				Object[] opcije = {"Odustani","Potvrdi"};
 				int option = JOptionPane.showOptionDialog(parent, poruka, "Ukloni Profesora", JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE, null, opcije, null);
 				if(option == JOptionPane.NO_OPTION) {
