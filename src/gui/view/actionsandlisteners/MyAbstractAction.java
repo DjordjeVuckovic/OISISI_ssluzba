@@ -165,6 +165,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 			}
 		}
 		else if(name.equals("Close")){
+			MainWindow.getInstance().closing();
 			MainWindow.getInstance().setVisible(false);
 			MainWindow.getInstance().dispose();
 		}
@@ -210,10 +211,6 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 			}
 		}
 
-
-		//else if(name.equals("Close")) {
-		//exit;
-		//}
 		else if (name.equals("Edit")) {
 			switch (CentralBox.getInstance().getSelectedIndex()) {
 				case 0:
