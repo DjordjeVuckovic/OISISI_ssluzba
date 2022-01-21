@@ -138,9 +138,9 @@ public class AddProfessorForSubject extends JDialog {
 		}
 
 		@Override
-		public String getValueAt(int arg0, int arg1) {
-			String prof = BazaProfesora.getInstance().getValueAt(arg0,0)+" "+
-					      BazaProfesora.getInstance().getValueAt(arg0,1);
+		public String getValueAt(int index1, int index2) {
+			String prof = BazaProfesora.getInstance().getValueAt(index1,0)+" "+
+					      BazaProfesora.getInstance().getValueAt(index2,1);
 			return prof; 
 		}
 		@Override

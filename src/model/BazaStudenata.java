@@ -40,14 +40,13 @@ public class BazaStudenata implements AbstractModel {
 		this.students= new ArrayList<>();
 		Address address = new Address("N","N","N","N");
 		Date date = new Date();
-		Student st = new Student("Milan","Milic",date,address,"06125412","dsa@asdas","RA/1/2011",2011,YearofStudy.I,9.1,Status.SAMOFINANSIRANJE);
-		students.add(st);
-		students.add(new Student("Mika", "Mikic", "RA/8/2020", YearofStudy.I,9.8, Status.SAMOFINANSIRANJE));
-		students.add(new Student("Igor", "Bodiroga", "RA/5/2017", YearofStudy.II,7.8, Status.SAMOFINANSIRANJE));
-		students.add(new Student("Marko", "Markovic", "RA/88/2016", YearofStudy.I,10.0, Status.BUDZET ));
-		students.add(new Student("Mirko", "Mikic",date, "RA/1/2020", YearofStudy.IV,9.8, Status.SAMOFINANSIRANJE));
-		students.add(new Student("Igor", "Igic",date, "RA/8/2017", YearofStudy.II,7.8, Status.BUDZET));
-		students.add(new Student("Marko", "Kraljevic",date, "RA/888/2016", YearofStudy.III,10.0, Status.BUDZET));
+		students.add(new Student("Milan","Milic",date,address,"069584871","jej@hotmail","RA/1/2011",2011,YearofStudy.I,9.1,Status.SAMOFINANSIRANJE));
+		students.add(new Student("Mika", "Mikic",date,address,"06125412","ne@hotmail","RA/5/2015",2011,YearofStudy.II,9.1,Status.BUDZET));
+		students.add(new Student("Milan","Milic",date,address,"06125412","da@hotmail","RA/155/2016",2011,YearofStudy.II,8.7,Status.BUDZET));
+		students.add(new Student("Milan","Milic",date,address,"06125412","nesto@hotmail","RA/16/2019",2011,YearofStudy.IV,8.0,Status.SAMOFINANSIRANJE));
+		students.add(new Student("Milan","Milic",date,address,"06125412","nesto2@hotmail","RA/88/2014",2011,YearofStudy.III,6.5,Status.BUDZET));
+		//students.add(new Student("Igor", "Igic",date, "RA/8/2017", YearofStudy.II,7.8, Status.BUDZET));
+		//students.add(new Student("Marko", "Kraljevic",date, "RA/888/2016", YearofStudy.III,10.0, Status.BUDZET));
 	}
 
 	public ArrayList<Student> getStudents() {
