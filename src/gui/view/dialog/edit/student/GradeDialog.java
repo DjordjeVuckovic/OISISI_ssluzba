@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GradeDialog extends JDialog  {
+    private static final long serialVersionUID = 3582140730556264549L;
     private final JLabel lbDate;
     private final JTextField jTextFieldDate;
     private final JButton accButt;

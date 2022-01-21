@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class AddSubject extends MyDialog {
+    private static final long serialVersionUID = 3582140730556264549L;
 
     private JTextField txtIdS;
     private JTextField txtName;

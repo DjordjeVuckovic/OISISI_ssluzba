@@ -10,13 +10,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class ChangeStudentDialog extends MyDialog {
-    //private static ChangeStudentDialog instance=null;
-    //public static ChangeStudentDialog getInstance(){
-       // if(instance ==null){
-           // instance=new ChangeStudentDialog();
-       // }
-        //return instance;
-   // }
+
 
     private JTabbedPane tabbedPane;
 

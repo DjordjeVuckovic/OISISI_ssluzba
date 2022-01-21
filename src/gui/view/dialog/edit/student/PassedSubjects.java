@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PassedSubjects extends JPanel {
+    private static final long serialVersionUID = 3582840730556264549L;
     private JButton btCancelGrade;
     private JTextField txtAvgGrade;
     private JTextField txtSumPoints;

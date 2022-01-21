@@ -13,8 +13,8 @@ public class Subject implements Serializable{
 		private YearofStudy yearOfStudy;
 		private Professor professor;
 		private int pointsESPB;
-		private ArrayList<Student> passed = new ArrayList<Student>();
-		private ArrayList<Student> failed = new ArrayList<Student>();
+		private ArrayList<Student> passed = new ArrayList<>();
+		private ArrayList<Student> failed = new ArrayList<>();
 
 
 	public Subject(){

@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class FailedSubjects extends JPanel{
+    private static final long serialVersionUID = 3582140730456264549L;
     private ArrayList<Subject> failedSubjects;
     private Student student;
     private JButton buttonAdd;

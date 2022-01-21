@@ -15,13 +15,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class AddSubjectForStudent extends JDialog {
-    private Student student;
+    private static final long serialVersionUID = 3582140730556264549L;
     private ArrayList<Subject> possibleSubjects;
     private SubjectTableEdit subjectTableEdit;
 
     public AddSubjectForStudent(JDialog parent,FailedSubjects failedSubjects,Student student){
         super(parent,"Add subject",true);
-        this.student = student;
         setSize(450,450);
         setResizable(false);
         setLocationRelativeTo(parent);

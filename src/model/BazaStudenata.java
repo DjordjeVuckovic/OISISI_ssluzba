@@ -17,6 +17,7 @@ public class BazaStudenata implements AbstractModel, Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -1783935642755010733L;
+
 	private ArrayList<Student> students;
 	private ArrayList<String> colums;
 	private static BazaStudenata instance=null;
@@ -46,11 +47,10 @@ public class BazaStudenata implements AbstractModel, Serializable {
 	}
 	private void initStudents(){
 		this.students= new ArrayList<>();
-		Address address1 = new Address("N","N","N","N");
-		Date date = new Date();
-		Student st = new Student("Milan","Milic",date,address1,"06125412","dsa@asdas","RA/1/2011",2011,YearofStudy.I,Status.SAMOFINANSIRANJE);
-		students.add(st);
+
 		Address address= new Address();
+		Student st = new Student("Milan","Milic",new GregorianCalendar(2001, 9, 21).getTime(),address.generateAddress(2),"011/8172-372","milos.milic@mailinator.com","SW/12/2021",2021,YearofStudy.I,Status.SAMOFINANSIRANJE);
+		students.add(st);
 		students.add(new Student("Marko","Milosevic",new GregorianCalendar(2001, 2, 12).getTime(),address.generateAddress(1),"021/333-555", "marko.milosevic@mailinator.com","RA/2/2020", 2020,YearofStudy.I,Status.BUDZET));
 		students.add(new Student("Marija","Milić",new GregorianCalendar(2000, 0, 12).getTime(),address.generateAddress(2),"021/555-2222", "marija.milic@mailinator.com","RA/3/2019", 2019,YearofStudy.II,Status.SAMOFINANSIRANJE));
 		students.add(new Student("Nikola","Nikolic",new GregorianCalendar(2001, 7, 30).getTime(),address.generateAddress(3),"021/135-463", "nikola.nikolic@mailinator.com","RA/3/2017", 2017,YearofStudy.I,Status.BUDZET));
