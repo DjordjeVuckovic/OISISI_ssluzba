@@ -6,7 +6,7 @@ Projekat iz predmeta OISISI Studentska Služba Fakulteta Tehničkih Nauka
 
 # Verzija:JDK 17.01
 
-Glavne promene u preporucenoj raspodeli i nasoj su:
+# Glavne promene u preporucenoj raspodeli i nasoj su:
 
 # Student1: 
 
