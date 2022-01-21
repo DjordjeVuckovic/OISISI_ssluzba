@@ -27,7 +27,7 @@ public class BazaKatedri implements AbstractModel, Serializable {
     private void init(){
         departments.add(new Department("KA1","Automatika"));
         departments.add(new Department("KA12","PRNI"));
-        departments.add(new Department("KA12","RTRK"));
+        departments.add(new Department("KA15","RTRK"));
     }
 
     @Override

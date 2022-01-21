@@ -9,7 +9,7 @@ public class Professor implements Serializable {
 
 
 	@Serial
-	private static final long serialVersionUID = -3492649923901635786L;
+	private static final long serialVersionUID = 2906642554793891381L;
 	// POLJA
 	private String name;
 	private String surname;

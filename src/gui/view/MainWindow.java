@@ -1,12 +1,8 @@
 package gui.view;
 
-import java.awt.BorderLayout;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.io.Serial;
 import javax.swing.*;
+import java.awt.*;
+import java.io.Serial;
 
 
 public class MainWindow extends JFrame {
@@ -36,8 +32,6 @@ public class MainWindow extends JFrame {
 		ImageIcon img_student= new ImageIcon("img/student.jpg");
 		setIconImage(img_student.getImage());
 		getContentPane().setBackground(Color.LIGHT_GRAY);
-		this.addWindowListener(new MyWindowListener());
-
 		MenuBar menu_bar= new MenuBar();
 		this.add(menu_bar);
 		this.setJMenuBar(menu_bar);
@@ -49,7 +43,11 @@ public class MainWindow extends JFrame {
 		JPanel centralPanel = new JPanel(new BorderLayout());
 		centralPanel.add(CentralBox.getInstance());
 		this.add(centralPanel, BorderLayout.CENTER);
+		closing();
 
+	}
+	public void closing() {
+		this.addWindowListener(new MyWindowListener());
 	}
 
 }

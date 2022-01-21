@@ -1,9 +1,14 @@
 package gui.view.dialog.edit.student;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import controller.StudentController;
+import controller.focuslisteners.StudentListener;
+import model.Address;
+import model.Status;
+import model.Student;
+import model.YearofStudy;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -13,21 +18,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import controller.StudentController;
-import controller.focuslisteners.StudentListener;
-import model.Address;
-import model.Status;
-import model.Student;
-import model.YearofStudy;
 
 public class EditStudent extends JPanel{
 	/**
@@ -56,7 +46,7 @@ public class EditStudent extends JPanel{
     private JTextField txtAdressNum;
     private JTextField txtAdressCity;
     private JTextField txtAdressContry;
-    
+    private EditStudent editStudent;
     public boolean allValid(){
         for(StudentListener sl:validations){
             if(!sl.getValidation()){
@@ -78,6 +68,7 @@ public class EditStudent extends JPanel{
     private ArrayList<StudentListener> validations=new ArrayList<>();
 	public EditStudent(Student student) {
 		this.student=student;
+        editStudent = this;
 		cellDim = new Dimension(200, 20);
         setLayout(new BorderLayout());
         JLabel lbName = new JLabel("Ime*");
@@ -288,7 +279,8 @@ public class EditStudent extends JPanel{
         btDecline.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //
+                Component comp = SwingUtilities.getRoot(editStudent);
+                ((Window) comp).dispose();
             }
         });
         btAccept.addActionListener(new ActionListener() {
