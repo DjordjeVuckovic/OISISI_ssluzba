@@ -19,8 +19,19 @@ public class Professor implements Serializable {
 	private Zvanje title;
 	private int yearsOfTail;
 	private ArrayList<Subject> subjects;
-	
-	
+
+	public Professor(String surname,String name,Date birthday,Address adresaStan, Address adresaKanc,String contact,String mail,String idNum, Zvanje title,int yearsOfTail){
+		this.surname = surname;
+		this.name = name;
+		this.birthday = birthday;
+		this.adresaStan = adresaStan;
+		this.adresaKanc = adresaKanc;
+		this.contact = contact;
+		this.mail = mail;
+		this.idNum = idNum;
+		this.title = title;
+		this.yearsOfTail = yearsOfTail;
+	}
 	public Professor(String name, String surname, Zvanje title, String mail) {
 		this.name = name;
 		this.surname = surname;

@@ -4,6 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class BazaProfesora implements AbstractModel, Serializable {
 
@@ -44,12 +45,26 @@ public class BazaProfesora implements AbstractModel, Serializable {
 		Address address = new Address("N","N","N","N");
 		Professor professor = new Professor("Marko","Markodic",date,address,"0","aa@aa",address,"112",12,Zvanje.REDOVNI_PROFESOR);
 		Professors.add(professor);
-		//Professor pr = new Professor("Milan","Milic",Zvanje.DOCENT,"volim@oisisi");
-		//Professors.add(pr);
-		//Professors.add(new Professor("Mika", "Mikic", Zvanje.SARADNIK_U_NASTAVI, "mika@gmail.com"));
-		//Professors.add(new Professor("Vladimir", "Radic", Zvanje.ASISTENT, "vladimir@gmail.com"));
-		//Professors.add(new Professor("Marko", "Markic", Zvanje.DOCENT , "milos@gmail.com"));
-		//Professors.add(new Professor("Darko", "Darkic", Zvanje.ASISTENT_SA_DOKTORATOM, "minjule@gmail.com"));
+		Address office = new Address("\u0160afarikova","2","Novi Sad","Srbija");
+		Professors.add(new Professor("Nikolic", "Milos",new GregorianCalendar(1965, 11, 12).getTime() ,new Address("\u0160afarikova","2","Novi Sad","Srbija"),office,"021/356-785", "milos.nikolic@mailinator.com",  "123123123", Zvanje.REDOVNI_PROFESOR,30 ));
+		Professors.add(new Professor("Mirkovic", "Nikola",new GregorianCalendar(1978, 0, 1).getTime() ,new Address("Nikole Tesle","56","Novi Sad","Srbija"),office,"021/368-456", "nikola.mirkovic@mailinator.com",  "321321321", Zvanje.REDOVNI_PROFESOR,22 ));
+		Professors.add(new Professor("Petkovic", "Ilija",new GregorianCalendar(1988, 8, 3).getTime() ,new Address("Bulevar Patrijaha Pavla","3","Beograd","Srbija"),office,"021/215-314", "ilija.petkovic@mailinator.com",  "456456456", Zvanje.VANREDNI_PROFESOR,22 ));
+		Professors.add(new Professor("Petrovic", "Mitar",new GregorianCalendar(1976, 6, 25).getTime() ,new Address("Stra\u017Eilovska","6a","Novi Sad","Srbija"),office,"021/884-640", "mitar.petrovic@mailinator.com",  "789789789", Zvanje.VANREDNI_PROFESOR,27 ));
+		Professors.add(new Professor("Micic", "Vasa",new GregorianCalendar(1970, 1, 14).getTime() ,new Address("Nikole Pa\u0161i\u0107a","2d","Kikinda","Srbija"),office,"021/212-114", "vasa.micic@mailinator.com",  "100100144", Zvanje.DOCENT,24 ));
+		Professors.add(new Professor("Miletic", "Srdjan",new GregorianCalendar(1966, 3, 20).getTime() ,new Address("Bulevar Kralja Petra","22", "Ni\u0161","Srbija"),office,"021/978-225", "srdjan.miletic@mailinator.com",  "200020244", Zvanje.DOCENT,31 ));
+		Professors.add(new Professor("Mihajlovic", "Branislav",new GregorianCalendar(1980, 5, 28).getTime() ,new Address("Tolstojeva","31", "Novi Sad","Srbija"),office,"021/778-323", "branislav.mihajlovic@mailinator.com",  "559585632", Zvanje.REDOVNI_PROFESOR,13 ));
+		Professors.add(new Professor("Markovi\u0107", "Marko",new GregorianCalendar(1985, 0, 31).getTime() ,new Address("Mari\u0107eva","11", "Kragujevac","Srbija"),office,"021/899-659", "marko.markovic@mailinator.com",  "334968855", Zvanje.REDOVNI_PROFESOR,17 ));
+		Professors.add(new Professor("Milakovi\u0107", "Milo\u0161",new GregorianCalendar(1975, 8, 21).getTime() ,new Address("Stražilovska","3", "Beograd","Srbija"),office,"021/122-326", "milos.milakovic@mailinator.com",  "730703654", Zvanje.VANREDNI_PROFESOR,12 ));
+		Professors.add(new Professor("Brati\u0107", "Lazar",new GregorianCalendar(1973, 10, 13).getTime() ,office,office,"021/156-326", "lazar.bratic@mailinator.com",  "600378644", Zvanje.VANREDNI_PROFESOR,3 ));
+		Professors.add(new Professor("Dra\u017Ei\u0107", "Ljeposava",new GregorianCalendar(1964, 7, 11).getTime() ,new Address("Bulevar Kralja Petra","2d", "Ni\u0161","Srbija"),office,"021/888-156", "ljeposava.drazic@mailinator.com",  "158496152", Zvanje.DOCENT,31 ));
+		Professors.add(new Professor("Dragi\u0107", "Miroljub",new GregorianCalendar(1959, 2, 2).getTime() ,new Address("Knez Mihajlova","22", "Beograd","Srbija"),office,"021/456-125", "miroljub.dragic@mailinator.com",  "777348595", Zvanje.DOCENT,42 ));
+		Professors.add(new Professor("Rekavi\u0107", "Bogdan",new GregorianCalendar(1977, 5, 23).getTime() ,new Address("Bulevar Kralja Petra","22", "Ni\u0161","Srbija"),office,"021/886-455", "bogdan.rekavic@mailinator.com",  "721254363", Zvanje.VANREDNI_PROFESOR,18 ));
+		Professors.add(new Professor("Mili\u0107", "Stanka",new GregorianCalendar(1991, 2, 3).getTime() ,new Address("Bulevar Patrijaha Pavla","3","Beograd","Srbija"),office,"021/945-155", "stanka.milic@mailinator.com",  "225533448", Zvanje.DOCENT,7 ));
+		Professors.add(new Professor("Vukovi\u0107", "Milica",new GregorianCalendar(1967, 9, 18).getTime() ,new Address("Mari\u0107eva","11", "Kragujevac","Srbija"),office,"021/746-659", "milica.vukovic@mailinator.com",  "111555888", Zvanje.VANREDNI_PROFESOR,14 ));
+		Professors.add(new Professor("Mi\u0161i\u0107", "Mi\u0161a",new GregorianCalendar(1969, 9, 20).getTime() ,new Address("\u0160afarikova","2","Novi Sad","Srbija"),office,"021/489-326", "misa.misic@mailinator.com",  "300300344", Zvanje.DOCENT,19 ));
+		Professors.add(new Professor("Marici\u0107", "Branko",new GregorianCalendar(1973, 0, 18).getTime() ,new Address("Nikole Tesle","56","Novi Sad","Srbija"),office,"021/487-265", "branko.maricic@mailinator.com",  "400400444", Zvanje.DOCENT,22 ));
+		Professors.add(new Professor("Lukovic", "Branislav",new GregorianCalendar(1982, 3, 8).getTime() ,new Address("Bulevar Patrijaha Pavla","3","Beograd","Srbija"),office,"021/159-478", "branislav.lukovic@mailinator.com",  "500500544", Zvanje.REDOVNI_PROFESOR,9));
+		Professors.add(new Professor("Obradovi\u0107", "Branimir",new GregorianCalendar(1979, 0, 17).getTime() ,new Address("\u0160afarikova","2","Novi Sad","Srbija"),office,"021/922-333", "branimir.obradovic@mailinator.com",  "600600644", Zvanje.DOCENT,17 ));
 	}
 
 	public ArrayList<Professor> getProfessors() {
