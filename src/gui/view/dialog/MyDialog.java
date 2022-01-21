@@ -5,13 +5,11 @@ import java.awt.*;
 import java.io.Serial;
 
 public class MyDialog extends JDialog {
-<<<<<<< HEAD
+
     @Serial
     private static final long serialVersionUID = 333220301151622460L;
-    private final Frame parent;
-=======
     public final Frame parent;
->>>>>>> 3
+
 
     public MyDialog(Frame parent, String windowName) {
         super(parent, windowName, true);

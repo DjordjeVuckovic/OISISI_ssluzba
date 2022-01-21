@@ -1,21 +1,9 @@
 package gui.view.dialog;
 
-<<<<<<< HEAD
+
 import javax.swing.*;
-import java.io.Serial;
+import java.awt.*;
 
-public class MyButton extends JButton {
-    @Serial
-    private static final long serialVersionUID = 7827454444333406502L;
-
-    public MyButton(String text){
-        super(text);
-    }
-=======
-
-import java.awt.Color;
-
-import javax.swing.JButton;
 
 public class MyButton extends JButton{
 
@@ -37,5 +25,5 @@ public class MyButton extends JButton{
 	
 	
 	
->>>>>>> 3
+
 }

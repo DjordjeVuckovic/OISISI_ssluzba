@@ -6,12 +6,10 @@ import gui.view.dialog.MyDialog;
 import model.Professor;
 
 import javax.swing.*;
-<<<<<<< HEAD
-import java.io.Serial;
-=======
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
->>>>>>> 3
+import java.io.Serial;
+
 
 public class ChangeProfessorDialog extends MyDialog {
 
