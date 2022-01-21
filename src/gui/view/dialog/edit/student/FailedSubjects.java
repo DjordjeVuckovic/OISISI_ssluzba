@@ -2,9 +2,13 @@ package gui.view.dialog.edit.student;
 
 import gui.view.MainWindow;
 import gui.view.center.StudentsTable;
+import model.BazaPredmeta;
+import model.BazaStudenata;
 import model.Grade;
+import model.Status;
 import model.Student;
 import model.Subject;
+import model.YearofStudy;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -31,6 +35,40 @@ public class FailedSubjects extends JPanel{
         failedSubjects = student.getFailedExams();
         failedSubjectsThis = this;
 
+       
+    		
+        
+		/*
+		 * this.failedSubjects = new ArrayList<>();
+		 * 
+		 * failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("4"),
+		 * BazaPredmeta.getInstance().findSubjectById("2"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("4"),
+		 * BazaPredmeta.getInstance().findSubjectById("4"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("17"),
+		 * BazaPredmeta.getInstance().findSubjectById("15"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("18"),
+		 * BazaPredmeta.getInstance().findSubjectById("15"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("22"),
+		 * BazaPredmeta.getInstance().findSubjectById("18"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("23"),
+		 * BazaPredmeta.getInstance().findSubjectById("18"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("24"),
+		 * BazaPredmeta.getInstance().findSubjectById("18"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("26"),
+		 * BazaPredmeta.getInstance().findSubjectById("18"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("22"),
+		 * BazaPredmeta.getInstance().findSubjectById("19"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("23"),
+		 * BazaPredmeta.getInstance().findSubjectById("19"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("23"),
+		 * BazaPredmeta.getInstance().findSubjectById("19"))); failedSubjects.add(new
+		 * FailedSubjects(BazaStudenata.getInstance().getStudentById("24"),
+		 * BazaPredmeta.getInstance().findSubjectById("19")));
+		 */
+       
+        
         JPanel downPane = new JPanel();
         downPane.setPreferredSize(new Dimension(30,30));
         JPanel rightPane = new JPanel();
@@ -170,5 +208,8 @@ public class FailedSubjects extends JPanel{
         model.fireTableDataChanged();
         validate();
     }
+    
+    public FailedSubjects() {};
+    
 
 }

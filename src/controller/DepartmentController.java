@@ -1,6 +1,7 @@
 package controller;
 
 import gui.view.center.DepartmentsTable;
+import gui.view.center.ProfessorsTable;
 import model.BazaKatedri;
 import model.BazaProfesora;
 import model.Department;
@@ -21,5 +22,14 @@ public class DepartmentController {
     public Department getDepById(String id){
         Department dep = BazaKatedri.getInstance().findDep(id);
         return dep;
+    }
+    
+    public void deleteDepartment(int row){
+        if(row <0){
+            return;
+        }
+        Department departman = BazaKatedri.getInstance().getDepartmanByRow(row);
+        BazaKatedri.getInstance().deleteKatedra(departman);
+        DepartmentsTable.getInstance().refreshTable();
     }
 }
