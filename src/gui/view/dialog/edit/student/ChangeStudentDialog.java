@@ -8,10 +8,13 @@ import model.Student;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.io.Serial;
 
 public class ChangeStudentDialog extends MyDialog {
 
 
+    @Serial
+    private static final long serialVersionUID = 8394619157539383781L;
     private JTabbedPane tabbedPane;
 
     public ChangeStudentDialog(final Student student) {

@@ -8,8 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 
 public class AddDepartment extends JDialog {
+    @Serial
+    private static final long serialVersionUID = -3203087255380944579L;
     private JTextField txtFieldName;
     private JTextField txtFieldId;
 

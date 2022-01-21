@@ -1,15 +1,16 @@
 package gui.view.center;
 
-import gui.view.dialog.edit.student.FailedSubjects;
 import model.BazaKatedri;
-import model.BazaStudenata;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.io.Serial;
 
 public class DepartmentsTable extends JTable {
+    @Serial
+    private static final long serialVersionUID = 8054281760067602497L;
     public static DepartmentsTable instance;
 
     public static DepartmentsTable getInstance(){

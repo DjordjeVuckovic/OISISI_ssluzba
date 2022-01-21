@@ -10,9 +10,12 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 import java.util.ArrayList;
 
 public class AddBossDialog extends JDialog {
+    @Serial
+    private static final long serialVersionUID = -4096378513041332657L;
     private ArrayList<Professor> possibleBosses;
     private TableBoss table;
     private Professor selectedBoss = null;

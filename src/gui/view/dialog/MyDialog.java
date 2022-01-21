@@ -2,8 +2,11 @@ package gui.view.dialog;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 
 public class MyDialog extends JDialog {
+    @Serial
+    private static final long serialVersionUID = 333220301151622460L;
     private final Frame parent;
 
     public MyDialog(Frame parent, String windowName) {

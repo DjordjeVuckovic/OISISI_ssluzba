@@ -12,10 +12,13 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 import java.util.ArrayList;
 
 public class AddSubjectForStudent extends JDialog {
-    private static final long serialVersionUID = 3582140730556264549L;
+    @Serial
+    private static final long serialVersionUID = 5072538040319452064L;
+
     private ArrayList<Subject> possibleSubjects;
     private SubjectTableEdit subjectTableEdit;
 

@@ -3,8 +3,11 @@ package gui.view.center;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.io.Serial;
 
 public class SubjectTable extends JTable {
+    @Serial
+    private static final long serialVersionUID = -4175809032429004585L;
     private static SubjectTable instance = null;
 
     public static SubjectTable getInstance() {

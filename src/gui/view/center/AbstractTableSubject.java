@@ -3,8 +3,12 @@ package gui.view.center;
 import model.BazaPredmeta;
 
 import javax.swing.table.AbstractTableModel;
+import java.io.Serial;
 
 public class AbstractTableSubject extends AbstractTableModel {
+    @Serial
+    private static final long serialVersionUID = 7104895964774040596L;
+
     @Override
     public int getRowCount() {
         return BazaPredmeta.getInstance().getRowCount();

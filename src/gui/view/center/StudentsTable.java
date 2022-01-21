@@ -3,8 +3,11 @@ package gui.view.center;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.io.Serial;
 
 public class StudentsTable extends JTable {
+    @Serial
+    private static final long serialVersionUID = -9115449028075708606L;
     private static StudentsTable instance=null;
 
     public static StudentsTable getInstance(){

@@ -3,8 +3,12 @@ package gui.view.center;
 import model.BazaStudenata;
 
 import javax.swing.table.AbstractTableModel;
+import java.io.Serial;
 
 public class AbstractTableStudents extends AbstractTableModel {
+    @Serial
+    private static final long serialVersionUID = 391004202215814432L;
+
     public AbstractTableStudents(){}
     @Override
     public int getRowCount() {

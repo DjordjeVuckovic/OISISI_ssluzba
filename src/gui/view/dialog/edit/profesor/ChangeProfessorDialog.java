@@ -5,16 +5,13 @@ import gui.view.dialog.MyDialog;
 import model.Professor;
 
 import javax.swing.*;
+import java.io.Serial;
 
 public class ChangeProfessorDialog extends MyDialog {
-    //private static ChangeProfessorDialog instance=null;
-    //public static ChangeProfessorDialog getInstance(){
-       // if(instance ==null){
-           // instance=new ChangeProfessorDialog();
-       // }
-        //return instance;
-   // }
 
+
+    @Serial
+    private static final long serialVersionUID = -4880791851891937466L;
     private JTabbedPane tabbedPane;
 
     public ChangeProfessorDialog(final Professor Professor) {
