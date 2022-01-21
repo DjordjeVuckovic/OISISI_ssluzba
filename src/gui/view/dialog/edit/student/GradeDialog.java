@@ -39,6 +39,7 @@ public class GradeDialog extends JDialog  {
         lbGrade.setPreferredSize(cellDim);
         lbDate = new JLabel("Datum*");
         lbDate.setPreferredSize(cellDim);
+         //init grade u bazi studenata, constructor ovde 
 
         JTextField jTextFieldId = new JTextField();
         jTextFieldId.setText("IdS");

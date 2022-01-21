@@ -11,6 +11,7 @@ public class Department implements Serializable {
 	private static final long serialVersionUID = 6732445630585765214L;
 
 	private String id;
+	private String sifra;
 	private String name;
 	private Professor director;
 	private ArrayList<Professor> professors = new ArrayList<Professor>();
@@ -26,12 +27,19 @@ public class Department implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getSifra() {
+		return sifra;
+	}
+	public void setSifra(String sifra) {
+		this.sifra = sifra;
+	}
 	public Professor getDirector() {
 		return director;
 	}
 	public void setDirector(Professor director) {
 		this.director = director;
 	}
+	
 	public ArrayList<Professor> getProfessor_list() {
 		return professors;
 	}
@@ -40,9 +48,13 @@ public class Department implements Serializable {
 	}
 
 	public Department(){};
-	public Department(String id, String name) {
+	
+	public Department(String id, String sifra, String name, String idD) {
 		this.id = id;
+		this.sifra = sifra;
 		this.name = name;
+		
+		
 	}
 
 	
