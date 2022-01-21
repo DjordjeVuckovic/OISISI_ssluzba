@@ -16,9 +16,9 @@ Projekat iz predmeta OISISI Studentska Služba Fakulteta Tehničkih Nauka
  
  # Student2:
 
-# profesor_predaje_predmete
-# dodavanje_predmeta_profesoru
-# uklanjanje_predmeta_sa_profesora
+#profesor_predaje_predmete
+#dodavanje_predmeta_profesoru
+#uklanjanje_predmeta_sa_profesora
 
 Tacna raspodela posla:
 
@@ -71,7 +71,7 @@ Tacna raspodela posla:
 #postavljanje sefa katedre
 
 
-#Student2:  Dusan Vukovic RA/16/2019
+# Student2:  Dusan Vukovic RA/16/2019
 
 #profesor
 
