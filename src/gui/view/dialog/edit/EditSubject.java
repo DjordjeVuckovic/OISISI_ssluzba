@@ -1,74 +1,49 @@
 package gui.view.dialog.edit;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
-import controller.ProfessorController;
 import controller.SubjectController;
 import controller.focuslisteners.SubjectListener;
 import gui.view.MainWindow;
-import gui.view.dialog.MyDialog;
 import model.Professor;
 import model.Semester;
 import model.Subject;
 import model.YearofStudy;
 
+public class EditSubject extends JDialog {
 
-public class EditSubject extends MyDialog {
-    private JTextField txtIdS;
-    private JTextField txtName;
-    private JComboBox<String> txtFJComboBoxCurrentYear;
-    private JComboBox<String> txtSemester;
-    private JTextField txtPointsESPB;
-    private JTextField txtProfesor;
-    
-    private JButton btAccept;
-    private Subject oldsubject;
-    
-    private JButton btnDodajProf;
-    private JButton btnUkloniProf;
-    
-    
-    private Professor profesor;
-    
-    /*
-    private static EditSubject instance = null;
-    public static EditSubject getInstance(String idS){
-        if(instance==null){
-            instance = new EditSubject(idS);
-        }
-        return instance;
-    }
-    */
-    
-    public void setEnableButtProf(boolean yes) {
-		if(yes) {
-			btnDodajProf.setEnabled(true);
-			btnUkloniProf.setEnabled(false);
-		}else {
-			btnDodajProf.setEnabled(false);
-			btnUkloniProf.setEnabled(true);
-		}
-	}
-    
-    
-    public boolean allValid(){
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -680864083765738860L;
+	private boolean ispravno[] = {true, true, true};
+	private String id;
+	private String naziv;
+	private String espbString;
+	private Professor profesor;
+	private AddProfessorForSubject ddpp;
+	
+	JButton btnPotvrdi;
+	JButton btnOdustani;
+	
+	public boolean allValid(){
         for(SubjectListener sb:validations){
             if(!sb.getValidation()){
                 return false;
@@ -77,243 +52,220 @@ public class EditSubject extends MyDialog {
         return true;
     }
     public void EnableButt(){
-        btAccept.setEnabled(allValid());
+        btnPotvrdi.setEnabled(allValid());
     }
-    
-    private ArrayList<SubjectListener> validations=new java.util.ArrayList<>();
-    public EditSubject(String idS) {
-        super(MainWindow.getInstance(), "Izmena predmeta");
-        oldsubject = SubjectController.getInstance().findSubjectById(idS);
-        initEditDialog();
-    }
-    private void initEditDialog(){
-        Dimension cellDim = new Dimension(200, 20);
-        setLayout(new BorderLayout());
-        
-        JLabel lbIds = new JLabel("Sifra*");
-        lbIds.setToolTipText("Unesite jedinstvenu sifru predmeta");
-        lbIds.setPreferredSize(cellDim);
-        txtIdS = new JTextField();
-        txtIdS.setToolTipText("Unesite jedinstvenu sifru predmeta");
-        txtIdS.setPreferredSize(cellDim);
-        txtIdS.setName("txtId");
-        JPanel panelA = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelA.add(lbIds);
-        panelA.add(txtIdS);
 
-
-        JLabel lbName = new JLabel("Naziv*");
-        lbName.setToolTipText("Unesite naziv oldsubjecta");
-        lbName.setPreferredSize(cellDim);
-        txtName = new JTextField();
-        txtName.setToolTipText("Unesite naziv oldsubjecta");
-        txtName.setPreferredSize(cellDim);
-        txtName.setName("txtName");
-        JPanel panelB = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelB.add(lbName);
-        panelB.add(txtName);
-
-
-        JLabel lbESPB = new JLabel("ESPB*");
-        lbESPB.setToolTipText("Unesite broj ESPB bodova");
-        lbESPB.setPreferredSize(cellDim);
-        txtPointsESPB = new JTextField();
-        txtPointsESPB.setToolTipText("Unesite broj ESPB bodova");
-        txtPointsESPB.setPreferredSize(cellDim);
-        txtPointsESPB.setName("txtESPB");
-        JPanel panelC = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelC.add(lbESPB);
-        panelC.add(txtPointsESPB);
-
-        JLabel lbCurrentYear = new JLabel("Godina izvodjenja predmeta*");
-        lbCurrentYear.setPreferredSize(cellDim);
-        String []currentYear = new String[]{"I", "II", "III", "IV"};
-        txtFJComboBoxCurrentYear = new JComboBox<>(currentYear);
-        txtFJComboBoxCurrentYear.setName("txtCurrentYear");
-        txtFJComboBoxCurrentYear.setPreferredSize(cellDim);
-        JPanel panelD= new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelD.add(lbCurrentYear);
-        panelD.add(txtFJComboBoxCurrentYear);
-
-        JLabel lbSem = new JLabel("Semestar*");
-        lbSem.setPreferredSize(cellDim);
-        String []sem = new String[]{"SUMMER", "WINTER"};
-        txtSemester = new JComboBox<>(sem);
-        txtSemester.setName("txtCurrentYear");
-        txtSemester.setPreferredSize(cellDim);
-        JPanel panelE = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelE.add(lbSem);
-        panelE.add(txtSemester);
-
-        
-        JLabel lbProf = new JLabel("Profesor*");
-        lbProf.setToolTipText("Samo jedan profesor");
-        lbProf.setPreferredSize(new Dimension(135,20));
-        txtProfesor = new JTextField();
-        txtProfesor.setToolTipText("Samo jedan profesor");
-        txtProfesor.setPreferredSize(cellDim);
-        txtProfesor.setName("txtProfesor");
-        txtProfesor.setEditable(false);  
-        JPanel panelP = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelP.add(lbProf);
-        panelP.add(txtProfesor);
-     
-        
-		btnDodajProf = new JButton();
-		btnDodajProf.setIcon(new ImageIcon("img/add-icon.png"));
-		btnDodajProf.setPreferredSize(new Dimension(20,20));
-		btnUkloniProf = new JButton();
-		btnUkloniProf.setIcon(new ImageIcon("img/iconDelete.png"));
-		btnUkloniProf.setPreferredSize(new Dimension(20,20));
-		btnUkloniProf.setEnabled(false);
+    private ArrayList<SubjectListener> validations=new ArrayList<>();
+	
+	public EditSubject(int selectedIndex) {
+		super();
+		setTitle("Izmena predmeta");
+		setSize(750, 750);
+		setLocationRelativeTo(MainWindow.getInstance());
+		this.setModal(true);
+		
+		JPanel dialogPanel = new JPanel();
+		BoxLayout dialogLayout = new BoxLayout(dialogPanel, BoxLayout.Y_AXIS);
+		dialogPanel.setLayout(dialogLayout);
+		
+		Dimension dimension1 = new Dimension(200, 30);
+		FlowLayout layout1 = new FlowLayout(FlowLayout.CENTER);
+		
+		JPanel idPanel = new JPanel(layout1);
+		JPanel nazivPanel = new JPanel(layout1);
+		JPanel semestarPanel = new JPanel(layout1);
+		JPanel godinaPanel = new JPanel(layout1);
+		JPanel espbPanel = new JPanel(layout1);
+		JPanel profesorPanel = new JPanel(layout1);
+		
+		Subject predmet = SubjectController.getInstance().getPredmet(selectedIndex);
+		naziv = predmet.getNameSub();
+		id = predmet.getIdS();
+		espbString = Integer.toString(predmet.getESPBpoints());
+	
+		JLabel idLabel = new JLabel("Sifra predmeta*:");
+		idLabel.setPreferredSize(dimension1);
+		JLabel nazivLabel = new JLabel("Naziv predmeta*:");
+		nazivLabel.setPreferredSize(dimension1);
+		JLabel semestarLabel = new JLabel("Semestar*:");
+		semestarLabel.setPreferredSize(dimension1);
+		JLabel godinaLabel = new JLabel("Godina studija*:");
+		godinaLabel.setPreferredSize(dimension1);
+		JLabel espbLabel = new JLabel("Broj ESPB bodova*:");
+		espbLabel.setPreferredSize(dimension1);
+		JLabel profesorLabel = new JLabel("Profesor*:");
+		profesorLabel.setPreferredSize(dimension1);
+		
+		JTextField idTF = new JTextField(id);
+		idTF.setPreferredSize(dimension1);
+		JTextField nazivTF = new JTextField(naziv);
+		nazivTF.setPreferredSize(dimension1);
+		JTextField espbTF = new JTextField(espbString);
+		espbTF.setPreferredSize(dimension1);
+		JTextField profTF = new JTextField();
+		if(predmet.getProfessor() != null)
+			profTF.setText(predmet.getProfessor().getName() + " " + predmet.getProfessor().getSurname());
+		else
+			profTF.setText("");
+		profTF.setPreferredSize(dimension1);
+		profTF.setEditable(false);
+		
+		String[] semestri = {"Letnji", "Zimski"};
+		JComboBox<String> semestarComboBox = new JComboBox<String>(semestri);
+		semestarComboBox.setPreferredSize(dimension1);
+		
+		String[] godine = {"I", "II", "III", "IV"};
+		JComboBox<String> godinaComboBox = new JComboBox<String>(godine);
+		godinaComboBox.setPreferredSize(dimension1);
+		
+		semestarComboBox.setSelectedIndex(predmet.getSemester().ordinal());
+	    godinaComboBox.setSelectedIndex(predmet.getYearOfStudy().ordinal());
+	    
+		idPanel.add(idLabel);
+		idPanel.add(idTF);
+		nazivPanel.add(nazivLabel);
+		nazivPanel.add(nazivTF);
+		semestarPanel.add(semestarLabel);
+		semestarPanel.add(semestarComboBox);
+		godinaPanel.add(godinaLabel);
+		godinaPanel.add(godinaComboBox);
+		espbPanel.add(espbLabel);
+		espbPanel.add(espbTF);
 		
 		
-		btnDodajProf.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				AddProfessorForSubject dodajProfPredmetu = new AddProfessorForSubject(parent);
-				profesor = dodajProfPredmetu.getSelectedProf();
-				if(profesor != null) {
-					txtProfesor.setText(profesor.getName() + " " + profesor.getSurname());
-					setEnableButtProf(false);
-					allValid();
-				}
-			}
-		});
-		
-		btnUkloniProf.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				String poruka = "Da li želite da uklonite predmetnog profesora?";
-				Object[] opcije = {"Odustani","Potvrdi"};
-				int option = JOptionPane.showOptionDialog(parent, poruka, "Ukloni Profesora", JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE, null, opcije, null);
-				if(option == JOptionPane.NO_OPTION) {
-					profesor = null; 
-					setEnableButtProf(true);
-					txtProfesor.setText("");
-					allValid();
-				}
-			}
-		});
-		
-		
-        //validation
-        SubjectListener val1 = new SubjectListener(lbIds,txtIdS,this,oldsubject.getIdS());
-        txtIdS.addFocusListener(val1);
-        validations.add(val1);
+		JButton plus = new JButton("+");
+		JButton minus = new JButton("-");
+		profesorPanel.add(profesorLabel);
+		profesorPanel.add(profTF);
+		profesorPanel.add(plus);
+		profesorPanel.add(minus);
 
-        SubjectListener val2 = new SubjectListener(lbESPB,txtPointsESPB,this);
-        txtPointsESPB.addFocusListener(val2);
-        validations.add(val2);
-
-        SubjectListener val3 = new SubjectListener(lbName,txtName,this);
-        txtName.addFocusListener(val3);
-        validations.add(val3);
-        //
-        initFields(oldsubject);
-        //
-        JPanel CentralPanel = new JPanel();
-        BoxLayout boxCenter = new BoxLayout(CentralPanel,BoxLayout.Y_AXIS);
-        CentralPanel.setLayout(boxCenter);
-        CentralPanel.add(Box.createVerticalGlue());
-        CentralPanel.add(panelA);
-        CentralPanel.add(panelB);
-        CentralPanel.add(panelC);
-        CentralPanel.add(panelD);
-        CentralPanel.add(panelE);
-        CentralPanel.add(panelP);
-        panelP.add(btnDodajProf);
-        panelP.add(Box.createHorizontalStrut(7));
-        panelP.add(btnUkloniProf);
-        
-        this.add(CentralPanel,BorderLayout.CENTER);
-        //button
-        JPanel JButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButtonPanel.setPreferredSize(new Dimension(60,60));
-        btAccept = new JButton("Potvrdi");
-        btAccept.setEnabled(false);
-        btAccept.setMnemonic(KeyEvent.VK_S);
-        btAccept.setForeground(Color.GREEN);
-        JButton btDecline = new JButton("Odustani");
-        btDecline.setForeground(Color.BLACK);
-        btDecline.setMnemonic(KeyEvent.VK_Q);
-        btDecline.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-
-        JButtonPanel.add(btDecline);
-        btAccept.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Subject sub = new Subject();
-                sub.setIdS(txtIdS.getText());
-                val1.setIdSub(sub.getIdS());
-                sub.setNameSub(txtName.getText());
-                sub.setESPBpoints(Integer.parseInt(txtPointsESPB.getText()));
-                if(txtFJComboBoxCurrentYear.getSelectedIndex()==0){
-                    sub.setYearOfStudy(YearofStudy.I);
-                }
-                else if(txtFJComboBoxCurrentYear.getSelectedIndex()==1){
-                    sub.setYearOfStudy(YearofStudy.II);
-                }
-                else if(txtFJComboBoxCurrentYear.getSelectedIndex()==2){
-                    sub.setYearOfStudy(YearofStudy.III);
-                }
-                else if(txtFJComboBoxCurrentYear.getSelectedIndex()==3){
-                    sub.setYearOfStudy(YearofStudy.IV);
-                }
-                if(txtSemester.getSelectedIndex()==0){
-                    sub.setSemester(Semester.SUMMER);
-                }
-                else{
-                    sub.setSemester(Semester.WINTER);
-                }
-                if(profesor != null) {
-					sub.setProfessor(profesor);
-				}
-                SubjectController.getInstance().editSubject(oldsubject,sub);
-                ProfessorController.getInstance().AddSubjectForProfessor(profesor, oldsubject);
-                btAccept.setEnabled(false);
-                dispose();
-            }
-        });
-        JButtonPanel.add(btAccept);
-        JButtonPanel.add(Box.createHorizontalStrut(20));
-        this.add(JButtonPanel,BorderLayout.SOUTH);
-    }
-    private void initFields(Subject subject){
-        txtIdS.setText(subject.getIdS());
-        txtName.setText(subject.getNameSub());
-        txtPointsESPB.setText(String.valueOf(subject.getESPBpoints()));
-        if(subject.getSemester() ==Semester.SUMMER){
-            txtSemester.setSelectedIndex(0);
-        }else{
-            txtSemester.setSelectedIndex(1);
-        }
-        if(subject.getYearOfStudy()== YearofStudy.I) {
-            txtFJComboBoxCurrentYear.setSelectedIndex(0);
-        }
-        if(subject.getYearOfStudy()== YearofStudy.II) {
-            txtFJComboBoxCurrentYear.setSelectedIndex(1);
-        }
-        if(subject.getYearOfStudy()== YearofStudy.I) {
-            txtFJComboBoxCurrentYear.setSelectedIndex(2);
-        }
-        if(subject.getYearOfStudy()== YearofStudy.I) {
-            txtFJComboBoxCurrentYear.setSelectedIndex(3);
-        }
-        if(oldsubject.getProfessor() != null) {
-			profesor = oldsubject.getProfessor();
-			txtProfesor.setText(profesor.getName()+" "+profesor.getSurname());
-			setEnableButtProf(false);
-		}else {
-			txtProfesor.setText("");
-			setEnableButtProf(true);
+		dialogPanel.add(idPanel);
+		dialogPanel.add(nazivPanel);
+		dialogPanel.add(godinaPanel);
+		dialogPanel.add(semestarPanel);
+		dialogPanel.add(espbPanel);
+		dialogPanel.add(profesorPanel);
+		dialogPanel.add(Box.createVerticalStrut(25));
+		
+		add(dialogPanel, BorderLayout.CENTER);
+		
+		JPanel buttonPanel = new JPanel();
+		BoxLayout buttonLayout = new BoxLayout(buttonPanel, BoxLayout.X_AXIS);
+		buttonPanel.setLayout(buttonLayout);
+		
+		JButton btnPotvrdi = new JButton("Potvrdi");
+		btnPotvrdi.setPreferredSize(new Dimension(100, 30));
+		JButton btnOdustani = new JButton("Odustani");
+		btnOdustani.setPreferredSize(new Dimension(100, 30));
+		buttonPanel.add(Box.createHorizontalGlue());
+		buttonPanel.add(btnPotvrdi);
+		buttonPanel.add(Box.createHorizontalStrut(50));
+		buttonPanel.add(btnOdustani);
+		buttonPanel.add(Box.createHorizontalGlue());
+		
+		add(buttonPanel, BorderLayout.SOUTH);
+		
+		btnPotvrdi.setEnabled(true);
+		
+		//profTF.setEnabled(false);
+		
+		if(profTF.getText().equals("")) {
+			minus.setEnabled(false);
+			plus.setEnabled(true);
 		}
-  
-        
-    }
-    }
+		else {
+			plus.setEnabled(false);
+			minus.setEnabled(true);
+		}
+		
+		//validacija
+		
+		 	SubjectListener val1 = new SubjectListener(idLabel,idTF ,this);
+		 	idTF.addFocusListener(val1);
+	        validations.add(val1);
+
+	        SubjectListener val2 = new SubjectListener(espbLabel,espbTF,this);
+	        espbTF.addFocusListener(val2);
+	        validations.add(val2);
+
+	        SubjectListener val3 = new SubjectListener(nazivLabel,nazivTF,this);
+	        nazivTF.addFocusListener(val3);
+	        validations.add(val3);
+		
+	   btnPotvrdi.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Semester semestar = Semester.values()[semestarComboBox.getSelectedIndex()];
+				YearofStudy godina = YearofStudy.values()[godinaComboBox.getSelectedIndex()];
+				
+				for(Subject p: SubjectController.getInstance().getPredmeti()) {
+					if(p.getIdS().equals(id) && p != SubjectController.getInstance().getPredmeti().get(selectedIndex)) {
+						JOptionPane.showMessageDialog(null,
+								"Predmet sa datom sifrom vec postoji u sistemu",
+								"Greska pri unosu predmeta", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+				}
+				if(profTF.getText().equals(""))
+					profesor = null;
+				else
+					profesor = ddpp.getProf();
+				
+				Subject predmet = new Subject(id, naziv, semestar, godina,Integer.parseInt(espbString), profesor);
+				SubjectController.getInstance().editSubject2(selectedIndex, predmet);
+				dispose();
+			}
+			
+		});
+		
+		btnOdustani.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+			}});
+		
+		plus.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ddpp = new AddProfessorForSubject(profTF);
+				ddpp.setVisible(true);
+			
+			}
+			
+		});
+		
+		minus.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				RemoveProfessorFromSubject dup = new RemoveProfessorFromSubject(profTF);
+				dup.setVisible(true);
+			}
+			
+		});
+	}
+	
+	public boolean proveraUnosa(String fieldText, String fieldRegex, int index) {
+		if (!fieldText.matches(fieldRegex))
+			ispravno[index] = false;			
+		else 
+			ispravno[index] = true;
+		boolean sviIspravni = true;
+		for(boolean i : ispravno)
+			if(i == false)
+				sviIspravni = false;
+		
+		if(sviIspravni == true)
+			return true;
+		else
+			return false;
+	}
+}

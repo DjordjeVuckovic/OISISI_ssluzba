@@ -199,7 +199,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					}
 					else{
 						Subject subject = SubjectController.getInstance().findSubjectById(SubjectTable.getInstance().getSelectedId());
-						EditSubject editSubject = new EditSubject(subject.getIdS());
+						EditSubject editSubject = new EditSubject(SubjectTable.getInstance().getTabelaPredmeta().getSelectedRow());
 						editSubject.setVisible(true);
 					}
 					break;

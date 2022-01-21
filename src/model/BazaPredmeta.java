@@ -129,4 +129,18 @@ public class BazaPredmeta implements AbstractModel {
         }
         return subs;
     }
+    
+    public Subject getPredmet(int rowIndex) {
+		return subjects.get(rowIndex);
+	}
+    
+    public void editSubject2(int i, Subject p) {
+		Subject predmet = subjects.get(i); 
+		predmet.setIdS(p.getIdS());
+		predmet.setNameSub(p.getNameSub());
+		predmet.setSemester(p.getSemester());
+		predmet.setESPBpoints(p.getESPBpoints());
+		predmet.setYearOfStudy(p.getYearOfStudy());
+		predmet.setProfessor(p.getProfessor());	
+	}
 }

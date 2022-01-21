@@ -9,15 +9,19 @@ import java.awt.*;
 public class SubjectTable extends JTable {
     private static SubjectTable instance = null;
 
+    
     public static SubjectTable getInstance() {
         if(instance==null) instance = new SubjectTable();
         return instance;
     }
+    
     private SubjectTable() {
         this.setRowSelectionAllowed(true);
         setColumnSelectionAllowed(true);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setModel(new AbstractTableSubject());
+        
+        
     }
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
         Component c = super.prepareRenderer(renderer, row, column);
@@ -37,4 +41,6 @@ public class SubjectTable extends JTable {
         model.fireTableDataChanged();
         validate();
     }
+    
+    
 }

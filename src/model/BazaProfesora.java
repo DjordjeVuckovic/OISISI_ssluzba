@@ -197,4 +197,8 @@ public class BazaProfesora implements AbstractModel {
 		}
 	}
 	
+	public Object getValueAtProf1(int i) {
+		Professor profesor = BazaProfesora.getInstance().getProfessors().get(i);
+		return profesor.getName() + " " + profesor.getSurname();
+	}
 }

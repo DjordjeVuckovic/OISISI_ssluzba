@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+
+import gui.view.MainWindow;
 import gui.view.center.SubjectTable;
 import model.BazaPredmeta;
 import model.Subject;
@@ -29,4 +32,18 @@ public class SubjectController {
         oldSub.setSemester(nSub.getSemester());
         SubjectTable.getInstance().refreshTable();
     }
+    
+    public Subject getPredmet(int rowIndex) {
+		Subject p=BazaPredmeta.getInstance().getPredmet(rowIndex);		
+		return p;
+	}
+    
+    public ArrayList<Subject> getPredmeti() {
+		return BazaPredmeta.getInstance().getSubjects();
+	}
+    
+    public void editSubject2(int i, Subject p) {
+		BazaPredmeta.getInstance().editSubject2(i, p);
+		SubjectTable.getInstance().refreshTable();
+	}
 }

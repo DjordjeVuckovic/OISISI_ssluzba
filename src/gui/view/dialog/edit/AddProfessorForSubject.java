@@ -1,170 +1,124 @@
 package gui.view.dialog.edit;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableCellRenderer;
 
-import controller.ProfessorController;
-import gui.view.dialog.MyButton;
+import gui.view.center.AbstractListProfessors;
 import model.BazaProfesora;
 import model.Professor;
 
-public class AddProfessorForSubject extends JDialog {
+public class AddProfessorForSubject extends JDialog{
 
-	private static final long serialVersionUID = 8561976962718904066L;
-
-	private TabelaOdabirProf tabelaOdabirProf;
-
-	private Professor Professor = null;
-
-	public AddProfessorForSubject(Frame parent) {
-		super(parent, "Izaberite Profesora", true);
-
-		setSize(350,300);
-		setResizable(false);
-		setLocationRelativeTo(null); 	
-		setLayout(new BorderLayout());
-
-		JPanel pang = new JPanel();
-		JPanel panMyButtons = new JPanel(new FlowLayout(10,10,10));
-		JPanel panl= new JPanel();
-		JPanel pand = new JPanel();
-
-		pang.setPreferredSize(new Dimension(30,30));
-		panMyButtons.setPreferredSize(new Dimension(50,50));
-		panl.setPreferredSize(new Dimension(10,10));
-		pand.setPreferredSize(new Dimension(10,10));
-
-		JPanel centralniPanel = new JPanel(new BorderLayout());
-		centralniPanel.setBackground(Color.white);
-
-		tabelaOdabirProf = new TabelaOdabirProf();
-		JScrollPane panelProfessoriScrollPane = new JScrollPane(tabelaOdabirProf);
-		centralniPanel.add(panelProfessoriScrollPane,BorderLayout.CENTER);
-		azurirajPrikazTabeleProfessora("POCETNA", 0);
-
-
-
-		MyButton btnConfirm = new MyButton("Potvrdi");
-		btnConfirm.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				int iProf = getSelectedRow();
-
-				Professor = ProfessorController.getInstance().getProfesor(iProf);
-				dispose();
-			}
-		});
-
-		MyButton btnDecline = new MyButton("Odustani");
-		btnDecline.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
-
-		panMyButtons.add(Box.createHorizontalStrut(52));
-		panMyButtons.add(btnConfirm);
-		panMyButtons.add(Box.createHorizontalStrut(10));
-		panMyButtons.add(btnDecline);
-
-
-
-		add(pang, BorderLayout.NORTH);
-		add(panMyButtons, BorderLayout.SOUTH);
-		add(panl, BorderLayout.WEST);
-		add(pand, BorderLayout.EAST);
-
-		add(centralniPanel, BorderLayout.CENTER);
-
-		setVisible(true);
-	}
-
-
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5968193652354772695L;
+	private JList<Object> profesoriList;
+	Professor prof;
 	
-	private class TabelaOdabirProf extends JTable{
-		private static final long serialVersionUID = -3805554009583860187L;
-		//dodavanje svih klasa
-		public TabelaOdabirProf() {
-			setRowSelectionAllowed(true);
-			setColumnSelectionAllowed(true);
-			setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			setModel(new AbstractTableProfessoriOdabir());
-		}
-		@Override
-		public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+	public AddProfessorForSubject(JTextField profTF) {
 		
-			// System.out.println(row + " " + column);
-			Component c = super.prepareRenderer(renderer, row, column);
+		super();
+	
+		
+		setSize(500, 500);
+		setModal(true);
+		setLocationRelativeTo(this.getParent());
+		setTitle("Odaberite profesora");
+		
+		JPanel dialogPanel = new JPanel();
+		BorderLayout dialogLayout = new BorderLayout();
+		dialogPanel.setLayout(dialogLayout);
+		
+		JPanel panLabel = new JPanel();
+		BoxLayout labelLayout = new BoxLayout(panLabel, BoxLayout.X_AXIS);
+		panLabel.setLayout(labelLayout);
+		panLabel.setPreferredSize(new Dimension(500, 50));
+		JLabel predmetiLabel = new JLabel("Profesori:");
+		
+		Dimension dimension = new Dimension(100, 30);
+		predmetiLabel.setPreferredSize(dimension);
+		
+		panLabel.add(Box.createHorizontalStrut(25));
+		panLabel.add(predmetiLabel);
+		panLabel.add(Box.createHorizontalGlue());
+		
+		dialogPanel.add(panLabel, BorderLayout.NORTH);
+		
+		profesoriList = new JList<Object>(new AbstractListProfessors());
+		profesoriList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JScrollPane profesoriScrollPane = new JScrollPane(profesoriList);
+		profesoriScrollPane.setPreferredSize(new Dimension(200, 200));
+		dialogPanel.add(profesoriScrollPane, BorderLayout.CENTER);
+		
+		JPanel btnPanel = new JPanel();
+		BoxLayout btnLayout = new BoxLayout(btnPanel, BoxLayout.X_AXIS);
+		btnPanel.setLayout(btnLayout);
+		btnPanel.setPreferredSize(new Dimension(500, 50));
+		
+		JButton btnPotvrdi = new JButton("Potvrdi");
+		btnPotvrdi.setPreferredSize(new Dimension(100, 30));
+		JButton btnOdustani = new JButton("Odustani");
+		btnOdustani.setPreferredSize(new Dimension(100, 30));
+		
+		btnPanel.add(Box.createHorizontalGlue());
+		btnPanel.add(btnPotvrdi);
+		btnPanel.add(Box.createHorizontalStrut(25));
+		btnPanel.add(btnOdustani);
+		btnPanel.add(Box.createHorizontalGlue());
+		dialogPanel.add(btnPanel, BorderLayout.SOUTH);
+		
+		JPanel westPanel = new JPanel();
+		westPanel.setPreferredSize(new Dimension(25, 500));
+		dialogPanel.add(westPanel, BorderLayout.WEST);
+		
+		JPanel eastPanel = new JPanel();
+		eastPanel.setPreferredSize(new Dimension(25, 500));
+		dialogPanel.add(eastPanel, BorderLayout.EAST);
+		
+		add(dialogPanel, BorderLayout.CENTER);
+		
+		btnPotvrdi.addActionListener(new ActionListener() {
 
-			if (isRowSelected(row)) {
-				c.setBackground(Color.LIGHT_GRAY);
-			} else {
-				c.setBackground(Color.WHITE);
-			}
-			return c;
-		}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(profesoriList.getSelectedIndex() > -1) {
+					prof = BazaProfesora.getInstance().getProfessors().get(profesoriList.getSelectedIndex());
+					profTF.setText(prof.getName() + " " + prof.getSurname());
+					
+					dispose();
+				}
+			}});
+		
+		btnOdustani.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+			}});
 	}
 
-	public class AbstractTableProfessoriOdabir extends AbstractTableModel{
-
-		private static final long serialVersionUID = 2335644876350909315L;
-
-		@Override
-		public int getColumnCount() {
-			return 1;
-		}
-
-		@Override
-		public int getRowCount() {
-			return BazaProfesora.getInstance().getProfessors().size();
-		}
-
-		@Override
-		public String getValueAt(int index1, int index2) {
-			String prof = BazaProfesora.getInstance().getValueAt(index1,0)+" "+
-					      BazaProfesora.getInstance().getValueAt(index2,1);
-			return prof; 
-		}
-		@Override
-		public String getColumnName(int column) {
-			return "Ime i Prezime";
-		}
-
+	public Professor getProf() {
+		return prof;
 	}
 
-	public void azurirajPrikazTabeleProfessora(String akcija, int vrednost) {
-		AbstractTableProfessoriOdabir model = (AbstractTableProfessoriOdabir) tabelaOdabirProf.getModel();
-		model.fireTableDataChanged();
-		validate();
+	public void setProf(Professor prof) {
+		this.prof = prof;
 	}
-
-	public int getSelectedRow() {
-		return tabelaOdabirProf.getSelectedRow();
-	}
-
-	public Professor getSelectedProf() {
-		return Professor;
-	}
-
-
-
+	
 }
-

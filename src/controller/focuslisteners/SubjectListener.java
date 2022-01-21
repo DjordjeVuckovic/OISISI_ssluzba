@@ -105,7 +105,7 @@ public class SubjectListener implements FocusListener {
             addSubject.EnableButt();
         }
         if(mode==2){
-            editSubject.EnableButt();
+           editSubject.EnableButt();
         }
 
     }
