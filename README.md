@@ -4,15 +4,15 @@ Projekat iz predmeta OISISI Studentska Služba Fakulteta Tehničkih Nauka
 # Student1: Đorđe Vučković RA/8/2019
 # Student2:  Dusan Vuković RA/16/2019
 
-Verzija:JDK 17.01
+# Verzija:JDK 17.01
 
 Glavne promene u preporucenoj raspodeli i nasoj su:
 
-**Student1: 
+# Student1: 
 
-# prikaz_nepolozenih_ispita
-# upis_ocene
-# ponistavanje_ocene
+#prikaz_nepolozenih_ispita
+#upis_ocene
+#ponistavanje_ocene
  
  **Student2:
 
