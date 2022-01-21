@@ -30,13 +30,13 @@ public class Subject {
 		this.professor = professor;
 	}
 	
-	public Subject(String id, String nameSub, Semester semester, YearofStudy yearOfStudy, int pointsESPB) {
-		this.idS = id;
-		this.nameSub = nameSub;
-		this.semester = semester;
-		this.yearOfStudy = yearOfStudy;
-		this.pointsESPB = pointsESPB;
+	
+	public Subject(String id, String nameSub, Semester semester, YearofStudy yearOfStudy, int pointsESPB) { this.idS = id; this.nameSub = nameSub;
+	  this.semester = semester;
+	  this.yearOfStudy = yearOfStudy;
+	  this.pointsESPB =pointsESPB;
 	}
+	 
 
 	public String getIdS() {
 		return idS;

@@ -147,9 +147,11 @@ public class Professor {
 	}
 	
 	public  void addSubjects(Subject subject){
-		subjects.add(subject);
+		this.getSubjects().add(subject);
 	}
 	public void removeSubjects(Subject subject){
+		if(subject == null) return;
+		
 		subjects.remove(subject);
 	}
 	

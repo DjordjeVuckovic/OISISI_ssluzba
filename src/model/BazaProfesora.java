@@ -137,6 +137,21 @@ public class BazaProfesora implements AbstractModel {
 	}
 	public void deleteProfessor(Professor pr){Professors.remove(pr);}
 	
+	public void addSubjectForProf(Professor pro,Subject pre) {
+
+		if(pro == null || pre == null) return;
+		
+
+		for (Subject predmet : pro.getSubjects()) {
+			if(predmet.equals(pre)) {
+				return; 		
+			}
+		}
+		pro.addSubjects(pre);
+		return;
+	}
+	
+	
 	public boolean UniqueId(String id_){
 		boolean ret=true;
 		for(Professor pr:this.Professors){

@@ -1,20 +1,35 @@
 package gui.view.dialog.edit;
 
-import controller.SubjectController;
-import controller.focuslisteners.SubjectListener;
-import gui.view.MainWindow;
-import gui.view.dialog.MyDialog;
-import gui.view.dialog.add.AddSubject;
-import model.Semester;
-import model.Subject;
-import model.YearofStudy;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import controller.ProfessorController;
+import controller.SubjectController;
+import controller.focuslisteners.SubjectListener;
+import gui.view.MainWindow;
+import gui.view.dialog.MyButton;
+import gui.view.dialog.MyDialog;
+import model.Professor;
+import model.Semester;
+import model.Subject;
+import model.YearofStudy;
+
 
 public class EditSubject extends MyDialog {
     private JTextField txtIdS;
@@ -22,8 +37,15 @@ public class EditSubject extends MyDialog {
     private JComboBox<String> txtFJComboBoxCurrentYear;
     private JComboBox<String> txtSemester;
     private JTextField txtPointsESPB;
+    private JTextField txtProfesor;
+    
     private JButton btAccept;
     private Subject oldsubject;
+    
+    private MyButton btnDodajProf;
+    private MyButton btnUkloniProf;
+ 
+    private Professor profesor;
     /*
     private static EditSubject instance = null;
     public static EditSubject getInstance(String idS){
@@ -33,7 +55,18 @@ public class EditSubject extends MyDialog {
         return instance;
     }
     */
-
+    
+    public void setEnableButtProf(boolean yes) {
+		if(yes) {
+			btnDodajProf.setEnabled(true);
+			btnUkloniProf.setEnabled(false);
+		}else {
+			btnDodajProf.setEnabled(false);
+			btnUkloniProf.setEnabled(true);
+		}
+	}
+    
+    
     public boolean allValid(){
         for(SubjectListener sb:validations){
             if(!sb.getValidation()){
@@ -45,20 +78,22 @@ public class EditSubject extends MyDialog {
     public void EnableButt(){
         btAccept.setEnabled(allValid());
     }
+    
     private ArrayList<SubjectListener> validations=new java.util.ArrayList<>();
     public EditSubject(String idS) {
-        super(MainWindow.getInstance(), "Izmena predmeta");
+        super(MainWindow.getInstance(), "Izmena oldsubjecta");
         oldsubject = SubjectController.getInstance().findSubjectById(idS);
         initEditDialog();
     }
     private void initEditDialog(){
         Dimension cellDim = new Dimension(200, 20);
         setLayout(new BorderLayout());
+        
         JLabel lbIds = new JLabel("Sifra*");
-        lbIds.setToolTipText("Unesite jedinstvenu sifru predmeta");
+        lbIds.setToolTipText("Unesite jedinstvenu sifru oldsubjecta");
         lbIds.setPreferredSize(cellDim);
         txtIdS = new JTextField();
-        txtIdS.setToolTipText("Unesite jedinstvenu sifru predmeta");
+        txtIdS.setToolTipText("Unesite jedinstvenu sifru oldsubjecta");
         txtIdS.setPreferredSize(cellDim);
         txtIdS.setName("txtId");
         JPanel panelA = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -67,10 +102,10 @@ public class EditSubject extends MyDialog {
 
 
         JLabel lbName = new JLabel("Naziv*");
-        lbName.setToolTipText("Unesite naziv predmeta");
+        lbName.setToolTipText("Unesite naziv oldsubjecta");
         lbName.setPreferredSize(cellDim);
         txtName = new JTextField();
-        txtName.setToolTipText("Unesite naziv predmeta");
+        txtName.setToolTipText("Unesite naziv oldsubjecta");
         txtName.setPreferredSize(cellDim);
         txtName.setName("txtName");
         JPanel panelB = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -89,7 +124,7 @@ public class EditSubject extends MyDialog {
         panelC.add(lbESPB);
         panelC.add(txtPointsESPB);
 
-        JLabel lbCurrentYear = new JLabel("Godina izvodjenja predmeta*");
+        JLabel lbCurrentYear = new JLabel("Godina izvodjenja oldsubjecta*");
         lbCurrentYear.setPreferredSize(cellDim);
         String []currentYear = new String[]{"I", "II", "III", "IV"};
         txtFJComboBoxCurrentYear = new JComboBox<>(currentYear);
@@ -109,6 +144,57 @@ public class EditSubject extends MyDialog {
         panelE.add(lbSem);
         panelE.add(txtSemester);
 
+        
+        JLabel lbProf = new JLabel("Profesor*");
+        lbProf.setToolTipText("Samo jedan profesor");
+        lbProf.setPreferredSize(cellDim);
+        txtProfesor = new JTextField();
+        txtProfesor.setToolTipText("Samo jedan profesor");
+        txtProfesor.setPreferredSize(cellDim);
+        txtProfesor.setName("txtProfesor");
+        JPanel panelP = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelP.add(lbProf);
+        panelP.add(txtProfesor);
+     
+        
+		btnDodajProf = new MyButton();
+		btnDodajProf.setIcon(new ImageIcon("img/icon-add.png"));
+		btnDodajProf.setPreferredSize(new Dimension(20,20));
+		btnUkloniProf = new MyButton();
+		btnUkloniProf.setIcon(new ImageIcon("img/iconDelete.png"));
+		btnUkloniProf.setPreferredSize(new Dimension(20,20));
+		btnUkloniProf.setEnabled(false);
+		
+		
+		btnDodajProf.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				AddProfessorForSubject dodajProfNaoldsubject = new AddProfessorForSubject(parent);
+				profesor = dodajProfNaoldsubject.getSelectedProf();
+				if(profesor != null) {
+					txtProfesor.setText(profesor.getName()+" "+profesor.getSurname());
+					setEnableButtProf(false);
+					allValid();
+				}
+			}
+		});
+		
+		btnUkloniProf.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String poruka = "Da li želite da uklonite oldsubjectnog profesora?";
+				Object[] opcije = {"Potvrdi","Odustani"};
+				int option = JOptionPane.showOptionDialog(parent, poruka, "Ukloni Profesora", JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE, null, opcije, null);
+				if(option == JOptionPane.YES_OPTION) {
+					profesor = null; 
+					setEnableButtProf(true);
+					txtProfesor.setText("");
+					allValid();
+				}
+			}
+		});
+		
+		
         //validation
         SubjectListener val1 = new SubjectListener(lbIds,txtIdS,this,oldsubject.getIdS());
         txtIdS.addFocusListener(val1);
@@ -133,10 +219,15 @@ public class EditSubject extends MyDialog {
         CentralPanel.add(panelC);
         CentralPanel.add(panelD);
         CentralPanel.add(panelE);
+        CentralPanel.add(panelP);
+        panelP.add(btnDodajProf);
+        panelP.add(Box.createHorizontalStrut(10));
+        panelP.add(btnUkloniProf);
+        
         this.add(CentralPanel,BorderLayout.CENTER);
         //button
-        JPanel diaButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        diaButtonPanel.setPreferredSize(new Dimension(60,60));
+        JPanel MyButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        MyButtonPanel.setPreferredSize(new Dimension(60,60));
         btAccept = new JButton("Potvrdi");
         btAccept.setEnabled(false);
         btAccept.setMnemonic(KeyEvent.VK_S);
@@ -151,7 +242,7 @@ public class EditSubject extends MyDialog {
             }
         });
 
-        diaButtonPanel.add(btDecline);
+        MyButtonPanel.add(btDecline);
         btAccept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -178,14 +269,18 @@ public class EditSubject extends MyDialog {
                 else{
                     sub.setSemester(Semester.WINTER);
                 }
+                if(profesor != null) {
+					sub.setProfessor(profesor);
+				}
                 SubjectController.getInstance().editSubject(oldsubject,sub);
+                ProfessorController.getInstance().AddSubjectForProfessor(profesor, oldsubject);
                 btAccept.setEnabled(false);
                 dispose();
             }
         });
-        diaButtonPanel.add(btAccept);
-        diaButtonPanel.add(Box.createHorizontalStrut(20));
-        this.add(diaButtonPanel,BorderLayout.SOUTH);
+        MyButtonPanel.add(btAccept);
+        MyButtonPanel.add(Box.createHorizontalStrut(20));
+        this.add(MyButtonPanel,BorderLayout.SOUTH);
     }
     private void initFields(Subject subject){
         txtIdS.setText(subject.getIdS());
@@ -208,5 +303,14 @@ public class EditSubject extends MyDialog {
         if(subject.getYearOfStudy()== YearofStudy.I) {
             txtFJComboBoxCurrentYear.setSelectedIndex(3);
         }
+        if(oldsubject.getProfessor() != null) {
+			profesor = oldsubject.getProfessor();
+			txtProfesor.setText(profesor.getName()+" "+profesor.getSurname());
+			setEnableButtProf(false);
+		}else {
+			txtProfesor.setText("");
+			setEnableButtProf(true);
+		}
+        
     }
     }

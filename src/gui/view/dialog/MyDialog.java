@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MyDialog extends JDialog {
-    private final Frame parent;
+    public final Frame parent;
 
     public MyDialog(Frame parent, String windowName) {
         super(parent, windowName, true);
