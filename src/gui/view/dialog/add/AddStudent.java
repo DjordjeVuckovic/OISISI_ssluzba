@@ -319,7 +319,8 @@ public class AddStudent  extends MyDialog {
                     }else if(txtFJComboBoxCurrentYear.getSelectedIndex()==3){
                         student.setCurrentyear(YearofStudy.IV);
                     }
-
+                    double avg = student.CalculateAvgGrade();
+                    student.setAvgGrade(avg);
                     StudentController.getInstance().addStudent(student);
                     clearFields();
                     btAccept.setEnabled(false);

@@ -165,6 +165,8 @@ public class Student implements Serializable {
 		}
 		return sum;
 	}
+	//
+
 	@Override
 		public String toString() {
 			return "Student [ime=" + name + ", prezime=" + surname + ", datum_rodjenja=" + birthday + ", adresa="

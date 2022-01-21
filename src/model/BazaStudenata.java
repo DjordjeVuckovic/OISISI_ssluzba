@@ -1,16 +1,10 @@
 package model;
 
-import gui.view.center.StudentsTable;
 import serial.Serialization;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class BazaStudenata implements AbstractModel, Serializable {
@@ -59,6 +53,7 @@ public class BazaStudenata implements AbstractModel, Serializable {
 		students.add(new Student("Sofija","Ilic",new GregorianCalendar(1999, 4, 6).getTime(),address.generateAddress(5),"021/731-067", "sofija.ilic@mailinator.com","RA/5/2019", 2019,YearofStudy.III,Status.BUDZET));
 		students.add(new Student("Martina","Lukic",new GregorianCalendar(1999, 4, 16).getTime(),address.generateAddress(6),"011/4333-800", "martina.lukic@mailinator.com","RA/8/2018", 2018,YearofStudy.III,Status.SAMOFINANSIRANJE));
 		students.add(new Student("Stojan","Stojakovic",new GregorianCalendar(1999, 4, 16).getTime(),address.generateAddress(7),"011/4333-800", "martina.lukic@mailinator.com","RA 8/2018", 2018,YearofStudy.III,Status.SAMOFINANSIRANJE));
+		CalculateAvgGrade();
 		deserijalizacija();
 	}
 	private void deserijalizacija(){
@@ -185,6 +180,13 @@ public class BazaStudenata implements AbstractModel, Serializable {
 	public void removeSearchSt(Student student){
 		if(searchMode){
 			searchStudents.remove(student);
+		}
+
+	}
+	public void CalculateAvgGrade(){
+		for(Student st:students){
+			double ret=st.CalculateAvgGrade();
+			st.setAvgGrade(ret);
 		}
 	}
 }
