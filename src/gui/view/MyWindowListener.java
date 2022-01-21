@@ -32,10 +32,13 @@ public class MyWindowListener implements WindowListener {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        } else {
+        }
+            else if(option == JOptionPane.NO_OPTION){
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            }
+            else {
+            frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         }
     }
 

@@ -19,11 +19,19 @@ public class SearchStudent {
         ArrayList<Student> search = new ArrayList<>();
         string.trim().toLowerCase();
         String[] arraySt =string.split(",");
+        if(arraySt.length>3){
+            BazaStudenata.getInstance().setSearchMode(true);
+            StudentsTable.getInstance().refreshTable();
+        }
         // sw-1-2019, Marko, Marković
         if(arraySt.length ==3){
             for(Student student :BazaStudenata.getInstance().getStudents()){
-                if(student.getIndex().toLowerCase().contains(arraySt[0].trim()) && student.getName().toLowerCase().contains(arraySt[1].trim()) && student.getSurname().contains(arraySt[2].trim())){
-                    search.add(student);
+                if(student.getIndex().toLowerCase().contains(arraySt[0].trim())){
+                    if(student.getName().toLowerCase().contains(arraySt[1].trim())) {
+                        if(student.getSurname().toLowerCase().contains(arraySt[2].trim())) {//&& student.getName().toLowerCase().contains(arraySt[1]) && student.getSurname().contains(arraySt[2])){
+                            search.add(student);
+                        }
+                    }
                 }
             }
         }
