@@ -1,10 +1,9 @@
 package controller;
 
-import gui.view.center.ProfessorsTable;
 import gui.view.center.SubjectTable;
 import model.BazaPredmeta;
 import model.BazaProfesora;
-import model.Professor;
+import model.BazaStudenata;
 import model.Subject;
 
 public class SubjectController {
@@ -31,6 +30,10 @@ public class SubjectController {
         }
         Subject predmet= BazaPredmeta.getInstance().getSubjectByRow(row);
         BazaPredmeta.getInstance().deleteSubject(predmet);
+        //ref zavisnost sa studentom
+        BazaStudenata.getInstance().DeleteSubjectForStudent(predmet.getIdS());
+        //ref zavisnost sa profesorom
+        BazaProfesora.getInstance().deleteSubjectForProfessor(predmet.getIdS());
         SubjectTable.getInstance().refreshTable();
     }
     

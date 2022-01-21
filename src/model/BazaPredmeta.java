@@ -176,4 +176,13 @@ public class BazaPredmeta implements AbstractModel, Serializable {
         }
         return subs;
     }
+    public void deleteStudentForSubject(String idSt){
+        int lenght;
+        for(Subject sub: subjects ){
+            lenght = sub.getFailed().indexOf(BazaStudenata.getInstance().getStudentById(idSt));
+            if(lenght>=0){
+                sub.getFailed().remove(lenght);
+            }
+        }
+    }
 }

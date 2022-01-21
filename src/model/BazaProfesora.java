@@ -166,6 +166,21 @@ public class BazaProfesora implements AbstractModel, Serializable {
 		}
 	}
 	public void deleteProfessor(Professor pr){Professors.remove(pr);}
+
+	public void deleteProfFromSubject(Professor prof) {
+
+		if(prof == null) return;
+
+		for (Subject sub : prof.getSubjects()) {
+			sub.setProfessor(null); 	// brisemo i profesora
+		}
+
+	}
+	public void deleteSearched(Professor prof){
+		if(searchMode) {
+			searchProfessors.remove(prof);
+		}
+	}
 	
 	public void addSubjectForProf(Professor pro,Subject pre) {
 
@@ -238,6 +253,14 @@ public class BazaProfesora implements AbstractModel, Serializable {
 		}
 		return profs;
 	}
-
+	public void deleteSubjectForProfessor(String idOfSubject){
+		int length;
+		for(Professor p: Professors) {
+			length=p.getSubjects().indexOf(BazaPredmeta.getInstance().findSubjectById(idOfSubject));
+			if(length>=0){
+				p.getSubjects().remove(length);
+			}
+		}
+	}
 
 }

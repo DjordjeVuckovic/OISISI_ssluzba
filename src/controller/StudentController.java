@@ -1,6 +1,7 @@
 package controller;
 
 import gui.view.center.StudentsTable;
+import model.BazaPredmeta;
 import model.BazaStudenata;
 import model.Student;
 
@@ -23,6 +24,10 @@ public class StudentController {
         }
         Student student = BazaStudenata.getInstance().getStudentByRow(row);
         BazaStudenata.getInstance().deleteStudent(student);
+        //brisanje iz trazenih
+        BazaStudenata.getInstance().removeSearchSt(student);
+        //ref zavisnost sa predmetom
+        BazaPredmeta.getInstance().deleteStudentForSubject(student.getIndex());
         StudentsTable.getInstance().refreshTable();
     }
     public Student getStudentByIndex(String index){

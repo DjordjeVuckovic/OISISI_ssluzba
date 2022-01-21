@@ -25,6 +25,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -165,9 +166,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 			}
 		}
 		else if(name.equals("Close")){
-			MainWindow.getInstance().closing();
-			MainWindow.getInstance().setVisible(false);
-			MainWindow.getInstance().dispose();
+			MainWindow.getInstance().dispatchEvent(new WindowEvent(MainWindow.getInstance(), WindowEvent.WINDOW_CLOSING));
 		}
 		else if(name.equals("About")){
 			AboutDialog aboutDialog = new AboutDialog();
@@ -194,7 +193,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					}
 					int choices = JOptionPane.showConfirmDialog(MainWindow.getInstance(),"Upozorenje", "Da li ste sigurni?",0);
 					if(choices ==JOptionPane.YES_OPTION){
-						SubjectController.getInstance().deleteSubject(rowSelecteds);
+						SubjectController.getInstance().deleteSubject(rowSelecteds);//mora da se vodi racuna o referencijalnim zavisnostima zavisnostima
 					}
 					break;
 				case 2:

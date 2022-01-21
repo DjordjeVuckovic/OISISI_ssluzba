@@ -1,11 +1,11 @@
 package controller;
 
-import java.util.List;
-
 import gui.view.center.ProfessorsTable;
 import model.BazaProfesora;
 import model.Professor;
 import model.Subject;
+
+import java.util.List;
 
 public class ProfessorController {
     private static  ProfessorController instance = null;
@@ -37,6 +37,9 @@ public class ProfessorController {
         }
         Professor Professor = BazaProfesora.getInstance().getProfessorByRow(row);
         BazaProfesora.getInstance().deleteProfessor(Professor);
+        //referencijalna zavisnost sa predmetom na kojem predaje i sa listom trazenih
+        BazaProfesora.getInstance().deleteSearched(Professor);
+        BazaProfesora.getInstance().deleteProfFromSubject(Professor);
         ProfessorsTable.getInstance().refreshTable();
     }
     

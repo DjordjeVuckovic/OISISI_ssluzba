@@ -181,12 +181,21 @@ public class BazaStudenata implements AbstractModel, Serializable {
 		if(searchMode){
 			searchStudents.remove(student);
 		}
-
 	}
-	public void CalculateAvgGrade(){
-		for(Student st:students){
-			double ret=st.CalculateAvgGrade();
+	public void CalculateAvgGrade() {
+		for (Student st : students) {
+			double ret = st.CalculateAvgGrade();
 			st.setAvgGrade(ret);
 		}
 	}
+		public void DeleteSubjectForStudent(String id){
+			int lenght;
+			for(Student st: students){
+				lenght = st.getFailedExams().indexOf(BazaPredmeta.getInstance().findSubjectById(id));
+				if(lenght>=0){
+					st.getFailedExams().remove(lenght);
+				}
+			}
+		}
+
 }
