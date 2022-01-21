@@ -20,7 +20,7 @@ Projekat iz predmeta OISISI Studentska Služba Fakulteta Tehničkih Nauka
 #dodavanje_predmeta_profesoru
 #uklanjanje_predmeta_sa_profesora
 
-Tacna raspodela posla:
+# Tacna raspodela posla:
 
 # Student1: Đorđe Vučković RA/8/2019:
 
