@@ -1,27 +1,21 @@
 package gui.view;
 
 
+import static java.lang.Thread.sleep;
+
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.Timer;
-
-import static java.lang.Thread.sleep;
 
 
 public class StatusBar extends JPanel {
 		
-
+	
 	private static final long serialVersionUID = 1L;
 
 	private static StatusBar instance = null;
@@ -30,9 +24,12 @@ public class StatusBar extends JPanel {
 		return instance;
 	}
 	
+	//private String statusBarLanguage;
 	private JLabel date;
 	private String switchName = new String();
 	JLabel name = new JLabel();
+	
+	
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat( "E  HH:mm:ss  dd.MM.yyyy." );
 	private StatusBar() {
@@ -67,6 +64,31 @@ public class StatusBar extends JPanel {
 		this.setSize(100, 100);
 		this.add(date);
 	}
-
+	
+	
+	
+	/*
+	 * public void initComponents() {
+	 * 
+	 * statusBarLanguage.setText(MainWindow.getInstance().getResourceBundle().
+	 * getString("lblJezik") + Locale.getDefault().getDisplayLanguage());
+	 * 
+	 * DateFormat df = DateFormat.getDateInstance(); String datum = df.format(new
+	 * date()); statusBarMenuDescription.setText(datum);
+	 * 
+	 * }
+	 * 
+	 * public StatusPane getStatusBarLanguage() { return statusBarLanguage; }
+	 * 
+	 * public void setStatusBarLanguage(StatusPane statusBarLanguage) {
+	 * this.statusBarLanguage = statusBarLanguage; }
+	 * 
+	 * public StatusPane getStatusBarMenuDescription() { return
+	 * statusBarMenuDescription; }
+	 * 
+	 * public void setStatusBarMenuDescription() { this.statusBarMenuDescription =
+	 * statusBarMenuDescription; }
+	 */
+	
 
 }

@@ -18,6 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Locale;
 
 public class MyAbstractAction extends AbstractAction implements ScaleImage {
 	
@@ -100,6 +101,19 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 			putValue(ACCELERATOR_KEY,KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.CTRL_MASK));
 			putValue(SMALL_ICON, scaleImg(new ImageIcon("img/about.png")));
 			break;
+		case "Srpski":
+			putValue(Action.NAME, "Srpski");
+			putValue(MNEMONIC_KEY, KeyEvent.VK_S);
+			putValue(ACCELERATOR_KEY,KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.SHIFT_MASK));
+			putValue(SMALL_ICON, scaleImg(new ImageIcon("img/srb.png")));
+			break;
+		case "English":
+			putValue(Action.NAME, "English");
+			putValue(MNEMONIC_KEY, KeyEvent.VK_E);
+			putValue(ACCELERATOR_KEY,KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.SHIFT_MASK));
+			putValue(SMALL_ICON, scaleImg(new ImageIcon("img/eng.png")));
+			break;
+			
 		
 		}
 	}
@@ -160,7 +174,14 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 			}
 		}
 
-
+		else if(name.equals("Srpski")) {
+			Locale.setDefault(new Locale("sr", "RS"));
+			MainWindow.getInstance().changeLanguage();
+		}
+		else if(name.equals("English")) {
+			Locale.setDefault(new Locale("en", "US"));
+			MainWindow.getInstance().changeLanguage();
+		}
 		//else if(name.equals("Close")) {
 			//exit;
 		//}
@@ -187,8 +208,9 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					}
 					break;
 			}
+			
 		}
-		
+	
 	}
 
 }
