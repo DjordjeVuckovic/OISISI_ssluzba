@@ -1,12 +1,15 @@
 package model;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Professor implements Serializable {
-	private static final long serialVersionUID = 2906642554793891381L;
 
+
+	@Serial
+	private static final long serialVersionUID = -3492649923901635786L;
 	// POLJA
 	private String name;
 	private String surname;
