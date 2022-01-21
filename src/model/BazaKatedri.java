@@ -1,5 +1,7 @@
 package model;
 
+import serial.Serialization;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,33 +23,26 @@ public class BazaKatedri implements AbstractModel, Serializable {
         departments = new ArrayList<>();
         init();
         this.columns = new ArrayList<>();
-        columns.add("id");
         columns.add("Sifra");
         columns.add("Naziv");
         columns.add("id_sefa_katedre");
     }
     private void init(){
 
-
-		//departments.add(new Department("1","e42", "Katedra za matematiku", departments.getDirector().getIdNumber())); ovo poslednje ne valja 
-		
-        /*
-		 * departments.add(new Department("2","e43", "Katedra za fiziku",
-		 * BazaProfesora.getInstance().getProfessorById("2"))); departments.add(new
-		 * Department("3","e44", "Katedra za elektrotehniku",
-		 * BazaProfesora.getInstance().getProfessorById("2"))); departments.add(new
-		 * Department("4","e45", "Katedra za primenjene racunarske nauke",
-		 * BazaProfesora.getInstance().getProfessorById("2"))); departments.add(new
-		 * Department("5","e46", "Katedra za informatiku",
-		 * BazaProfesora.getInstance().getProfessorById("2"))); departments.add(new
-		 * Department("6","e47", "Katedra za automatiku",
-		 * BazaProfesora.getInstance().getProfessorById("2")));
-		 */
-        
-
+		departments.add(new Department(1,"e42", "Katedra za matematiku", BazaProfesora.getInstance().getProfessorById("321321321")));
+        departments.add(new Department(2,"e43", "Katedra za fiziku",BazaProfesora.getInstance().getProfessorById("456456456")));
+        departments.add(new Department(3,"e44", "Katedra za elektrotehniku", BazaProfesora.getInstance().getProfessorById("789789789")));
+        departments.add(new Department(4,"e45", "Katedra za primenjene racunarske nauke", BazaProfesora.getInstance().getProfessorById("559585632")));
+        departments.add(new Department(5,"e46", "Katedra za informatiku", BazaProfesora.getInstance().getProfessorById("721254363")));
+        departments.add(new Department(6,"e47", "Katedra za automatiku", BazaProfesora.getInstance().getProfessorById("500500544")));
+        deserijalizacija();
     }
-
-    public ArrayList<Department> getDepartment() {
+    private void deserijalizacija(){
+        BazaPodataka bp = Serialization.readFile();
+        if(bp !=null)
+            this.departments = bp.getDepartments();
+    }
+    public ArrayList<Department> getDepartments() {
 		return departments;
 	}
     
@@ -73,10 +68,8 @@ public class BazaKatedri implements AbstractModel, Serializable {
             case 0:
                 return department.getId();
             case 1:
-                return department.getSifra();
-            case 2:
                 return department.getName();    
-            case 3:
+            case 2:
                 if(department.getDirector() !=null){
                     return department.getDirector().getIdNumber();
                 }else {
@@ -95,9 +88,7 @@ public class BazaKatedri implements AbstractModel, Serializable {
                 return dep;
             }
         }
-        return null;   
-        //return null;
-		//Professor  pr= Professors.get(0);
+        return null;
 	}
 
     public Department getDepartmanByRow(int row){

@@ -156,7 +156,7 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 			helpDialog.setVisible(true);
 		}
 		else if(name.equals("Save")){
-			BazaPodataka base = new BazaPodataka(BazaStudenata.getInstance().getStudents(), BazaProfesora.getInstance().getProfessors(), BazaPredmeta.getInstance().getSubjects());
+			BazaPodataka base = new BazaPodataka(BazaStudenata.getInstance().getStudents(), BazaProfesora.getInstance().getProfessors(), BazaPredmeta.getInstance().getSubjects(),BazaKatedri.getInstance().getDepartments());
 			try {
 				Serialization.writeToFile(base);
 			} catch (FileNotFoundException ex) {

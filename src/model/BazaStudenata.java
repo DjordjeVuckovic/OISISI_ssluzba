@@ -29,6 +29,7 @@ public class BazaStudenata implements AbstractModel, Serializable {
 	private BazaStudenata() {
 		initStudents();
 		initFPassed();
+		initFailed();
 		CalculateAvgGrade();
 		this.colums= new ArrayList<>();
 		this.colums.add("Indeks");
@@ -96,6 +97,27 @@ public class BazaStudenata implements AbstractModel, Serializable {
 		subjectsPassed16.add(grade1616);
 		this.getStudentById("RA/12/2018").setPassedExams(subjectsPassed16);
 
+	}
+	private void initFailed(){
+		ArrayList<Subject> subjectsNotPassed4 = new ArrayList();
+		Address office = new Address("Nikole Pa\u0161i\u0107a","6a","Novi Sad","Srbija");
+
+		Subject s2 = new Subject("p2","statistika",Semester.SUMMER,YearofStudy.III,BazaProfesora.getInstance().getProfessorById("321321321"),8);
+		Subject s4 = new Subject("p4","LPRS",Semester.WINTER,YearofStudy.III,BazaProfesora.getInstance().getProfessorById("321321321"),7);
+		subjectsNotPassed4.add(s2);
+		subjectsNotPassed4.add(s4);
+
+		ArrayList<Subject> subjectsNotPassed17 = new ArrayList();
+		Subject s15 =new Subject("p15","paralelno programiranje",Semester.WINTER,YearofStudy.II,BazaProfesora.getInstance().getProfessorById("559585632"),8);
+		subjectsNotPassed17.add(s15);
+
+
+		ArrayList<Subject> subjectsNotPassed22 = new ArrayList();
+		Subject s18 = new Subject("p18","Algebra",Semester.WINTER,YearofStudy.I,null,15);
+		Subject s19 =new Subject("p19","Diskretna matematika",Semester.SUMMER,YearofStudy.III,null,14);
+
+		subjectsNotPassed22.add(s18);
+		subjectsNotPassed22.add(s19);
 	}
 	private void deserijalizacija(){
 		BazaPodataka bp = Serialization.readFile();

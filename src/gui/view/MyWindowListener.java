@@ -1,9 +1,6 @@
 package gui.view;
 
-import model.BazaPodataka;
-import model.BazaPredmeta;
-import model.BazaProfesora;
-import model.BazaStudenata;
+import model.*;
 import serial.Serialization;
 
 import javax.swing.*;
@@ -27,8 +24,7 @@ public class MyWindowListener implements WindowListener {
         Object[] options = {"Yes","No"};
         int option = JOptionPane.showOptionDialog(null, message, "Closing App", JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE, null, options, null);
         if (option == JOptionPane.YES_OPTION) {
-            BazaPodataka base = new BazaPodataka(BazaStudenata.getInstance().getStudents(), BazaProfesora.getInstance().getProfessors(), BazaPredmeta.getInstance().getSubjects());
-
+            BazaPodataka base = new BazaPodataka(BazaStudenata.getInstance().getStudents(), BazaProfesora.getInstance().getProfessors(), BazaPredmeta.getInstance().getSubjects(), BazaKatedri.getInstance().getDepartments());
             try {
                 Serialization.writeToFile(base);
             } catch (FileNotFoundException ex) {

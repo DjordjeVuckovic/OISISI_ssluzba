@@ -1,5 +1,7 @@
 package model;
 
+import serial.Serialization;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -71,10 +73,13 @@ public class BazaPredmeta implements AbstractModel, Serializable {
        subjects.add(new Subject("p28","Projektovanje softvera",Semester.WINTER,YearofStudy.III,BazaProfesora.getInstance().getProfessorById("500500544"),5));
        subjects.add(new Subject("p29","Informacioni sistemi",Semester.WINTER,YearofStudy.IV,BazaProfesora.getInstance().getProfessorById("400400444"),6));
        subjects.add(new Subject("p30","Masinsko ucenje",Semester.SUMMER,YearofStudy.IV,null,7));
-       
-    
+       deserijalizacija();
     }
-
+    private void deserijalizacija(){
+        BazaPodataka bp = Serialization.readFile();
+        if(bp !=null)
+            this.subjects = bp.getSubjects();
+    }
     public ArrayList<Subject> getSubjects() {
         return subjects;
     }

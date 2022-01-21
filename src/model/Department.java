@@ -9,9 +9,8 @@ import java.util.ArrayList;
 public class Department implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 6732445630585765214L;
-
+	private int id_k;
 	private String id;
-	private String sifra;
 	private String name;
 	private Professor director;
 	private ArrayList<Professor> professors = new ArrayList<Professor>();
@@ -26,12 +25,6 @@ public class Department implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getSifra() {
-		return sifra;
-	}
-	public void setSifra(String sifra) {
-		this.sifra = sifra;
 	}
 	public Professor getDirector() {
 		return director;
@@ -49,12 +42,11 @@ public class Department implements Serializable {
 
 	public Department(){};
 	
-	public Department(String id, String sifra, String name, String idD) {
+	public Department(int id_k, String id, String name,Professor director) {
 		this.id = id;
-		this.sifra = sifra;
+		this.id_k = id_k;
 		this.name = name;
-		
-		
+		this.director =director;
 	}
 
 	
