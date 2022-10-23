@@ -1,7 +1,6 @@
 package gui.view;
 
 
-
 import controller.compare.StudentAvgGradeCmp;
 import controller.compare.StudentIdComparator;
 import gui.view.center.*;
@@ -21,8 +20,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.TableRowSorter;
 
 import gui.view.center.StudentsTable;
-import gui.view.center.SubjectTable;
-import gui.view.center.ProfessorsTable;
+
 
 
 public class CentralBox extends JTabbedPane {
@@ -45,55 +43,16 @@ public class CentralBox extends JTabbedPane {
 	panelStudents.add(jScrollPaneStudents,BorderLayout.CENTER);
 	this.addTab("Students",panelStudents);
 
-	JPanel panelSubject = new JPanel(new BorderLayout());
-	JScrollPane jScrollPaneSubject= new JScrollPane(SubjectTable.getInstance());
-	panelSubject.add(jScrollPaneSubject,BorderLayout.CENTER);
-	this.addTab("Subject",panelSubject);
-
-
-	JPanel panelProfessors= new JPanel(new BorderLayout());
-	JScrollPane jScrollPaneProfessors= new JScrollPane(ProfessorsTable.getInstance());
-	panelProfessors.add(jScrollPaneProfessors,BorderLayout.CENTER);
-	this.addTab("Professors",panelProfessors);
-
-	JPanel pDep= new JPanel(new BorderLayout());
-	JScrollPane jDep= new JScrollPane(DepartmentsTable.getInstance());
-	pDep.add(jDep,BorderLayout.CENTER);
-	this.addTab("Departments",pDep);
 
 	sortStudentRows();
 	this.addChangeListener(new ChangeListener() {
 		@Override
 		public void stateChanged(ChangeEvent e) {
 			StudentsTable.getInstance().refreshTable();
-			SubjectTable.getInstance().refreshTable();
-			ProfessorsTable.getInstance().refreshTable();
-			DepartmentsTable.getInstance().refreshTable();
 		}
 	});
 	
-	sortProfRows();
-	this.addChangeListener(new ChangeListener() {
-		@Override
-		public void stateChanged(ChangeEvent e) {
-			StudentsTable.getInstance().refreshTable();
-			SubjectTable.getInstance().refreshTable();
-			ProfessorsTable.getInstance().refreshTable();
-			DepartmentsTable.getInstance().refreshTable();
-		}
-	});
-	
-	sortSubjRows();
-	this.addChangeListener(new ChangeListener() {
-		@Override
-		public void stateChanged(ChangeEvent e) {
-			StudentsTable.getInstance().refreshTable();
-			SubjectTable.getInstance().refreshTable();
-			ProfessorsTable.getInstance().refreshTable();
-			DepartmentsTable.getInstance().refreshTable();
-		}
-	});
-	
+
 }
 	public void  sortStudentRows(){
 		TableRowSorter tableRowSorter = new TableRowSorter(StudentsTable.getInstance().getModel());
@@ -102,17 +61,6 @@ public class CentralBox extends JTabbedPane {
 		StudentsTable.getInstance().setRowSorter(tableRowSorter);
 	}
 	
-	public void  sortProfRows(){
-		TableRowSorter tableRowSorter = new TableRowSorter(ProfessorsTable.getInstance().getModel());
-		ProfessorsTable.getInstance().setRowSorter(tableRowSorter);
-	
-	}
-	
-	public void  sortSubjRows(){
-		TableRowSorter tableRowSorter = new TableRowSorter(SubjectTable.getInstance().getModel());
-		SubjectTable.getInstance().setRowSorter(tableRowSorter);
-	
-	}
 
 
 }

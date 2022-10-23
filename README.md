@@ -1,4 +1,4 @@
-# OISISI_ssluzba
+ OISISI_ssluzba
 Projekat iz predmeta OISISI Studentska Služba Fakulteta Tehničkih Nauka
 
 # Student1: Đorđe Vučković RA/8/2019

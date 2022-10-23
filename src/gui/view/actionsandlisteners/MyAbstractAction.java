@@ -1,17 +1,12 @@
 package gui.view.actionsandlisteners;
 
-
-import controller.DepartmentController;
-import controller.ProfessorController;
 import controller.StudentController;
-import controller.SubjectController;
+
 import gui.view.*;
 import gui.view.center.DepartmentsTable;
 import gui.view.center.ProfessorsTable;
 import gui.view.center.StudentsTable;
 import gui.view.center.SubjectTable;
-import gui.view.department.AddDepartment;
-import gui.view.department.EditDepartment;
 import gui.view.dialog.add.AddProfessor;
 import gui.view.dialog.add.AddStudent;
 import gui.view.dialog.add.AddSubject;
@@ -63,24 +58,6 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.CTRL_MASK));
 				putValue(SMALL_ICON, scaleImg(new ImageIcon("img/student.png")));
 				break;
-			case "Predmeti":
-				putValue(Action.NAME, "Predmeti");
-				putValue(MNEMONIC_KEY, KeyEvent.VK_2);
-				putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.CTRL_MASK));
-				putValue(SMALL_ICON, scaleImg(new ImageIcon("img/subject.png")));
-				break;
-			case "Profesori":
-				putValue(Action.NAME, "Profesori");
-				putValue(MNEMONIC_KEY, KeyEvent.VK_3);
-				putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.CTRL_MASK));
-				putValue(SMALL_ICON, scaleImg(new ImageIcon("img/prof.png")));
-				break;
-			case "Katedre":
-				putValue(Action.NAME, "Katedre");
-				putValue(MNEMONIC_KEY, KeyEvent.VK_3);
-				putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.CTRL_MASK));
-				putValue(SMALL_ICON, scaleImg(new ImageIcon("img/dep.jpg")));
-				break;
 			case "Close":
 				putValue(Action.NAME, "Close");
 				putValue(MNEMONIC_KEY, KeyEvent.VK_C);
@@ -99,18 +76,6 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 				putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
 				putValue(SMALL_ICON, scaleImg(new ImageIcon("img/delete.jpg")));
 				break;
-			case "Help":
-				putValue(Action.NAME, "Help");
-				putValue(MNEMONIC_KEY, KeyEvent.VK_H);
-				putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
-				putValue(SMALL_ICON, scaleImg(new ImageIcon("img/help.png")));
-				break;
-			case "About":
-				putValue(Action.NAME, "About");
-				putValue(MNEMONIC_KEY, KeyEvent.VK_A);
-				putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
-				putValue(SMALL_ICON, scaleImg(new ImageIcon("img/about.png")));
-				break;
 
 		}
 	}
@@ -121,57 +86,16 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 
 		if (name.equals("New")) {
 			AddStudent addStudent = new AddStudent();
-			AddSubject addSubject = new AddSubject();
-			AddProfessor addProfessor = new AddProfessor();
 
 			switch (CentralBox.getInstance().getSelectedIndex()) {
 				case 0:
 					addStudent.setVisible(true);
 					break;
-				case 1:
-					addSubject.setVisible(true);
-
-					break;
-				case 2:
-					addProfessor.setVisible(true);
-					break;
-				case 3:
-					AddDepartment addDepartment=  new AddDepartment();
-					addDepartment.setVisible(true);
 			}
 		} else if (name.equals("Studenti")) {
 			CentralBox.getInstance().setSelectedIndex(0);
 		}
-
-		else if (name.equals("Katedre")) {
-			CentralBox.getInstance().setSelectedIndex(3);
-		} else if (name.equals("Profesori")) {
-			CentralBox.getInstance().setSelectedIndex(2);
-
-		} else if (name.equals("Predmeti")) {
-			CentralBox.getInstance().setSelectedIndex(1);
-		}
-		else if(name.equals("Help")){
-			HelpDialog  helpDialog = new HelpDialog();
-			helpDialog.setVisible(true);
-		}
-		else if(name.equals("Save")){
-			BazaPodataka base = new BazaPodataka(BazaStudenata.getInstance().getStudents(), BazaProfesora.getInstance().getProfessors(), BazaPredmeta.getInstance().getSubjects(),BazaKatedri.getInstance().getDepartments());
-			try {
-				Serialization.writeToFile(base);
-			} catch (FileNotFoundException ex) {
-				ex.printStackTrace();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-		else if(name.equals("Close")){
-			MainWindow.getInstance().dispatchEvent(new WindowEvent(MainWindow.getInstance(), WindowEvent.WINDOW_CLOSING));
-		}
-		else if(name.equals("About")){
-			AboutDialog aboutDialog = new AboutDialog();
-			aboutDialog.setVisible(true);
-		}
+	
 		else if (name.equals("Delete")) {
 			switch (CentralBox.getInstance().getSelectedIndex()) {
 				case 0:
@@ -183,39 +107,6 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 					int choice = JOptionPane.showConfirmDialog(MainWindow.getInstance(), "Upozorenje", "Da li ste sigurni?", 0);
 					if (choice == JOptionPane.YES_OPTION) {
 						StudentController.getInstance().deleteStudent(rowSelected);
-					}
-					break;
-				case 1:
-					int rowSelecteds = SubjectTable.getInstance().getSelectedRow();
-					if (rowSelecteds <0) {
-						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste odabrali predmet", "Upozorenje", 0, null);
-						return;
-					}
-					int choices = JOptionPane.showConfirmDialog(MainWindow.getInstance(),"Upozorenje", "Da li ste sigurni?",0);
-					if(choices ==JOptionPane.YES_OPTION){
-						SubjectController.getInstance().deleteSubject(rowSelecteds);//mora da se vodi racuna o referencijalnim zavisnostima zavisnostima
-					}
-					break;
-				case 2:
-					int rowSelectedp = ProfessorsTable.getInstance().getSelectedRow();
-					if (rowSelectedp < 0) {
-						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste odabrali profesora", "Upozorenje", 0, null);
-						return;
-					}
-					int choicep = JOptionPane.showConfirmDialog(MainWindow.getInstance(), "Upozorenje", "Da li ste sigurni?", 0);
-					if (choicep == JOptionPane.YES_OPTION) {
-						ProfessorController.getInstance().deleteProfessor(rowSelectedp);
-					}
-					break;
-				case 3:
-					int rowSelectedk = DepartmentsTable.getInstance().getSelectedRow();
-					if (rowSelectedk < 0) {
-						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste odabrali katedru", "Upozorenje", 0, null);
-						return;
-					}
-					int choicek = JOptionPane.showConfirmDialog(MainWindow.getInstance(), "Upozorenje", "Da li ste sigurni?", 0);
-					if (choicek == JOptionPane.YES_OPTION) {
-						DepartmentController.getInstance().deleteDepartment(rowSelectedk);
 					}
 					break;
 			}
@@ -230,36 +121,6 @@ public class MyAbstractAction extends AbstractAction implements ScaleImage {
 						Student student = StudentController.getInstance().getStudentByIndex(StudentsTable.getInstance().getSelectedIndex());
 						ChangeStudentDialog changeStudentDialog = new ChangeStudentDialog(student);
 						changeStudentDialog.setVisible(true);
-					}
-					break;
-				case 1:
-					if (SubjectTable.getInstance().getSelectedRow() == -1) {
-						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali premet za izmenu", "Upozorenje", 0, null);
-					} else {
-						Subject subject = SubjectController.getInstance().findSubjectById(SubjectTable.getInstance().getSelectedId());
-						EditSubject editSubject = new EditSubject(subject.getIdS());
-						editSubject.setVisible(true);
-
-					}
-					break;
-				case 2:
-					if (ProfessorsTable.getInstance().getSelectedIndexinTable() == -1) {
-						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali profesora za izmenu", "Upozorenje", 0, null);
-					} else {
-						Professor profesor = ProfessorController.getInstance().getProfessorById(ProfessorsTable.getInstance().getSelectedIndex());
-						ChangeProfessorDialog changeProfessorDialog = new ChangeProfessorDialog(profesor);
-						changeProfessorDialog.setVisible(true);
-
-					}
-					break;
-				case 3:
-					if (DepartmentsTable.getInstance().getSelectedRow() == -1) {
-						JOptionPane.showMessageDialog(MainWindow.getInstance(), "Niste izabrali katedru za izmenu", "Upozorenje", 0, null);
-						return;
-					} else {
-						Department dep = DepartmentController.getInstance().getDepById(DepartmentsTable.getInstance().getSelectedIndex());
-						EditDepartment editDepartment = new EditDepartment(dep);
-						editDepartment.setVisible(true);
 					}
 					break;
 			}

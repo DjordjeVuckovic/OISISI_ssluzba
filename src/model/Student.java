@@ -21,7 +21,6 @@ public class Student implements Serializable {
 		private double avgGrade;
 		private Status status;
 		private ArrayList<Grade> passedExams;
-		private ArrayList<Subject> failedExams;
 
 
 
@@ -33,7 +32,6 @@ public class Student implements Serializable {
 		this.avgGrade = avgGrade;
 		this.status = status;
 		passedExams = new ArrayList<>();
-		failedExams = new ArrayList<>();
 	}
 	public Student(String name, String surname,Date birthday, String index, YearofStudy currentYear, double avgGrade, Status status) {
 		this.name = name;
@@ -44,9 +42,8 @@ public class Student implements Serializable {
 		this.avgGrade = avgGrade;
 		this.status = status;
 		passedExams = new ArrayList<>();
-		failedExams = new ArrayList<>();
 	}
-	public Student(){passedExams = new ArrayList<>();failedExams = new ArrayList<>();}
+	//public Student(){passedExams = new ArrayList<>();failedExams = new ArrayList<>();}
 		public Student(String ime, String prezime, Date datum_rodjenja, Address address, String kontakt_telefon,
 					   String email, String index, int godina_upisa, YearofStudy tren_god_studiranja, Status n_finansiranja) {
 			super();
@@ -61,7 +58,7 @@ public class Student implements Serializable {
 			this.currentYear =tren_god_studiranja;
 			this.status=n_finansiranja;
 			passedExams = new ArrayList<>();
-			failedExams = new ArrayList<>();
+
 		}
 		//GET i SET metode
 		public String getName() {
@@ -161,16 +158,7 @@ public class Student implements Serializable {
 		}
 		return  avgGrade;
 	}
-	public int SumPoints(){
-		int sum = 0;
-		for(Grade grade:passedExams){
-			if(grade.getSubject() !=null){
-				sum +=grade.getSubject().getESPBpoints();
-			}
-		}
-		return sum;
-	}
-	//
+
 
 	@Override
 		public String toString() {
@@ -183,51 +171,6 @@ public class Student implements Serializable {
 
 	public void setAdress(String street, String number, String city, String country) {
 		this.address =new Address(street,number,city,country);
-	}
-	public Grade getGradeTable(int selectedSubject){
-		if(selectedSubject<passedExams.size()){
-			return passedExams.get(selectedSubject);
-		}
-		return null;
-	}
-	public void cancelGrade(Grade grade){
-		passedExams.remove(grade);
-	}
-	public ArrayList<Subject> getFailedExams() {
-		return failedExams;
-	}
 
-	public void setFailedExams(ArrayList<Subject> failedExams) {
-		this.failedExams = failedExams;
 	}
-	public  void addFailedExam(Subject subject){
-		failedExams.add(subject);
-	}
-	public void removeFailedExam(Subject subject){
-		failedExams.remove(subject);
-	}
-	//cond 1
-	public boolean checkExams(Subject subject){
-		boolean ret = false;
-		for(Grade grade : passedExams){
-			if(grade.getSubject().getIdS().equals(subject.getIdS())){
-				ret = true;
-			}
-		}
-		for(Subject subject1 : failedExams){
-			if(subject1.getIdS().equals(subject.getIdS())){
-				ret = true;
-			}
-		}
-		return ret;
-	}
-	//cond 2
-	public boolean checkYears(Subject subject,Student student){
-		boolean ret = false;
-		if(subject.getYearOfStudy().compareTo(student.getCurrentyear()) <=0){
-		ret= true;
-		}
-		return ret;
-	}
-
 }

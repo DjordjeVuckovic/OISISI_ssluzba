@@ -36,9 +36,6 @@ public class MainWindow extends JFrame {
 		this.add(menu_bar);
 		this.setJMenuBar(menu_bar);
 		
-		this.add(new Toolbar(),BorderLayout.NORTH);
-
-		this.getContentPane().add(StatusBar.getInstance(),BorderLayout.SOUTH);
 
 		JPanel centralPanel = new JPanel(new BorderLayout());
 		centralPanel.add(CentralBox.getInstance());
